@@ -8,9 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PlaylistController extends AbstractController
 {
-    #[Route('/playlist', name: 'app_playlist')]
+    #[Route('/playlist', name: 'playlist_detail')]
     public function index(): Response
     {
+
         return $this->render('playlist/index.html.twig', [
             'controller_name' => 'PlaylistController',
         ]);

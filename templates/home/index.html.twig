@@ -16,47 +16,59 @@
 
         <div class="playlistCards">
 
-            <div class="playlistCard">
-                <a href="playlistDetail.html">
+            {% for playlist in playlists %}
+                
+                <div class="playlistCard">
+                    <a href="{{path('playlist_detail')}}">
+                        
+                        <figure>
+                            <img src="{{playlist.image}}" alt="playlist image">
+                        </figure>
+                        
+                        <h3>{{playlist.playlistName}}</h3>
+                    </a>
+                </div>
+            {% endfor %}
 
-                    <figure>
-                        <img src="img/1.png" alt="playlist image">
-                    </figure>
+        </div>
+
+    </div>
+
+    {% if app.user %}
+
+        <div class="playlist">
+
+            <div class="title">
+
+                <h1>Your Favorite Playlists</h1>
+                <a href="{{path('playlist_detail')}}">More</a>
+            </div>
+
+            <div class="playlistCards">
+                
+  
+                {% for favorite in app.user.favoritePlaylists %}
                     
-                    <h3>Playlist Name</h3>
-                </a>
+                    <div class="playlistCard">
+
+                        <a href="{{path('playlist_detail')}}">
+                            <figure>
+                                <img src="{{favorite.image}}" alt="playlist image">
+                            </figure>
+
+                            <h3>{{favorite.playlistName}}</h3>
+
+                        </a>
+                    </div>
+                {% endfor %}
+
             </div>
 
         </div>
 
-    </div>
+    {% endif %}
 
-    <div class="playlist">
-
-        <div class="title">
-
-            <h1>Your Playlists</h1>
-            <a href="#">More</a>
-        </div>
-
-        <div class="playlistCards">
-
-            <div class="playlistCard">
-
-                <a href="#">
-                    <figure>
-                        <img src="img/1.png" alt="playlist image">
-                    </figure>
-
-                    <h3>Playlist Name</h3>
-
-                </a>
-            </div>
-
-        </div>
-
-    </div>
-
+    {# TODO: figure out what to do with it #}
     <div class="playlist">
 
         <div class="title">
@@ -69,7 +81,7 @@
 
             <div class="playlistCard">
 
-                <a href="#">
+                <a href="{{path('playlist_detail')}}">
 
                     <figure>
                         <img src="img/1.png" alt="playlist image">
