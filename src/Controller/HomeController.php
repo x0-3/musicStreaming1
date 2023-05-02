@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
 
-        $playlists = $em->getRepository(Playlist::class)->findBy([],['dateCreated'=>'DESC'], 4);
+        $playlists = $em->getRepository(Playlist::class)->findByMostLikes();
 
         return $this->render('home/index.html.twig', [
             'playlists' => $playlists,

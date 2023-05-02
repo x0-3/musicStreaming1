@@ -39,6 +39,27 @@ class PlaylistRepository extends ServiceEntityRepository
         }
     }
 
+    // like recommendations
+   /**
+    * @return Playlist[] Returns an array of Playlist objects
+    */
+   public function findByMostLikes(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p.id, p.image, p.playlistName, COUNT(pu.id) AS num_followers
+            FROM App\Entity\Playlist p
+            LEFT JOIN p.userFavorites pu
+            GROUP BY p.id, p.playlistName
+            ORDER BY num_followers DESC'
+        );
+        
+        $results = $query->getResult();
+
+        return $results;
+
+    }
 //    /**
 //     * @return Playlist[] Returns an array of Playlist objects
 //     */
