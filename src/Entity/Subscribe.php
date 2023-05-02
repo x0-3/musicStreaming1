@@ -25,12 +25,6 @@ class Subscribe
     #[ORM\ManyToOne(inversedBy: 'subscriptions')]
     private ?User $userSubscribes = null;
 
-
-
-    public function __construct()
-    {
-    }
-
     public function getId(): ?int
     {
         return $this->id;
