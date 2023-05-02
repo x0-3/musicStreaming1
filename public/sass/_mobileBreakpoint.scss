@@ -1,0 +1,218 @@
+$breakpointPhone: 767px;
+
+@media only screen and (max-width: $breakpointPhone) {
+    
+    body{
+
+        header{
+            justify-content: space-between;
+
+            figure{
+                width: 13%;
+                margin-left: 8px;
+
+            }
+
+           .mySidepanel{
+                height: 100vh;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                right: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                padding-top: 60px;
+                transition: 0.5s;
+                flex-direction: column;
+                justify-content: flex-start;
+
+                nav{
+                    ul{
+                        flex-direction: column;
+                        align-items: flex-start;
+
+                        li{
+                            a{
+                                margin: 5px;
+                            }
+                        }
+                    }
+                }
+
+                a{
+                    padding: 8px 8px 8px 32px;
+                    text-decoration: none;
+                    font-size: 25px;
+                    color: #818181;
+                    display: block;
+                    transition: 0.3s;
+                }
+
+                .closebtn{
+                    position: absolute;
+                    top: 0;
+                    right: 10px;
+                    font-size: 36px;
+                    margin-left: 50px;
+                    color: red;
+                }
+
+                .avatar{
+                    width: 32%;
+
+                    .dropdown-content{
+                        right: 0px;
+                    }
+
+                    &:hover .dropdown-content{
+                        width: 100%;
+
+                    }
+                }
+
+            }
+
+            .openbtn{
+                display: block;
+                font-size: 20px;
+                cursor: pointer;
+                background: none;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+            }
+        
+            
+        }
+
+        .title{
+            margin: 65px 18px 41px 14px;
+        }
+
+        section.home, section.artistDetail {
+            .playlist, .album, .artist{
+
+                .playlistCards, .cards{
+                    display: block;
+                    white-space: nowrap;
+                    overflow-x: auto;
+
+                    &::-webkit-scrollbar{
+                        display: none;
+                    }
+
+                  .playlistCard, .card{
+                        width: 190px;
+                        display: inline-flex;
+                        margin: 0 15px;
+                    }
+                }
+            }
+        }
+
+        .card {
+            width: 22%;
+            margin: auto;
+        }
+
+        section.playlistList {
+
+            .title{
+
+                .nav {
+                    width: 42%;
+                }
+            } 
+
+        }
+
+        section.playlistList{
+            
+            .myPlaylist{
+                
+                .mainCard {
+                    width: auto;
+                    height: 253px;
+                    
+                    a{
+                        figure{
+                            figcaption {
+                            
+                                position: absolute;
+                                top: 386px;
+                                left: 5%;
+                            } 
+                        } 
+                    }
+                }
+    
+                .card{
+                    width: 26%;
+                    margin: 0 auto 40px;
+                }
+            } 
+        }
+
+        section.listArtist {
+            .artistCard {
+                
+                figure {
+                    width: 22%;
+                }
+            }
+        }
+
+        section.playlistDetail {
+            min-height: 67vh;
+        }
+
+        section.playlistDetail ,section.artistDetail , section.musicPlayer{
+            table tbody tr td figure{
+                width: 56%;
+            }
+        }
+
+        section.artistDetail .hero figure img {
+            width: 26%;
+        }
+
+        section.musicPlayer {
+
+            flex-direction: column;
+            margin: 74px auto 5px auto;
+
+            .player {
+                
+                position: initial;
+                width: 97%;
+                margin: 25px auto;
+            }
+            .leftSide {
+                width: 100%;
+            }
+
+            form {
+                margin: 32px 5px;
+
+                input[type=text] {
+                    width: 60%;
+                }
+            }
+
+            .comments article p {
+                margin-left: 37px;
+            }
+
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+
+            small{
+                margin: 15px auto;
+            }
+        }
+    }
+}

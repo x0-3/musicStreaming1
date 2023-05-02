@@ -1,0 +1,97 @@
+$breakpointDesktop: 1024px;
+$breakpointTablet: 768px;
+
+@media only screen and (min-width: $breakpointTablet) and (max-width: $breakpointDesktop) {
+    
+    body{
+
+        main{
+            min-height: 76vh;
+        }
+        
+        header{
+            .mySidepanel{
+
+                nav{
+                    ul{
+                        li{
+                            a{
+                                margin: 15px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .avatar:hover{
+                .dropdown-content{
+                    width: 30%;
+                    font-size: x-large;
+                }
+
+            } 
+        }
+
+        section.home .playlistCards .playlistCard a figure{
+            width: 100%;
+        }
+
+        .card{
+            width: 21%;
+        }
+
+        section.playlistList{
+
+            .title{
+                .nav{
+                    width: 26%;
+                }
+
+            }
+             
+            
+            .myPlaylist {
+                
+                .mainCard{
+                    width: 100%;
+                    a{
+                        figure{
+                            figcaption{
+                                top: 51vh;
+                                left: 5%;
+                            }
+
+                        } 
+
+                    } 
+                }
+
+                
+                .card{
+                    width: 24%;
+                }
+
+                
+            }
+        } 
+
+        section.musicPlayer {
+
+            width: 95%;
+
+            table{
+                width: 100%;
+
+                tbody{
+                    tr{
+                        td{
+                            width: 17%;
+
+                        }
+                    } 
+                } 
+            }
+        }
+    }
+
+}

@@ -6,14 +6,100 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+            <script src="https://kit.fontawesome.com/adba52364d.js" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="{{ asset('sass/style.css') }}">
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
     </head>
     <body>
+
+        <header>
+            <figure>
+                <a href="index.html">
+    
+                    <img src="assets/img/2.png" alt="logo">
+                </a>
+            </figure>
+    
+            <div class="mySidepanel" id="mySidepanel">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <nav>
+                    <ul>
+                        <li><a class="menuItem" href="index.html">Home</a></li>
+                        <li><a class="menuItem" href="newRelease.html">New Release</a></li>
+                        <li><a class="menuItem" href="playlist.html">My Playlists</a></li>
+                        <li><a class="menuItem" href="playlistDetail.html">Liked Songs</a></li>
+                        <li><a class="menuItem" href="#" class="fa-solid fa-magnifying-glass"></a></li>
+                    </ul>
+                </nav>
+    
+                <figure class="avatar">
+                    <img src="assets/img/2.png" alt="avatar">
+    
+                    <div class="dropdown-content">
+    
+                        <div class="setting">
+    
+                            <a href="#">
+                                <i class="fa-solid fa-gear"></i>
+                                Settings
+                            </a>
+                        </div>
+    
+                        <div class="logout">
+                            <a href="login.html">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                Log out
+                            </a>
+                        </div>
+    
+                        
+                        <button onclick="myFunction()">toggle mode</button>
+                        
+    
+    
+                        <h3>latest subscription :</h3>
+                        <div class="recentSub">
+                            <a href="artistDetail.html">
+                                <figure>
+                                    <img src="assets/img/2.png" alt="subscribedTo">
+    
+                                </figure>
+    
+                                <small>Artist Name</small>
+                            </a>
+                        </div>
+                    </div>
+                </figure>
+    
+            </div>
+    
+            <button class="openbtn" onclick="openNav()">&#9776;</button>
+        </header>
+
         {% block body %}{% endblock %}
+
+
+        <footer>
+            <footer>
+                <div class="legal">
+                    <ul>
+                        <li><a href="#">Legal</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Cookie</a></li>
+                        <li><a href="#">Copyright</a></li>
+                    </ul>
+                </div>
+        
+                <small>StreamVibe</small>
+            </footer>
+        </footer>
+
+        {% block javascripts %}
+            <script src="{{ asset('js/app.js')}}"></script>
+        {% endblock %}
     </body>
 </html>
