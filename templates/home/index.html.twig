@@ -1,15 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
 
-{# {% if app.user %}
-    <a href="{{path('app_logout')}}">logOut</a>
+<section class="home">
 
-{% else %}
-    <a href="{{path('app_register')}}">signUp</a>
-    <a href="{{path('app_login')}}">logIn</a>
+    <div class="playlist">
 
-{% endif %} #}
+        <div class="title">
+
+            <h1>Recommended</h1>
+            <a href="#">More</a>
+        </div>
+
+        <div class="playlistCards">
+
+            <div class="playlistCard">
+                <a href="playlistDetail.html">
+
+                    <figure>
+                        <img src="img/1.png" alt="playlist image">
+                    </figure>
+                    
+                    <h3>Playlist Name</h3>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="playlist">
+
+        <div class="title">
+
+            <h1>Your Playlists</h1>
+            <a href="#">More</a>
+        </div>
+
+        <div class="playlistCards">
+
+            <div class="playlistCard">
+
+                <a href="#">
+                    <figure>
+                        <img src="img/1.png" alt="playlist image">
+                    </figure>
+
+                    <h3>Playlist Name</h3>
+
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="playlist">
+
+        <div class="title">
+
+            <h1>Discover a new genre</h1>
+            <a href="#">More</a>
+        </div>
+
+        <div class="playlistCards">
+
+            <div class="playlistCard">
+
+                <a href="#">
+
+                    <figure>
+                        <img src="img/1.png" alt="playlist image">
+                    </figure>
+                    
+                    <h3>Playlist Name</h3>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 {% endblock %}

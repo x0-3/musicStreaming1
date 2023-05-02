@@ -46,7 +46,7 @@
   justify-content: center;
 }
 * body header .mySidepanel nav {
-  width: 81%;
+  width: 100%;
 }
 * body header .mySidepanel nav ul {
   display: flex;
@@ -64,7 +64,7 @@
   color: #7DF9FF;
 }
 * body header .mySidepanel .avatar {
-  width: 3%;
+  width: 4.5%;
   float: right;
   overflow: hidden;
 }

@@ -28,7 +28,7 @@
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <nav>
                     <ul>
-                        <li><a class="menuItem" href="index.html">Home</a></li>
+                        <li><a class="menuItem" href="{{path('app_home')}}">Home</a></li>
                         <li><a class="menuItem" href="newRelease.html">New Release</a></li>
                         <li><a class="menuItem" href="playlist.html">My Playlists</a></li>
                         <li><a class="menuItem" href="playlistDetail.html">Liked Songs</a></li>
@@ -37,7 +37,15 @@
                 </nav>
     
                 <figure class="avatar">
-                    <img src="assets/img/2.png" alt="avatar">
+                    
+                    {% if app.user %}
+
+                        <img src="{{app.user.avatar}}" alt="avatar">
+
+                    {% else %}
+                        <img src="{{asset('assets/img/profil_pic.png')}}" alt="avatar">
+
+                    {% endif %}
     
                     <div class="dropdown-content">
     
@@ -50,10 +58,20 @@
                         </div>
     
                         <div class="logout">
-                            <a href="login.html">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                Log out
-                            </a>
+
+                            {% if app.user %}
+                                <a href="{{path('app_logout')}}">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    LogOut
+                                </a>             
+                            
+                            {% else %}
+                                <a href="{{path('app_login')}}">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    LogIn
+                                </a>  
+                            {% endif %}
+                        
                         </div>
     
                         
@@ -74,13 +92,16 @@
                         </div>
                     </div>
                 </figure>
-    
+                
             </div>
     
             <button class="openbtn" onclick="openNav()">&#9776;</button>
         </header>
 
-        {% block body %}{% endblock %}
+        <main>
+            {% block body %}{% endblock %}
+
+        </main>
 
 
         <footer>
