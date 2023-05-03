@@ -13,6 +13,7 @@ class SongController extends AbstractController
     public function index(Song $song): Response
     {
 
+        
         return $this->render('song/songMusicPlayer.html.twig', [
             'song' => $song,
         ]);

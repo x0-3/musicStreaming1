@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artist page{% endblock %}
+
+{% block body %}
+artist page
+
+<section class="artistDetail">
+
+    <div class="hero">
+        <figure>
+            <img src="img/2.png" alt="profile picture">
+
+            <figcaption>
+                <h1>Artist Name</h1>
+                <button>subscribe</button>
+            </figcaption>
+        </figure>
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th></th>
+                <th>title</th>
+                <th>artist</th>
+                <th></th>
+                <th>time</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>
+                    <figure>
+                        <img src="img/2.png" alt="song img">
+                    </figure>
+                </td>
+                <td>song Title</td>
+                <td> <a href="artistDetail.html"> Artist name </a></td>
+                <td><button><i class="fa-regular fa-heart"></i></button></td>
+                <td>3:09</td>
+                <td><button><i class="fa-solid fa-plus"></i></button></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <figure>
+                        <img src="img/2.png" alt="song img">
+                    </figure>
+                </td>
+                <td>song Title</td>
+                <td>Artist name</td>
+                <td><button><i class="fa-regular fa-heart"></i></button></td>
+                <td>3:09</td>
+                <td><button><i class="fa-solid fa-plus"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="album">
+
+        <div class="title">
+
+            <h1>Albums</h1>
+            <a href="#">More</a>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <a href="playlistDetail.html">
+
+                    <figure>
+                        <img src="img/2.png" alt="album cover">
+                    </figure>
+                    
+                    <h3>Album Name</h3>
+                    <p>Artist</p>
+                </a>
+            </div>
+
+            <div class="card">
+                <a href="#">
+
+                    <figure>
+                        <img src="img/2.png" alt="album cover">
+                    </figure>
+                    
+                    <h3>Album Name</h3>
+                    <p>Artist</p>
+                </a>
+            </div>
+
+            <div class="card">
+
+                <a href="#">
+
+                    <figure>
+                        <img src="img/2.png" alt="album cover">
+                    </figure>
+                    
+                    <h3>Album Name</h3>
+                    <p>Artist</p>
+                </a>
+            </div>
+
+            <div class="card">
+
+                <a href="#">
+
+                    <figure>
+                        <img src="img/2.png" alt="album cover">
+                    </figure>
+                    
+                    <h3>Album Name</h3>
+                    <p>Artist</p>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="artist">
+
+        <div class="title">
+
+            <h1>Similare Artists</h1>
+            <a href="#">More</a>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <a href="artistDetail.html">
+
+                    <figure>
+                        <img src="img/2.png" alt="album cover">
+                    </figure>
+                    
+                    <h3>Name</h3>
+                </a>
+            </div>
+
+            <div class="card">
+                <a href="#">
+
+                    <figure>
+                        <img src="img/2.png" alt="album cover">
+                    </figure>
+                    
+                    <h3>Name</h3>
+                </a>
+            </div>
+
+            <div class="card">
+
+                <a href="#">
+
+                    <figure>
+                        <img src="img/2.png" alt="album cover">
+                    </figure>
+                    
+                    <h3>Name</h3>
+                </a>
+            </div>
+
+            <div class="card">
+
+                <a href="#">
+
+                    <figure>
+                        <img src="img/2.png" alt="album cover">
+                    </figure>
+                    
+                    <h3>Name</h3>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

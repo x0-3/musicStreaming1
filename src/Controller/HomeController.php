@@ -24,4 +24,21 @@ class HomeController extends AbstractController
 
         ]);
     }
+
+    #[Route('/home', name: 'app_artistDetail')]
+    public function artistPage(EntityManagerInterface $em): Response
+    {
+
+        $playlists = $em->getRepository(Playlist::class)->findByMostFollow();
+        $songs = $em->getRepository(Song::class)->findByMostLikes();
+
+        return $this->render('home/index.html.twig', [
+            'playlists' => $playlists,
+            'songs' => $songs,
+
+        ]);
+    }
+
+
+
 }
