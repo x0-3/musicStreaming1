@@ -37,9 +37,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
-    // #[ORM\Column]
-    // private ?bool $isVerified = null;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Song::class, orphanRemoval: true)]
     private Collection $songs;
 

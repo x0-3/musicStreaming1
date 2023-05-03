@@ -15,6 +15,7 @@ class PlaylistController extends AbstractController
     {
 
         
+        
         return $this->render('playlist/playlistDetail.html.twig', [
             'playlist' => $playlist,
         ]);
