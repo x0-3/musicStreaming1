@@ -87,7 +87,7 @@
                         </figure>
                     </td>
                     <td><a href="{{path('app_songPlayer',{'id': song.id} )}}">{{song.nameSong}}</a></td>
-                    <td> <a href="#"> {{song.user.username}}</a></td>
+                    <td> <a href="{{path('app_artistDetail', {'id':song.user.id })}}"> {{song.user.username}}</a></td>
                     <td><button><i class="fa-regular fa-heart"></i></button></td>
                     <td>3:09</td>
                     <td><button><i class="fa-solid fa-plus"></i></button></td>
@@ -112,7 +112,7 @@
                        <img src="{{comment.user.avatar}}" alt="profile picture">
                        
                        <figcaption> 
-                           <a href="#">{{comment.user.username}}</a>
+                           <a href="{{path('app_artistDetail', {'id':comment.user.id })}}">{{comment.user.username}}</a>
                         </figcaption>
                     </figure>
                     

@@ -39,6 +39,28 @@ class AlbumRepository extends ServiceEntityRepository
         }
     }
 
+   /**
+    * @return Album[] Returns an array of Album objects
+    */
+   public function findByMostRecentAlbumArtist($artistId): array
+   {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQueryBuilder()
+            ->select('a.id, a.nameAlbum, a.cover, a.releaseDate')
+            ->from('App\Entity\Song', 's')
+            ->innerJoin('s.album', 'a')
+            ->andWhere('s.user = :id')
+            ->setParameter('id', $artistId)
+            ->groupBy('a.id, a.nameAlbum, a.cover, a.releaseDate')
+            ->orderBy('a.releaseDate', ' DESC');
+
+        $query = $query->getQuery();
+
+        return $query->execute();
+    }
+
 //    /**
 //     * @return Album[] Returns an array of Album objects
 //     */

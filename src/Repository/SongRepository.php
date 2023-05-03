@@ -62,6 +62,33 @@ class SongRepository extends ServiceEntityRepository
         return $query;
     }
 
+    /**
+    * @return Song[] Returns an array of Song objects
+    */
+    public function findByArtistMostLike($artistId): array
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQueryBuilder()
+            ->select('s.id,s.nameSong, a.cover, u.username, COUNT(ul.id) AS num_like')
+            ->from('App\Entity\Song', 's')
+            ->leftJoin('s.album', 'a')
+            ->leftJoin('s.likes', 'ul')
+            ->leftJoin('s.user', 'u')
+            ->andWhere('s.user = :id')
+            ->setParameter('id', $artistId)
+            ->groupBy('s.id, s.nameSong,  a.cover')
+            ->orderBy('num_like', 'DESC')
+            ->setMaxResults(3);
+            
+            
+            
+        $query = $query->getQuery();
+
+        return $query->execute();
+    }
+
 //    /**
 //     * @return Song[] Returns an array of Song objects
 //     */
