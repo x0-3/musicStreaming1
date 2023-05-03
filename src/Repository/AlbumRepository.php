@@ -39,20 +39,6 @@ class AlbumRepository extends ServiceEntityRepository
         }
     }
 
-   /**
-    * @return Album[] Returns an array of Album objects
-    */
-   public function findByExampleField($value): array
-   {
-
-        // SELECT a.id, a.cover, a.name_album, a.release_date, s.user_id
-        // FROM album a
-        // INNER JOIN song s
-        // ON a.id = s.album_id
-
-        
-
-   }
 //    /**
 //     * @return Album[] Returns an array of Album objects
 //     */

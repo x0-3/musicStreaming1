@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Song;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\From;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -47,18 +48,18 @@ class SongRepository extends ServiceEntityRepository
 
         $entityManager = $this->getEntityManager();
 
-        return $entityManager->createQueryBuilder('s')
-            ->select('s.id, s.nameSong, s.link, a.cover  ,COUNT(us.id) AS num_like')
+        $query = $entityManager->createQueryBuilder()
+            ->select('s.id,s.nameSong, a.cover, COUNT(ul.id) AS num_like')
             ->from('App\Entity\Song', 's')
-            ->innerjoin('App\Entity\Album', 'a')
-            ->leftJoin('s.likes', 'us')
-            ->groupBy('s.id, s.nameSong, s.link, a.cover ')
+            ->leftJoin('s.album', 'a')
+            ->leftJoin('s.likes', 'ul')
+            ->groupBy('s.id, s.nameSong,  a.cover')
             ->orderBy('num_like', 'DESC')
             ->setMaxResults(4)
             ->getQuery()
             ->getResult();
             
-
+        return $query;
     }
 
 //    /**

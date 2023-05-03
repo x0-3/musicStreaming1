@@ -19,18 +19,16 @@
 
                 
                 {% for album in albums %}
-                {{ dump(album) }}  
                     
                     <div class="card">
                         {# TODO:link to playlistDetail #}
                         <a href="#">
                             
                             <figure>
-                                <img src=" "alt="album cover">
+                                <img src="{{album.cover}} "alt="album cover">
                             </figure>
                             
-                            <h3></h3>
-                            <p> </p>
+                            <h3>{{album.nameAlbum}} </h3>
                         </a>
                     </div>
 
