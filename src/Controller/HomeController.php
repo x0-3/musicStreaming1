@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Album;
 use App\Entity\Playlist;
 use App\Entity\Song;
 use Doctrine\ORM\EntityManagerInterface;

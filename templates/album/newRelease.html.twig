@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AlbumController!{% endblock %}
+
+{% block body %}
+    <section class="newRelease">
+
+        <div class="album">
+
+            <div class="title">
+
+                <h1>New Album</h1>
+                <a href="#">More</a>
+            </div>
+
+            <div class="cards">
+
+                {# need a limit of 4 #}
+
+                
+                {% for album in albums %}
+                {{ dump(album) }}  
+                    
+                    <div class="card">
+                        {# TODO:link to playlistDetail #}
+                        <a href="#">
+                            
+                            <figure>
+                                <img src=" "alt="album cover">
+                            </figure>
+                            
+                            <h3></h3>
+                            <p> </p>
+                        </a>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <div class="genres">
+
+            <h1 class="title">Genres</h1>
+
+            {# need 14 #}
+
+            <div class="genresList">
+                <a href="#">Genre Name</a>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
