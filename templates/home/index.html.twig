@@ -81,8 +81,7 @@
             {% for song in songs %}            
                 <div class="playlistCard">
                     
-                    {# TODO: link it to media player of one song #}
-                    <a href="#">
+                    <a href="{{path('app_songPlayer', {'id': song.id})}}">
                         
                         <figure>
                             <img src="{{song.cover}}" alt="playlist image">

@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Song;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SongController extends AbstractController
 {
-    #[Route('/song', name: 'app_song')]
-    public function index(): Response
+    #[Route('/song/{id}', name: 'app_songPlayer')]
+    public function index(Song $song): Response
     {
-        return $this->render('song/index.html.twig', [
-            'controller_name' => 'SongController',
+
+        return $this->render('song/songMusicPlayer.html.twig', [
+            'song' => $song,
         ]);
     }
 }

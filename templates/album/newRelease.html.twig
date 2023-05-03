@@ -14,15 +14,13 @@
             </div>
 
             <div class="cards">
-
-                {# need a limit of 4 #}
-
                 
                 {% for album in albums %}
-                    
+                
                     <div class="card">
-                        {# TODO:link to playlistDetail #}
-                        <a href="#">
+                        {# TODO:link to albumDetail #}
+
+                        <a href="">
                             
                             <figure>
                                 <img src="{{album.cover}} "alt="album cover">
@@ -41,12 +39,17 @@
 
             <h1 class="title">Genres</h1>
 
-            {# need 14 #}
-
             <div class="genresList">
-                <a href="#">Genre Name</a>
 
+                {% for genre in genres %}
+
+                    {# TODO: link to page of music in this genre  #}
+                    <a href="#">{{genre.genreName}}</a>
+                
+                {% endfor %}
+            
             </div>
+
         </div>
     </section>
 {% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Song music player{% endblock %}
+
+{% block body %}
+
+<section class="musicPlayer">
+
+    {# {{ dump(song) }} #}
+
+    <div class="player">
+
+        <figure class="cover">
+            <img src="{{song.album.cover}}" alt="music cover">
+        </figure>
+
+        <h3 class="trackTitle">{{song.nameSong}}</h3>
+        <h4 class="ArtistName">{{song.user.username}}</h4>
+
+        
+        <div class="controls">
+            
+            <!-- TODO: change all like and add button to form -->
+            <button class="like"><i class="fa-regular fa-heart"></i></button>
+
+            <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
+            <button id="mainPlayBtn"><span class="fa-solid fa-circle-play"></span></button>
+            <button class="fa-sharp fa-solid fa-forward" id="btnNext"></button>
+        
+            <div class="hover">
+
+                <i class="volume-icon"><span class="fa-solid fa-volume-high"></span></i>
+
+
+                <div class="audio">
+                    
+                    <input type="range" id="volume-slider">
+                    
+                </div>
+            </div>
+        </div>
+
+        <audio id="audio" src="assets/music/Aaliyah - Giving You More.mp3">
+        </audio>
+
+        <div class="timeline">
+            <small class="time">0:00</small>
+
+            <div class="range-slider">
+                <input type="range" min="0" max="100" value="0" class="slider">
+            
+
+                <div class="slider-thumb"></div>
+
+                <div class="progress"></div>
+            </div>
+
+            <small class="fulltime">2:55</small>
+
+        </div>
+
+    </div>
+
+    <div class="leftSide">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th></th>
+                    <th>title</th>
+                    <th>artist</th>
+                    <th></th>
+                    <th>time</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                <tr>
+                    
+                    <td>
+                        <figure>
+                            <a href="musicPlayer.html">
+
+                                <img src="img/2.png" alt="song img">
+                            </a>
+                        </figure>
+                    </td>
+                    <td><a href="musicPlayer.html">song Title</a></td>
+                    <td> <a href="artistDetail.html"> Artist name </a></td>
+                    <td><button><i class="fa-regular fa-heart"></i></button></td>
+                    <td>3:09</td>
+                    <td><button><i class="fa-solid fa-plus"></i></button></td>
+                
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <form action="" method="post">
+            <input type="text" placeholder="leave a comment">
+
+            <button type="submit">Comment</button>
+        </form>
+
+        <div class="comments">
+
+            <article>
+                <figure>
+                    <img src="img/1.png" alt="profile picture">
+
+                    <figcaption> 
+                        <a href="#">Name</a>
+                    </figcaption>
+                </figure>
+
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur repellat quasi exercitationem? Nisi cupiditate quas adipisci modi tenetur fugiat quos vitae perferendis, obcaecati illum voluptatem distinctio tempore natus ab minima.</p>
+            </article>
+
+        </div>
+
+    </div>
+    
+</section>
+{% endblock %}
