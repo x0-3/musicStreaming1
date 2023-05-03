@@ -43,23 +43,24 @@ class PlaylistRepository extends ServiceEntityRepository
    /**
     * @return Playlist[] Returns an array of Playlist objects
     */
-   public function findByMostLikes(): array
+   public function findByMostFollow(): array
     {
         $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT p.id, p.image, p.playlistName, COUNT(pu.id) AS num_followers
-            FROM App\Entity\Playlist p
-            LEFT JOIN p.userFavorites pu
-            GROUP BY p.id, p.playlistName
-            ORDER BY num_followers DESC'
-        );
         
-        $results = $query->getResult();
+        $query = $entityManager->createQueryBuilder()
+            ->select('p.id, p.image, p.playlistName, COUNT(pu.id) AS num_followers')
+            ->from('App\Entity\Playlist', 'p')
+            ->leftJoin('p.userFavorites', 'pu')
+            ->groupBy('p.id, p.playlistName')
+            ->orderBy('num_followers', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
 
-        return $results;
+        return $query;
 
     }
+    
 //    /**
 //     * @return Playlist[] Returns an array of Playlist objects
 //     */

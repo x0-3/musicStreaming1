@@ -39,6 +39,28 @@ class SongRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    * @return Song[] Returns an array of Song objects
+    */
+    public function findByMostLikes(): array
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        return $entityManager->createQueryBuilder('s')
+            ->select('s.id, s.nameSong, s.link, a.cover  ,COUNT(us.id) AS num_like')
+            ->from('App\Entity\Song', 's')
+            ->innerjoin('App\Entity\Album', 'a')
+            ->leftJoin('s.likes', 'us')
+            ->groupBy('s.id, s.nameSong, s.link, a.cover ')
+            ->orderBy('num_like', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+            
+
+    }
+
 //    /**
 //     * @return Song[] Returns an array of Song objects
 //     */
