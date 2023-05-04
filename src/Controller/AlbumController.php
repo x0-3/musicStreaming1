@@ -23,4 +23,12 @@ class AlbumController extends AbstractController
             'genres' => $genres,
         ]);
     }
+
+    #[Route('/album/{id}', name: 'app_albumDetail')]
+    public function albumDetail(Album $album): Response
+    {
+        return $this->render('album/albumDetail.html.twig', [
+
+        ]);
+    }
 }

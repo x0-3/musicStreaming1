@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Entity\Playlist;
 use App\Entity\Song;
+use App\Entity\Subscribe;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,12 +34,14 @@ class HomeController extends AbstractController
 
         $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist);
         $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist);
+        $artistMostSub = $em->getRepository(Subscribe::class)->findByMostSubscribers();
 
 
-        return $this->render('home/ArtistDetail.html.twig', [
+        return $this->render('home/artistDetail.html.twig', [
             'artist' => $artist,
             'songs' => $songs,
             'albums' => $albums,
+            'artistMostSub' => $artistMostSub,
 
         ]);
     }

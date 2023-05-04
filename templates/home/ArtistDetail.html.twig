@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Artist page{% endblock %}
+{% block title %}{{artist.username}}{% endblock %}
 
 {% block body %}
 
@@ -74,7 +74,7 @@
             
                 <div class="card">
                     {# TODO: redirect to album detail #}
-                    <a href="#">
+                    <a href="{{path('app_albumDetail', {'id': album.id})}}">
 
                         <figure>
                             <img src="{{album.cover}}" alt="album cover">
@@ -92,23 +92,34 @@
 
         <div class="title">
 
-            <h1>Similare Artists</h1>
+            <h1>Most Popular Artists</h1>
             <a href="#">More</a>
         </div>
 
         <div class="cards">
 
-            <div class="card">
-                <a href="{{path('app_artistDetail', {'id': artist.id})}}">
+            {% for artistMostSub in artistMostSub %}
+                
+                <div class="card">
+                    <a href="{{path('app_artistDetail', {'id': artistMostSub.id})}}">
 
-                    <figure>
-                        <img src="img/2.png" alt="album cover">
-                    </figure>
-                    
-                    <h3>Name</h3>
-                </a>
-            </div>
+                        {% if artistMostSub.avatar == null %}
+                            <figure>
+                                <img src="{{asset('assets/img/profil_pic.png')}}" alt="album cover">
+                            </figure>
 
+                        {% else %}
+                            <figure>
+                                <img src="{{artistMostSub.avatar}}" alt="album cover">
+                            </figure>
+                            
+                        {% endif %}
+                        
+                        <h3>{{artistMostSub.username}}</h3>
+                    </a>
+                </div>
+            
+            {% endfor %}
 
         </div>
     </div>
