@@ -12,8 +12,6 @@ class SongController extends AbstractController
     #[Route('/song/{id}', name: 'app_songPlayer')]
     public function index(Song $song): Response
     {
-
-        
         return $this->render('song/songMusicPlayer.html.twig', [
             'song' => $song,
         ]);

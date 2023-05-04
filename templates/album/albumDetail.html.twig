@@ -1,1 +1,62 @@
-{# TODO: create to album detail #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{album.nameAlbum}}{% endblock %}
+
+{% block body %}
+<section class="playlistDetail">
+
+    <div class="playlistHeader">
+        <figure>
+            <img src="{{album.cover}}" alt="playlist image">
+        </figure>
+        <h3>{{album.nameAlbum}}</h3>
+
+        <div class="playerBtns">
+            <a href="{{path('app_albumPlayer', {'id': album.id})}}">
+                <i class="fa-regular fa-circle-play"></i>
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-shuffle"></i>
+            </a>
+        </div>
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th></th>
+                <th>title</th>
+                <th>artist</th>
+                <th></th>
+                <th>time</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            
+            {% for song in album.songs %}            
+                <tr>
+                    <td>
+                        <figure>
+                            <img src="{{album.cover}}" alt="song img">
+                        </figure>
+                    </td>
+                    <td><a href="{{path('app_songPlayer', {'id': song.id})}}"> {{song.nameSong}} </a></td>
+                    <td> <a href="{{path('app_artistDetail', {'id': song.user.id})}}"> {{song.user.username}} </a></td>
+                    <td><button><i class="fa-regular fa-heart"></i></button></td>
+                    <td>3:09</td>
+                    <td><button><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}
+
