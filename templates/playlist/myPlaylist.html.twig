@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My playlists{% endblock %}
+
+{% block body %}
+
+{% if app.user %}
+    
+
+    <section class="playlistList">
+
+        <div class="title">
+            <div class="nav">
+
+                <h1>Playlist</h1>
+                <a class="artistLink" href="artist.html">Artists</a>
+            </div>
+
+            <a href="#">New playlist</a>
+            
+        </div>
+
+        <div class="myPlaylist">
+            <div class="mainCard">
+                <a href="playlistDetail.html">
+                    <figure>
+                        <img src="{{asset('assets/img/liked.jpg')}}" alt="playlist image">
+                        <figcaption>
+                            <h2>Like</h2>
+                            <h3>Number of Songs : {{like|length}} </h3>
+                        </figcaption>
+                        
+                    </figure>
+                </a>
+            </div>
+
+            {% for playlist in playlists %}
+
+                <div class="card">
+
+                    <a href="#">
+
+                        <figure>
+                            <img src="{{playlist.image}}" alt="playlist image">
+                        </figure>
+
+                        <h3>{{playlist.playlistName}}</h3>
+
+                    </a>
+                </div>
+
+            {% endfor %}
+            
+        </div>
+    </section>
+
+
+{% else %}
+
+<h3>You need to be logged in</h3>
+
+
+{% endif %}
+{% endblock %}

@@ -168,18 +168,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function isIsVerified(): ?bool
-    // {
-    //     return $this->isVerified;
-    // }
-
-    // public function setIsVerified(bool $isVerified): self
-    // {
-    //     $this->isVerified = $isVerified;
-
-    //     return $this;
-    // }
-
     /**
      * @return Collection<int, Song>
      */
