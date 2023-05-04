@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{playlist.playlistName}} - {{songs[0].nameSong}} {{songs[0].user.username}} {% endblock %}
+
+{% block body %}
+<section class="musicPlayer">
+
+    <div class="player">
+
+        <figure class="cover">
+            <img src="{{songs[0].album.cover}}" alt="music cover">
+        </figure>
+
+        <h3 class="trackTitle">{{songs[0].nameSong}}</h3>
+        <h4 class="ArtistName">{{songs[0].user.username}}</h4>
+
+        
+        <div class="controls">
+            
+            <button class="like"><i class="fa-regular fa-heart"></i></button>
+
+            <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
+            <button id="mainPlayBtn"><span class="fa-solid fa-circle-play"></span></button>
+            <button class="fa-sharp fa-solid fa-forward" id="btnNext"></button>
+        
+            <div class="hover">
+
+                <i class="volume-icon"><span class="fa-solid fa-volume-high"></span></i>
+
+
+                <div class="audio">
+                    <input type="range" id="volume-slider">
+                    
+                </div>
+            </div>
+        </div>
+
+        {% for song in songs %}
+            <audio id="audio" src="{{song.link}}">
+            </audio>
+            
+        {% endfor %}
+
+        <div class="timeline">
+            <small class="time">0:00</small>
+
+            <div class="range-slider">
+                <input type="range" min="0" max="100" value="0" class="slider">
+            
+
+                <div class="slider-thumb"></div>
+
+                <div class="progress"></div>
+            </div>
+
+            <small class="fulltime">2:55</small>
+
+        </div>
+
+    </div>
+
+    <div class="leftSide">
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th></th>
+                    <th>title</th>
+                    <th>artist</th>
+                    <th></th>
+                    <th>time</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                                
+                {% for song in playlist.songs %} 
+                   
+                    <tr>
+                        
+                        <td>
+                            <figure>
+                                <img src="{{song.album.cover}}" alt="song img">
+                            </figure>
+                        </td>
+                        <td>{{song.nameSong}}</td>
+                        <td> <a href="{{path('app_artistDetail', {'id': playlist.user.id})}}"> {{playlist.user.username}} </a></td>
+                        <td><button><i class="fa-regular fa-heart"></i></button></td>
+                        <td>0:00</td>
+                        <td><button><i class="fa-solid fa-plus"></i></button></td>
+                    
+                    </tr>
+                
+                {% endfor %}
+                
+            </tbody>
+        </table>
+
+        <form action="" method="post">
+            <input type="text" placeholder="leave a comment">
+
+            <button type="submit">Comment</button>
+        </form>
+
+        {# TODO: comment for each song #}
+        <div class="comments">
+
+            <article>
+                <figure>
+                    <img src="img/1.png" alt="profile picture">
+
+                    <figcaption> 
+                        <a href="#">Name</a>
+                    </figcaption>
+                </figure>
+
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur repellat quasi exercitationem? Nisi cupiditate quas adipisci modi tenetur fugiat quos vitae perferendis, obcaecati illum voluptatem distinctio tempore natus ab minima.</p>
+            </article>
+
+            
+        </div>
+
+        
+    </div>
+    
+</section>
+{% endblock %}

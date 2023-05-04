@@ -36,7 +36,7 @@ class AlbumController extends AbstractController
     }
 
     #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
-    public function albumMusicPlayer(Album $album, EntityManagerInterface $em): Response
+    public function albumMusicPlayer(Album $album): Response
     {
 
         $songs = $album->getSongs();

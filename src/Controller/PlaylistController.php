@@ -16,4 +16,16 @@ class PlaylistController extends AbstractController
             'playlist' => $playlist,
         ]);
     }
+
+    #[Route('/playlist/musicPlayer/{id}', name: 'playlist_player')]
+    public function playlistPlayer(Playlist $playlist): Response
+    {
+
+        $songs = $playlist->getSongs();
+
+        return $this->render('playlist/playlistPlayer.html.twig', [
+            'playlist' => $playlist,
+            'songs' => $songs,
+        ]);
+    }
 }

@@ -18,9 +18,8 @@
                 {% for album in albums %}
                 
                     <div class="card">
-                        {# TODO:link to albumDetail #}
-
-                        <a href="">
+                        
+                        <a href="{{path('app_albumDetail', {'id': album.id})}}">
                             
                             <figure>
                                 <img src="{{album.cover}} "alt="album cover">
