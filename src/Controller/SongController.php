@@ -21,6 +21,7 @@ class SongController extends AbstractController
     }
 
 
+    // user like songs
     #[Route('/song', name: 'app_like')]
     public function myPlaylist(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
     {

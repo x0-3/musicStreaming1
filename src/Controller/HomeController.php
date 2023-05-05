@@ -28,6 +28,7 @@ class HomeController extends AbstractController
         ]);
     }
 
+    // page for the detail of another user  
     #[Route('/artist/{id}', name: 'app_artistDetail')]
     public function artistPage(User $artist, EntityManagerInterface $em ): Response
     {

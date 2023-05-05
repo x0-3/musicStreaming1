@@ -39,6 +39,8 @@ class AlbumRepository extends ServiceEntityRepository
         }
     }
 
+
+    // find most recent albums for one artist
    /**
     * @return Album[] Returns an array of Album objects
     */

@@ -40,6 +40,8 @@ class SongRepository extends ServiceEntityRepository
         }
     }
 
+
+    // find the most liked songs
     /**
     * @return Song[] Returns an array of Song objects
     */
@@ -62,6 +64,8 @@ class SongRepository extends ServiceEntityRepository
         return $query;
     }
 
+
+    // find artists most liked song
     /**
     * @return Song[] Returns an array of Song objects
     */

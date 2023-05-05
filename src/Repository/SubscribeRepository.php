@@ -39,18 +39,19 @@ class SubscribeRepository extends ServiceEntityRepository
         }
     }
 
+    
+    // find top 4 artists with most subscribers 
    /**
     * @return Subscribe[] Returns an array of Subscribe objects
     */
    public function findByMostSubscribers(): array
-   {
-        // $entityManager = $this->getEntityManager();
+    {
 
         $query = $this->createQueryBuilder('s')
-            ->select("u.id, u.username, u.avatar, COUNT(s.id) AS num_followers")
-            ->from('App\Entity\Subscribe', 's')
+            ->select("u.id, u.username, u.avatar, COUNT(sub.id) AS num_followers")
+            ->from('App\Entity\Subscribe', 'sub')
             // TODO: might need to change to subscribers
-            ->innerJoin('s.userSubscribes', 'u')
+            ->innerJoin('sub.userSubscribes', 'u')
             ->groupBy('u.id, u.username, u.avatar')
             ->orderBy('num_followers', 'DESC')
             ->setMaxResults(4)
@@ -59,7 +60,31 @@ class SubscribeRepository extends ServiceEntityRepository
         ;
 
         return $query;
-   }
+    }
+
+
+    // get the artist that a user is subscribed to 
+   /**
+    * @return Subscribe[] Returns an array of Subscribe objects
+    */
+   public function findUserSubscriber($userId): array
+    {
+
+        $query = $this->createQueryBuilder('s')
+            ->select('sub.id, u.email, us.id, us.username, u.avatar')
+            ->from('App\Entity\Subscribe', 'sub')
+            ->innerJoin('sub.subscribers', 'u')
+            ->innerJoin('sub.userSubscribes', 'us')
+            ->where('u.email = :email')
+            ->setParameter('email', $userId)
+            ->groupBy('sub.id, u.email, us.id, us.username, u.avatar')
+            ->getQuery()
+            ->getResult();
+
+        ;
+
+        return $query;
+    }
 
 
 

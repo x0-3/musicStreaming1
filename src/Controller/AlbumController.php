@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AlbumController extends AbstractController
 {
+    // new released albums
     #[Route('/album', name: 'app_newRelease')]
     public function index(EntityManagerInterface $em): Response
     {

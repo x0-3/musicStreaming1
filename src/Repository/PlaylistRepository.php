@@ -61,6 +61,8 @@ class PlaylistRepository extends ServiceEntityRepository
 
     }
     
+
+    // find the created playlists for a user
    /**
     * @return Playlist[] Returns an array of Playlist objects
     */
@@ -83,6 +85,8 @@ class PlaylistRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+
+    // find songs that a user liked
    /**
     * @return Playlist[] Returns an array of Playlist objects
     */

@@ -33,6 +33,7 @@ class PlaylistController extends AbstractController
     }
 
 
+    // get the users playlists
     #[Route('/playlist', name: 'app_myPlaylist')]
     public function myPlaylist(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
     {

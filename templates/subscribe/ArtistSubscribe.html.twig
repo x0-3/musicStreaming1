@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subscriptions{% endblock %}
+
+{% block body %}
+
+    <section class="listArtist">
+        <h1 class="title">Artists</h1>
+
+        {% for sub in subs %}
+        
+            <div class="artistCard">
+                
+                {% if sub.avatar == null %}
+                    
+                    <figure>
+                        <img src="{{asset('assets/img/profil_pic.png')}}" alt="artist img">
+
+                    </figure>
+
+                {% else %}
+                    <figure>
+                        <img src="{{sub.avatar}}" alt="artist img">
+                    </figure>
+                {% endif %}
+                
+                <a href="{{path('app_artistDetail', {'id': sub.id})}}">{{sub.username}}</a>
+            </div>
+        {% endfor %}
+
+
+    </section>
+
+{% endblock %}
