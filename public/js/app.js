@@ -57,16 +57,11 @@ const volumeIcon = document.querySelector(".volume-icon");
 
 let trackPlaying = false;
 
-// let volumeMuted = false;
+let volumeMuted = false;
 
 let trackId = 0; 
 
-// TODO: make it dinamic with AJAX
-const tracks = [
-  "Aaliyah - Giving You More",
-  "Ella Mai - Good Bad",
-  "Aaliyah - Giving You More"
-];
+const tracks = [];
 
 // play /pause 
 playBtn.addEventListener("click", playTrack);
@@ -118,14 +113,8 @@ const trackScr = "assets/music/" + tracks[trackId] + ".mp3";
 function loadTrack(){
 
   // set the audio track source
-  audio.scr = "assets/music/" + tracks[trackId] + ".mp3";
-
-  // console.log(audio);
-
-  // reload the track
-  audio.load();
-
-
+  audio.scr = trackScr;
+  
   progress.style.width = 0;
   thumb.style.left = 0;
 
@@ -212,7 +201,7 @@ audio.addEventListener('timeupdate', () => {
 
   // get the current audio time
   const currentAudioTime = Math.floor(audio.currentTime);
-  
+
   // get the percentage
   const timePercentage = (currentAudioTime / audio.duration) * 100 + "%";
 
@@ -232,15 +221,13 @@ function customSlider(){
   // calculate the % 
   const val = (slider.value / audio.duration) * 100 + "%";
 
-  // console.log(audio.duration);
-
   // set the progress of the song
   progress.style.width = val;
   thumb.style.left = val;
-
-  // show the cuurent time of the song
+  
+  // show the curent time of the song
   setTime(time, slider.value);
-
+  
   // set it to the slider 
   audio.currentTime = slider.value;
 }

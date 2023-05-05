@@ -90,13 +90,13 @@ $breakpointPhone: 767px;
             margin: 65px 18px 41px 14px;
         }
 
-        section.home, section.artistDetail {
+        section.home, section.artistDetail, section.newRelease {
             .playlist, .album, .artist{
 
                 .playlistCards, .cards{
                     display: block;
-                    white-space: nowrap;
                     overflow-x: auto;
+                    white-space: nowrap;
 
                     &::-webkit-scrollbar{
                         display: none;
@@ -104,8 +104,8 @@ $breakpointPhone: 767px;
 
                   .playlistCard, .card{
                         width: 190px;
-                        display: inline-flex;
                         margin: 0 15px;
+                        display: inline-block;
                     }
                 }
             }
