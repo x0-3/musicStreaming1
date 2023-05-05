@@ -47,6 +47,4 @@ class HomeController extends AbstractController
         ]);
     }
 
-
-
 }

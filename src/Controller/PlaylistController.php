@@ -55,4 +55,16 @@ class PlaylistController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+
+    // top ten most followed playlists
+    #[Route('/recommended', name: 'more_recommended')]
+    public function TopFollowedPlaylists(EntityManagerInterface $em): Response
+    {
+
+        $playlists = $em->getRepository(Playlist::class)->findByMoreMostFollow();
+
+        return $this->render('home/recommended.html.twig', [
+            'playlists' => $playlists,
+        ]);
+    }
 }

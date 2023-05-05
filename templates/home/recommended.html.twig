@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recommended{% endblock %}
+
+{% block body %}
+
+    <section class="playlistList">
+
+        <div class="myPlaylist">
+
+            {% for playlist in playlists %}
+
+                <div class="card">
+
+                    <a href="{{path('playlist_detail', {'id': playlist.id})}}">
+
+                        <figure>
+                            <img src="{{playlist.image}}" alt="playlist image">
+                        </figure>
+
+                        <h3>{{playlist.playlistName}}</h3>
+
+                    </a>
+                </div>
+
+            {% endfor %}
+            
+        </div>
+    </section>
+{% endblock %}

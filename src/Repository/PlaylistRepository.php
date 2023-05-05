@@ -60,6 +60,27 @@ class PlaylistRepository extends ServiceEntityRepository
         return $query;
 
     }
+
+    // find top 10 of the ;ost followed playlists
+   /**
+    * @return Playlist[] Returns an array of Playlist objects
+    */
+   public function findByMoreMostFollow(): array
+    {
+        
+        $query = $this->createQueryBuilder('pl')
+            ->select('p.id, p.image, p.playlistName, COUNT(pu.id) AS num_followers')
+            ->from('App\Entity\Playlist', 'p')
+            ->leftJoin('p.userFavorites', 'pu')
+            ->groupBy('p.id, p.playlistName')
+            ->orderBy('num_followers', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+
+        return $query;
+
+    }
     
 
     // find the created playlists for a user

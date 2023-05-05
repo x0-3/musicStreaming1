@@ -41,4 +41,16 @@ class SongController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+
+
+    #[Route('/topLiked', name: 'app_mostLiked')]
+    public function topLiked(EntityManagerInterface $em): Response
+    {
+
+        $songs = $em->getRepository(Song::class)->findTenMostLikes();
+
+        return $this->render('song/mostLiked.html.twig', [
+            'songs'=> $songs,
+        ]);
+    }
 }
