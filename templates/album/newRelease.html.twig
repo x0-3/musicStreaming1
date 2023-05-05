@@ -42,8 +42,7 @@
 
                 {% for genre in genres %}
 
-                    {# TODO: link to page of music in this genre  #}
-                    <a href="#">{{genre.genreName}}</a>
+                    <a href="{{path('app_genre', {'id': genre.id})}}">{{genre.genreName}}</a>
                 
                 {% endfor %}
             
