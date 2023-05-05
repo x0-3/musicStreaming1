@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{% if app.user %}
+
     
 
     <section class="playlistList">
@@ -21,10 +21,12 @@
         </div>
 
         <div class="myPlaylist">
+
             <div class="mainCard">
-                <a href="playlistDetail.html">
+
+                <a href="{{path('app_like')}}">
                     <figure>
-                        <img src="{{asset('assets/img/liked.jpg')}}" alt="playlist image">
+                        <img src="{{asset('assets/img/dee-XhvEvfXQoSY-unsplash.jpg')}}" alt="playlist image">
                         <figcaption>
                             <h2>Like</h2>
                             <h3>Number of Songs : {{like|length}} </h3>
@@ -38,7 +40,7 @@
 
                 <div class="card">
 
-                    <a href="#">
+                    <a href="{{path('playlist_detail', {'id': playlist.id})}}">
 
                         <figure>
                             <img src="{{playlist.image}}" alt="playlist image">
@@ -55,10 +57,4 @@
     </section>
 
 
-{% else %}
-
-<h3>You need to be logged in</h3>
-
-
-{% endif %}
 {% endblock %}

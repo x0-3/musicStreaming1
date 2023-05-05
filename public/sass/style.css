@@ -19,6 +19,9 @@
 * p {
   font-family: "Lato", sans-serif;
 }
+* body main {
+  min-height: 67vh;
+}
 * body header {
   background-color: #36454F;
   display: flex;

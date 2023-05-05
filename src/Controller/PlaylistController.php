@@ -19,6 +19,7 @@ class PlaylistController extends AbstractController
         ]);
     }
 
+
     #[Route('/playlist/musicPlayer/{id}', name: 'playlist_player')]
     public function playlistPlayer(Playlist $playlist): Response
     {
@@ -31,24 +32,26 @@ class PlaylistController extends AbstractController
         ]);
     }
 
+
     #[Route('/playlist', name: 'app_myPlaylist')]
     public function myPlaylist(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
     {
         $token = $tokenStorage->getToken();
         if ($token) {
             $userEmail = $token->getUser()->getUserIdentifier();
+            $repo = $em->getRepository(Playlist::class);
+            $playlists = $repo->findPlaylistUser($userEmail);
+    
+            $like =  $repo->findlikedSongs($userEmail);
+
+            return $this->render('playlist/myPlaylist.html.twig', [
+                'playlists'=> $playlists,
+                'like'=> $like,
+            ]);
+        
+        }else{
+
+            return $this->redirectToRoute('app_login');
         }
-
-        $repo = $em->getRepository(Playlist::class);
-        $playlists = $repo->findPlaylistUser($userEmail);
-
-        $like =  $repo->findlikedSongs($userEmail);
-
-
-
-        return $this->render('playlist/myPlaylist.html.twig', [
-            'playlists'=> $playlists,
-            'like'=> $like,
-        ]);
     }
 }

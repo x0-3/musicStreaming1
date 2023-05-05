@@ -69,7 +69,7 @@ class PlaylistRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQueryBuilder()
-            ->select('p.id, u.id, p.image, p.playlistName, p.dateCreated')
+            ->select('p.id, p.image, p.playlistName, p.dateCreated')
             ->from('App\Entity\Playlist', 'p')
             ->leftJoin('p.user', 'u')
             ->where('u.email = :email')
@@ -91,8 +91,10 @@ class PlaylistRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQueryBuilder()
-            ->select('l.id')
+            ->select('l.id,  u.id, s.nameSong, u.username, a.cover')
             ->from('App\Entity\Song', 's')
+            ->leftJoin('s.album', 'a')
+            ->leftJoin('s.user', 'u')
             ->leftJoin('s.likes', 'l')
             ->where('l.email = :email')
             ->setParameter('email', $userEmail)

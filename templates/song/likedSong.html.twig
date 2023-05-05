@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SongController!{% endblock %}
+
+{% block body %}
+
+<section class="playlistDetail">
+
+    <div class="playlistHeader">
+        <figure>
+            <img src="{{asset('assets/img/dee-XhvEvfXQoSY-unsplash.jpg')}}" alt="playlist image">
+        </figure>
+        <h3>Liked Songs</h3>
+
+        <div class="playerBtns">
+
+            {# TODO: find a way to get the like  #}
+            <a href="">
+                <i class="fa-regular fa-circle-play"></i>
+            </a>
+
+            <a href="">
+                <i class="fa-solid fa-shuffle"></i>
+            </a>
+        </div>
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th></th>
+                <th>title</th>
+                <th>artist</th>
+                <th></th>
+                <th>time</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            
+            {% for song in like %}
+                            
+                <tr>
+                    <td>
+                        <figure>
+                            <img src="{{song.cover}}" alt="song img">
+                        </figure>
+                    </td>
+                    <td>{{song.nameSong}} </td>
+                    <td> <a href="{{path('app_artistDetail', {'id': song.id})}}"> {{song.username}} </a></td>
+                    <td><button><i class="fa-regular fa-heart"></i></button></td>
+                    <td>3:09</td>
+                    <td><button><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+            
+            {% endfor %}
+
+        </tbody>
+    </table>
+</section>
+{% endblock %}
