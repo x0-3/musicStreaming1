@@ -4,13 +4,13 @@
 
 {% block body %}
 
-    <section class="playlistList">
+    <section class="m-5">
 
-        <div class="myPlaylist">
+        <div class="d-flex m-auto flex-wrap">
 
             {% for song in songs %}
 
-                <div class="card">
+                <div class="card m-3 ">
 
                     <a href="{{path('app_songPlayer', {'id': song.id})}}">
 
