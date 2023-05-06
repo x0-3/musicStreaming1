@@ -61,7 +61,7 @@ class PlaylistRepository extends ServiceEntityRepository
 
     }
 
-    // find top 10 of the ;ost followed playlists
+    // find top 10 of the most followed playlists
    /**
     * @return Playlist[] Returns an array of Playlist objects
     */
@@ -129,6 +129,43 @@ class PlaylistRepository extends ServiceEntityRepository
 
         return $query->execute();
     }
+
+
+    // find user top 4 favorite playlist
+   /**
+    * @return Playlist[] Returns an array of Playlist objects
+    */
+   public function find4FavoritePlaylists($userEmail): array
+    {
+       return $this->createQueryBuilder('p')
+           ->select('pl.id, pl.image, pl.playlistName, pu.email')
+           ->from('App\Entity\Playlist', 'pl')
+           ->leftJoin('pl.userFavorites', 'pu')
+           ->where('pu.email = :email')
+           ->setParameter('email', $userEmail)
+           ->setMaxResults(4)
+           ->getQuery()
+           ->getResult()
+       ;
+    }
+
+    // find user favorites playlists
+   /**
+    * @return Playlist[] Returns an array of Playlist objects
+    */
+   public function findFavoritePlaylists($userEmail): array
+    {
+       return $this->createQueryBuilder('p')
+           ->select('pl.id, pl.image, pl.playlistName, pu.email')
+           ->from('App\Entity\Playlist', 'pl')
+           ->leftJoin('pl.userFavorites', 'pu')
+           ->where('pu.email = :email')
+           ->setParameter('email', $userEmail)
+           ->getQuery()
+           ->getResult()
+       ;
+    }
+
 
 //    /**
 //     * @return Playlist[] Returns an array of Playlist objects

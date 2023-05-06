@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your favorites{% endblock %}
+
+{% block body %}
+
+    <section class="m-5">
+
+        <div class="d-flex w-75 m-auto">
+
+            {% for playlist in favoritePlaylists %}
+
+                <div class="card w-25 me-5">
+
+                    <a href="{{path('playlist_detail', {'id': playlist.id})}}">
+
+                        <figure>
+                            <img src="{{playlist.image}}" alt="playlist image">
+                        </figure>
+
+                        <h3>{{playlist.playlistName}}</h3>
+
+                    </a>
+                </div>
+
+            {% endfor %}
+            
+        </div>
+    </section>
+{% endblock %}

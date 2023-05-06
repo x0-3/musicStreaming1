@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class SongController extends AbstractController
 {
+
+    // song player for one song
     #[Route('/song/{id}', name: 'app_songPlayer')]
     public function index(Song $song): Response
     {
@@ -21,16 +23,18 @@ class SongController extends AbstractController
     }
 
 
-    // user like songs
+    // list of the user like songs
     #[Route('/song', name: 'app_like')]
     public function myPlaylist(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
     {
         $token = $tokenStorage->getToken();
+
         if ($token) {
-            $userEmail = $token->getUser()->getUserIdentifier();
+            $userEmail = $token->getUser()->getUserIdentifier(); // get user email
+
             $repo = $em->getRepository(Playlist::class);
     
-            $like =  $repo->findlikedSongs($userEmail);
+            $like =  $repo->findlikedSongs($userEmail); // find like song for the user
 
             return $this->render('song/likedSong.html.twig', [
                 'like'=> $like,
@@ -43,11 +47,12 @@ class SongController extends AbstractController
     }
 
 
+    // find the top ten like song (most popular)
     #[Route('/topLiked', name: 'app_mostLiked')]
     public function topLiked(EntityManagerInterface $em): Response
     {
 
-        $songs = $em->getRepository(Song::class)->findTenMostLikes();
+        $songs = $em->getRepository(Song::class)->findTenMostLikes(); // find the top ten like song
 
         return $this->render('song/mostLiked.html.twig', [
             'songs'=> $songs,

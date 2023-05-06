@@ -11,6 +11,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class PlaylistController extends AbstractController
 {
+
+    // detailed page for one playlist
     #[Route('/playlist/{id}', name: 'playlist_detail')]
     public function index(Playlist $playlist): Response
     {
@@ -20,11 +22,12 @@ class PlaylistController extends AbstractController
     }
 
 
+    // music player page for one playlist
     #[Route('/playlist/musicPlayer/{id}', name: 'playlist_player')]
     public function playlistPlayer(Playlist $playlist): Response
     {
 
-        $songs = $playlist->getSongs();
+        $songs = $playlist->getSongs(); // get the list of songs from the playlist
 
         return $this->render('playlist/playlistPlayer.html.twig', [
             'playlist' => $playlist,
@@ -33,38 +36,31 @@ class PlaylistController extends AbstractController
     }
 
 
-    // get the users playlists
+    // get the playlists created by the user
     #[Route('/playlist', name: 'app_myPlaylist')]
     public function myPlaylist(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
     {
         $token = $tokenStorage->getToken();
+
         if ($token) {
-            $userEmail = $token->getUser()->getUserIdentifier();
-            $repo = $em->getRepository(Playlist::class);
-            $playlists = $repo->findPlaylistUser($userEmail);
-    
-            $like =  $repo->findlikedSongs($userEmail);
+
+            $userEmail = $token->getUser()->getUserIdentifier(); // get the user email
+            
+            $repo = $em->getRepository(Playlist::class); // get the playlist repository
+
+            $playlists = $repo->findPlaylistUser($userEmail); // get the playlist created by the user
+            $like =  $repo->findlikedSongs($userEmail); //get the liked songs of the user
 
             return $this->render('playlist/myPlaylist.html.twig', [
                 'playlists'=> $playlists,
                 'like'=> $like,
             ]);
         
+            // if the user isn't logged in then redirect to login page
         }else{
 
             return $this->redirectToRoute('app_login');
         }
     }
 
-    // top ten most followed playlists
-    #[Route('/recommended', name: 'more_recommended')]
-    public function TopFollowedPlaylists(EntityManagerInterface $em): Response
-    {
-
-        $playlists = $em->getRepository(Playlist::class)->findByMoreMostFollow();
-
-        return $this->render('home/recommended.html.twig', [
-            'playlists' => $playlists,
-        ]);
-    }
 }

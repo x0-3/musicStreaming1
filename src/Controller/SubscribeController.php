@@ -18,10 +18,11 @@ class SubscribeController extends AbstractController
     {
 
         $token = $tokenStorage->getToken();
-        if ($token) {
-            $userId = $token->getUser()->getUserIdentifier();
 
-            $subs = $em->getRepository(Subscribe::class)->findUserSubscriber($userId);
+        if ($token) {
+            $userId = $token->getUser()->getUserIdentifier(); // get the user email
+
+            $subs = $em->getRepository(Subscribe::class)->findUserSubscriber($userId); // get the user subscriptions
 
             return $this->render('subscribe/ArtistSubscribe.html.twig', [
                 'subs' => $subs,
