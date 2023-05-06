@@ -787,6 +787,22 @@
             }
         }
 
+
+        section.more {
+            width: 90%;
+            margin: 48px auto;
+
+            .listItems {
+                display: flex;
+                width: 100%;
+                flex-wrap: wrap;
+
+                .card{
+                    margin: 36px;
+                }
+            }
+        }
+
         footer{
 
             margin-top: 50px;

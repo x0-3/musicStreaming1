@@ -576,6 +576,18 @@
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
+* body section.more {
+  width: 90%;
+  margin: 48px auto;
+}
+* body section.more .listItems {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+* body section.more .listItems .card {
+  margin: 36px;
+}
 * body footer {
   margin-top: 50px;
 }

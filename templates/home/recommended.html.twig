@@ -4,13 +4,13 @@
 
 {% block body %}
 
-    <section class="m-5">
+    <section class="more">
 
-        <div class="d-flex w-75 m-auto">
+        <div class="listItems">
 
             {% for playlist in playlists %}
 
-                <div class="card w-25 me-5">
+                <div class="card">
 
                     <a href="{{path('playlist_detail', {'id': playlist.id})}}">
 

@@ -161,6 +161,7 @@ class PlaylistRepository extends ServiceEntityRepository
            ->leftJoin('pl.userFavorites', 'pu')
            ->where('pu.email = :email')
            ->setParameter('email', $userEmail)
+           ->groupBy('pl.id, pl.image, pl.playlistName, pu.email')
            ->getQuery()
            ->getResult()
        ;
