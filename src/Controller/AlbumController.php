@@ -26,7 +26,17 @@ class AlbumController extends AbstractController
     }
 
 
-    // TODO: add the new release page for 20 albums
+    // new release page for 20 albums
+    #[Route('/album/newRelease', name: 'app_albums')]
+    public function newReleasedAlbum(EntityManagerInterface $em): Response
+    {
+
+        $albums= $em->getRepository(Album::class)->findBy([],['releaseDate'=>'DESC'],20); // get the new released albums
+
+        return $this->render('album/mostRecent.html.twig', [
+            'albums' => $albums,
+        ]);
+    }
 
 
     // detail page of one album

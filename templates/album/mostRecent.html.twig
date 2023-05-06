@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your favorites{% endblock %}
+
+{% block body %}
+
+    <section class="m-5">
+
+        <div class="d-flex w-75 m-auto">
+
+            {% for album in albums %}
+
+                <div class="card w-25 me-5">
+
+                    <a href="{{path('app_albumDetail', {'id': album.id})}}">
+
+                        <figure>
+                            <img src="{{album.cover}}" alt="playlist image">
+                        </figure>
+
+                        <h3>{{album.nameAlbum}}</h3>
+
+                    </a>
+                </div>
+
+            {% endfor %}
+            
+        </div>
+    </section>
+{% endblock %}
