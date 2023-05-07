@@ -34,7 +34,8 @@
 
     </div>
 
-    {% if app.user %}
+    {# if the user is connected and has a favorite playlist #}
+    {% if (app.user) and (favoritePlaylists != null) %}
 
         <div class="playlist">
 

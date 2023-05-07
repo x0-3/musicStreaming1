@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{song.user.username}} {{song.nameSong}}{% endblock %}
+{% block title %}{{song.user.username}} - {{song.nameSong}}{% endblock %}
 
 {% block body %}
 
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <audio id="audio" src="{{song.link}}"></audio>
+        <audio id="audio" src="{{song.link}}" autoplay></audio>
 
         <div class="timeline">
             <small class="time">0:00</small>

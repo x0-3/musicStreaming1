@@ -1,7 +1,24 @@
 // ******************************************* Toggle light and dark mode ********************************************************************* //
+(function() {
+  let onpageLoad = localStorage.getItem("theme") || "";
+  let element = document.body;
+  element.classList.add(onpageLoad);
+  document.getElementById("theme").textContent =
+    localStorage.getItem("theme") || "light";
+})();
+
 function myFunction() {
   var element = document.body;
   element.classList.toggle("dark");
+
+  let theme = localStorage.getItem("theme");
+  if (theme && theme === "dark") {
+    localStorage.setItem("theme", "");
+  } else {
+    localStorage.setItem("theme", "dark");
+  }
+
+  document.getElementById("theme").textContent = localStorage.getItem("theme");
 }
 
 
@@ -54,7 +71,6 @@ const volumeSlider = document.querySelector(".volume-slider .slider");
 const volumeProgress = document.querySelector(".volume-slider .progress");
 const volumeIcon = document.querySelector(".volume-icon");
 
-
 let trackPlaying = false;
 
 let volumeMuted = false;
@@ -81,6 +97,7 @@ function playTrack(){
 
     // set it to true
     trackPlaying = true;
+
   }else{ //else if the track is already playing then
 
     // stop the audio
@@ -108,7 +125,7 @@ function switchtrack(){
 }
 
 // get track source
-const trackScr = "assets/music/" + tracks[trackId] + ".mp3";
+const trackScr = "assets/music/" + tracks[trackTitle] + ".mp3";
 
 function loadTrack(){
 

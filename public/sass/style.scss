@@ -493,7 +493,6 @@
                         margin-left: 16px;
 
                         button {
-                            width: 83%;
                             padding: 9px;
                             border: none;
                             border-radius: 25px;
@@ -833,9 +832,89 @@
 }
 
 
-.dark{
+body.dark{
     background-color: #36454F;
-    color: white
+
+    h1 {
+        color: #7DF9FF;
+    }
+
+    h3 {
+        color: white;
+
+        &:hover{
+            color: #7DF9FF;
+        }
+    }
+
+    .title a {
+        background-color: #7DF9FF;
+        color: #36454F;
+    }
+
+    section.playlistList {
+        
+        .title .nav .artistLink{
+            color: #7DF9FF;
+
+        }
+
+        .myPlaylist .mainCard {
+           
+            a, h3{
+                color: #36454F;
+
+            }
+        }
+
+
+    }
+
+    section.listArtist .artistCard a {
+        color: white;
+    }
+
+    section.playlistDetail, section.artistDetail, section.musicPlayer{
+        
+        .playlistHeader {
+            
+            h3{
+                color: #7DF9FF;
+
+            }
+
+            .playerBtns a{
+                color: white;
+
+            }
+
+            
+        }
+
+        th, tr, i, td a{
+            color: white;
+        }
+
+        button {
+            color: white;
+        }
+
+
+    }
+
+
+    section.genreSongs {
+        h2{
+            color:#7DF9FF;
+        }
+    }
+
+    footer {
+        ul li a, small{
+
+            color: white;
+        }
+    }
 }
 
 

@@ -354,7 +354,6 @@
   margin-left: 16px;
 }
 * body section.artistDetail .hero figure figcaption button {
-  width: 83%;
   padding: 9px;
   border: none;
   border-radius: 25px;
@@ -606,8 +605,47 @@
   font-family: "Playfair Display", serif;
 }
 
-.dark {
+body.dark {
   background-color: #36454F;
+}
+body.dark h1 {
+  color: #7DF9FF;
+}
+body.dark h3 {
+  color: white;
+}
+body.dark h3:hover {
+  color: #7DF9FF;
+}
+body.dark .title a {
+  background-color: #7DF9FF;
+  color: #36454F;
+}
+body.dark section.playlistList .title .nav .artistLink {
+  color: #7DF9FF;
+}
+body.dark section.playlistList .myPlaylist .mainCard a, body.dark section.playlistList .myPlaylist .mainCard h3 {
+  color: #36454F;
+}
+body.dark section.listArtist .artistCard a {
+  color: white;
+}
+body.dark section.playlistDetail .playlistHeader h3, body.dark section.artistDetail .playlistHeader h3, body.dark section.musicPlayer .playlistHeader h3 {
+  color: #7DF9FF;
+}
+body.dark section.playlistDetail .playlistHeader .playerBtns a, body.dark section.artistDetail .playlistHeader .playerBtns a, body.dark section.musicPlayer .playlistHeader .playerBtns a {
+  color: white;
+}
+body.dark section.playlistDetail th, body.dark section.playlistDetail tr, body.dark section.playlistDetail i, body.dark section.playlistDetail td a, body.dark section.artistDetail th, body.dark section.artistDetail tr, body.dark section.artistDetail i, body.dark section.artistDetail td a, body.dark section.musicPlayer th, body.dark section.musicPlayer tr, body.dark section.musicPlayer i, body.dark section.musicPlayer td a {
+  color: white;
+}
+body.dark section.playlistDetail button, body.dark section.artistDetail button, body.dark section.musicPlayer button {
+  color: white;
+}
+body.dark section.genreSongs h2 {
+  color: #7DF9FF;
+}
+body.dark footer ul li a, body.dark footer small {
   color: white;
 }
 
