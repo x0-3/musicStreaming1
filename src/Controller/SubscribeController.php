@@ -30,4 +30,18 @@ class SubscribeController extends AbstractController
 
         }
     }
+
+
+    // find all of the artist that has the most subscriptions
+    #[Route('/subscribe/similarArtists', name: 'app_similarArtist')]
+    public function mostPopularArtist(EntityManagerInterface $em ): Response
+    {
+
+        $artistMostSub = $em->getRepository(Subscribe::class)->findByMostSubscribers(); //find the artist's with the most subscribers 
+
+        return $this->render('subscribe/mostSubscribers.html.twig', [
+            'artistMostSub' => $artistMostSub,
+            
+        ]);
+    }
 }

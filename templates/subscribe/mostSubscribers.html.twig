@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Popular artists{% endblock %}
+
+{% block body %}
+
+    <section class="more">
+
+        <div class="listItems">
+
+            {% for artist in artistMostSub %}
+
+                <div class="card">
+
+                    <a href="{{path('app_artistDetail', {'id': artist.id})}}">
+
+                        {% if artist.avatar == null %}
+                            <figure>
+                                <img src="{{asset('assets/img/profil_pic.png')}}" alt="playlist image">
+                            </figure>
+
+                        {% else %}
+
+                            <figure>
+                                <img src="{{artist.avatar}}" alt="playlist image">
+                            </figure>
+                        {% endif %}
+
+                        <h3>{{artist.username}}</h3>
+                        <h3>sub count : {{artist.num_followers}}</h3>
+
+                    </a>
+                </div>
+
+            {% endfor %}
+            
+        </div>
+    </section>
+{% endblock %}

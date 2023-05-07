@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}albums{% endblock %}
+
+{% block body %}
+
+    <section class="more">
+
+        <div class="listItems">
+
+            {% for album in albums %}
+
+                <div class="card">
+
+                    <a href="{{path('app_albumDetail', {'id': album.id})}}">
+
+                        <figure>
+                            <img src="{{album.cover}}" alt="playlist image">
+                        </figure>
+
+                        <h3>{{album.nameAlbum}}</h3>
+
+                    </a>
+                </div>
+
+            {% endfor %}
+            
+        </div>
+    </section>
+{% endblock %}

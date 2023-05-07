@@ -44,17 +44,38 @@ class SubscribeRepository extends ServiceEntityRepository
    /**
     * @return Subscribe[] Returns an array of Subscribe objects
     */
+   public function find4ByMostSubscribers(): array
+    {
+
+        $query = $this->createQueryBuilder('s')
+            ->select("u.id, u.username, u.avatar, COUNT(sub.id) AS num_followers")
+            ->from('App\Entity\Subscribe', 'sub')
+            ->innerJoin('sub.userSubscribes', 'u')
+            ->groupBy('u.id, u.username, u.avatar')
+            ->orderBy('num_followers', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $query;
+    }
+
+    
+    // find artists with most subscribers 
+   /**
+    * @return Subscribe[] Returns an array of Subscribe objects
+    */
    public function findByMostSubscribers(): array
     {
 
         $query = $this->createQueryBuilder('s')
             ->select("u.id, u.username, u.avatar, COUNT(sub.id) AS num_followers")
             ->from('App\Entity\Subscribe', 'sub')
-            // TODO: might need to change to subscribers
             ->innerJoin('sub.userSubscribes', 'u')
             ->groupBy('u.id, u.username, u.avatar')
             ->orderBy('num_followers', 'DESC')
-            ->setMaxResults(4)
+            ->setMaxResults(20)
             ->getQuery()
             ->getResult()
         ;

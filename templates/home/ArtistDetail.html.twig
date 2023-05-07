@@ -65,15 +65,14 @@
         <div class="title">
 
             <h1>Albums</h1>
-            <a href="#">More</a>
+            <a href="{{path('app_artistAlbum', {'id': artist.id})}}">More</a>
         </div>
 
         <div class="cards">
-            
+
             {% for album in albums %}
             
                 <div class="card">
-                    {# TODO: redirect to album detail #}
                     <a href="{{path('app_albumDetail', {'id': album.id})}}">
 
                         <figure>
@@ -93,7 +92,7 @@
         <div class="title">
 
             <h1>Most Popular Artists</h1>
-            <a href="#">More</a>
+            <a href="{{path('app_similarArtist')}}">More</a>
         </div>
 
         <div class="cards">

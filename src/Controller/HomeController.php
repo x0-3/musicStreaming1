@@ -15,7 +15,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class HomeController extends AbstractController
 {
-
     // main page
     #[Route('/home', name: 'app_home')]
     public function index(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
@@ -51,26 +50,6 @@ class HomeController extends AbstractController
     }
 
 
-    // page for the detail of another user  
-    #[Route('/artist/{id}', name: 'app_artistDetail')]
-    public function artistPage(User $artist, EntityManagerInterface $em ): Response
-    {
-
-        $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
-        $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
-        $artistMostSub = $em->getRepository(Subscribe::class)->findByMostSubscribers(); //find the artist's with the most subscribers 
-
-
-        return $this->render('home/artistDetail.html.twig', [
-            'artist' => $artist,
-            'songs' => $songs,
-            'albums' => $albums,
-            'artistMostSub' => $artistMostSub,
-
-        ]);
-    }
-
-
     // top ten most followed playlists
     #[Route('home/recommended', name: 'more_recommended')]
     public function TopFollowedPlaylists(EntityManagerInterface $em): Response
@@ -101,6 +80,60 @@ class HomeController extends AbstractController
             ]);
         }
     }
+
+    // ************************************************* artist page ********************************************************** //
+
+    // page for the detail of another user  
+    #[Route('/artist/{id}', name: 'app_artistDetail')]
+    public function artistPage(User $artist, EntityManagerInterface $em ): Response
+    {
+
+        $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
+        $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
+        $artistMostSub = $em->getRepository(Subscribe::class)->find4ByMostSubscribers(); //find the artist's with the most subscribers 
+
+
+        return $this->render('home/artistDetail.html.twig', [
+            'artist' => $artist,
+            'songs' => $songs,
+            'albums' => $albums,
+            'artistMostSub' => $artistMostSub,
+
+        ]);
+    }
+
+
+    // find all of the artist albums ordered by most recent 
+    #[Route('/artist/{id}/album', name: 'app_artistAlbum')]
+    public function artistAlbum(User $artist, EntityManagerInterface $em ): Response
+    {
+
+        $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
+
+        return $this->render('home/moreArtistAlbum.html.twig', [
+            'albums' => $albums,
+        ]);
+    }
+
+
+    // ************************************************* profil page ********************************************************** //
+    // #[Route('/artist/{id}', name: 'app_artistDetail')]
+    // public function artistPage(User $artist, EntityManagerInterface $em ): Response
+    // {
+
+    //     $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
+    //     $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
+    //     $artistMostSub = $em->getRepository(Subscribe::class)->find4ByMostSubscribers(); //find the artist's with the most subscribers 
+
+
+    //     return $this->render('home/artistDetail.html.twig', [
+    //         'artist' => $artist,
+    //         'songs' => $songs,
+    //         'albums' => $albums,
+    //         'artistMostSub' => $artistMostSub,
+
+    //     ]);
+    // }
 
 
 }
