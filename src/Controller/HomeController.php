@@ -117,20 +117,12 @@ class HomeController extends AbstractController
 
 
     // ************************************************* profil page ********************************************************** //
-    // #[Route('/artist/{id}', name: 'app_artistDetail')]
-    // public function artistPage(User $artist, EntityManagerInterface $em ): Response
+    // #[Route('/artist/profil', name: 'app_profil')]
+    // public function profilPage(EntityManagerInterface $em ): Response
     // {
 
-    //     $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
-    //     $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
-    //     $artistMostSub = $em->getRepository(Subscribe::class)->find4ByMostSubscribers(); //find the artist's with the most subscribers 
-
-
     //     return $this->render('home/artistDetail.html.twig', [
-    //         'artist' => $artist,
-    //         'songs' => $songs,
-    //         'albums' => $albums,
-    //         'artistMostSub' => $artistMostSub,
+
 
     //     ]);
     // }
