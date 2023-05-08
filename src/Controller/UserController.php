@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Album;
+use App\Entity\Song;
+use App\Entity\Subscribe;
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserController extends AbstractController
 {
@@ -14,5 +20,62 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
         ]);
+    }
+
+
+    // page for the detail of another user  
+    #[Route('/artist/{id}', name: 'app_artistDetail')]
+    public function artistPage(User $artist, EntityManagerInterface $em ): Response
+    {
+
+        $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
+        $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
+        $artistMostSub = $em->getRepository(Subscribe::class)->find4ByMostSubscribers(); //find the artist's with the most subscribers 
+
+
+        return $this->render('user/artistDetail.html.twig', [
+            'artist' => $artist,
+            'songs' => $songs,
+            'albums' => $albums,
+            'artistMostSub' => $artistMostSub,
+
+        ]);
+    }
+
+
+    // find all of the artist albums ordered by most recent 
+    #[Route('/artist/{id}/album', name: 'app_artistAlbum')]
+    public function artistAlbum(User $artist, EntityManagerInterface $em ): Response
+    {
+
+        $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
+
+        return $this->render('user/moreArtistAlbum.html.twig', [
+            'albums' => $albums,
+        ]);
+    }
+
+
+    // ************************************************* profil page ********************************************************** //
+    #[Route('/profil', name: 'app_profil')]
+    public function profilPage(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
+    {
+
+        $token = $tokenStorage->getToken();
+
+        if ($token) {
+            $userEmail = $token->getUser()->getUserIdentifier(); // get the user email
+            $songs = $em->getRepository(Song::class)->findByArtistMostLike($userEmail); //find the artist's most like songs
+            $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($userEmail); //find the artist's most recent albums
+            // dd($userEmail);
+            
+            return $this->render('user/profil.html.twig', [
+                'songs' => $songs,
+                'albums' => $albums,
+    
+            ]);
+        }
+        
+
     }
 }

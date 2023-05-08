@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{app.user.username}}{% endblock %}
+
+{% block body %}
+
+<section class="artistDetail">
+
+    <div class="hero">
+
+        <figure>
+
+            {% if app.user.avatar == null %}
+              
+                <img src="{{asset('assets/img/profil_pic.png')}}" alt="profile picture"> 
+            {% else %}
+            
+                <img src="{{app.user.avatar}}" alt="profile picture"> 
+            {% endif %}
+            
+
+            <figcaption>
+                <h1>{{app.user.username}}</h1>
+
+                <button>Edit profil</button>
+                <a href="#">Upload song</a>
+            </figcaption>
+        </figure>
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th></th>
+                <th>title</th>
+                <th>artist</th>
+                <th>time</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+            {% for song in app.user.songs %}
+
+                <tr>
+                    <td>
+                        <figure>
+                            <img src="{{song.album.cover}}" alt="song img">
+                        </figure>
+                    </td>
+                    <td><a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
+                    <td> <a href="{{path('app_artistDetail', {'id': app.user.id})}}"> {{app.user.username}} </a></td>
+                    <td>3:09</td>
+                </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="album">
+
+        <div class="title">
+
+            <h1>Albums</h1>
+
+            <div class="buttons">
+
+                <a href="#">Add Album</a>
+                <a href="{{path('app_artistAlbum', {'id': app.user.id})}}">More</a>
+            </div>
+        </div>
+        
+        <div class="cards">
+            
+            {% for album in albums %}
+
+            
+                <div class="card">
+                    <a href="{{path('app_albumDetail', {'id': album.id})}}">
+
+                        <figure>
+                            <img src="{{album.album.cover}}" alt="album cover">
+                        </figure>
+                        
+                        <h3>{{album.nameAlbum}} </h3>
+                    </a>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</section>
+{% endblock %}
