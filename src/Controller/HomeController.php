@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Album;
 use App\Entity\Playlist;
 use App\Entity\Song;
-use App\Entity\Subscribe;
-use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
