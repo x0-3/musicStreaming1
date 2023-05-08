@@ -67,13 +67,15 @@ class UserController extends AbstractController
             $userEmail = $token->getUser()->getUserIdentifier(); // get the user email
             $songs = $em->getRepository(Song::class)->findByArtistMostLike($userEmail); //find the artist's most like songs
             $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($userEmail); //find the artist's most recent albums
-            // dd($userEmail);
             
             return $this->render('user/profil.html.twig', [
                 'songs' => $songs,
                 'albums' => $albums,
     
             ]);
+        }else{
+
+            return $this->redirectToRoute('app_login');
         }
         
 

@@ -4,7 +4,7 @@
   let element = document.body;
   element.classList.add(onpageLoad);
   document.getElementById("theme").textContent =
-    localStorage.getItem("theme") || "light";
+    localStorage.getItem("theme") || "";
 })();
 
 function myFunction() {

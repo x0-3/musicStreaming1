@@ -51,12 +51,15 @@
     
                     <div class="dropdown-content">
     
-                        <div class="profil">
-    
-                            <a href="{{path('app_profil')}}">
-                                Profil
-                            </a>
-                        </div>
+                        {% if app.user %}
+                            
+                            <div class="profil">
+                                
+                                <a href="{{path('app_profil')}}">
+                                    Profil
+                                </a>
+                            </div>
+                        {% endif %}
 
                         <div class="setting">
     
@@ -84,8 +87,7 @@
                         </div>
     
                         
-                        <button type="button" onclick="myFunction()">toggle mode</button>
-                        <div id="theme"></div>
+                        <button type="button" onclick="myFunction()" id="theme">mode</button>
     
     
                         {# <h3>latest subscription :</h3>
