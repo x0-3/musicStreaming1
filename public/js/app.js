@@ -55,225 +55,225 @@ likeIcon.addEventListener("click", () => {
 
 // ******************************************* audio player **************************************************************** * //
 
-const playBtn = document.querySelector("#mainPlayBtn");
-const audio = document.querySelector("#audio");
-const btnPrev = document.querySelector("#btnPrev");
-const btnNext = document.querySelector("#btnNext");
-const trackTitle = document.querySelector(".trackTitle");
-const ArtistName = document.querySelector(".ArtistName");
-const cover = document.querySelector(".cover");
-const slider = document.querySelector(".slider");
-const thumb = document.querySelector(".slider-thumb");
-const progress = document.querySelector(".progress");
-const time = document.querySelector(".time");
-const fulltime = document.querySelector(".fulltime");
-const volumeSlider = document.querySelector(".volume-slider .slider");
-const volumeProgress = document.querySelector(".volume-slider .progress");
-const volumeIcon = document.querySelector(".volume-icon");
+// const playBtn = document.querySelector("#mainPlayBtn");
+// const audio = document.querySelector("#audio");
+// const btnPrev = document.querySelector("#btnPrev");
+// const btnNext = document.querySelector("#btnNext");
+// const trackTitle = document.querySelector(".trackTitle");
+// const ArtistName = document.querySelector(".ArtistName");
+// const cover = document.querySelector(".cover");
+// const slider = document.querySelector(".slider");
+// const thumb = document.querySelector(".slider-thumb");
+// const progress = document.querySelector(".progress");
+// const time = document.querySelector(".time");
+// const fulltime = document.querySelector(".fulltime");
+// const volumeSlider = document.querySelector(".volume-slider .slider");
+// const volumeProgress = document.querySelector(".volume-slider .progress");
+// const volumeIcon = document.querySelector(".volume-icon");
 
-let trackPlaying = false;
+// let trackPlaying = false;
 
-let volumeMuted = false;
+// let volumeMuted = false;
 
-let trackId = 0; 
+// let trackId = 0; 
 
-const tracks = [];
+// const tracks = [];
 
-// play /pause 
-playBtn.addEventListener("click", playTrack);
+// // play /pause 
+// playBtn.addEventListener("click", playTrack);
 
-function playTrack(){
+// function playTrack(){
 
-  // if the track is not playing
-  if(trackPlaying === false){
+//   // if the track is not playing
+//   if(trackPlaying === false){
 
-    // play the audio
-    audio.play();
+//     // play the audio
+//     audio.play();
 
-    // change the button with a pause icon
-    playBtn.innerHTML = `
-    <span class="fa-solid fa-pause"></span>
-    `;
+//     // change the button with a pause icon
+//     playBtn.innerHTML = `
+//     <span class="fa-solid fa-pause"></span>
+//     `;
 
-    // set it to true
-    trackPlaying = true;
+//     // set it to true
+//     trackPlaying = true;
 
-  }else{ //else if the track is already playing then
+//   }else{ //else if the track is already playing then
 
-    // stop the audio
-    audio.pause();
+//     // stop the audio
+//     audio.pause();
 
-    // change the button with a play icon
-    playBtn.innerHTML = ` <span class="fa-solid fa-circle-play"></span> `;
+//     // change the button with a play icon
+//     playBtn.innerHTML = ` <span class="fa-solid fa-circle-play"></span> `;
 
-    // set it to false
-    trackPlaying = false;
+//     // set it to false
+//     trackPlaying = false;
 
-  }
-}
+//   }
+// }
 
-// switch songs
-function switchtrack(){
+// // switch songs
+// function switchtrack(){
 
-  // if the audio is playing 
-  if(trackPlaying === true){
+//   // if the audio is playing 
+//   if(trackPlaying === true){
 
-    // then keep it playing
-    audio.play();
+//     // then keep it playing
+//     audio.play();
 
-  }
-}
+//   }
+// }
 
-// get track source
-const trackScr = "assets/music/" + tracks[trackTitle] + ".mp3";
+// // get track source
+// const trackScr = "assets/music/" + tracks[trackTitle] + ".mp3";
 
-function loadTrack(){
+// function loadTrack(){
 
-  // set the audio track source
-  audio.scr = trackScr;
+//   // set the audio track source
+//   audio.scr = trackScr;
   
-  progress.style.width = 0;
-  thumb.style.left = 0;
+//   progress.style.width = 0;
+//   thumb.style.left = 0;
 
-  // wait for the song to load
-  audio.addEventListener('loadedData', () => {
+//   // wait for the song to load
+//   audio.addEventListener('loadedData', () => {
 
-    // display the duration of the song
-    setTime(fulltime, audio.duration);
+//     // display the duration of the song
+//     setTime(fulltime, audio.duration);
 
-    // set the max value to the slider
-    slider.setAttribute("max", audio.duration);
-  });
-}
+//     // set the max value to the slider
+//     slider.setAttribute("max", audio.duration);
+//   });
+// }
 
-loadTrack();
+// loadTrack();
 
-// play previous track
-btnPrev.addEventListener('click', () => {
+// // play previous track
+// btnPrev.addEventListener('click', () => {
 
-  trackId--;
+//   trackId--;
 
-  // if the track id is negative  
-  if (trackId < 0) {
+//   // if the track id is negative  
+//   if (trackId < 0) {
 
-    // go back to the last song
-    trackId = tracks.length - 1;
-  }
+//     // go back to the last song
+//     trackId = tracks.length - 1;
+//   }
 
-  loadTrack();
+//   loadTrack();
 
-  switchtrack();
+//   switchtrack();
 
-});
+// });
 
-// switch to next song
-btnNext.addEventListener("click", nextTrack);
+// // switch to next song
+// btnNext.addEventListener("click", nextTrack);
 
-function nextTrack(){
+// function nextTrack(){
 
-  trackId++;
+//   trackId++;
 
-  if (trackId > tracks.length - 1) {
+//   if (trackId > tracks.length - 1) {
 
-    // set the id to 0
-    trackId = 0;
-  }
+//     // set the id to 0
+//     trackId = 0;
+//   }
     
-  loadTrack();
+//   loadTrack();
 
-  switchtrack();
+//   switchtrack();
 
-}
+// }
 
 
-audio.addEventListener('ended', nextTrack);
+// audio.addEventListener('ended', nextTrack);
 
-// music time 
-function setTime(output, input){
+// // music time 
+// function setTime(output, input){
 
-  // calculate the minutes
-  const minutes = Math.floor(input / 60);
+//   // calculate the minutes
+//   const minutes = Math.floor(input / 60);
   
-  // calculate the seconds
-  const seconds = Math.floor(input % 60);
+//   // calculate the seconds
+//   const seconds = Math.floor(input % 60);
 
-  // if seconds is under 10
-  if (seconds < 10) {
+//   // if seconds is under 10
+//   if (seconds < 10) {
     
-    // show a zero 
-    output.innerHTML = minutes + ":0" + seconds;
+//     // show a zero 
+//     output.innerHTML = minutes + ":0" + seconds;
 
-  }else{
+//   }else{
 
-    // show the :
-    output.innerHTML = minutes + ":" + seconds;
-  }
-}
-
-
-setTime(fulltime, audio.duration);
+//     // show the :
+//     output.innerHTML = minutes + ":" + seconds;
+//   }
+// }
 
 
-audio.addEventListener('timeupdate', () => {
-
-  // get the current audio time
-  const currentAudioTime = Math.floor(audio.currentTime);
-
-  // get the percentage
-  const timePercentage = (currentAudioTime / audio.duration) * 100 + "%";
-
-  // set the current time of the song
-  setTime(time, currentAudioTime);
-
-  // set the slider to the time
-  progress.style.width = timePercentage;
-  thumb.style.left = timePercentage;
-
-});
+// setTime(fulltime, audio.duration);
 
 
-// music slider
-function customSlider(){
+// audio.addEventListener('timeupdate', () => {
 
-  // calculate the % 
-  const val = (slider.value / audio.duration) * 100 + "%";
+//   // get the current audio time
+//   const currentAudioTime = Math.floor(audio.currentTime);
 
-  // set the progress of the song
-  progress.style.width = val;
-  thumb.style.left = val;
+//   // get the percentage
+//   const timePercentage = (currentAudioTime / audio.duration) * 100 + "%";
+
+//   // set the current time of the song
+//   setTime(time, currentAudioTime);
+
+//   // set the slider to the time
+//   progress.style.width = timePercentage;
+//   thumb.style.left = timePercentage;
+
+// });
+
+
+// // music slider
+// function customSlider(){
+
+//   // calculate the % 
+//   const val = (slider.value / audio.duration) * 100 + "%";
+
+//   // set the progress of the song
+//   progress.style.width = val;
+//   thumb.style.left = val;
   
-  // show the curent time of the song
-  setTime(time, slider.value);
+//   // show the curent time of the song
+//   setTime(time, slider.value);
   
-  // set it to the slider 
-  audio.currentTime = slider.value;
-}
+//   // set it to the slider 
+//   audio.currentTime = slider.value;
+// }
 
-customSlider();
+// customSlider();
 
-slider.addEventListener("input", customSlider);
+// slider.addEventListener("input", customSlider);
 
 
-// volume control
-let volume = document.getElementById('volume-slider');
-volume.addEventListener("change", function(e) {
-  audio.volume = e.currentTarget.value / 100;
+// // volume control
+// let volume = document.getElementById('volume-slider');
+// volume.addEventListener("change", function(e) {
+//   audio.volume = e.currentTarget.value / 100;
 
-  // if the volume is high
-  if (audio.volume > 0.5) {
+//   // if the volume is high
+//   if (audio.volume > 0.5) {
   
-    // change the icon 
-    volumeIcon.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
+//     // change the icon 
+//     volumeIcon.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
 
-  } else if (audio.volume === 0){
+//   } else if (audio.volume === 0){
 
-    // mute icon
-    volumeIcon.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+//     // mute icon
+//     volumeIcon.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
 
-  } else{
+//   } else{
 
-    // volume low
-    volumeIcon.innerHTML = `<i class="fa-solid fa-volume-low"></i>`;
+//     // volume low
+//     volumeIcon.innerHTML = `<i class="fa-solid fa-volume-low"></i>`;
 
-  }
-});
+//   }
+// });

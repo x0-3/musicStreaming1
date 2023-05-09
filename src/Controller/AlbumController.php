@@ -8,6 +8,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class AlbumController extends AbstractController
 {
@@ -49,7 +52,7 @@ class AlbumController extends AbstractController
     }
 
 
-    // music player page for an album
+    // // music player page for an album
     #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
     public function albumMusicPlayer(Album $album): Response
     {
@@ -61,4 +64,38 @@ class AlbumController extends AbstractController
             'songs'=> $songs,
         ]);
     }
+
+
+
+    // tests 
+    // #[Route('/skipForward', name: 'app_skipforward')]
+    // public function skipForward(Request $request): JsonResponse
+    // {
+    //     $url = $request->get('url');
+
+    //     // Logic to fetch the new audio file URL goes here
+
+    //     $data = [
+    //         'link' => $url,
+    //     ];
+
+    //     return $this->json($data);
+    // }
+
+
+    // // music player page for an album
+    // #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
+    // public function albumMusicPlayer(Album $album, RouterInterface $router): Response
+    // {
+    //     $songs = $album->getSongs(); // get the song list from the album
+    //     $skipForwardUrl = $router->generate('app_skipforward', ['id' => $album->getId()]);
+
+    //     return $this->render('album/albumPlayer.html.twig', [
+    //         'album' => $album,
+    //         'songs' => $songs,
+    //         'skipForwardUrl' => $skipForwardUrl,
+    //     ]);
+    // }
+
+
 }
