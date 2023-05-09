@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}add song currently playing{% endblock %}
+{% block title %}{{songs[0].nameSong}}{% endblock %}
 
 {% block body %}
 <section class="musicPlayer">
@@ -36,9 +36,8 @@
         </div>
 
         {% for song in songs %}
-            <audio id="audio" src="{{song.link}}">
-            </audio>
-            
+
+            <audio id="audio" src="{{song.link}}"></audio>    
         {% endfor %}
 
         <div class="timeline">
@@ -104,22 +103,26 @@
             <button type="submit">Comment</button>
         </form>
 
-        {# TODO: comment for each song #}
         <div class="comments">
-
-            <article>
-                <figure>
-                    <img src="img/1.png" alt="profile picture">
-
-                    <figcaption> 
-                        <a href="#">Name</a>
-                    </figcaption>
-                </figure>
-
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur repellat quasi exercitationem? Nisi cupiditate quas adipisci modi tenetur fugiat quos vitae perferendis, obcaecati illum voluptatem distinctio tempore natus ab minima.</p>
-            </article>
-
             
+            {% for song in songs %}
+
+                {% for comment in song.comments %}
+                    
+                    <article>
+                        <figure>
+                            <img src="{{comment.user.avatar}}" alt="profile picture">
+
+                            <figcaption> 
+                                <a href="#">{{comment.user.username}}</a>
+                            </figcaption>
+                        </figure>
+
+                        <p>{{comment.text}} </p>
+                    </article>
+                {% endfor %}
+
+            {% endfor %}
         </div>
 
         
