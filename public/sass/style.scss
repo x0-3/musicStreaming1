@@ -803,6 +803,47 @@
             }
         }
 
+        section.login{
+
+            display: flex;
+            flex-direction: row-reverse;
+            width: 64%;
+            margin: auto;
+            height: 75vh;
+            align-items: center;
+
+            figure {
+                width: 50%;
+
+                img {
+                    width: 100%;
+                    border-radius: 8px;
+                }
+            }
+
+            .loginForm {
+                width: 50%;
+                margin-right: 37px;
+
+                form{
+                    
+                    display: flex;
+                    flex-direction: column;
+
+                    h1 {
+
+                        text-align: center;
+                    }
+
+                    input, button {
+                        padding: 15px;
+                        border-radius: 10px;
+                        margin: 9px 0;
+                    }
+                }
+            }
+        }
+
         footer{
 
             margin-top: 50px;

@@ -588,6 +588,37 @@
 * body section.more .listItems .card {
   margin: 36px;
 }
+* body section.login {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 64%;
+  margin: auto;
+  height: 75vh;
+  align-items: center;
+}
+* body section.login figure {
+  width: 50%;
+}
+* body section.login figure img {
+  width: 100%;
+  border-radius: 8px;
+}
+* body section.login .loginForm {
+  width: 50%;
+  margin-right: 37px;
+}
+* body section.login .loginForm form {
+  display: flex;
+  flex-direction: column;
+}
+* body section.login .loginForm form h1 {
+  text-align: center;
+}
+* body section.login .loginForm form input, * body section.login .loginForm form button {
+  padding: 15px;
+  border-radius: 10px;
+  margin: 9px 0;
+}
 * body footer {
   margin-top: 50px;
 }
