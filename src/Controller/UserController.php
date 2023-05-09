@@ -57,7 +57,7 @@ class UserController extends AbstractController
 
 
     // ************************************************* profil page ********************************************************** //
-    #[Route('/profil', name: 'app_profil')]
+    #[Route('/profile', name: 'app_profile')]
     public function profilPage(EntityManagerInterface $em, Security $security): Response
     {
         
@@ -68,7 +68,7 @@ class UserController extends AbstractController
             $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($user); //find the artist's most recent albums
 
 
-            return $this->render('user/profil.html.twig', [
+            return $this->render('user/profile.html.twig', [
                 'user' => $user,
                 'albums' => $albums,
             ]);

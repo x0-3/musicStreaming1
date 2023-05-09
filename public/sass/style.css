@@ -94,7 +94,7 @@
   padding: 26px 19px;
   font-size: large;
 }
-* body header .mySidepanel .avatar:hover .dropdown-content .setting, * body header .mySidepanel .avatar:hover .dropdown-content .logout {
+* body header .mySidepanel .avatar:hover .dropdown-content .setting, * body header .mySidepanel .avatar:hover .dropdown-content .logout, * body header .mySidepanel .avatar:hover .dropdown-content .profile {
   margin-bottom: 10px;
 }
 * body header .mySidepanel .avatar:hover .dropdown-content a {
