@@ -8,9 +8,9 @@ use App\Entity\Subscribe;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserController extends AbstractController
 {
@@ -58,26 +58,26 @@ class UserController extends AbstractController
 
     // ************************************************* profil page ********************************************************** //
     #[Route('/profil', name: 'app_profil')]
-    public function profilPage(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
+    public function profilPage(EntityManagerInterface $em, Security $security): Response
     {
+        
+        $user =  $security->getUser();
 
-        $token = $tokenStorage->getToken();
-
-        if ($token) {
-            $userEmail = $token->getUser()->getUserIdentifier(); // get the user email
-            $songs = $em->getRepository(Song::class)->findByArtistMostLike($userEmail); //find the artist's most like songs
-            $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($userEmail); //find the artist's most recent albums
+        if ($user) {
             
+            $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($user); //find the artist's most recent albums
+
+
             return $this->render('user/profil.html.twig', [
-                'songs' => $songs,
+                'user' => $user,
                 'albums' => $albums,
-    
             ]);
-        }else{
+
+        } else {
 
             return $this->redirectToRoute('app_login');
+
         }
-        
 
     }
 }

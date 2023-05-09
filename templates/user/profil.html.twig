@@ -80,12 +80,11 @@
             
             {% for album in albums %}
 
-            
                 <div class="card">
                     <a href="{{path('app_albumDetail', {'id': album.id})}}">
 
                         <figure>
-                            <img src="{{album.album.cover}}" alt="album cover">
+                            <img src="{{album.cover}}" alt="album cover">
                         </figure>
                         
                         <h3>{{album.nameAlbum}} </h3>
