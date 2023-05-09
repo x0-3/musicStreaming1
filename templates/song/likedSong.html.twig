@@ -14,7 +14,6 @@
 
         <div class="playerBtns">
 
-            {# TODO: find a way to get the like  #}
             <a href="">
                 <i class="fa-regular fa-circle-play"></i>
             </a>
@@ -47,7 +46,7 @@
                 <tr>
                     <td>
                         <figure>
-                            <img src="{{song.cover}}" alt="song img">
+                            <img src="{{asset('uploads/img/' ~ song.cover)}}" alt="song img">
                         </figure>
                     </td>
                     <td>{{song.nameSong}} </td>

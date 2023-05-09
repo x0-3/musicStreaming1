@@ -41,7 +41,7 @@
                     
                     {% if (app.user) and (app.user.avatar != null) %}
 
-                        <img src="{{app.user.avatar}}" alt="avatar">
+                        <img src="{{ asset('uploads/img/' ~ app.user.avatar )}}" alt="avatar">
 
                     {% else %}
 

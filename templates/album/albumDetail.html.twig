@@ -7,7 +7,7 @@
 
     <div class="playlistHeader">
         <figure>
-            <img src="{{album.cover}}" alt="playlist image">
+            <img src="{{asset('uploads/img/' ~ album.cover)}}" alt="playlist image">
         </figure>
         <h3>{{album.nameAlbum}}</h3>
 
@@ -43,7 +43,7 @@
                 <tr>
                     <td>
                         <figure>
-                            <img src="{{album.cover}}" alt="song img">
+                            <img src="{{asset('uploads/img/' ~ album.cover)}}" alt="song img">
                         </figure>
                     </td>
                     <td><a href="{{path('app_songPlayer', {'id': song.id})}}"> {{song.nameSong}} </a></td>

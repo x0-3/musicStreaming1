@@ -10,7 +10,7 @@
     <div class="player">
 
         <figure class="cover">
-            <img src="{{song.album.cover}}" alt="music cover">
+            <img src="{{asset('uploads/img/' ~ song.album.cover)}}" alt="music cover">
         </figure>
 
         <h3 class="trackTitle">{{song.nameSong}}</h3>
@@ -82,7 +82,7 @@
                         <figure>
                             <a href="{{path('app_songPlayer',{'id': song.id} )}}">
 
-                                <img src="{{song.album.cover}}" alt="song img">
+                                <img src="{{asset('uploads/img/' ~ song.album.cover)}}" alt="song img">
                             </a>
                         </figure>
                     </td>
@@ -109,7 +109,13 @@
 
                <article>
                    <figure>
-                       <img src="{{comment.user.avatar}}" alt="profile picture">
+                        {% if comment.user.avatar != null %}
+                            <img src="{{asset('uploads/img/' ~ comment.user.avatar)}}" alt="profile picture">
+                            
+                        {% else %}
+                            <img src="{{asset('assets/img/profil_pic.png')}}" alt="profile picture">
+
+                        {% endif %}
                        
                        <figcaption> 
                            <a href="{{path('app_artistDetail', {'id':comment.user.id })}}">{{comment.user.username}}</a>

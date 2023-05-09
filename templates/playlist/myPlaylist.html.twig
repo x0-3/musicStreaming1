@@ -43,7 +43,7 @@
                     <a href="{{path('playlist_detail', {'id': playlist.id})}}">
 
                         <figure>
-                            <img src="{{playlist.image}}" alt="playlist image">
+                            <img src="{{asset('uploads/img/' ~ playlist.image)}}" alt="playlist image">
                         </figure>
 
                         <h3>{{playlist.playlistName}}</h3>

@@ -13,7 +13,7 @@
                 <a href="{{path('app_songPlayer', {'id': song.id})}}">
 
                     <figure>
-                        <img src="{{song.album.cover}}" alt="song cover">
+                        <img src="{{asset('uploads/img/' ~ song.album.cover)}}" alt="song cover">
                     </figure>
                     
                     <div class="songInfo">

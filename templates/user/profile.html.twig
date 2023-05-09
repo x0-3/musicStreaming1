@@ -84,7 +84,7 @@
                     <a href="{{path('app_albumDetail', {'id': album.id})}}">
 
                         <figure>
-                            <img src="{{album.cover}}" alt="album cover">
+                            <img src="{{asset('uploads/img/' ~ album.cover)}}" alt="album cover">
                         </figure>
                         
                         <h3>{{album.nameAlbum}} </h3>
