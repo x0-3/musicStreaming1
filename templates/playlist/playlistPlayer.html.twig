@@ -36,7 +36,7 @@
         </div>
 
         {% for song in songs %}
-            <audio id="audio" src="{{song.link}}">
+            <audio id="audio" src="{{asset('uploads/music/' ~ song.link)}}">
             </audio>
             
         {% endfor %}
