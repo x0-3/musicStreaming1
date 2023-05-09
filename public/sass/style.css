@@ -591,10 +591,15 @@
 * body section.login {
   display: flex;
   flex-direction: row-reverse;
-  width: 64%;
-  margin: auto;
-  height: 75vh;
+  width: 61%;
+  margin: 44px auto;
   align-items: center;
+  box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 * body section.login figure {
   width: 50%;
@@ -602,10 +607,14 @@
 * body section.login figure img {
   width: 100%;
   border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 * body section.login .loginForm {
   width: 50%;
-  margin-right: 37px;
+  padding: 50px;
 }
 * body section.login .loginForm form {
   display: flex;
@@ -616,8 +625,26 @@
 }
 * body section.login .loginForm form input, * body section.login .loginForm form button {
   padding: 15px;
-  border-radius: 10px;
   margin: 9px 0;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);
+  border: none;
+}
+* body section.login .loginForm form button {
+  background-color: #191970;
+  color: white;
+  cursor: pointer;
+}
+* body section.login .loginForm .register_reset {
+  display: flex;
+  justify-content: space-between;
+}
+* body section.login .loginForm .register_reset a {
+  color: black;
 }
 * body footer {
   margin-top: 50px;
@@ -719,6 +746,13 @@ body.dark footer ul li a, body.dark footer small {
   }
   body section.musicPlayer table tbody tr td {
     width: 17%;
+  }
+  body section.login {
+    width: 66%;
+  }
+  body section.login .loginForm {
+    width: 50%;
+    padding: 45px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -852,6 +886,16 @@ body.dark footer ul li a, body.dark footer small {
   }
   body section.musicPlayer .comments article p {
     margin-left: 37px;
+  }
+  body section.login {
+    flex-direction: column;
+    width: 98%;
+  }
+  body section.login figure {
+    width: 0;
+  }
+  body section.login .loginForm {
+    width: 100%;
   }
   body footer {
     display: flex;

@@ -804,26 +804,34 @@
         }
 
         section.login{
-
             display: flex;
             flex-direction: row-reverse;
-            width: 64%;
-            margin: auto;
-            height: 75vh;
+            width: 61%;
+            margin: 44px auto;
             align-items: center;
-
-            figure {
+            box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+                                    
+            figure{
                 width: 50%;
 
                 img {
                     width: 100%;
                     border-radius: 8px;
+                    -webkit-border-radius: 8px;
+                    -moz-border-radius: 8px;
+                    -ms-border-radius: 8px;
+                    -o-border-radius: 8px;
                 }
             }
 
             .loginForm {
                 width: 50%;
-                margin-right: 37px;
+                padding: 50px;
 
                 form{
                     
@@ -837,8 +845,29 @@
 
                     input, button {
                         padding: 15px;
-                        border-radius: 10px;
                         margin: 9px 0;
+                        border-radius:10px;
+                        -webkit-border-radius:10px;
+                        -moz-border-radius:10px;
+                        -ms-border-radius:10px;
+                        -o-border-radius:10px;
+                        box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);
+                        border: none;
+                    }
+
+                    button {
+                        background-color: #191970;
+                        color: white;
+                        cursor: pointer;
+                    }
+                }
+
+                .register_reset {
+                    display: flex;
+                    justify-content: space-between;
+
+                    a{
+                        color: black;
                     }
                 }
             }

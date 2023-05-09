@@ -206,6 +206,19 @@ $breakpointPhone: 767px;
 
         }
 
+        section.login{
+            flex-direction: column;
+            width: 98%;
+
+            figure {
+                width: 0;
+            }
+
+            .loginForm {
+                width: 100%;
+            }
+        }
+
         footer {
             display: flex;
             flex-direction: column;
