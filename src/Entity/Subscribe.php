@@ -20,10 +20,10 @@ class Subscribe
     private ?\DateTimeInterface $dateFollow = null;
 
     #[ORM\ManyToOne(inversedBy: 'subscribes')]
-    private ?User $subscribers = null;
+    private ?User $subscribers = null; // user that is subscribed to an artist
 
     #[ORM\ManyToOne(inversedBy: 'subscriptions')]
-    private ?User $userSubscribes = null;
+    private ?User $userSubscribes = null; // artist that has subscriptions
 
     public function getId(): ?int
     {

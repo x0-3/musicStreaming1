@@ -92,7 +92,7 @@ class SubscribeRepository extends ServiceEntityRepository
     {
 
         $query = $this->createQueryBuilder('s')
-            ->select('sub.id, u.email, us.id, us.username, u.avatar')
+            ->select('sub.id, u.email, us.id, us.username, us.avatar')
             ->from('App\Entity\Subscribe', 'sub')
             ->innerJoin('sub.subscribers', 'u')
             ->innerJoin('sub.userSubscribes', 'us')

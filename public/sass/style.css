@@ -564,10 +564,13 @@
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-* body section.genreSongs .songCard figure {
+* body section.genreSongs .songCard a {
+  width: 15%;
+}
+* body section.genreSongs .songCard a figure {
   margin: 6px 21px 6px 6px;
 }
-* body section.genreSongs .songCard figure img {
+* body section.genreSongs .songCard a figure img {
   margin: auto;
   width: 100%;
   border-radius: 10px;

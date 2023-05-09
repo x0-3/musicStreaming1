@@ -43,7 +43,6 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            // test
             // image upload 
             $image = $form->get('avatar')->getData(); // get the image data
             if ($image) { // if the image is uploaded
