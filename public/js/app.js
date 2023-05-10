@@ -33,7 +33,6 @@ function closeNav() {
   document.getElementById("mySidepanel").style.width = "0";
 }
 
-
 // ********************************************* Like icons *****************************************************************//
 const likeIcon = document.querySelector(".like");
 
@@ -52,6 +51,9 @@ likeIcon.addEventListener("click", () => {
     heartfull = false;
   }
 })
+
+
+
 
 // ******************************************* audio player **************************************************************** * //
 

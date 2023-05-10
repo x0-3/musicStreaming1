@@ -7,12 +7,31 @@
 <section class="playlistDetail">
 
     <div class="playlistHeader">
+
         <figure>
             <img src="{{asset('uploads/img/' ~ playlist.image)}}" alt="playlist image">
         </figure>
-        <h3>{{playlist.playlistName}} </h3>
+
+        <div class="playlistName">
+
+            <h3>{{playlist.playlistName}} </h3>
+
+            {# if it isn't the playlist owner then don't show the button #}
+            {% if playlist.user.id is same as(app.user.id)   %}
+                <div class="dropdown">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                    <div class="dropdown-content">
+                        <a href="{{path('edit_playlist', {'id': playlist.id})}}">Edit</a>
+                        <a href="{{path('delete_playlist', {'id': playlist.id})}}">Delete</a>
+                    </div>
+                </div>
+                
+            {% endif %}
+            
+        </div>
 
         <div class="playerBtns">
+
             <a href="{{path('playlist_player', {'id': playlist.id})}}">
                 <i class="fa-regular fa-circle-play"></i>
             </a>
@@ -20,6 +39,7 @@
             <a href="">
                 <i class="fa-solid fa-shuffle"></i>
             </a>
+                
         </div>
     </div>
 

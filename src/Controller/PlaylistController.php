@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Playlist;
+use App\Entity\User;
 use App\Form\PlaylistType;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -56,22 +58,19 @@ class PlaylistController extends AbstractController
     }
 
 
-    // TODO: add file upload
     // create a new playlist
     #[Route('/playlist/add', name: 'add_playlist')]
-    #[Route('/playlist/{id}/edit', name: 'edit_playlist')]
-    public function add(EntityManagerInterface $em, Playlist $playlist = null, Request $request, Security $security)
+    public function add(EntityManagerInterface $em, Playlist $playlist = null, Request $request, Security $security, FileUploader $fileUploader)
     {
-        $user =  $security->getUser(); // get the user in session
+        $user =  $security->getUser(); // get the user in session        
 
         // if the user is connected then proceed with the form submission
         if ($user) {
 
-            // if the entreprise id doesn't exist then create it
-            if (!$playlist) {
-                $playlist = new Playlist();
-            }
-            // else edit
+
+            $playlist = new Playlist();
+            
+            
 
             $playlist->setDateCreated(new \DateTime()); //get current date
             $playlist->setUser($user); //set the current user
@@ -85,6 +84,14 @@ class PlaylistController extends AbstractController
                 $playlist = $form->getData(); // get the data submitted in form and hydrate the object 
 
                 $em->getRepository(Playlist::class);
+
+                // file upload
+                $imageFile = $form->get('image')->getData();
+                if ($imageFile) {
+                    $imageFileName = $fileUploader->upload($imageFile);
+                    $playlist->setImage($imageFileName);
+                }
+
                 // need the doctrine manager to get persist and flush
                 $em->persist($playlist); // prepare
                 $em->flush(); // execute
@@ -96,14 +103,85 @@ class PlaylistController extends AbstractController
             return $this->render('playlist/newPlaylist.html.twig', [
 
                 'formAddPlaylist'=> $form->createView(),   
-                'edit'=> $playlist->getId(),   
+                // 'edit'=> $playlist->getId(), 
             ]);
 
         }
     }
 
 
-    // TODO: delete playlist
+    // edit playlists
+    #[Route('/playlist/{id}/edit', name: 'edit_playlist')]
+    public function edit(EntityManagerInterface $em, Playlist $playlist, Request $request, Security $security, FileUploader $fileUploader)
+    {
+        $user =  $security->getUser(); // get the user in session        
+
+        $playlistOwner = $playlist->getUser(); // owner of the playlist
+
+        // if the owner of the playlist is strictly equal to the user in session then proceed with the edit
+        if ($playlistOwner === $user) {            
+            
+            $playlist->setDateCreated(new \DateTime()); //get current date
+
+            $form = $this->createForm(PlaylistType::class, $playlist);
+            $form ->handleRequest($request); //analyse whats in the request / gets the data
+
+            // if the form is submitted and check security 
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $playlist = $form->getData(); // get the data submitted in form and hydrate the object 
+
+                $em->getRepository(Playlist::class);
+
+                // file upload
+                $imageFile = $form->get('image')->getData();
+                if ($imageFile) {
+                    $imageFileName = $fileUploader->upload($imageFile);
+                    $playlist->setImage($imageFileName);
+                }
+
+                // need the doctrine manager to get persist and flush
+                $em->persist($playlist); // prepare
+                $em->flush(); // execute
+
+                return $this->redirectToRoute('app_myPlaylist');
+            }
+
+            // vue to show form
+            return $this->render('playlist/newPlaylist.html.twig', [
+
+                'formAddPlaylist'=> $form->createView(),   
+                'edit'=> $playlist->getId(), 
+            ]);
+
+        } else {
+
+            // else show the error message and redirect to the home page
+
+            echo "You are not the owner of this playlist";
+            return $this->redirectToRoute('app_home');
+
+        }
+    }
+
+
+    // delete playlist
+    #[Route('/playlist/{id}/delete', name: 'delete_playlist')]
+    public function delete(EntityManagerInterface $em, Playlist $playlist, Security $security)
+    {
+        $user =  $security->getUser(); // get the user in session        
+
+        $playlistOwner = $playlist->getUser(); // owner of the playlist
+
+        // if the user is equal to the playlist owner then delete
+        if ($playlistOwner === $user){ 
+            $em->remove($playlist);
+            $em->flush();
+        }
+        return $this->redirectToRoute('app_myPlaylist');
+        
+    }
+
 
 
     // detailed page for one playlist

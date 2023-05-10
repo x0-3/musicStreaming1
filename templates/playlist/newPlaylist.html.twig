@@ -7,12 +7,12 @@
 
 {{ form_start(formAddPlaylist)}}
 
-    {# {{form_row(formAddPlaylist.image)}} #}
+    {# {{ dump(playlist) }} #}
+
     {{form_row(formAddPlaylist.playlistName)}}
-    {# {{form_row(formAddPlaylist.dateCreated)}} #}
+    {{form_row(formAddPlaylist.image)}}
     {# {{form_row(formAddPlaylist.user)}} #}
     {# {{form_row(formAddPlaylist.songs)}} #}
-    {# {{form_row(formAddPlaylist.userFavorites)}} #}
     {{form_row(formAddPlaylist.submit)}}
 
 

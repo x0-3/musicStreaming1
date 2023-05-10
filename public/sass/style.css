@@ -296,6 +296,36 @@
 * body section.playlistDetail .playlistHeader figure img, * body section.artistDetail .playlistHeader figure img, * body section.musicPlayer .playlistHeader figure img {
   width: 100%;
 }
+* body section.playlistDetail .playlistHeader .playlistName, * body section.artistDetail .playlistHeader .playlistName, * body section.musicPlayer .playlistHeader .playlistName {
+  display: flex;
+}
+* body section.playlistDetail .playlistHeader .playlistName .dropdown, * body section.artistDetail .playlistHeader .playlistName .dropdown, * body section.musicPlayer .playlistHeader .playlistName .dropdown {
+  position: relative;
+  display: inline-block;
+}
+* body section.playlistDetail .playlistHeader .playlistName .dropdown i, * body section.artistDetail .playlistHeader .playlistName .dropdown i, * body section.musicPlayer .playlistHeader .playlistName .dropdown i {
+  color: black;
+  font-size: 19px;
+  border: none;
+  margin: 0px 0 0 7px;
+}
+* body section.playlistDetail .playlistHeader .playlistName .dropdown .dropdown-content, * body section.artistDetail .playlistHeader .playlistName .dropdown .dropdown-content, * body section.musicPlayer .playlistHeader .playlistName .dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+* body section.playlistDetail .playlistHeader .playlistName .dropdown .dropdown-content a, * body section.artistDetail .playlistHeader .playlistName .dropdown .dropdown-content a, * body section.musicPlayer .playlistHeader .playlistName .dropdown .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+* body section.playlistDetail .playlistHeader .playlistName .dropdown:hover .dropdown-content, * body section.artistDetail .playlistHeader .playlistName .dropdown:hover .dropdown-content, * body section.musicPlayer .playlistHeader .playlistName .dropdown:hover .dropdown-content {
+  display: block;
+}
 * body section.playlistDetail .playlistHeader .playerBtns a, * body section.artistDetail .playlistHeader .playerBtns a, * body section.musicPlayer .playlistHeader .playerBtns a {
   text-decoration: none;
   color: black;
