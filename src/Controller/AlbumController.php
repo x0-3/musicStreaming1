@@ -58,7 +58,6 @@ class AlbumController extends AbstractController
     }
 
 
-    // TODO:
     // add a new Album
     #[Route('/album/add', name: 'add_album')]
     public function add(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
@@ -95,13 +94,52 @@ class AlbumController extends AbstractController
     }
 
 
-    // TODO: edit the album
+    // TODO: add button in view
+    // add a new Album
+    #[Route('/album/edit/{id}', name: 'edit_album')]
+    public function edit(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, Album $album): Response
+    {
+
+        $form = $this->createForm(AlbumType::class, $album);
+
+        $album->setReleaseDate(new \DateTime());
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $album = $form->getData();
+
+            // file upload
+            $imageFile = $form->get('cover')->getData();
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $album->setCover($imageFileName);
+            }
+
+            $entityManager->persist($album);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_profile');
+        }
+
+        return $this->render('album/newAlbum.html.twig', [
+            'formAddAlbum' => $form,
+        ]);
+    
+    }
 
 
+    // TODO: add button in view
+    // delete the album
+    #[Route('/album/delete/{id}', name: 'delete_album')]
+    public function delete(EntityManagerInterface $em, Album $album)
+    {
 
-    // TODO: delete the album
-
-
+        $em->remove($album);
+        $em->flush();
+        return $this->redirectToRoute('app_myPlaylist');
+        
+    }
 
 
     // detail page of one album

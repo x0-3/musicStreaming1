@@ -43,27 +43,7 @@ class AlbumType extends AbstractType
             ])
 
             ->add('nameAlbum',TextType::class)
-
-            // TODO: add a colection type for the songs
-            
-            // ->add('programs', CollectionType::class, [
-
-            //     // the collection waits for the element that will go into the form
-            //     // not mandatory for it to be another form
-            //     'entry_type' => ProgramType::class,
-            //     'prototype' => true,
-
-            //     // allows to add new elements into the Session entity that will be persisted thanks to cascade_persist on the programs element 
-            //     // it will activate a prototype date that will be an HTML attribute that can be manipulated in JavaScript 
-            //     'allow_add' => true, // allow to add a new element
-            //     'allow_delete' => true, // allow to delete an element
-            //     'by_reference' => false, // mandatory : Session doesn't have a set Programe but program has a setSession
-            //     // Program is the owner of the relation 
-            //     // to avoid a mapping false we are obligated to set a by_reference
-            // ])
-
         
-
             ->add('submit', SubmitType::class)
 
             // ->add('releaseDate')
