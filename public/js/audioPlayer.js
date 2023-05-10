@@ -142,9 +142,11 @@ setTime(fulltime, audio.duration);
 
 
 audio.addEventListener('timeupdate', () => {
-
+  
   // get the current audio time
   const currentAudioTime = Math.floor(audio.currentTime);
+
+  // console.log(audio.currentTime);
 
   // get the percentage
   const timePercentage = (currentAudioTime / audio.duration) * 100 + "%";
@@ -213,16 +215,17 @@ audio.addEventListener('timeupdate', () => {
 
 // add an event listener to the range slider input element to seek to a specific time in the song
 slider.addEventListener('input', () => {
-  audio.currentTime = rangeSlider.value;
+  // audio.currentTime = rangeSlider.value;
+  audio.currentTime = slider.value;
 });
 
 // update the progress bar as the song plays
 audio.addEventListener('timeupdate', () => {
 
   const progressPercent = (audio.currentTime / audio.duration) * 100;
-  setTime(time, currentAudioTime);
+  setTime(time, audio.currentTime);
   progress.style.width = `${progressPercent}%`;
-  sliderThumb.style.left = `${progressPercent}%`;
+  thumb.style.left = `${progressPercent}%`;
 });
 
 
