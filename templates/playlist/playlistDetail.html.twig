@@ -17,7 +17,7 @@
             <h3>{{playlist.playlistName}} </h3>
 
             {# if it isn't the playlist owner then don't show the button #}
-            {% if playlist.user.id is same as(app.user.id)   %}
+            {% if playlist.user.id is same as(app.user.id) %}
                 <div class="dropdown">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                     <div class="dropdown-content">

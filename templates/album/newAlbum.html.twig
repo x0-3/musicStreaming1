@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add a new playlsit{% endblock %}
+
+{% block body %}
+
+
+{{ form_start(formAddAlbum)}}
+
+
+    {{form_row(formAddAlbum.cover)}}
+    {{form_row(formAddAlbum.nameAlbum)}}
+    {{form_row(formAddAlbum.submit)}}
+
+
+{{form_end(formAddAlbum)}}
+
+{% endblock %}

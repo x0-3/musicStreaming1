@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Album;
 use App\Entity\Genre;
+use App\Form\AlbumType;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,16 +44,6 @@ class AlbumController extends AbstractController
     }
 
 
-    // detail page of one album
-    #[Route('/album/{id}', name: 'app_albumDetail')]
-    public function albumDetail(Album $album): Response
-    {
-        return $this->render('album/albumDetail.html.twig', [
-            'album'=> $album,
-        ]);
-    }
-
-
     // // music player page for an album
     #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
     public function albumMusicPlayer(Album $album): Response
@@ -66,6 +58,60 @@ class AlbumController extends AbstractController
     }
 
 
+    // TODO:
+    // add a new Album
+    #[Route('/album/add', name: 'add_album')]
+    public function add(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
+    {
+
+        $album = new Album();
+
+        $form = $this->createForm(AlbumType::class, $album);
+
+        $album->setReleaseDate(new \DateTime());
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $album = $form->getData();
+
+            // file upload
+            $imageFile = $form->get('cover')->getData();
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $album->setCover($imageFileName);
+            }
+
+            $entityManager->persist($album);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_profile');
+        }
+
+        return $this->render('album/newAlbum.html.twig', [
+            'formAddAlbum' => $form,
+        ]);
+ 
+    }
+
+
+    // TODO: edit the album
+
+
+
+    // TODO: delete the album
+
+
+
+
+    // detail page of one album
+    #[Route('/album/{id}', name: 'app_albumDetail')]
+    public function albumDetail(Album $album): Response
+    {
+        return $this->render('album/albumDetail.html.twig', [
+            'album'=> $album,
+        ]);
+    }
 
     // tests 
     // #[Route('/skipForward', name: 'app_skipforward')]

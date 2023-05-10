@@ -44,6 +44,7 @@ class PlaylistController extends AbstractController
         }
     }
 
+
     // music player page for one playlist
     #[Route('/playlist/musicPlayer/{id}', name: 'playlist_player')]
     public function playlistPlayer(Playlist $playlist): Response
@@ -69,8 +70,6 @@ class PlaylistController extends AbstractController
 
 
             $playlist = new Playlist();
-            
-            
 
             $playlist->setDateCreated(new \DateTime()); //get current date
             $playlist->setUser($user); //set the current user
@@ -103,7 +102,6 @@ class PlaylistController extends AbstractController
             return $this->render('playlist/newPlaylist.html.twig', [
 
                 'formAddPlaylist'=> $form->createView(),   
-                // 'edit'=> $playlist->getId(), 
             ]);
 
         }
