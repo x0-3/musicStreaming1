@@ -255,52 +255,26 @@ volume.addEventListener("change", function(e) {
 });
 
 
+// FIXME: need to fetch info from db
 
+function skipForward(url) {
+  let audio = document.getElementById('audio');
+  let slider = document.querySelector('.slider');
+  let progress = document.querySelector('.progress');
+  let playBtn = document.querySelector('#mainPlayBtn');
 
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      audio.src = data.link;
+      audio.play();
+      playBtn.innerHTML = '<span class="fa-solid fa-pause"></span>';
 
-
-
-
-
-
-
-// // ************************************************ volume control ************************************************//
-// // set the initial volume to 50%
-// audio.volume = 0.5;
-
-// // add an event listener to the volume slider input element
-// volumeSlider.addEventListener('input', () => {
-//   // get the current value of the volume slider
-//   const volume = volumeSlider.value;
-
-//   // convert the volume to a decimal value between 0 and 1
-//   const decimalVolume = volume / 100;
-
-//   // set the volume of the audio element
-//   audio.volume = decimalVolume;
-// });
-
-
-// // ************************************************ music slider ************************************************//
-
-// function skipForward(url) {
-//   let audio = document.getElementById('audio');
-//   let slider = document.querySelector('.slider');
-//   let progress = document.querySelector('.progress');
-//   let playBtn = document.querySelector('#mainPlayBtn');
-
-//   fetch(url)
-//     .then(response => response.json())
-//     .then(data => {
-//       audio.src = data.link;
-//       audio.play();
-//       playBtn.innerHTML = '<span class="fa-solid fa-pause"></span>';
-
-//       slider.value = 0;
-//       progress.style.width = '0%';
-//     })
-//     .catch(error => console.error(error));
-// }
+      slider.value = 0;
+      progress.style.width = '0%';
+    })
+    .catch(error => console.error(error));
+}
 
 
 // ************************************************ keybinds ************************************************//

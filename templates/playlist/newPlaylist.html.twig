@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add a new playlsit{% endblock %}
+
+{% block body %}
+
+
+{{ form_start(formAddPlaylist)}}
+
+    {# {{form_row(formAddPlaylist.image)}} #}
+    {{form_row(formAddPlaylist.playlistName)}}
+    {# {{form_row(formAddPlaylist.dateCreated)}} #}
+    {# {{form_row(formAddPlaylist.user)}} #}
+    {# {{form_row(formAddPlaylist.songs)}} #}
+    {# {{form_row(formAddPlaylist.userFavorites)}} #}
+    {{form_row(formAddPlaylist.submit)}}
+
+
+{{form_end(formAddPlaylist)}}
+
+{% endblock %}

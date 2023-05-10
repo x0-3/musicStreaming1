@@ -20,9 +20,10 @@
             <button class="like"><i class="fa-regular fa-heart"></i></button>
 
             <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
-            <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-circle-play"></span></button>
+            <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
             <button class="fa-sharp fa-solid fa-forward" id="btnNext"></button>
-        
+            {# <button class="fa-sharp fa-solid fa-forward" onclick="skipForward('{{ asset('/uploads/music/' ~ songs[2].link) }}')"></button> #}
+
             <div class="hover">
 
                 <i class="volume-icon"><span class="fa-solid fa-volume-high"></span></i>
@@ -35,10 +36,10 @@
             </div>
         </div>
 
-        {% for song in songs %}
+        {# {% for song in songs %} #}
 
-            <audio id="audio" src="{{asset('uploads/music/' ~ song.link)}}" autoplay skip></audio>    
-        {% endfor %}
+            <audio id="audio" src="{{asset('uploads/music/' ~ songs[0].link)}}" autoplay skip></audio>    
+        {# {% endfor %} #}
 
         <div class="timeline">
             <small class="time">0:00</small>
