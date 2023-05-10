@@ -9,7 +9,7 @@
     <div class="playlistHeader">
 
         <figure>
-            <img src="{{asset('uploads/img/' ~ playlist.image)}}" alt="playlist image">
+            <img src="{{asset('uploads/' ~ playlist.image)}}" alt="playlist image">
         </figure>
 
         <div class="playlistName">
@@ -64,7 +64,7 @@
                 <tr>
                     <td>
                         <figure>
-                            <img src="{{asset('uploads/img/' ~ song.album.cover)}}" alt="song img">
+                            <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
                         </figure>
                     </td>
                     <td>{{song.nameSong}} </td>

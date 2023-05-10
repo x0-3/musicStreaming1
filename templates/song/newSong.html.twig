@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add a new song{% endblock %}
+
+{% block body %}
+
+
+{{ form_start(formAddSong)}}
+
+
+    {{form_row(formAddSong.nameSong)}}
+    {{form_row(formAddSong.link)}}
+    {{form_row(formAddSong.album)}}
+    {{form_row(formAddSong.genre)}}
+    {{form_row(formAddSong.submit)}}
+
+
+{{form_end(formAddSong)}}
+
+{% endblock %}

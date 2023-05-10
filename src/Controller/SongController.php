@@ -4,14 +4,66 @@ namespace App\Controller;
 
 use App\Entity\Playlist;
 use App\Entity\Song;
+use App\Form\SongType;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SongController extends AbstractController
 {
+
+    // add a new song
+    #[Route('/song/add', name: 'add_song')]
+    public function add(EntityManagerInterface $em, Request $request, Security $security, FileUploader $fileUploader)
+    {
+        $user =  $security->getUser(); // get the user in session        
+
+        // if the user is connected then proceed with the form submission
+        if ($user) {
+
+
+            $song = new Song();
+
+            $song->setUser($user); //set the current user
+
+            $form = $this->createForm(SongType::class, $song);
+            $form ->handleRequest($request); //analyse whats in the request / gets the data
+
+            // if the form is submitted and check security 
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $song = $form->getData(); // get the data submitted in form and hydrate the object 
+
+                $em->getRepository(Song::class);
+
+                // music file upload
+                $musicFile = $form->get('link')->getData();
+                if ($musicFile) {
+                    $musicFileName = $fileUploader->upload($musicFile);
+                    $song->setLink($musicFileName);
+                }
+
+                // need the doctrine manager to get persist and flush
+                $em->persist($song); // prepare
+                $em->flush(); // execute
+
+                return $this->redirectToRoute('app_profile');
+            }
+
+            // vue to show form
+            return $this->render('song/newSong.html.twig', [
+
+                'formAddSong'=> $form->createView(),   
+            ]);
+
+        }
+    }
+
 
     // song player for one song
     #[Route('/song/{id}', name: 'app_songPlayer')]

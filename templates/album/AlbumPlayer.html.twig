@@ -8,7 +8,7 @@
     <div class="player">
 
         <figure class="cover">
-            <img src="{{asset('uploads/img/' ~ album.cover)}}" alt="music cover">
+            <img src="{{asset('uploads/' ~ album.cover)}}" alt="music cover">
         </figure>
 
         <h3 class="trackTitle">{{songs[0].nameSong}}</h3>
@@ -38,7 +38,7 @@
 
         {# {% for song in songs %} #}
 
-            <audio id="audio" src="{{asset('uploads/music/' ~ songs[0].link)}}" autoplay skip></audio>    
+            <audio id="audio" src="{{asset('uploads/' ~ songs[0].link)}}" autoplay skip></audio>    
         {# {% endfor %} #}
 
         <div class="timeline">
@@ -82,7 +82,7 @@
                         
                         <td>
                             <figure>
-                                <img src="{{asset('uploads/img/' ~ album.cover)}}" alt="song img">
+                                <img src="{{asset('uploads/' ~ album.cover)}}" alt="song img">
                             </figure>
                         </td>
                         <td>{{song.nameSong}}</td>
@@ -118,7 +118,7 @@
     
                             {% else %}
 
-                                <img src="{{asset('uploads/img/' ~ comment.user.avatar)}}" alt="profile picture">
+                                <img src="{{asset('uploads/' ~ comment.user.avatar)}}" alt="profile picture">
                             {% endif %}
 
                             <figcaption> 

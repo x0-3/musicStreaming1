@@ -22,7 +22,7 @@
                     <a href="{{path('playlist_detail', {'id' : playlist.id})}}">
                         
                         <figure>
-                            <img src="{{asset('uploads/img/' ~ playlist.image)}}" alt="playlist image">
+                            <img src="{{asset('uploads/' ~ playlist.image)}}" alt="playlist image">
                         </figure>
                         
                         <h3>{{playlist.playlistName}}</h3>
@@ -54,7 +54,7 @@
 
                         <a href="{{path('playlist_detail', {'id' : favorite.id})}}">
                             <figure>
-                                <img src="{{asset('uploads/img/' ~ favorite.image)}}" alt="playlist image">
+                                <img src="{{asset('uploads/' ~ favorite.image)}}" alt="playlist image">
                             </figure>
 
                             <h3>{{favorite.playlistName}}</h3>
@@ -85,7 +85,7 @@
                     <a href="{{path('app_songPlayer', {'id': song.id})}}">
                         
                         <figure>
-                            <img src="{{asset('uploads/img/' ~ song.cover)}}" alt="playlist image">
+                            <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
                         </figure>
                         
                         <h3>{{song.nameSong}} </h3>

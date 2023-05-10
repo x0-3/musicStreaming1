@@ -15,7 +15,7 @@
                 <img src="{{asset('assets/img/profil_pic.png')}}" alt="profile picture"> 
             {% else %}
             
-                <img src="{{asset('uploads/img/' ~ app.user.avatar)}}" alt="profile picture"> 
+                <img src="{{asset('uploads/' ~ app.user.avatar)}}" alt="profile picture"> 
             {% endif %}
             
 
@@ -27,7 +27,7 @@
         </figure>
 
         <div class="title">
-            <a href="#">Upload song</a>
+            <a href="{{path('add_song')}}">Upload song</a>
         </div>
     </div>
 
@@ -51,7 +51,7 @@
                 <tr>
                     <td>
                         <figure>
-                            <img src="{{asset('uploads/img/' ~ song.album.cover)}}" alt="song img">
+                            <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
                         </figure>
                     </td>
                     <td><a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
@@ -84,7 +84,7 @@
                     <a href="{{path('app_albumDetail', {'id': album.id})}}">
 
                         <figure>
-                            <img src="{{asset('uploads/img/' ~ album.cover)}}" alt="album cover">
+                            <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">
                         </figure>
                         
                         <h3>{{album.nameAlbum}} </h3>
