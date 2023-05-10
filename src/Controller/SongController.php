@@ -17,6 +17,18 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class SongController extends AbstractController
 {
 
+    // find the top ten like song (most popular)
+    #[Route('/topLiked', name: 'app_mostLiked')]
+    public function index(EntityManagerInterface $em): Response
+    {
+
+        $songs = $em->getRepository(Song::class)->findTenMostLikes(); // find the top ten like song
+
+        return $this->render('song/mostLiked.html.twig', [
+            'songs'=> $songs,
+        ]);
+    }
+
     // add a new song
     #[Route('/song/add', name: 'add_song')]
     public function add(EntityManagerInterface $em, Request $request, Security $security, FileUploader $fileUploader)
@@ -65,13 +77,65 @@ class SongController extends AbstractController
     }
 
 
-    // song player for one song
-    #[Route('/song/{id}', name: 'app_songPlayer')]
-    public function index(Song $song): Response
+    // edit song 
+    #[Route('/song/edit/{id}', name: 'edit_song')]
+    public function edit(EntityManagerInterface $em, Request $request, Security $security, FileUploader $fileUploader, Song $song)
     {
-        return $this->render('song/songMusicPlayer.html.twig', [
-            'song' => $song,
-        ]);
+        $user =  $security->getUser(); // get the user in session        
+        $songOwner = $song->getUser(); // owner of the song
+
+        // if the user is the same as the song owner
+        if ($songOwner === $user) {
+
+            $form = $this->createForm(SongType::class, $song);
+            $form ->handleRequest($request); //analyse whats in the request / gets the data
+
+            // if the form is submitted and check security 
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $song = $form->getData(); // get the data submitted in form and hydrate the object 
+
+                $em->getRepository(Song::class);
+
+                // music file upload
+                $musicFile = $form->get('link')->getData();
+                if ($musicFile) {
+                    $musicFileName = $fileUploader->upload($musicFile);
+                    $song->setLink($musicFileName);
+                }
+
+                // need the doctrine manager to get persist and flush
+                $em->persist($song); // prepare
+                $em->flush(); // execute
+
+                return $this->redirectToRoute('app_profile');
+            }
+
+            // vue to show form
+            return $this->render('song/newSong.html.twig', [
+
+                'formAddSong'=> $form->createView(),   
+            ]);
+
+        }
+    }
+
+
+    // delete song
+    #[Route('/song/delete/{id}', name: 'delete_song')]
+    public function delete(EntityManagerInterface $em, Song $song, Security $security)
+    {
+        $user =  $security->getUser(); // get the user in session        
+
+        $songOwner = $song->getUser(); // owner of the song
+
+        // if the user is equal to the song owner then delete
+        if ($songOwner === $user){ 
+            $em->remove($song);
+            $em->flush();
+        }
+        return $this->redirectToRoute('app_profile');
+        
     }
 
 
@@ -97,17 +161,15 @@ class SongController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+    
 
-
-    // find the top ten like song (most popular)
-    #[Route('/topLiked', name: 'app_mostLiked')]
-    public function topLiked(EntityManagerInterface $em): Response
+    // song player for one song
+    #[Route('/song/{id}', name: 'app_songPlayer')]
+    public function songPlayer(Song $song): Response
     {
-
-        $songs = $em->getRepository(Song::class)->findTenMostLikes(); // find the top ten like song
-
-        return $this->render('song/mostLiked.html.twig', [
-            'songs'=> $songs,
+        return $this->render('song/songMusicPlayer.html.twig', [
+            'song' => $song,
         ]);
     }
+
 }

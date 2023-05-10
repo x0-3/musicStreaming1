@@ -41,6 +41,7 @@
                 <th>title</th>
                 <th>artist</th>
                 <th>time</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -57,7 +58,20 @@
                     <td><a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
                     <td> <a href="{{path('app_artistDetail', {'id': app.user.id})}}"> {{app.user.username}} </a></td>
                     <td>3:09</td>
+
+                    <td>
+                        <div class="dropdown">
+                            <button><i class="fa-solid fa-plus"></i></button>
+                            
+                            <div id="list-items">
+                               <a href="{{path('edit_song', {'id': song.id})}}">edit</a>
+                               <a href="{{path('delete_song', {'id': song.id})}}">delete</a>
+                            </div>
+                        </div>
+                        
+                    </td>
                 </tr>
+
 
             {% endfor %}
         </tbody>
@@ -81,17 +95,30 @@
             {% for album in albums %}
 
                 <div class="card">
+
+                    <div class="dropdown">
+                        <button class="fa-solid fa-ellipsis-vertical"></button>
+                  
+                        <div id="list-items">
+                           <a href="{{path('edit_album', {'id': album.id})}}">edit</a>
+                           <a href="{{path('delete_album', {'id': album.id})}}">delete</a>
+                        </div>
+                    </div>
+                    
                     <a href="{{path('app_albumDetail', {'id': album.id})}}">
 
                         <figure>
-                            <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">
+                            <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">          
                         </figure>
                         
                         <h3>{{album.nameAlbum}} </h3>
-                    </a>
-                </div>
-            {% endfor %}
 
+                    </a>
+                
+                    
+                </div>
+                {% endfor %}
+                
         </div>
     </div>
 
