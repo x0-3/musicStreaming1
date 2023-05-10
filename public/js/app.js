@@ -1,6 +1,6 @@
 // ******************************************* Toggle light and dark mode ********************************************************************* //
 (function() {
-  let onpageLoad = localStorage.getItem("theme") || "";
+  let onpageLoad = localStorage.getItem("theme") || "light";
   let element = document.body;
   element.classList.add(onpageLoad);
   document.getElementById("theme").textContent =
