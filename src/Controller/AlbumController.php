@@ -94,7 +94,6 @@ class AlbumController extends AbstractController
     }
 
 
-    // TODO: add button in view
     // add a new Album
     #[Route('/album/edit/{id}', name: 'edit_album')]
     public function edit(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, Album $album): Response
@@ -129,7 +128,6 @@ class AlbumController extends AbstractController
     }
 
 
-    // TODO: add button in view
     // delete the album
     #[Route('/album/delete/{id}', name: 'delete_album')]
     public function delete(EntityManagerInterface $em, Album $album)

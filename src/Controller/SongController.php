@@ -29,6 +29,7 @@ class SongController extends AbstractController
         ]);
     }
 
+    
     // add a new song
     #[Route('/song/add', name: 'add_song')]
     public function add(EntityManagerInterface $em, Request $request, Security $security, FileUploader $fileUploader)
