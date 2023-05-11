@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
+    const COMMENT_ADDED_SUCCESSFULLY = 'COMMENT_ADDED_SUCCESSFULLY';
+    const COMMENT_ERROR = 'COMMENT_ERROR';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
