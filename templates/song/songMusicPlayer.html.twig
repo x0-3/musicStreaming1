@@ -97,11 +97,25 @@
             </tbody>
         </table>
 
-        <form action="#" method="post">
-            <input type="text" placeholder="leave a comment">
+        {# TODO: make it dynamique #}
+        {% if app.user %}
+            {{ form_start(formAddComment)}}
 
-            <button type="submit">Comment</button>
-        </form>
+
+                {{form_row(formAddComment.text)}}
+                {{form_row(formAddComment.submit)}}
+        
+        
+            {{form_end(formAddComment)}}
+            
+        {% else %}
+            <form action="#" method="post">
+                <input type="text" placeholder="leave a comment">
+
+                <button type="submit">Comment</button>
+            </form>
+        {% endif %}
+
 
         <div class="comments">
 

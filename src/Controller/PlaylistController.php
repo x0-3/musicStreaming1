@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Playlist;
-use App\Entity\User;
 use App\Form\PlaylistType;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
