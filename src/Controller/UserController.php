@@ -65,8 +65,7 @@ class UserController extends AbstractController
 
         if ($user) {
             
-            $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($user); //find the artist's most recent albums
-
+            $albums = $em->getRepository(Album::class)->findBy(['user' => $user],['releaseDate'=>'DESC'], 5);
 
             return $this->render('user/profile.html.twig', [
                 'user' => $user,

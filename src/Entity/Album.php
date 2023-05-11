@@ -28,6 +28,9 @@ class Album
     #[ORM\OneToMany(mappedBy: 'album', targetEntity: Song::class)]
     private Collection $songs;
 
+    #[ORM\ManyToOne(inversedBy: 'albums')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->songs = new ArrayCollection();
@@ -100,6 +103,18 @@ class Album
                 $song->setAlbum(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

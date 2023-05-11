@@ -8,6 +8,7 @@ use App\Form\AlbumType;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -60,83 +61,116 @@ class AlbumController extends AbstractController
 
     // add a new Album
     #[Route('/album/add', name: 'add_album')]
-    public function add(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
+    public function add(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, Security $security): Response
     {
 
-        $album = new Album();
+        $user =  $security->getUser(); // get the user in session        
 
-        $form = $this->createForm(AlbumType::class, $album);
+        if($user){
 
-        $album->setReleaseDate(new \DateTime());
+            $album = new Album();
 
-        $form->handleRequest($request);
+            $form = $this->createForm(AlbumType::class, $album);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $album = $form->getData();
+            $album->setReleaseDate(new \DateTime()); // set the release date to now
+            $album->setUser($user); // set the user in session
 
-            // file upload
-            $imageFile = $form->get('cover')->getData();
-            if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
-                $album->setCover($imageFileName);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $album = $form->getData();
+
+                // file upload
+                $imageFile = $form->get('cover')->getData();
+                if ($imageFile) {
+                    $imageFileName = $fileUploader->upload($imageFile);
+                    $album->setCover($imageFileName);
+                }
+
+                $entityManager->persist($album);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_profile');
             }
 
-            $entityManager->persist($album);
-            $entityManager->flush();
+            return $this->render('album/newAlbum.html.twig', [
+                'formAddAlbum' => $form,
+            ]);
 
-            return $this->redirectToRoute('app_profile');
+        } else {
+            return $this-> redirectToRoute('app_home');
         }
-
-        return $this->render('album/newAlbum.html.twig', [
-            'formAddAlbum' => $form,
-        ]);
  
     }
 
 
     // add a new Album
     #[Route('/album/edit/{id}', name: 'edit_album')]
-    public function edit(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, Album $album): Response
+    public function edit(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, Album $album, Security $security): Response
     {
 
-        $form = $this->createForm(AlbumType::class, $album);
+        $user =  $security->getUser(); // get the user in session        
 
-        $album->setReleaseDate(new \DateTime());
+        $albumOwner = $album->getUser(); // get the owner of the album
 
-        $form->handleRequest($request);
+        // if the owner of the album is strictly equal to the user in session then proceed with the edit
+        if ($albumOwner === $user) {            
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $album = $form->getData();
+            $form = $this->createForm(AlbumType::class, $album);
 
-            // file upload
-            $imageFile = $form->get('cover')->getData();
-            if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
-                $album->setCover($imageFileName);
+            $album->setReleaseDate(new \DateTime());
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $album = $form->getData();
+
+                // file upload
+                $imageFile = $form->get('cover')->getData();
+                if ($imageFile) {
+                    $imageFileName = $fileUploader->upload($imageFile);
+                    $album->setCover($imageFileName);
+                }
+
+                $entityManager->persist($album);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_profile');
             }
 
-            $entityManager->persist($album);
-            $entityManager->flush();
+            return $this->render('album/newAlbum.html.twig', [
+                'formAddAlbum' => $form,
+            ]);
 
-            return $this->redirectToRoute('app_profile');
+        }else {
+
+            // else show the error message and redirect to the home page
+
+            echo "You are not the owner of this playlist";
+            return $this->redirectToRoute('app_home');
+
         }
-
-        return $this->render('album/newAlbum.html.twig', [
-            'formAddAlbum' => $form,
-        ]);
-    
+        
     }
 
 
     // delete the album
     #[Route('/album/delete/{id}', name: 'delete_album')]
-    public function delete(EntityManagerInterface $em, Album $album)
+    public function delete(EntityManagerInterface $em, Album $album, Security $security)
     {
 
-        $em->remove($album);
-        $em->flush();
-        return $this->redirectToRoute('app_myPlaylist');
-        
+        $user =  $security->getUser(); // get the user in session        
+        $albumOwner = $album->getUser(); // get the owner of the album
+
+        // if the owner of the album is strictly equal to the user in session then proceed with the edit
+        if ($albumOwner === $user) {  
+
+            $em->remove($album);
+            $em->flush();
+
+        }
+
+        return $this->redirectToRoute('app_profile');
     }
 
 
@@ -149,7 +183,9 @@ class AlbumController extends AbstractController
         ]);
     }
 
-    // tests 
+
+    // tests
+    // get the song for an album 
     #[Route('/skipForward', name: 'app_skipforward')]
     public function skipForward(Request $request): JsonResponse
     {
