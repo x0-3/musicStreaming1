@@ -97,24 +97,17 @@
             </tbody>
         </table>
 
-        {# TODO: make it dynamique #}
-        {% if app.user %}
-            {{ form_start(formAddComment)}}
 
+        {# FIXME: make it dynamique #}
+        <div id="sidebar">
+            {{ render(controller('App\\Controller\\CommentController::addComment', {'id': song.id})) }}
+        </div>
 
-                {{form_row(formAddComment.text)}}
-                {{form_row(formAddComment.submit)}}
-        
-        
-            {{form_end(formAddComment)}}
-            
-        {% else %}
-            <form action="#" method="post">
-                <input type="text" placeholder="leave a comment">
-
-                <button type="submit">Comment</button>
-            </form>
-        {% endif %}
+        {# <form action="" method="post">
+            <input type="text" placeholder="leave a comment">
+            <button type="submit">Comment</button>
+        </form> #}
+       
 
 
         <div class="comments">

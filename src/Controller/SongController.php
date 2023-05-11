@@ -177,47 +177,10 @@ class SongController extends AbstractController
         }
     }
     
-    // with form for comments TODO: make it dynamic
     // song player for one song
     #[Route('/song/{id}', name: 'app_songPlayer')]
-    public function songPlayer(Request $request, EntityManagerInterface $entityManager, Security $security, Song $song): Response
+    public function songPlayer(Song $song): Response
     {
-
-        $user = $security->getUser();
-
-        if ($user) {
-      
-            // just set up a fresh $task object (remove the example data)
-            $comment = new Comment();
-
-            $comment->setUser($user); // set the user to connect user
-            $comment->setDateMess(new \DateTime()); // set the date message to the current date
-            $comment->setSong($song); // set the song id to the current song
-            
-            $form = $this->createForm(CommentType::class, $comment);
-
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                $comment = $form->getData();
-                
-                // ... perform some action, such as saving the task to the database
-                $entityManager->persist($comment);
-
-                // actually executes the queries (i.e. the INSERT query)
-                $entityManager->flush();
-
-                return $this->redirectToRoute('app_songPlayer', ['id' => $comment->getSong()->getId()]);
-            
-            }
-           
-            return $this->render('song/songMusicPlayer.html.twig', [
-            'formAddComment' => $form->createView(),
-            'song' => $song,
-            ]);
-        }
-
 
         return $this->render('song/songMusicPlayer.html.twig', [
             'song' => $song,
