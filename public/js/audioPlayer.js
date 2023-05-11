@@ -53,7 +53,7 @@ function switchtrack(){
 
 // ************************************************ track source ************************************************//
 
-// FIXME: the trak is undefined
+// FIXME: the track is undefined
 const trackScr = "uploads/music/" + tracks[trackId];
 // console.log(trackScr);
 
@@ -138,9 +138,11 @@ function setTime(output, input){
     output.innerHTML = minutes + ":" + seconds;
   }
 }
+
 setTime(fulltime, audio.duration);
 
 
+// current time on slider 
 audio.addEventListener('timeupdate', () => {
   
   // get the current audio time
@@ -182,24 +184,6 @@ function customSlider(){
 }
 
 customSlider();
-
-slider.addEventListener("input", customSlider);
-
-
-// Initialize the slider position
-
-slider.addEventListener("input", () => {
-
-  // Calculate the time based on the percentage value of the slider position
-  const time = (slider.value / 100) * audio.duration;
-
-  // Set the current time of the audio
-  audio.currentTime = time;
-
-  // Update the slider position
-  customSlider();
-});
-
 
 // ************************************************ move the slider with music ************************************************//
 
