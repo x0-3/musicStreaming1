@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Album;
 use App\Entity\Playlist;
 use App\Entity\Song;
 use App\Form\SongType;
@@ -31,18 +32,17 @@ class SongController extends AbstractController
 
     
     // add a new song
-    #[Route('/song/add', name: 'add_song')]
-    public function add(EntityManagerInterface $em, Request $request, Security $security, FileUploader $fileUploader)
+    #[Route('/song/{id}/add', name: 'add_song')]
+    public function add(EntityManagerInterface $em, Request $request, Security $security, FileUploader $fileUploader, Album $album)
     {
         $user =  $security->getUser(); // get the user in session        
 
         // if the user is connected then proceed with the form submission
         if ($user) {
 
-
             $song = new Song();
 
-            $song->setUser($user); //set the current user
+            
 
             $form = $this->createForm(SongType::class, $song);
             $form ->handleRequest($request); //analyse whats in the request / gets the data
@@ -52,8 +52,10 @@ class SongController extends AbstractController
 
                 $song = $form->getData(); // get the data submitted in form and hydrate the object 
 
-                $em->getRepository(Song::class);
-
+                // $em->getRepository(Song::class);
+                $song->setUser($user); //set the current user
+                $song->setAlbum($album); // set the current album
+                
                 // music file upload
                 $musicFile = $form->get('link')->getData();
                 if ($musicFile) {
@@ -65,15 +67,20 @@ class SongController extends AbstractController
                 $em->persist($song); // prepare
                 $em->flush(); // execute
 
-                return $this->redirectToRoute('app_profile');
+                return $this->redirectToRoute('app_albumDetail',['id'=>$album->getId()]);
             }
 
             // vue to show form
             return $this->render('song/newSong.html.twig', [
 
                 'formAddSong'=> $form->createView(),   
+                'album'=> $album,
             ]);
 
+        } else {
+            
+            // else return to the current page
+            return $this->redirectToRoute('app_albumDetail',['id'=>$album->getId()]);
         }
     }
 
@@ -109,7 +116,7 @@ class SongController extends AbstractController
                 $em->persist($song); // prepare
                 $em->flush(); // execute
 
-                return $this->redirectToRoute('app_profile');
+                return $this->redirectToRoute('app_profile', ['id' => $song->getAlbum()->getId()]);
             }
 
             // vue to show form
@@ -118,6 +125,10 @@ class SongController extends AbstractController
                 'formAddSong'=> $form->createView(),   
             ]);
 
+        } else  {
+
+            // if the user isn't the song owner then redirect to current album page
+            return $this->redirectToRoute('app_albumDetail', ['id' => $song->getAlbum()->getId()]);
         }
     }
 
@@ -135,7 +146,8 @@ class SongController extends AbstractController
             $em->remove($song);
             $em->flush();
         }
-        return $this->redirectToRoute('app_profile');
+        
+        return $this->redirectToRoute('app_albumDetail', ['id' => $song->getAlbum()->getId()]);
         
     }
 

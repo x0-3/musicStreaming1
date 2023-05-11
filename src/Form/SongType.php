@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Album;
 use App\Entity\Genre;
 use App\Entity\Song;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -46,10 +45,10 @@ class SongType extends AbstractType
 
             // ->add('user')
 
-            ->add('album', EntityType::class,[
-                'class' =>Album::class,
-                'choice_label' => 'nameAlbum',
-            ])
+            // ->add('album', EntityType::class,[
+            //     'class' =>Album::class,
+            //     'choice_label' => 'nameAlbum',
+            // ])
 
             ->add('genre', EntityType::class,[
                 'class' =>Genre::class,
