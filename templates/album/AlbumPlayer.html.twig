@@ -21,8 +21,8 @@
 
             <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
-            <button class="fa-sharp fa-solid fa-forward" id="btnNext"></button>
-            {# <button class="fa-sharp fa-solid fa-forward" onclick="skipForward('{{ asset('/uploads/music/' ~ songs[2].link) }}')"></button> #}
+            {# <button class="fa-sharp fa-solid fa-forward" id="btnNext"></button> #}
+            <button class="fa-sharp fa-solid fa-forward" onclick="skipForward('{{ asset('/uploads/' ~ songs[2].link) }}')"></button>
 
             <div class="hover">
 

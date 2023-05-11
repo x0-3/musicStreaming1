@@ -45,17 +45,17 @@ class AlbumController extends AbstractController
 
 
     // // music player page for an album
-    #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
-    public function albumMusicPlayer(Album $album): Response
-    {
+    // #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
+    // public function albumMusicPlayer(Album $album): Response
+    // {
 
-        $songs = $album->getSongs(); // get the song list from the album
+    //     $songs = $album->getSongs(); // get the song list from the album
 
-        return $this->render('album/albumPlayer.html.twig', [
-            'album'=> $album,
-            'songs'=> $songs,
-        ]);
-    }
+    //     return $this->render('album/albumPlayer.html.twig', [
+    //         'album'=> $album,
+    //         'songs'=> $songs,
+    //     ]);
+    // }
 
 
     // add a new Album
@@ -150,34 +150,34 @@ class AlbumController extends AbstractController
     }
 
     // tests 
-    // #[Route('/skipForward', name: 'app_skipforward')]
-    // public function skipForward(Request $request): JsonResponse
-    // {
-    //     $url = $request->get('url');
+    #[Route('/skipForward', name: 'app_skipforward')]
+    public function skipForward(Request $request): JsonResponse
+    {
+        $url = $request->get('url');
 
-    //     // Logic to fetch the new audio file URL goes here
+        // Logic to fetch the new audio file URL goes here
 
-    //     $data = [
-    //         'link' => $url,
-    //     ];
+        $data = [
+            'link' => $url,
+        ];
 
-    //     return $this->json($data);
-    // }
+        return $this->json($data);
+    }
 
 
-    // // music player page for an album
-    // #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
-    // public function albumMusicPlayer(Album $album, RouterInterface $router): Response
-    // {
-    //     $songs = $album->getSongs(); // get the song list from the album
-    //     $skipForwardUrl = $router->generate('app_skipforward', ['id' => $album->getId()]);
+    // music player page for an album
+    #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
+    public function albumMusicPlayer(Album $album, RouterInterface $router): Response
+    {
+        $songs = $album->getSongs(); // get the song list from the album
+        $skipForwardUrl = $router->generate('app_skipforward', ['id' => $album->getId()]);
 
-    //     return $this->render('album/albumPlayer.html.twig', [
-    //         'album' => $album,
-    //         'songs' => $songs,
-    //         'skipForwardUrl' => $skipForwardUrl,
-    //     ]);
-    // }
+        return $this->render('album/albumPlayer.html.twig', [
+            'album' => $album,
+            'songs' => $songs,
+            'skipForwardUrl' => $skipForwardUrl,
+        ]);
+    }
 
 
 }

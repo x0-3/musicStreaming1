@@ -72,7 +72,7 @@
 
             {% for album in albums %}
             
-                <div class="card">
+                <div class="mcard">
                     <a href="{{path('app_albumDetail', {'id': album.id})}}">
 
                         <figure>
@@ -99,7 +99,7 @@
 
             {% for artistMostSub in artistMostSub %}
                 
-                <div class="card">
+                <div class="mcard">
                     <a href="{{path('app_artistDetail', {'id': artistMostSub.id})}}">
 
                         {% if artistMostSub.avatar == null %}

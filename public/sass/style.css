@@ -147,23 +147,23 @@
 * body .title a:hover {
   background-color: #183153;
 }
-* body .card {
+* body .mcard {
   width: 14%;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 }
-* body .card a {
+* body .mcard a {
   text-decoration: none;
   color: black;
 }
-* body .card a:hover {
+* body .mcard a:hover {
   color: #36454F;
 }
-* body .card a figure img {
+* body .mcard a figure img {
   width: 100%;
   border-radius: 10px;
 }
-* body .card a h3, * body .card a p {
+* body .mcard a h3, * body .mcard a p {
   margin: 12px 0 44px 9px;
 }
 * body .dropdown {
@@ -284,7 +284,7 @@
   top: 67vh;
   left: 2%;
 }
-* body section.playlistList .myPlaylist .card {
+* body section.playlistList .myPlaylist .mcard {
   margin: 0 58px 40px 0;
   width: 12%;
 }
@@ -433,17 +433,17 @@
   cursor: pointer;
   margin-top: 7px;
 }
-* body section.artistDetail .artist .card {
+* body section.artistDetail .artist .mcard {
   padding-top: 25px;
 }
-* body section.artistDetail .artist .card a {
+* body section.artistDetail .artist .mcard a {
   text-align: center;
 }
-* body section.artistDetail .artist .card a img {
+* body section.artistDetail .artist .mcard a img {
   width: 61%;
   border-radius: 100%;
 }
-* body section.artistDetail .artist .card a h3 {
+* body section.artistDetail .artist .mcard a h3 {
   margin: 34px 0 51px 0px;
 }
 * body section.loginForm {
@@ -658,7 +658,7 @@
   width: 100%;
   flex-wrap: wrap;
 }
-* body section.more .listItems .card {
+* body section.more .listItems .mcard {
   margin: 36px;
 }
 * body section.login {
