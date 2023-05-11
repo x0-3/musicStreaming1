@@ -1,11 +1,9 @@
 
-{% block body %}
-    {{ form_start(formAddComment)}}
+{{ form_start(formAddComment)}}
 
 
     {{form_row(formAddComment.text)}}
     {{form_row(formAddComment.submit)}}
 
 
-    {{form_end(formAddComment)}}
-{% endblock %}
+{{form_end(formAddComment)}}

@@ -98,15 +98,26 @@
         </table>
 
 
-        {# FIXME: make it dynamique #}
-        <div id="sidebar">
-            {{ render(controller('App\\Controller\\CommentController::addComment', {'id': song.id})) }}
-        </div>
+        {# TODO: make it dynamique #}
+        {% if app.user %}
 
-        {# <form action="" method="post">
-            <input type="text" placeholder="leave a comment">
-            <button type="submit">Comment</button>
-        </form> #}
+            {# // FIXME: add to db but show error message #}
+
+            <div id="sidebar">
+                {{ render(controller('App\\Controller\\CommentController::addComment',{'song': song.id})) }}
+
+                {# {{render(path('add_comment', {id: song.id}))}} #}
+            </div>
+
+        {% else %}
+        
+            <form action="" method="post">
+                <input type="text" placeholder="leave a comment">
+                <button type="submit">Comment</button>
+            </form>
+
+        {% endif %}
+
        
 
 

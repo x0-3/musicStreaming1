@@ -26,12 +26,11 @@ class CommentController extends AbstractController
     }
 
     #[Route('/comment/form/{id}', name: 'add_comment')]
-    public function addComment(Request $request, EntityManagerInterface $entityManager, Security $security, Song $song, RequestStack $requestStack): Response
+    public function addComment(Request $request, EntityManagerInterface $entityManager, Security $security, Song $song, RequestStack $requestStack)
     {
         $user = $security->getUser();
-
         if ($user) {
-
+            
             // just set up a fresh $task object (remove the example data)
             $comment = new Comment();
 
@@ -40,15 +39,15 @@ class CommentController extends AbstractController
             $comment->setSong($song); // set the song id to the current song
             
             $form = $this->createForm(CommentType::class, $comment);
-
             
-            $form->handleRequest($request);
-            // FIXME: 
+            // FIXME: add to db but show error message
             $request = $requestStack->getMainRequest();
+            $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 
                 $comment = $form->getData();
+
                 
                 // ... perform some action, such as saving the task to the database
                 $entityManager->persist($comment);
@@ -56,15 +55,16 @@ class CommentController extends AbstractController
                 // actually executes the queries (i.e. the INSERT query)
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_songPlayer', ['id' => $comment->getSong()->getId()]);
+                return $this->redirectToRoute('app_home');
             
             }
            
             return $this->render('comment/_add.html.twig', [
                 'formAddComment' => $form->createView(),
-                'song' => $song,
+                // 'song' => $song,
             ]);
-        }
+        } 
+
     }
 
 }
