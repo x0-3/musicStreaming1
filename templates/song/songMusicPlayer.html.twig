@@ -101,8 +101,7 @@
         {% if app.user %}
 
             <div id="sidebar">
-                {{ render(controller('App\\Controller\\CommentController::index',{'song': song.id})) }}
-
+                {% include('comment/_add.html.twig') %}
             </div>
 
         {% else %}
@@ -114,31 +113,12 @@
 
         {% endif %}
 
-        {# TODO: make it dynamique #}
         <div class="comments">
 
             {% for comment in song.comments %}
 
                 {% include('comment/_comment.html.twig') %}
 
-            
-               {# <article>
-                   <figure>
-                        {% if comment.user.avatar != null %}
-                            <img src="{{asset('uploads/' ~ comment.user.avatar)}}" alt="profile picture">
-                            
-                        {% else %}
-                            <img src="{{asset('assets/img/profil_pic.png')}}" alt="profile picture">
-
-                        {% endif %}
-                       
-                       <figcaption> 
-                           <a href="{{path('app_artistDetail', {'id':comment.user.id })}}">{{comment.user.username}}</a>
-                        </figcaption>
-                    </figure>
-                    
-                    <p>{{comment.text}} </p>
-                </article> #}
             {% endfor %}
                 
         </div>

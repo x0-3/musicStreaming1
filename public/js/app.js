@@ -1,5 +1,3 @@
-window.onload = function() {
-
 // ******************************************* Toggle light and dark mode ********************************************************************* //
 (function() {
   let onpageLoad = localStorage.getItem("theme") || "light";
@@ -73,14 +71,11 @@ formComment.addEventListener('submit', function(e){
   .then(json => {
 
     handleResponse(json);
-    console.log(json);
-
   })
 
 })
 
 
-// TODO: finish functionality
 const handleResponse = function(response) {
 
   switch (response.code){
@@ -90,4 +85,4 @@ const handleResponse = function(response) {
       break; 
   }
 }
-}
+

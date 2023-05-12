@@ -12,10 +12,13 @@ use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Twig\Environment;
 
 class SongController extends AbstractController
 {
@@ -177,11 +180,55 @@ class SongController extends AbstractController
         }
     }
     
+    
     // song player for one song
     #[Route('/song/{id}', name: 'app_songPlayer')]
-    public function songPlayer(Song $song): Response
+    public function songPlayer(Song $song, Security $security, EntityManagerInterface $entityManager, RequestStack $requestStack, Environment $environment): Response
     {
 
+        $user = $security->getUser();
+
+        if ($user) {
+            $request = $requestStack->getMainRequest(); // get the request from the request stack
+
+            // just set up a fresh $task object (remove the example data)
+            $comment = new Comment();
+
+            $comment->setUser($user); // set the user to connect user
+            $comment->setDateMess(new \DateTime()); // set the date message to the current date
+            $comment->setSong($song); // set the song id to the current song
+            
+            
+            $form = $this->createForm(CommentType::class, $comment);
+            
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                
+                $comment = $form->getData();
+  
+                // ... perform some action, such as saving the task to the database
+                $entityManager->persist($comment);
+                
+                // actually executes the queries (i.e. the INSERT query)
+                $entityManager->flush();
+
+                return new JsonResponse([
+                    'code' => Comment::COMMENT_ADDED_SUCCESSFULLY,
+                    'html' => $environment->render('comment/_comment.html.twig', [
+                        'comment' => $comment,
+                    ])
+                ]);
+
+            }
+            
+            return $this->render('song/songMusicPlayer.html.twig', [
+                'formAddComment' => $form->createView(),
+                'song' => $song,
+            ]);
+            
+        }
+    
         return $this->render('song/songMusicPlayer.html.twig', [
             'song' => $song,
         ]);
