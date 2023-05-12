@@ -54,7 +54,7 @@ likeIcon.addEventListener("click", () => {
 
 
 // TODO: finish functionality
-// form json 
+// ********************************************* comment form *****************************************************************//
 const formComment = document.querySelector('form');
 
 formComment.addEventListener("submit", function(e){

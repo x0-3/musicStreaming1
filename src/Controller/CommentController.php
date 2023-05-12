@@ -24,7 +24,7 @@ class CommentController extends AbstractController
             
         if ($user) {
             
-            $request = $requestStack->getMainRequest();
+            $request = $requestStack->getMainRequest(); // get the request from the request stack
 
             // just set up a fresh $task object (remove the example data)
             $comment = new Comment();
