@@ -13,11 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 class CommentController extends AbstractController
 {
     #[Route('/comment/{id}', name: 'app_comment')]
-    public function index(EntityManagerInterface $entityManager, Security $security, Song $song, RequestStack $requestStack): Response
+    public function index(EntityManagerInterface $entityManager, Security $security, Song $song, RequestStack $requestStack, Environment $environment): Response
     {
 
         $user = $security->getUser();
@@ -52,6 +53,7 @@ class CommentController extends AbstractController
                 return new JsonResponse([
                     'code'=> Comment::COMMENT_ADDED_SUCCESSFULLY,
                     'html'=> ''
+        
                 ]);
             }
             

@@ -53,9 +53,10 @@ likeIcon.addEventListener("click", () => {
 })
 
 
-// TODO: finish functionality
+
 // ********************************************* comment form *****************************************************************//
 const formComment = document.querySelector('form');
+const CommentList = document.querySelector('.comments');
 
 formComment.addEventListener("submit", function(e){
 
@@ -76,11 +77,14 @@ formComment.addEventListener("submit", function(e){
 
 })
 
+
+// TODO: finish functionality
 const handleResponse = function(response) {
 
   switch (response.code){
 
     case 'COMMENT_ADDED_SUCCESSFULLY':
+      CommentList.innerHTML += response.html;
       break;
     
   }
