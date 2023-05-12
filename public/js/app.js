@@ -1,3 +1,5 @@
+window.onload = function() {
+
 // ******************************************* Toggle light and dark mode ********************************************************************* //
 (function() {
   let onpageLoad = localStorage.getItem("theme") || "light";
@@ -56,22 +58,22 @@ likeIcon.addEventListener("click", () => {
 
 // ********************************************* comment form *****************************************************************//
 const formComment = document.querySelector('form');
-const CommentList = document.querySelector('.comments');
+const commentList = document.querySelector('.comments');
 
 formComment.addEventListener('submit', function(e){
 
   e.preventDefault(); // doesn't send form to server
 
   fetch(this.action, {
-
     body: new FormData(e.target), // get form data
     method: 'POST',
 
   })
-
   .then(response => response.json())
   .then(json => {
+
     handleResponse(json);
+    console.log(json);
 
   })
 
@@ -84,8 +86,8 @@ const handleResponse = function(response) {
   switch (response.code){
 
     case 'COMMENT_ADDED_SUCCESSFULLY':
-      CommentList.innerHTML += response.html;
-      break;
-    
+      commentList.innerHTML += response.html;
+      break; 
   }
+}
 }

@@ -42,22 +42,22 @@ class CommentController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 
                 $comment = $form->getData();
-
-                
+  
                 // ... perform some action, such as saving the task to the database
                 $entityManager->persist($comment);
-
+                
                 // actually executes the queries (i.e. the INSERT query)
                 $entityManager->flush();
 
+                // fixme: 
                 return new JsonResponse([
                     'code'=> Comment::COMMENT_ADDED_SUCCESSFULLY,
                     'html'=> $environment->render('comment/_comment.html.twig', [
-
+                        
                         'comment' => $comment,
                         'song' => $song,
-                    ])
-        
+                        ])
+                    
                 ]);
             }
             
@@ -68,7 +68,7 @@ class CommentController extends AbstractController
         } 
 
         return new JsonResponse([
-            'code'=> Comment::COMMENT_ERROR,
+            'code'=> Comment::COMMENT_ERROR
         ]);
         
     }
