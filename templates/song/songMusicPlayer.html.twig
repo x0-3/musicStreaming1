@@ -98,7 +98,6 @@
         </table>
 
 
-        {# TODO: make it dynamique #}
         {% if app.user %}
 
             <div id="sidebar">
@@ -115,14 +114,15 @@
 
         {% endif %}
 
-       
-
         {# TODO: make it dynamique #}
         <div class="comments">
 
             {% for comment in song.comments %}
 
-               <article>
+                {% include('comment/_comment.html.twig') %}
+
+            
+               {# <article>
                    <figure>
                         {% if comment.user.avatar != null %}
                             <img src="{{asset('uploads/' ~ comment.user.avatar)}}" alt="profile picture">
@@ -138,7 +138,7 @@
                     </figure>
                     
                     <p>{{comment.text}} </p>
-                </article>
+                </article> #}
             {% endfor %}
                 
         </div>

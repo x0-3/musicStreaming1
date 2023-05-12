@@ -58,7 +58,7 @@ likeIcon.addEventListener("click", () => {
 const formComment = document.querySelector('form');
 const CommentList = document.querySelector('.comments');
 
-formComment.addEventListener("submit", function(e){
+formComment.addEventListener('submit', function(e){
 
   e.preventDefault(); // doesn't send form to server
 
@@ -71,7 +71,7 @@ formComment.addEventListener("submit", function(e){
 
   .then(response => response.json())
   .then(json => {
-    console.log(json);
+    handleResponse(json);
 
   })
 

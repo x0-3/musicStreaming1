@@ -1,0 +1,17 @@
+<article>
+    <figure>
+         {% if comment.user.avatar != null %}
+             <img src="{{asset('uploads/' ~ comment.user.avatar)}}" alt="profile picture">
+             
+         {% else %}
+             <img src="{{asset('assets/img/profil_pic.png')}}" alt="profile picture">
+
+         {% endif %}
+        
+        <figcaption> 
+            <a href="{{path('app_artistDetail', {'id':comment.user.id })}}">{{comment.user.username}}</a>
+         </figcaption>
+     </figure>
+     
+     <p>{{comment.text}} </p>
+</article>
