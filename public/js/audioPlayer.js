@@ -118,106 +118,124 @@ function nextTrack(){
 audio.addEventListener('ended', nextTrack);
 
 // ************************************************ music time ************************************************//
-function setTime(output, input){
-
-  // calculate the minutes
-  const minutes = Math.floor(input / 60);
+audio.onloadedmetadata = function() {
   
-  // calculate the seconds
-  const seconds = Math.floor(input % 60);
-
-  // if seconds is under 10
-  if (seconds < 10) {
+  
+  function setTime(output, input){
+  
+    // calculate the minutes
+    const minutes = Math.floor(input / 60);
     
-    // show a zero 
-    output.innerHTML = minutes + ":0" + seconds;
-
-  }else{
-
-    // show the :
-    output.innerHTML = minutes + ":" + seconds;
+    // calculate the seconds
+    const seconds = Math.floor(input % 60);
+  
+    // if seconds is under 10
+    if (seconds < 10) {
+      
+      // show a zero 
+      output.innerHTML = minutes + ":0" + seconds;
+  
+    }else{
+  
+      // show the :
+      output.innerHTML = minutes + ":" + seconds;
+    }
   }
-}
-
-setTime(fulltime, audio.duration);
-
-
-// current time on slider 
-audio.addEventListener('timeupdate', () => {
   
-  // get the current audio time
-  const currentAudioTime = Math.floor(audio.currentTime);
+  setTime(fulltime, audio.duration);
 
-  // console.log(audio.currentTime);
+  // current time on slider 
+  audio.addEventListener('timeupdate', () => {
+    
+    // get the current audio time
+    const currentAudioTime = Math.floor(audio.currentTime);
 
-  // get the percentage
-  const timePercentage = (currentAudioTime / audio.duration) * 100 + "%";
+    // console.log(audio.currentTime);
 
-  // set the current time of the song
-  setTime(time, currentAudioTime);
+    // get the percentage
+    const timePercentage = (currentAudioTime / audio.duration) * 100 + "%";
 
-  // set the slider to the time
-  progress.style.width = timePercentage;
-  thumb.style.left = timePercentage;
+    // set the current time of the song
+    setTime(time, currentAudioTime);
 
-});
+    // set the slider to the time
+    progress.style.width = timePercentage;
+    thumb.style.left = timePercentage;
+
+  });
 
 
-// ************************************************ music slider ************************************************//
-function customSlider(){
+  // ************************************************ music slider ************************************************//
+  function customSlider(){
 
-  // calculate the % 
-  const val = (audio.currentTime / audio.duration) * 100;
+    // calculate the % 
+    const val = (audio.currentTime / audio.duration) * 100;
 
-  // set the progress of the song
-  progress.style.width = val + "%";
-  slider.style.left = val + "%";
-  
-  // show the current time of the song
-  setTime(time, slider.value);
-  
-  // set it to the slider 
-  audio.currentTime = slider.value;
+    // set the progress of the song
+    progress.style.width = val + "%";
+    slider.style.left = val + "%";
+    
+    // show the current time of the song
+    setTime(time, slider.value);
+    
+    // set it to the slider 
+    audio.currentTime = slider.value;
 
-  // update the display of the time
-  setTime(time, audio.currentTime);
-}
+    // update the display of the time
+    setTime(time, audio.currentTime);
+  }
 
-customSlider();
+  customSlider();
 
-// ************************************************ move the slider with music ************************************************//
 
-// set the initial value and max value of the range slider
-slider.value = 0; //do not uncomment
+  // ************************************************ move the slider with music ************************************************//
 
-slider.max = audio.duration;
+  // set the initial value and max value of the range slider
+  slider.value = 0; //do not uncomment
 
-// add an event listener to the audio element to update the range slider value as the song plays
-audio.addEventListener('timeupdate', () => {
-  slider.value = audio.currentTime;
-});
+  slider.max = audio.duration;
 
-// add an event listener to the range slider input element to seek to a specific time in the song
-slider.addEventListener('input', () => {
-  // audio.currentTime = rangeSlider.value;
-  audio.currentTime = slider.value;
-});
+  // add an event listener to the audio element to update the range slider value as the song plays
+  audio.addEventListener('timeupdate', () => {
+    slider.value = audio.currentTime;
+  });
 
-// update the progress bar as the song plays
-audio.addEventListener('timeupdate', () => {
+  // add an event listener to the range slider input element to seek to a specific time in the song
+  slider.addEventListener('input', () => {
+    // audio.currentTime = rangeSlider.value;
+    audio.currentTime = slider.value;
+  });
 
-  const progressPercent = (audio.currentTime / audio.duration) * 100;
-  setTime(time, audio.currentTime);
-  progress.style.width = `${progressPercent}%`;
-  thumb.style.left = `${progressPercent}%`;
-});
+  // update the progress bar as the song plays
+  audio.addEventListener('timeupdate', () => {
+
+    const progressPercent = (audio.currentTime / audio.duration) * 100;
+    setTime(time, audio.currentTime);
+    progress.style.width = `${progressPercent}%`;
+    thumb.style.left = `${progressPercent}%`;
+  });
+
+};
+
+
+
+
+
+
+
+
+
 
 
 
 // ************************************************ volume control ************************************************//
 let volume = document.getElementById('volume-slider');
+
+audio.volume = 0.3; // set the initial volume to 50%
+
 volume.addEventListener("change", function(e) {
   audio.volume = e.currentTarget.value / 100;
+
 
   // if the volume is high
   if (audio.volume > 0.5) {
