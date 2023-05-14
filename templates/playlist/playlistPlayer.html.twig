@@ -35,11 +35,11 @@
             </div>
         </div>
 
-        {% for song in songs %}
-            <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip>
+        {# {% for song in songs %} #}
+            <audio id="audio" src="{{asset('uploads/' ~ songs[0].link)}}" autoplay skip preload="metadata">
             </audio>
             
-        {% endfor %}
+        {# {% endfor %} #}
 
         <div class="timeline">
             <small class="time">0:00</small>
@@ -53,7 +53,7 @@
                 <div class="progress"></div>
             </div>
 
-            <small class="fulltime">2:55</small>
+            <small class="fulltime">0:00</small>
 
         </div>
 
@@ -85,7 +85,7 @@
                                 <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
                             </figure>
                         </td>
-                        <td>{{song.nameSong}}</td>
+                        <td><a href="{{path('playlist_player', {'id': playlist.id, 'song': song.id})}}">{{song.nameSong}}</a></td>
                         <td> <a href="{{path('app_artistDetail', {'id': song.user.id})}}"> {{song.user.username}} </a></td>
                         <td><button><i class="fa-regular fa-heart"></i></button></td>
                         <td>0:00</td>
@@ -109,6 +109,8 @@
             {% for song in songs %}
                 
                 {% for comment in song.comments | reverse %}
+
+                    {# {{ dump(comment) }} #}
 
                     {% include('comment/_comment.html.twig') %}
 

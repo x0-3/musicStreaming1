@@ -763,6 +763,10 @@
 
                     .range-slider {
                         width: 100%;
+
+                        .progress{
+                            display: none;
+                        }
                     }
 
 

@@ -567,6 +567,9 @@
 * body section.musicPlayer .player .timeline .range-slider {
   width: 100%;
 }
+* body section.musicPlayer .player .timeline .range-slider .progress {
+  display: none;
+}
 * body section.musicPlayer .player .controls {
   width: 24%;
   display: flex;

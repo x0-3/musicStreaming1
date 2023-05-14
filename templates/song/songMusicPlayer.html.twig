@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip></audio>
+        <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip preload="metadata"></audio>
 
         <div class="timeline">
             <small class="time">0:00</small>
@@ -52,7 +52,7 @@
                 <div class="progress"></div>
             </div>
 
-            <small class="fulltime">2:55</small>
+            <small class="fulltime">0:00</small>
 
         </div>
 
@@ -89,7 +89,7 @@
                     <td><a href="{{path('app_songPlayer',{'id': song.id} )}}">{{song.nameSong}}</a></td>
                     <td> <a href="{{path('app_artistDetail', {'id':song.user.id })}}"> {{song.user.username}}</a></td>
                     <td><button><i class="fa-regular fa-heart"></i></button></td>
-                    <td><small class="fulltime">3:09</small> </td>
+                    <td><small class="fulltime">0:00</small></td>
                     <td><button><i class="fa-solid fa-plus"></i></button></td>
                 
                 </tr>
