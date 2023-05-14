@@ -28,6 +28,22 @@ class CommentController extends AbstractController
         
     }
 
+    // delete comment
+    #[Route('/comment/{id}/delete', name: 'delete_comment')]
+    public function delete(EntityManagerInterface $em, Comment $comment, Security $security)
+    {
+        $user =  $security->getUser(); // get the user in session        
+
+        $commentOwner = $comment->getUser(); // owner of the playlist
+
+        // if the user is equal to the playlist owner then delete
+        if ($commentOwner === $user){ 
+            $em->remove($comment);
+            $em->flush();
+        }
+        return $this->redirectToRoute('app_songPlayer' , ['id' => $comment->getSong()->getId()]);
+        
+    }
 
 
 }

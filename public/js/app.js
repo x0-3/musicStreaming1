@@ -4,7 +4,7 @@
   let element = document.body;
   element.classList.add(onpageLoad);
   document.getElementById("theme").textContent =
-    localStorage.getItem("theme") || "";
+    localStorage.getItem("theme") || "light";
 })()
 
 function myFunction() {
@@ -13,7 +13,7 @@ function myFunction() {
 
   let theme = localStorage.getItem("theme");
   if (theme && theme === "dark") {
-    localStorage.setItem("theme", "");
+    localStorage.setItem("theme", "light");
   } else {
     localStorage.setItem("theme", "dark");
   }
