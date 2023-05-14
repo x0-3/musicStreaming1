@@ -50,13 +50,40 @@ class PlaylistController extends AbstractController
 
 
     // music player page for one playlist
-    #[Route('/playlist/musicPlayer/{id}', name: 'playlist_player')]
-    public function playlistPlayer(Playlist $playlist): Response
+    #[Route('/musicPlayer/{id}/song/{song}', name: 'playlist_player')]
+    public function playlistPlayer(Playlist $playlist, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {
 
         $songs = $playlist->getSongs(); // get the list of songs from the playlist
 
+        // for the comment section 
+        $user = $security->getUser();
+
+        // just set up a fresh $task object (remove the example data)
+        $comment = new Comment();
+        
+        $form = $this->createForm(CommentType::class, $comment);
+
+        if ($user) {
+            $request = $requestStack->getMainRequest(); // get the request from the request stack
+
+            $comment->setUser($user); // set the user to connect user
+            $comment->setDateMess(new \DateTime()); // set the date message to the current date
+            $comment->setSong($song); // set the song id to the current song
+
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted()) {
+                
+                return $commentService->handleCommentFormData($form);
+
+            }
+                        
+        }
+
         return $this->render('playlist/playlistPlayer.html.twig', [
+            'formAddComment' => $form->createView(),
             'playlist' => $playlist,
             'songs' => $songs,
         ]);
@@ -191,8 +218,11 @@ class PlaylistController extends AbstractController
     public function detailPlaylist(Playlist $playlist): Response
     {
 
+        $songs = $playlist->getSongs();
+
         return $this->render('playlist/playlistDetail.html.twig', [
             'playlist' => $playlist,
+            'songs' => $songs,
         ]);
     }
 
