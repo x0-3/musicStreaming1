@@ -185,7 +185,7 @@ class SongController extends AbstractController
     // song player for one song
     // with comment form
     #[Route('/song/{id}', name: 'app_songPlayer')]
-    public function songPlayer(Song $song, Security $security, RequestStack $requestStack, CommentService $commentService, EntityManagerInterface $em): Response
+    public function songPlayer(Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {
 
         // for the comment section 

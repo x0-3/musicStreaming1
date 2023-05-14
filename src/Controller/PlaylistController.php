@@ -2,13 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Playlist;
+use App\Entity\Song;
+use App\Form\CommentType;
 use App\Form\PlaylistType;
+use App\Service\CommentService;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -185,6 +190,7 @@ class PlaylistController extends AbstractController
     #[Route('/playlist/{id}', name: 'playlist_detail')]
     public function detailPlaylist(Playlist $playlist): Response
     {
+
         return $this->render('playlist/playlistDetail.html.twig', [
             'playlist' => $playlist,
         ]);

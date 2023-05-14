@@ -86,7 +86,7 @@
                             </figure>
                         </td>
                         <td>{{song.nameSong}}</td>
-                        <td> <a href="{{path('app_artistDetail', {'id': playlist.user.id})}}"> {{playlist.user.username}} </a></td>
+                        <td> <a href="{{path('app_artistDetail', {'id': song.user.id})}}"> {{song.user.username}} </a></td>
                         <td><button><i class="fa-regular fa-heart"></i></button></td>
                         <td>0:00</td>
                         <td><button><i class="fa-solid fa-plus"></i></button></td>
@@ -98,39 +98,25 @@
             </tbody>
         </table>
 
-        <form action="" method="post">
-            <input type="text" placeholder="leave a comment">
+        
+        {# TODO: find a way to implement comment form for a song #}
 
-            <button type="submit">Comment</button>
-        </form>
+        {# <div id="sidebar">
+            {% include('comment/_add.html.twig') %}
+        </div> #}
 
+
+        
         <div class="comments">
 
             {% for song in songs %}
                 
-                {% for comment in song.comments %}
-                    
-                    <article>
-                        <figure>
+                {% for comment in song.comments | reverse %}
 
-                            {% if comment.user.avatar == null %}
-                                <img src="{{asset('assets/img/profil_pic.png')}}" alt="profile picture">
-    
-                            {% else %}
+                    {% include('comment/_comment.html.twig') %}
 
-                                <img src="{{asset('uploads/' ~ comment.user.avatar)}}" alt="profile picture">
-
-                            {% endif %}
-
-                            <figcaption> 
-                                <a href="{{path('app_artistDetail', {'id': comment.user.id})}}">{{comment.user.username}}</a>
-                            </figcaption>
-                        </figure>
-
-                        <p>{{comment.text}}</p>
-                    </article>
- 
                 {% endfor %}
+
             {% endfor %}
 
             
