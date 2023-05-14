@@ -191,18 +191,19 @@ class SongController extends AbstractController
         // for the comment section 
         $user = $security->getUser();
 
+        // just set up a fresh $task object (remove the example data)
+        $comment = new Comment();
+        
+        $form = $this->createForm(CommentType::class, $comment);
+
         if ($user) {
             $request = $requestStack->getMainRequest(); // get the request from the request stack
-
-            // just set up a fresh $task object (remove the example data)
-            $comment = new Comment();
 
             $comment->setUser($user); // set the user to connect user
             $comment->setDateMess(new \DateTime()); // set the date message to the current date
             $comment->setSong($song); // set the song id to the current song
-            
-            $form = $this->createForm(CommentType::class, $comment);
-            
+
+
             $form->handleRequest($request);
 
             if ($form->isSubmitted()) {
@@ -210,18 +211,13 @@ class SongController extends AbstractController
                 return $commentService->handleCommentFormData($form);
 
             }
-            
-            
-            return $this->render('song/songMusicPlayer.html.twig', [
-                'formAddComment' => $form->createView(),
-                'song' => $song,
-            ]);
-            
+                        
         }
     
 
         // remder the page for the media player section
         return $this->render('song/songMusicPlayer.html.twig', [
+            'formAddComment' => $form->createView(),
             'song' => $song,
         ]);
 

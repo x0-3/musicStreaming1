@@ -11,15 +11,20 @@
         <figcaption> 
             <a href="{{path('app_artistDetail', {'id':comment.user.id })}}">{{comment.user.username}}</a>
 
-            <div class="dropdown">
-                <button class="fa-solid fa-ellipsis-vertical"></button>
-                
-                {% if app.user.id is same as(comment.user.id) %}
-                    <div id="list-items">
-                        <a href="{{path('delete_comment', {'id': comment.id})}}">delete</a>
+            {# if the user is connected then show the comment param section #}
+            {% if app.user %}
+                <div class="dropdown">
+                    <button class="fa-solid fa-ellipsis-vertical"></button>
                     
+                    {# if the user is the owner of the comment then show the delete #}
+                    {% if app.user.id is same as(comment.user.id) %}
+                        <div id="list-items">
+                            <a href="{{path('delete_comment', {'id': comment.id})}}">delete</a>
+                        
+                        </div>
                     </div>
-                </div>
+                    
+                {% endif %}
                 
             {% endif %}
                 

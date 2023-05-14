@@ -98,20 +98,9 @@
         </table>
 
 
-        {% if app.user %}
-
-            <div id="sidebar">
-                {% include('comment/_add.html.twig') %}
-            </div>
-
-        {% else %}
-        
-            <form action="" method="post">
-                <input type="text" placeholder="leave a comment">
-                <button type="submit">Comment</button>
-            </form>
-
-        {% endif %}
+        <div id="sidebar">
+            {% include('comment/_add.html.twig') %}
+        </div>
 
         <div class="comments">
 
