@@ -12,7 +12,8 @@
         <h3>{{album.nameAlbum}}</h3>
 
         <div class="playerBtns">
-            <a href="{{path('app_albumPlayer', {'id': album.id})}}">
+
+            <a href="{{path('app_albumPlayer', {'id': album.id, 'song': songs[0].id})}}">
                 <i class="fa-regular fa-circle-play"></i>
             </a>
 
@@ -22,14 +23,18 @@
         </div>
     </div>
 
-    {# if the user in session is equal to the creator of the album then #}
-    {% if app.user.id is same as(album.user.id) %}
-    
-        <div class="title">
-            <a href="{{path('add_song', {'id': album.id})}}">Upload song</a>
-        </div>
+    {% if app.user %}
         
+        {# if the user in session is equal to the creator of the album then #}
+        {% if app.user.id is same as(album.user.id) %}
+        
+            <div class="title">
+                <a href="{{path('add_song', {'id': album.id})}}">Upload song</a>
+            </div>
+            
+        {% endif %}
     {% endif %}
+
 
     <table>
 
@@ -66,13 +71,17 @@
                             
                             <div id="list-items">
                                 
-                                {# if the user is the owner of the song #}
-                                {% if app.user.id is same as(song.user.id) %}
+                                {% if app.user %}
+                                    
+                                    {# if the user is the owner of the song #}
+                                    {% if app.user.id is same as(song.user.id) %}
 
-                                    <a href="{{path('edit_song', {'id': song.id})}}">edit</a>
-                                    <a href="{{path('delete_song', {'id': song.id})}}">delete</a>
+                                        <a href="{{path('edit_song', {'id': song.id})}}">edit</a>
+                                        <a href="{{path('delete_song', {'id': song.id})}}">delete</a>
 
+                                    {% endif %}
                                 {% endif %}
+
                             </div>
                         </div>
 

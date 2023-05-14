@@ -99,12 +99,10 @@
         </table>
 
 
-        {# TODO: find a way to implement comment form for a song #}
-        <form action="" method="post">
-            <input type="text" placeholder="leave a comment">
+        <div id="sidebar">
+            {% include('comment/_add.html.twig') %}
+        </div>
 
-            <button type="submit">Comment</button>
-        </form>
 
         <div class="comments">
             

@@ -50,6 +50,7 @@ class PlaylistController extends AbstractController
 
 
     // music player page for one playlist
+    // with the comment form
     #[Route('/musicPlayer/{id}/song/{song}', name: 'playlist_player')]
     public function playlistPlayer(Playlist $playlist, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {

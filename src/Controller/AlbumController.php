@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Album;
+use App\Entity\Comment;
 use App\Entity\Genre;
+use App\Entity\Song;
 use App\Form\AlbumType;
+use App\Form\CommentType;
+use App\Service\CommentService;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class AlbumController extends AbstractController
 {
@@ -178,8 +183,12 @@ class AlbumController extends AbstractController
     #[Route('/album/{id}', name: 'app_albumDetail')]
     public function albumDetail(Album $album): Response
     {        
+
+        $songs = $album->getSongs();
+
         return $this->render('album/albumDetail.html.twig', [
             'album'=> $album,
+            'songs'=> $songs,
         ]);
     }
 
@@ -202,13 +211,42 @@ class AlbumController extends AbstractController
 
 
     // music player page for an album
-    #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
-    public function albumMusicPlayer(Album $album, RouterInterface $router): Response
+    // with the comment form
+    #[Route('/album/Player/{id}/song/{song}', name: 'app_albumPlayer')]
+    public function albumMusicPlayer(Album $album, RouterInterface $router, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {
         $songs = $album->getSongs(); // get the song list from the album
         $skipForwardUrl = $router->generate('app_skipforward', ['id' => $album->getId()]);
 
+
+        // for the comment section 
+        $user = $security->getUser();
+
+        // just set up a fresh $task object (remove the example data)
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+
+        if ($user) {
+            $request = $requestStack->getMainRequest(); // get the request from the request stack
+
+            $comment->setUser($user); // set the user to connect user
+            $comment->setDateMess(new \DateTime()); // set the date message to the current date
+            $comment->setSong($song); // set the song id to the current song
+
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted()) {
+                
+                return $commentService->handleCommentFormData($form);
+
+            }
+                        
+        }
+
         return $this->render('album/albumPlayer.html.twig', [
+            'formAddComment' => $form->createView(),
             'album' => $album,
             'songs' => $songs,
             'skipForwardUrl' => $skipForwardUrl,
