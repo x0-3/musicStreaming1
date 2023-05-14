@@ -55,19 +55,24 @@ likeIcon.addEventListener("click", () => {
 
 
 // ********************************************* comment form *****************************************************************//
-const formComment = document.querySelector('form');
+const formComment = document.querySelector('form'); 
 const commentList = document.querySelector('.comments');
 
+// listen for comment form submission
 formComment.addEventListener('submit', function(e){
 
   e.preventDefault(); // doesn't send form to server
 
+  // fetch the comment from server
   fetch(this.action, {
     body: new FormData(e.target), // get form data
-    method: 'POST',
+    method: 'POST', // get method 
 
   })
+  // the response is returned as a JSON object
   .then(response => response.json())
+  
+  // then the json is redirected to the the handleResponse function
   .then(json => {
 
     handleResponse(json);
@@ -80,9 +85,13 @@ const handleResponse = function(response) {
 
   switch (response.code){
 
+    // if the comment is successful then place the comment in the comment list
     case 'COMMENT_ADDED_SUCCESSFULLY':
-      commentList.innerHTML += response.html;
-      break; 
+
+      // insertAdjacentHTML allows you to insert the new comment to a specific position
+      // afterbegin insert the new comment at the top of the comment list 
+      commentList.insertAdjacentHTML('afterbegin', response.html); 
+    break; 
   }
 }
 

@@ -115,7 +115,7 @@
 
         <div class="comments">
 
-            {% for comment in song.comments %}
+            {% for comment in song.comments | reverse %}
 
                 {% include('comment/_comment.html.twig') %}
 

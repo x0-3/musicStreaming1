@@ -8,6 +8,7 @@ use App\Entity\Playlist;
 use App\Entity\Song;
 use App\Form\CommentType;
 use App\Form\SongType;
+use App\Service\CommentService;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -183,9 +184,10 @@ class SongController extends AbstractController
     
     // song player for one song
     #[Route('/song/{id}', name: 'app_songPlayer')]
-    public function songPlayer(Song $song, Security $security, EntityManagerInterface $entityManager, RequestStack $requestStack, Environment $environment): Response
+    public function songPlayer(Song $song, Security $security, RequestStack $requestStack, CommentService $commentService, EntityManagerInterface $em): Response
     {
 
+        // for the comment section 
         $user = $security->getUser();
 
         if ($user) {
@@ -198,29 +200,16 @@ class SongController extends AbstractController
             $comment->setDateMess(new \DateTime()); // set the date message to the current date
             $comment->setSong($song); // set the song id to the current song
             
-            
             $form = $this->createForm(CommentType::class, $comment);
             
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted()) {
                 
-                $comment = $form->getData();
-  
-                // ... perform some action, such as saving the task to the database
-                $entityManager->persist($comment);
-                
-                // actually executes the queries (i.e. the INSERT query)
-                $entityManager->flush();
-
-                return new JsonResponse([
-                    'code' => Comment::COMMENT_ADDED_SUCCESSFULLY,
-                    'html' => $environment->render('comment/_comment.html.twig', [
-                        'comment' => $comment,
-                    ])
-                ]);
+                return $commentService->handleCommentFormData($form);
 
             }
+            
             
             return $this->render('song/songMusicPlayer.html.twig', [
                 'formAddComment' => $form->createView(),
@@ -229,6 +218,8 @@ class SongController extends AbstractController
             
         }
     
+
+        // remder the page for the media player section
         return $this->render('song/songMusicPlayer.html.twig', [
             'song' => $song,
         ]);
