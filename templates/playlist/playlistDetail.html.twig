@@ -39,17 +39,21 @@
             
         </div>
 
-        <div class="playerBtns">
+        {% if songs|length > 0 %}
+        
+            <div class="playerBtns">
 
-            <a href="{{path('playlist_player', {'id': playlist.id, 'song':songs[0].id })}}">
-                <i class="fa-regular fa-circle-play"></i>
-            </a>
+                <a href="{{path('playlist_player', {'id': playlist.id, 'song':songs[0].id })}}">
+                    <i class="fa-regular fa-circle-play"></i>
+                </a>
 
-            <a href="">
-                <i class="fa-solid fa-shuffle"></i>
-            </a>
-                
-        </div>
+                <a href="">
+                    <i class="fa-solid fa-shuffle"></i>
+                </a>
+                    
+            </div>
+            
+        {% endif %}
     </div>
 
     <table>

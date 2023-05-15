@@ -30,10 +30,10 @@ class CommentController extends AbstractController
     }
 
 
-    // TODO: make it dynamique
+    // FIXME: redirection issue
     // delete comment
     #[Route('/comment/delete/{id}', name: 'delete_comment')]
-    public function delete(EntityManagerInterface $em, Comment $comment, Security $security, Environment $environment)
+    public function delete(EntityManagerInterface $em, Comment $comment, Security $security, Environment $environment, Request $request): JsonResponse
     {
 
         $user =  $security->getUser(); // get the user in session        
@@ -46,9 +46,14 @@ class CommentController extends AbstractController
             $em->remove($comment);
             $em->flush();
 
-        }
+            
+            return new JsonResponse([
+                'code' => 'COMMENT_DELETED_SUCCESSFULLY',
+            ]);
 
-        return $this->redirectToRoute('app_songPlayer' , ['id' => $comment->getSong()->getId()]);
+        }
+      
+        return $this->redirectToRoute('app_home');
 
     }
 

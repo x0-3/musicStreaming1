@@ -92,8 +92,18 @@ const handleResponse = function(response) {
       // afterbegin insert the new comment at the top of the comment list 
       commentList.insertAdjacentHTML('afterbegin', response.html); 
     break; 
+    
+    // if the comment has been successfully deleted then remove the comment from the comment list
+    case 'COMMENT_DELETED_SUCCESSFULLY':
 
+      // Get the comment element by its ID or any other unique identifier
+      var commentId = response.commentId;
+      var commentElement = document.getElementById(commentId);
+      if (commentElement) {
+        commentElement.remove();
+      }
+    
+    break; 
   }
 }
 
-// ********************************************* delete comment form *****************************************************************//
