@@ -22,7 +22,7 @@
                     {% if app.user.id is same as(comment.user.id) %}
 
                         <div id="list-items">
-                            <a href="{{path('delete_comment', {'id': comment.id})}}">delete</a>
+                            <a href="{{path('delete_comment', {'id': comment.id})}}" id="commentId">delete</a>
                         </div>
                         
                     {% endif %}
