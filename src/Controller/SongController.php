@@ -215,7 +215,7 @@ class SongController extends AbstractController
         }
     
 
-        // remder the page for the media player section
+        // render the page for the media player section
         return $this->render('song/songMusicPlayer.html.twig', [
             'formAddComment' => $form->createView(),
             'song' => $song,

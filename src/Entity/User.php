@@ -41,28 +41,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Song::class, orphanRemoval: true)]
     private Collection $songs;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Playlist::class, orphanRemoval: true)]
     private Collection $playlists;
 
-    #[ORM\ManyToMany(targetEntity: Song::class, inversedBy: 'likes')]
+    #[ORM\ManyToMany(targetEntity: Song::class, inversedBy: 'likes', orphanRemoval: true)]
     private Collection $likes;
 
-    #[ORM\ManyToMany(targetEntity: Playlist::class, mappedBy: 'userFavorites')]
+    #[ORM\ManyToMany(targetEntity: Playlist::class, mappedBy: 'userFavorites', orphanRemoval: true)]
     private Collection $favoritePlaylists;
 
-    #[ORM\OneToMany(mappedBy: 'subscribers', targetEntity: Subscribe::class)]
+    #[ORM\OneToMany(mappedBy: 'subscribers', targetEntity: Subscribe::class, orphanRemoval: true)]
     private Collection $subscribes;
 
-    #[ORM\OneToMany(mappedBy: 'userSubscribes', targetEntity: Subscribe::class)]
+    #[ORM\OneToMany(mappedBy: 'userSubscribes', targetEntity: Subscribe::class, orphanRemoval: true)]
     private Collection $subscriptions;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Album::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Album::class, orphanRemoval: true)]
     private Collection $albums;
 
 

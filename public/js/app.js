@@ -54,7 +54,7 @@ likeIcon.addEventListener("click", () => {
 
 
 
-// ********************************************* comment form *****************************************************************//
+// ********************************************* add comment form *****************************************************************//
 const formComment = document.querySelector('form'); 
 const commentList = document.querySelector('.comments');
 
@@ -92,6 +92,8 @@ const handleResponse = function(response) {
       // afterbegin insert the new comment at the top of the comment list 
       commentList.insertAdjacentHTML('afterbegin', response.html); 
     break; 
+
   }
 }
 
+// ********************************************* delete comment form *****************************************************************//

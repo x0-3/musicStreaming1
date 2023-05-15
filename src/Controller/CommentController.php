@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Song;
 use App\Form\CommentType;
+use App\Service\CommentService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -28,22 +29,27 @@ class CommentController extends AbstractController
         
     }
 
+
+    // TODO: make it dynamique
     // delete comment
-    #[Route('/comment/{id}/delete', name: 'delete_comment')]
-    public function delete(EntityManagerInterface $em, Comment $comment, Security $security)
+    #[Route('/comment/delete/{id}', name: 'delete_comment')]
+    public function delete(EntityManagerInterface $em, Comment $comment, Security $security, Environment $environment)
     {
+
         $user =  $security->getUser(); // get the user in session        
 
         $commentOwner = $comment->getUser(); // owner of the playlist
 
         // if the user is equal to the playlist owner then delete
         if ($commentOwner === $user){ 
+            
             $em->remove($comment);
             $em->flush();
-        }
-        return $this->redirectToRoute('app_songPlayer' , ['id' => $comment->getSong()->getId()]);
-        
-    }
 
+        }
+
+        return $this->redirectToRoute('app_songPlayer' , ['id' => $comment->getSong()->getId()]);
+
+    }
 
 }

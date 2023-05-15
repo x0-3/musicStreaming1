@@ -50,20 +50,6 @@ class AlbumController extends AbstractController
     }
 
 
-    // // music player page for an album
-    // #[Route('/album/Player/{id}', name: 'app_albumPlayer')]
-    // public function albumMusicPlayer(Album $album): Response
-    // {
-
-    //     $songs = $album->getSongs(); // get the song list from the album
-
-    //     return $this->render('album/albumPlayer.html.twig', [
-    //         'album'=> $album,
-    //         'songs'=> $songs,
-    //     ]);
-    // }
-
-
     // add a new Album
     #[Route('/album/add', name: 'add_album')]
     public function add(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, Security $security): Response
