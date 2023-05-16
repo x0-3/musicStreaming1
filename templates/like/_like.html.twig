@@ -1,0 +1,9 @@
+{% if app.user %}
+    <a href="{{path('like_song', {'id': song.id})}}">
+{% endif %}
+
+<button><i class="fa-regular fa-heart"></i></button>
+
+{% if app.user %}
+    </a>
+{% endif %}

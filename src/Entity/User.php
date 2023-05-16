@@ -47,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Playlist::class, orphanRemoval: true)]
     private Collection $playlists;
 
-    #[ORM\ManyToMany(targetEntity: Song::class, inversedBy: 'likes', orphanRemoval: true)]
+    #[ORM\ManyToMany(targetEntity: Song::class, inversedBy: 'likes')]
     private Collection $likes;
 
     #[ORM\ManyToMany(targetEntity: Playlist::class, mappedBy: 'userFavorites', orphanRemoval: true)]

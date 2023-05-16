@@ -19,7 +19,7 @@
         
         <div class="controls">
             
-            <button class="like"><i class="fa-regular fa-heart"></i></button>
+            {% include "like/_like.html.twig" %}
 
             <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
@@ -88,7 +88,9 @@
                     </td>
                     <td><a href="{{path('app_songPlayer',{'id': song.id} )}}">{{song.nameSong}}</a></td>
                     <td> <a href="{{path('app_artistDetail', {'id':song.user.id })}}"> {{song.user.username}}</a></td>
-                    <td><button><i class="fa-regular fa-heart"></i></button></td>
+                    <td>
+                        {% include "like/_like.html.twig" %}
+                    </td>
                     <td><small class="fulltime">0:00</small></td>
                     <td><button><i class="fa-solid fa-plus"></i></button></td>
                 

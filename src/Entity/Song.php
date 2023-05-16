@@ -172,6 +172,13 @@ class Song
         return $this;
     }
 
+    public function isLikeByUser(User $user): bool
+    {
+
+        return $this->likes->contains($user);
+
+    }
+
     /**
      * @return Collection<int, Playlist>
      */
@@ -199,8 +206,4 @@ class Song
         return $this;
     }
 
-    // public function __toString()
-    // {
-    //     return $this->getUser()->getUsername();
-    // }
 }
