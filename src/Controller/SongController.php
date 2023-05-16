@@ -181,7 +181,6 @@ class SongController extends AbstractController
         }
     }
     
-    
     // song player for one song
     // with comment form
     #[Route('/song/{id}', name: 'app_songPlayer')]

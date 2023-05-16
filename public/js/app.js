@@ -34,23 +34,23 @@ function closeNav() {
 }
 
 // ********************************************* Like icons *****************************************************************//
-const likeIcon = document.querySelector(".like");
+// const likeIcon = document.querySelector(".like");
 
-let heartfull = false
+// let heartfull = false
 
-likeIcon.addEventListener("click", () => {
+// likeIcon.addEventListener("click", () => {
 
-  if (heartfull === false) {
-    likeIcon.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+//   if (heartfull === false) {
+//     likeIcon.innerHTML = `<i class="fa-solid fa-heart"></i>`;
 
-    heartfull = true;
+//     heartfull = true;
     
-  }else{
-    likeIcon.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+//   }else{
+//     likeIcon.innerHTML = `<i class="fa-regular fa-heart"></i>`;
 
-    heartfull = false;
-  }
-})
+//     heartfull = false;
+//   }
+// })
 
 
 
