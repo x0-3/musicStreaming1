@@ -1,3 +1,5 @@
+import Like from "./like.js";
+
 // ******************************************* Toggle light and dark mode ********************************************************************* //
 (function() {
   let onpageLoad = localStorage.getItem("theme") || "light";
@@ -32,26 +34,6 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidepanel").style.width = "0";
 }
-
-// ********************************************* Like icons *****************************************************************//
-// const likeIcon = document.querySelector(".like");
-
-// let heartfull = false
-
-// likeIcon.addEventListener("click", () => {
-
-//   if (heartfull === false) {
-//     likeIcon.innerHTML = `<i class="fa-solid fa-heart"></i>`;
-
-//     heartfull = true;
-    
-//   }else{
-//     likeIcon.innerHTML = `<i class="fa-regular fa-heart"></i>`;
-
-//     heartfull = false;
-//   }
-// })
-
 
 
 // ********************************************* add comment form *****************************************************************//
@@ -106,4 +88,18 @@ const handleResponse = function(response) {
     break; 
   }
 }
+
+
+// ********************************************* Like functionnality *****************************************************************//
+document.addEventListener('DOMContentLoaded', () => {
+
+  const likeElements = []. slice.call(document.querySelectorAll('a[data-action="like"]'));
+
+  if (likeElements) {
+
+    new Like(likeElements);
+  }
+    
+});
+
 

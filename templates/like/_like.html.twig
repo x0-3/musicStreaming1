@@ -1,8 +1,11 @@
 {% if app.user %}
-    <a href="{{path('like_song', {'id': song.id})}}">
+    <a href="{{path('like_song', {'id': song.id})}}" data-action="like">
 {% endif %}
 
-<button><i class="fa-regular fa-heart"></i></button>
+<button>
+    <i class="fa-regular fa-heart unfilled {{ app.user in song.likes ? 'd-none' : '' }}"></i>
+    <i class="fa-solid fa-heart filled {{ app.user in song.likes ? '' : 'd-none' }}"></i>
+</button>
 
 {% if app.user %}
     </a>
