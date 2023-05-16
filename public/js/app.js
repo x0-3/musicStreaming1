@@ -55,7 +55,7 @@ function closeNav() {
 
 
 // ********************************************* add comment form *****************************************************************//
-const formComment = document.querySelector('form'); 
+const formComment = document.querySelector('#commentForm'); 
 const commentList = document.querySelector('.comments');
 
 // listen for comment form submission
