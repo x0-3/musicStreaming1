@@ -8,16 +8,16 @@
     <div class="player">
 
         <figure class="cover">
-            <img src="{{asset('uploads/' ~ songs[0].album.cover)}}" alt="music cover">
+            <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="music cover">
         </figure>
 
-        <h3 class="trackTitle">{{songs[0].nameSong}}</h3>
-        <h4 class="ArtistName">{{songs[0].user.username}}</h4>
+        <h3 class="trackTitle">{{song.nameSong}}</h3>
+        <h4 class="ArtistName">{{song.user.username}}</h4>
 
         
         <div class="controls">
             
-            <button class="like"><i class="fa-regular fa-heart"></i></button>
+            {% include "like/_like.html.twig" %}
 
             <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
@@ -36,7 +36,7 @@
         </div>
 
         {# {% for song in songs %} #}
-            <audio id="audio" src="{{asset('uploads/' ~ songs[0].link)}}" autoplay skip preload="metadata">
+            <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip preload="metadata">
             </audio>
             
         {# {% endfor %} #}
@@ -68,7 +68,6 @@
                     <th></th>
                     <th>title</th>
                     <th>artist</th>
-                    <th></th>
                     <th>time</th>
                     <th></th>
                 </tr>
@@ -87,7 +86,6 @@
                         </td>
                         <td><a href="{{path('playlist_player', {'id': playlist.id, 'song': song.id})}}">{{song.nameSong}}</a></td>
                         <td> <a href="{{path('app_artistDetail', {'id': song.user.id})}}"> {{song.user.username}} </a></td>
-                        <td><button><i class="fa-regular fa-heart"></i></button></td>
                         <td>0:00</td>
                         <td><button><i class="fa-solid fa-plus"></i></button></td>
                     
@@ -106,17 +104,15 @@
         
         <div class="comments">
 
-            {% for song in songs %}
+            {# {% for song in songs %} #}
                 
                 {% for comment in song.comments | reverse %}
-
-                    {# {{ dump(comment) }} #}
 
                     {% include('comment/_comment.html.twig') %}
 
                 {% endfor %}
 
-            {% endfor %}
+            {# {% endfor %} #}
 
             
         </div>

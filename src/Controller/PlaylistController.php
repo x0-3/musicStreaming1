@@ -87,6 +87,7 @@ class PlaylistController extends AbstractController
             'formAddComment' => $form->createView(),
             'playlist' => $playlist,
             'songs' => $songs,
+            'song' => $song,
         ]);
     }
 

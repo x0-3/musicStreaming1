@@ -1,5 +1,25 @@
 import Like from "./like.js";
 
+// ********************************************* Like functionnality *****************************************************************//
+// execute function when the DOM has finished loading
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Like
+
+  // get the array of likes 
+  // []. slice.call to get the functionnality of an array
+  const likeElements = []. slice.call(document.querySelectorAll('a[data-action="like"]'));
+
+  // check if it was successful fetched
+  if (likeElements) {
+
+    // then make a new like element imported from the javascript script
+    new Like(likeElements);
+  }
+    
+});
+
+
 // ******************************************* Toggle light and dark mode ********************************************************************* //
 (function() {
   let onpageLoad = localStorage.getItem("theme") || "light";
@@ -92,23 +112,3 @@ const handleResponse = function(response) {
     break; 
   }
 }
-
-
-// ********************************************* Like functionnality *****************************************************************//
-// execute function when the DOM has finished loading
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Like
-
-  // get the array of likes 
-  // []. slice.call to get the functionnality of an array
-  const likeElements = []. slice.call(document.querySelectorAll('a[data-action="like"]'));
-
-  // check if it was successful fetched
-  if (likeElements) {
-
-    // then make a new like element imported from the javascript script
-    new Like(likeElements);
-  }
-    
-});

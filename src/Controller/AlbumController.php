@@ -235,6 +235,7 @@ class AlbumController extends AbstractController
             'formAddComment' => $form->createView(),
             'album' => $album,
             'songs' => $songs,
+            'song' => $song,
             'skipForwardUrl' => $skipForwardUrl,
         ]);
     }

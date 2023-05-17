@@ -62,8 +62,12 @@
                     </td>
                     <td><a href="{{path('app_songPlayer', {'id': song.id})}}"> {{song.nameSong}} </a></td>
                     <td> <a href="{{path('app_artistDetail', {'id': song.user.id})}}"> {{song.user.username}} </a></td>
-                    <td><button><i class="fa-regular fa-heart"></i></button></td>
-                    <td>3:09</td>
+                    <td>
+
+                        {% include "like/_like.html.twig" %}
+
+                    </td>
+                    <td>0:00</td>
                     <td>
                         
                         <div class="dropdown">
