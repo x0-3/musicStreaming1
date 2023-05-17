@@ -14,7 +14,7 @@ class LikeController extends AbstractController
     public function index(Song $song, EntityManagerInterface $em): Response
     {
 
-        $user = $this->getUser();
+        $user = $this->getUser(); // get user in session
 
         // if the user has like the song the remove the like
         if ($song->isLikeByUser($user)) {
@@ -22,6 +22,7 @@ class LikeController extends AbstractController
             $song->removeLike($user);
             $em->flush();
 
+            // return a json response
             return $this->json(['message' => 'the like has been removed']);
         }
 
@@ -29,6 +30,7 @@ class LikeController extends AbstractController
         $song->addLike($user);
         $em->flush();
 
+        // return a json response
         return $this->json(['message' => 'the like has been added']);
     }
 }

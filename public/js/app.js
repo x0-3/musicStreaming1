@@ -9,7 +9,10 @@ import Like from "./like.js";
     localStorage.getItem("theme") || "light";
 })()
 
-function myFunction() {
+
+// we user window. because the onClick attribute it's defined in the global scope 
+// we need it to be defined in the global scope in order for the function to be found and called
+window.toggleTheme = function() {
   var element = document.body;
   element.classList.toggle("dark");
 
@@ -26,12 +29,12 @@ function myFunction() {
 
 // ********************************************** Hamburger menu ****************************************************************** * // 
 /* Set the width of the sidebar to 250px (show it) */
-function openNav() {
+window.openNav = function() {
   document.getElementById("mySidepanel").style.width = "250px";
 }
 
 /* Set the width of the sidebar to 0 (hide it) */
-function closeNav() {
+window.closeNav = function() {
   document.getElementById("mySidepanel").style.width = "0";
 }
 
@@ -75,6 +78,7 @@ const handleResponse = function(response) {
       commentList.insertAdjacentHTML('afterbegin', response.html); 
     break; 
     
+    // FIXME: make it not redirect to the json endpoint
     // if the comment has been successfully deleted then remove the comment from the comment list
     case 'COMMENT_DELETED_SUCCESSFULLY':
 
@@ -91,15 +95,20 @@ const handleResponse = function(response) {
 
 
 // ********************************************* Like functionnality *****************************************************************//
+// execute function when the DOM has finished loading
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Like
+
+  // get the array of likes 
+  // []. slice.call to get the functionnality of an array
   const likeElements = []. slice.call(document.querySelectorAll('a[data-action="like"]'));
 
+  // check if it was successful fetched
   if (likeElements) {
 
+    // then make a new like element imported from the javascript script
     new Like(likeElements);
   }
     
 });
-
-
