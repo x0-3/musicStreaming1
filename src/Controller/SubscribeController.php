@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Subscribe;
+use App\Entity\User;
+use App\Form\SubscribeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -44,4 +48,45 @@ class SubscribeController extends AbstractController
             
         ]);
     }
+
+
+    // subscribe to the artist
+    // TODO: add the unsub if the user is already subscribed to the artist
+    #[Route('/subscribeTo/{id}', name: 'app_subscribeTo')]
+    public function subscribe(Request $request, EntityManagerInterface $em, User $artist, RequestStack $requestStack): Response
+    {
+
+        $user = $this->getUser(); // get the user
+
+        if ($user) {
+            $subscribe = new Subscribe();
+
+            $form = $this->createForm(SubscribeType::class, $subscribe);
+
+            $subscribe->setDateFollow(new \DateTime());
+            $subscribe->setSubscribers($user);
+            $subscribe->setUserSubscribes($artist);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $subscribe = $form->getData();
+
+                // ... perform some action, such as saving the task to the database
+                $em->persist($subscribe);
+
+                // actually executes the queries (i.e. the INSERT query)
+                $em->flush();
+
+                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
+            }
+            return $this->render('subscribe/addSub.html.twig', [
+                'form' => $form,
+                'artist' => $artist,
+            ]);
+        }  
+    
+    } 
+
 }
