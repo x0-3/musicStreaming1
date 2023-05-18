@@ -100,15 +100,48 @@ const handleResponse = function(response) {
     
     // FIXME: make it not redirect to the json endpoint
     // if the comment has been successfully deleted then remove the comment from the comment list
-    case 'COMMENT_DELETED_SUCCESSFULLY':
+    // case 'COMMENT_DELETED_SUCCESSFULLY':
 
-      // Get the comment element by its ID or any other unique identifier
-      var commentId = response.commentId;
-      var commentElement = document.getElementById(commentId);
-      if (commentElement) {
-        commentElement.remove();
-      }
+    //   // Get the comment element by its ID or any other unique identifier
+    //   var commentId = response.commentId;
+    //   var commentElement = document.getElementById(commentId);
+    //   if (commentElement) {
+    //     commentElement.remove();
+    //   }
     
-    break; 
+    // break;  
   }
 }
+
+
+// FIXME: make it not redirect to the json endpoint
+$(document).ready(function () {
+  $('.deletebtn').on('click', function (e) {
+    
+    e.preventDefault(); // doens't send data 
+
+    var url = $(this).attr('href');
+    deleteComment(url);
+
+    function deleteComment(url) {
+
+      $.ajax({
+
+        type: "POST",
+        url: url
+      })
+
+      .done(function (data) {
+
+        var id = JSON.parse(data).id;
+
+        $('#comment-' + id).remove();
+      })
+
+      .fail(function () {
+
+        alert('Could not be deleted');
+      });
+    }
+  });
+});

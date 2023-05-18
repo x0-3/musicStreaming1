@@ -1,4 +1,5 @@
-<article>
+{# FIXME: fix issue not dynamique redirect to json #}
+<article id="comment">
 
     <figure>
         {% if comment.user.avatar != null %}
@@ -18,17 +19,22 @@
                 <div class="dropdown">
                     <button class="fa-solid fa-ellipsis-vertical"></button>
 
-                    {# if the user is the owner of the comment then show the delete #}
-                    {% if app.user.id is same as(comment.user.id) %}
+                    {# if the id of the comment is not null then show the button #}
+                    {% if comment.id is not null %}
 
-                        <div id="list-items">
-                            <a href="{{path('delete_comment', {'id': comment.id})}}" id="commentId">delete</a>
-                        </div>
-                        
+                        {# if the user is the owner of the comment then show the delete #}
+                        {% if app.user.id is same as(comment.user.id) %}
+
+                            <div id="list-items">
+                                <a href="{{path('delete_comment', {'id':comment.id})}}" class="deletebtn">delete</a>
+                                
+                            </div>
+                            
+                        {% endif %}
+
                     {% endif %}
-
                 </div>
-
+                
             {% endif %}
 
         </figcaption>

@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LikeController extends AbstractController
 {
+
+    // like a song / remove song from like list
     #[Route('/like/song/{id}', name: 'like_song')]
     public function index(Song $song, EntityManagerInterface $em): Response
     {

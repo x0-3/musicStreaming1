@@ -38,23 +38,27 @@ class CommentController extends AbstractController
 
         $user =  $security->getUser(); // get the user in session        
 
-        $commentOwner = $comment->getUser(); // owner of the playlist
+        $commentOwner = $comment->getUser(); // owner of the comment
 
-        // if the user is equal to the playlist owner then delete
+        // if the user is equal to the comment owner then delete
         if ($commentOwner === $user){ 
             
             $em->remove($comment);
             $em->flush();
-
-            
+   
             return new JsonResponse([
                 'code' => 'COMMENT_DELETED_SUCCESSFULLY',
+                'html' => $environment->render('comment/_comment.html.twig', [
+                    'comment' => $comment,
+                    'id' => $comment->getId()
+                ])
             ]);
 
         }
+        return new JsonResponse([
+            'code' => 'COMMENT_ERROR',
+        ]);
       
-        return $this->redirectToRoute('app_home');
-
     }
 
 }
