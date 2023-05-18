@@ -38,7 +38,6 @@
                 <th></th>
                 <th>title</th>
                 <th>artist</th>
-                <th></th>
                 <th>time</th>
                 <th></th>
             </tr>
@@ -55,7 +54,6 @@
                     </td>
                     <td><a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
                     <td> <a href="{{path('app_artistDetail', {'id': artist.id})}}"> {{song.username}} </a></td>
-                    <td><button><i class="fa-regular fa-heart"></i></button></td>
                     <td>3:09</td>
                     <td><button><i class="fa-solid fa-plus"></i></button></td>
                 </tr>

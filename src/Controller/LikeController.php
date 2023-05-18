@@ -35,4 +35,15 @@ class LikeController extends AbstractController
         // return a json response
         return $this->json(['message' => 'the like has been added']);
     }
+
+    // TODO: 
+    // music player like song
+    #[Route('/like/player/{id}', name: 'like_Player')]
+    public function likePlayer(Song $song, EntityManagerInterface $em): Response
+    {
+
+        return $this->render('album/albumPlayer.html.twig', [
+            'test'=>'test',
+        ]);
+    }
 }

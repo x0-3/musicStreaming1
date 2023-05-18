@@ -107,30 +107,6 @@ class PlaylistRepository extends ServiceEntityRepository
     }
 
 
-    // find songs that a user liked
-   /**
-    * @return Playlist[] Returns an array of Playlist objects
-    */
-    public function findlikedSongs($userEmail): array
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQueryBuilder()
-            ->select('l.id,  u.id, s.nameSong, u.username, a.cover')
-            ->from('App\Entity\Song', 's')
-            ->leftJoin('s.album', 'a')
-            ->leftJoin('s.user', 'u')
-            ->leftJoin('s.likes', 'l')
-            ->where('l.email = :email')
-            ->setParameter('email', $userEmail)
-        ;
-        
-        $query = $query->getQuery();
-
-        return $query->execute();
-    }
-
-
     // find user top 4 favorite playlist
    /**
     * @return Playlist[] Returns an array of Playlist objects

@@ -32,7 +32,6 @@ class UserController extends AbstractController
         $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
         $artistMostSub = $em->getRepository(Subscribe::class)->find4ByMostSubscribers(); //find the artist's with the most subscribers 
 
-
         return $this->render('user/artistDetail.html.twig', [
             'artist' => $artist,
             'songs' => $songs,

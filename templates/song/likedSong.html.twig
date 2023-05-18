@@ -32,7 +32,6 @@
                 <th></th>
                 <th>title</th>
                 <th>artist</th>
-                <th></th>
                 <th>time</th>
                 <th></th>
             </tr>
@@ -40,18 +39,16 @@
 
         <tbody>
 
-            
             {% for song in like %}
-                            
+                      
                 <tr>
                     <td>
                         <figure>
                             <img src="{{asset('uploads/' ~ song.cover)}}" alt="song img">
                         </figure>
                     </td>
-                    <td>{{song.nameSong}} </td>
+                    <td><a href="#"> {{song.nameSong}} </a></td>
                     <td> <a href="{{path('app_artistDetail', {'id': song.id})}}"> {{song.username}} </a></td>
-                    <td><button><i class="fa-regular fa-heart"></i></button></td>
                     <td>3:09</td>
                     <td><button><i class="fa-solid fa-plus"></i></button></td>
                 </tr>

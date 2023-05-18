@@ -167,7 +167,7 @@ class SongController extends AbstractController
         if ($token) {
             $userEmail = $token->getUser()->getUserIdentifier(); // get user email
 
-            $repo = $em->getRepository(Playlist::class);
+            $repo = $em->getRepository(Song::class);
     
             $like =  $repo->findlikedSongs($userEmail); // find like song for the user
 
@@ -181,6 +181,7 @@ class SongController extends AbstractController
         }
     }
     
+
     // song player for one song
     // with comment form
     #[Route('/song/{id}', name: 'app_songPlayer')]

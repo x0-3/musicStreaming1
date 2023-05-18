@@ -51,7 +51,7 @@ class SongRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQueryBuilder()
-            ->select('s.id,s.nameSong, a.cover, COUNT(ul.id) AS num_like')
+            ->select('s.id, s.nameSong, a.cover, COUNT(ul.id) AS num_like')
             ->from('App\Entity\Song', 's')
             ->leftJoin('s.album', 'a')
             ->leftJoin('s.likes', 'ul')
@@ -113,6 +113,28 @@ class SongRepository extends ServiceEntityRepository
         $query = $query->getQuery();
 
         return $query->execute();
+    }
+
+
+
+    // find songs that a user liked
+   /**
+    * @return Song[] Returns an array of Song objects
+    */
+    public function findlikedSongs($userEmail): array
+    {
+
+        return $this->createQueryBuilder('s')
+            ->select('l.id,  u.id, s.nameSong, u.username, a.cover')
+            ->leftJoin('s.album', 'a')
+            ->leftJoin('s.user', 'u')
+            ->leftJoin('s.likes', 'l')
+            ->where('l.email = :email')
+            ->setParameter('email', $userEmail)
+            ->getQuery()
+           ->getResult()
+        ;
+
     }
 
 //    /**
