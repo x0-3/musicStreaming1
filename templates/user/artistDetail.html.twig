@@ -127,6 +127,14 @@
                         {% endif %}
                         
                         <h3>{{artistMostSub.username}}</h3>
+
+                        {% if artist.subUser2|length <= 1 %}
+                            <h3>{{artist.subUser2|length}} subcriber</h3>
+                            
+                        {% else %}
+                            <h3>{{artist.subUser2|length}} subcribers</h3>
+        
+                        {% endif %}
                     </a>
                 </div>
             

@@ -35,7 +35,7 @@ class UserController extends AbstractController
         /* ***************************************** subscribe to the artist form ******************************************************** */
         $user = $this->getUser();
 
-        if ($user) {        
+        if ($user) {
     
             // find if the user is already subscribed to this artist
             $userSub = $em->getRepository(Subscribe::class)->findOneBy([
@@ -75,6 +75,14 @@ class UserController extends AbstractController
 
         }
         /* ****************************************************************************************************** */
+
+        
+        // if the user is the artist then redirect to the profile page
+        if ($user == $artist) {
+            return $this->redirectToRoute('app_profile');
+
+        }
+
 
         // page without subscriptions functionality
         $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
