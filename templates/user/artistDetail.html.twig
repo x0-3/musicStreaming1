@@ -21,11 +21,22 @@
             <figcaption>
                 <h1>{{artist.username}}</h1>
 
-                {% if app.user %}
 
-                    {% include "subscribe/_addSub.html.twig" %}
+                {# FIXME:  #}
+                {% if userSub %}
+                    <a href="{{path('app_subscribeTo', {'id': artist.id})}}">Subscribed</a>
+                    
+                {% else %}
+                    <a href="{{path('app_subscribeTo', {'id': artist.id})}}">Subscribe</a>
 
                 {% endif %}
+
+                {# {{ form_start(form)}}
+
+                    {{form_row(form.submit, { 'label': 'Subscribe' })}}
+                            
+                {{ form_end(form) }} #}
+
 
                 {% if artist.subUser2|length <= 1 %}
                     <h3>{{artist.subUser2|length}} subcriber</h3>

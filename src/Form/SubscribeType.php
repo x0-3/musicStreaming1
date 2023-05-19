@@ -16,9 +16,7 @@ class SubscribeType extends AbstractType
             // ->add('dateFollow')
             // ->add('subscribers')
             // ->add('userSubscribes')
-            ->add('submit', SubmitType::class, [
-                'label'=>'Subcribe',
-            ])
+            ->add('submit', SubmitType::class)
         ;
     }
 

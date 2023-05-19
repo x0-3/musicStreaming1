@@ -30,72 +30,33 @@ class UserController extends AbstractController
     public function artistPage(User $artist, EntityManagerInterface $em, Request $request): Response
     {
 
-        // TODO: find a better way to do this
-
-        /* ***************************************** subscribe to the artist form ******************************************************** */
         $user = $this->getUser();
-
-        if ($user) {
-    
-            // find if the user is already subscribed to this artist
-            $userSub = $em->getRepository(Subscribe::class)->findOneBy([
-                'user1' => $user,
-                'user2' => $artist,
-            ]);
-        
-            
-            // if the user is already subscribed
-            if ($userSub !== null) {
-
-                $em->remove($userSub); // unsubscribe the user
-                $em->flush();
-        
-                // redirect to the artist page
-                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
-            }
-            
-            // else if the user is not subscribed then
-
-            // add the user to the artist subscriptions
-            $subscribe = new Subscribe();
-            
-            $form = $this->createForm(SubscribeType::class, $subscribe);
-            $form->handleRequest($request);
-            
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                $subscribe->setDateFollow(new \DateTime());
-                $subscribe->setUser1($user);
-                $subscribe->setUser2($artist);
-
-                $em->persist($subscribe);
-                $em->flush();
-        
-            }
-
-        }
-        /* ****************************************************************************************************** */
-
-        
-        // if the user is the artist then redirect to the profile page
-        if ($user == $artist) {
-            return $this->redirectToRoute('app_profile');
-
-        }
-
 
         // page without subscriptions functionality
         $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
         $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
         $artistMostSub = $em->getRepository(Subscribe::class)->find4ByMostSubscribers(); //find the artist's with the most subscribers 
 
+        
+        // if the user is the artist then redirect to the profile page
+        if ($user == $artist) {
+            return $this->redirectToRoute('app_profile');
+        }
+
+        
+        // find if the user is subscribed to the artist
+        $userSub = $em->getRepository(Subscribe::class)->findOneBy([
+            'user1' => $user,
+            'user2' => $artist,
+        ]);
+
+
         return $this->render('user/artistDetail.html.twig', [
             'artist' => $artist,
             'songs' => $songs,
             'albums' => $albums,
             'artistMostSub' => $artistMostSub,
-            'form' => $form->createView(),
-
+            'userSub'=> $userSub,
         ]);
     }
 
