@@ -30,7 +30,7 @@ class UserController extends AbstractController
     public function artistPage(User $artist, EntityManagerInterface $em, Request $request): Response
     {
 
-        // TODO: put it in a service
+        // TODO: find a better way to do this
 
         /* ***************************************** subscribe to the artist form ******************************************************** */
         $user = $this->getUser();
@@ -76,7 +76,7 @@ class UserController extends AbstractController
         }
         /* ****************************************************************************************************** */
 
-
+        // page without subscriptions functionality
         $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
         $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
         $artistMostSub = $em->getRepository(Subscribe::class)->find4ByMostSubscribers(); //find the artist's with the most subscribers 

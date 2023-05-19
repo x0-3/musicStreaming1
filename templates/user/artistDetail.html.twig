@@ -26,6 +26,15 @@
                     {% include "subscribe/_addSub.html.twig" %}
 
                 {% endif %}
+
+                {% if artist.subUser2|length <= 1 %}
+                    <h3>{{artist.subUser2|length}} subcriber</h3>
+                    
+                {% else %}
+                    <h3>{{artist.subUser2|length}} subcribers</h3>
+
+                {% endif %}
+
             </figcaption>
         </figure>
     </div>

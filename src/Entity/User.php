@@ -317,12 +317,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Subscribe>
      */
-    public function getSubscribes(): Collection
+    public function getSubUser1(): Collection
     {
         return $this->subUser1;
     }
 
-    public function addSubscribe(Subscribe $subscribe): self
+    public function addSubUser1(Subscribe $subscribe): self
     {
         if (!$this->subUser1->contains($subscribe)) {
             $this->subUser1->add($subscribe);
@@ -332,7 +332,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeSubscribe(Subscribe $subUser1): self
+    public function removeSubUser1(Subscribe $subUser1): self
     {
         if ($this->subUser1->removeElement($subUser1)) {
             // set the owning side to null (unless already changed)
@@ -344,23 +344,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isSubToArtist(Subscribe $user): bool
-    {
-        if ($this->subUser1->contains($user)) {
+    // public function isSubToArtist(Subscribe $user): bool
+    // {
+    //     if ($this->subUser1->contains($user)) {
 
-            return $this->subUser1->contains($user);
-        }
-    }
+    //         return $this->subUser1->contains($user);
+    //     }
+    // }
 
     /**
      * @return Collection<int, Subscribe>
      */
-    public function getSubscriptions(): Collection
+    public function getSubUser2(): Collection
     {
         return $this->subUser2;
     }
 
-    public function addSubscription(Subscribe $subUser2): self
+    public function addSubUser2(Subscribe $subUser2): self
     {
         if (!$this->subUser2->contains($subUser2)) {
             $this->subUser2->add($subUser2);
@@ -370,7 +370,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeSubscription(Subscribe $subUser2): self
+    public function removeSubUser2(Subscribe $subUser2): self
     {
         if ($this->subUser2->removeElement($subUser2)) {
             // set the owning side to null (unless already changed)
