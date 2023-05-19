@@ -17,11 +17,11 @@ class Subscribe
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateFollow = null;
 
-    #[ORM\ManyToOne(inversedBy: 'subscribes')]
-    private ?User $subscribers = null; // user that is subscribed to an artist
+    #[ORM\ManyToOne(inversedBy: 'subUser1')]
+    private ?User $user1 = null; // user that is subscribed to an artist
 
-    #[ORM\ManyToOne(inversedBy: 'subscriptions')]
-    private ?User $userSubscribes = null; // artist that has subscriptions
+    #[ORM\ManyToOne(inversedBy: 'subUser2')]
+    private ?User $user2 = null; // artist that has subscriptions
 
     public function getId(): ?int
     {
@@ -40,27 +40,27 @@ class Subscribe
         return $this;
     }
 
-    public function getSubscribers(): ?User
+    public function getUser1(): ?User
     {
-        return $this->subscribers;
+        return $this->user1;
     }
 
-    public function setSubscribers(?User $subscribers): self
+    public function setUser1(?User $user1): self
     {
-        $this->subscribers = $subscribers;
+        $this->user1 = $user1;
 
         return $this;
     }
 
 
-    public function getUserSubscribes(): ?User
+    public function getUser2(): ?User
     {
-        return $this->userSubscribes;
+        return $this->user2;
     }
 
-    public function setUserSubscribes(?User $userSubscribes): self
+    public function setUser2(?User $user2): self
     {
-        $this->userSubscribes = $userSubscribes;
+        $this->user2 = $user2;
 
         return $this;
     }

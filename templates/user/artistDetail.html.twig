@@ -22,8 +22,14 @@
                 <h1>{{artist.username}}</h1>
 
                 {% if app.user %}
-                    {{ render(controller('App\\Controller\\SubscribeController::subscribe',{ 'id': artist.id })) }} 
-                    
+
+                    {# TODO: look into error 302 #}
+                    {# {{ render(controller('App\\Controller\\SubscribeController::subscribe',{ 'id': artist.id })) }}  #}
+                    <a href="{{path('app_subscribeTo', {'id': artist.id})}}">
+                        Subscribe
+                    </a>
+                    {# <button>Subscribe</button> #}
+
                 {% endif %}
             </figcaption>
         </figure>

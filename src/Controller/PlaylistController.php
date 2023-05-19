@@ -34,7 +34,9 @@ class PlaylistController extends AbstractController
             $repo = $em->getRepository(Playlist::class); // get the playlist repository
 
             $playlists = $repo->findPlaylistUser($userEmail); // get the playlist created by the user
-            $like =  $repo->findlikedSongs($userEmail); //get the liked songs of the user
+            
+            $like = $em->getRepository(Song::class)->findlikedSongs($userEmail);
+            // $like =  $repo->findlikedSongs($userEmail); //get the liked songs of the user
 
             return $this->render('playlist/myPlaylist.html.twig', [
                 'playlists'=> $playlists,

@@ -53,11 +53,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Playlist::class, mappedBy: 'userFavorites')]
     private Collection $favoritePlaylists;
 
-    #[ORM\OneToMany(mappedBy: 'subscribers', targetEntity: Subscribe::class)]
-    private Collection $subscribes;
+    #[ORM\OneToMany(mappedBy: 'user1', targetEntity: Subscribe::class)]
+    private Collection $subUser1;
 
-    #[ORM\OneToMany(mappedBy: 'userSubscribes', targetEntity: Subscribe::class)]
-    private Collection $subscriptions;
+    #[ORM\OneToMany(mappedBy: 'user2', targetEntity: Subscribe::class)]
+    private Collection $subUser2;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
@@ -74,8 +74,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->playlists = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->favoritePlaylists = new ArrayCollection();
-        $this->subscribes = new ArrayCollection();
-        $this->subscriptions = new ArrayCollection();
+        $this->subUser1 = new ArrayCollection();
+        $this->subUser2 = new ArrayCollection();
         $this->albums = new ArrayCollection();
 
     }
@@ -319,29 +319,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getSubscribes(): Collection
     {
-        return $this->subscribes;
+        return $this->subUser1;
     }
 
     public function addSubscribe(Subscribe $subscribe): self
     {
-        if (!$this->subscribes->contains($subscribe)) {
-            $this->subscribes->add($subscribe);
-            $subscribe->setSubscribers($this);
+        if (!$this->subUser1->contains($subscribe)) {
+            $this->subUser1->add($subscribe);
+            $subscribe->getUser1($this);
         }
 
         return $this;
     }
 
-    public function removeSubscribe(Subscribe $subscribe): self
+    public function removeSubscribe(Subscribe $subUser1): self
     {
-        if ($this->subscribes->removeElement($subscribe)) {
+        if ($this->subUser1->removeElement($subUser1)) {
             // set the owning side to null (unless already changed)
-            if ($subscribe->getSubscribers() === $this) {
-                $subscribe->setSubscribers(null);
+            if ($subUser1->getUser1() === $this) {
+                $subUser1->setUser1(null);
             }
         }
 
         return $this;
+    }
+
+    public function isSubToArtist(Subscribe $user): bool
+    {
+        if ($this->subUser1->contains($user)) {
+
+            return $this->subUser1->contains($user);
+        }
     }
 
     /**
@@ -349,25 +357,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getSubscriptions(): Collection
     {
-        return $this->subscriptions;
+        return $this->subUser2;
     }
 
-    public function addSubscription(Subscribe $subscription): self
+    public function addSubscription(Subscribe $subUser2): self
     {
-        if (!$this->subscriptions->contains($subscription)) {
-            $this->subscriptions->add($subscription);
-            $subscription->setUserSubscribes($this);
+        if (!$this->subUser2->contains($subUser2)) {
+            $this->subUser2->add($subUser2);
+            $subUser2->setUser2($this);
         }
 
         return $this;
     }
 
-    public function removeSubscription(Subscribe $subscription): self
+    public function removeSubscription(Subscribe $subUser2): self
     {
-        if ($this->subscriptions->removeElement($subscription)) {
+        if ($this->subUser2->removeElement($subUser2)) {
             // set the owning side to null (unless already changed)
-            if ($subscription->getUserSubscribes() === $this) {
-                $subscription->setUserSubscribes(null);
+            if ($subUser2->getUser2() === $this) {
+                $subUser2->setUser2(null);
             }
         }
 
