@@ -21,23 +21,19 @@
             <figcaption>
                 <h1>{{artist.username}}</h1>
 
-
-                {# FIXME:  #}
+                {# toggle between two btn if the user is sub or not to the artist #}
                 {% if userSub %}
-                    <a href="{{path('app_subscribeTo', {'id': artist.id})}}">Subscribed</a>
-                    
+
+                    <a href="{{path('app_subscribeTo', {'id': artist.id})}}" class="btn btn-info">Subscribed</a>
+                
                 {% else %}
-                    <a href="{{path('app_subscribeTo', {'id': artist.id})}}">Subscribe</a>
+
+                    {% include "subscribe/_addSub.html.twig" %}
 
                 {% endif %}
 
-                {# {{ form_start(form)}}
 
-                    {{form_row(form.submit, { 'label': 'Subscribe' })}}
-                            
-                {{ form_end(form) }} #}
-
-
+                {# count the nb if subscriber of an artist #}
                 {% if artist.subUser2|length <= 1 %}
                     <h3>{{artist.subUser2|length}} subcriber</h3>
                     

@@ -26,6 +26,7 @@ class UserController extends AbstractController
 
 
     // page for the detail of another user  
+    // with subscription form
     #[Route('/artist/{id}', name: 'app_artistDetail')]
     public function artistPage(User $artist, EntityManagerInterface $em, Request $request): Response
     {
@@ -50,8 +51,32 @@ class UserController extends AbstractController
             'user2' => $artist,
         ]);
 
+        
+        //* ********************************************* add subscription ****************************************************************************** *//
+        // add the user to the artist subscriptions
+        $subscribe = new Subscribe();
+        
+        $form = $this->createForm(SubscribeType::class, $subscribe);
+        $form->handleRequest($request);
+        
+        if ($userSub == null) {
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $subscribe->setDateFollow(new \DateTime());
+                $subscribe->setUser1($user);
+                $subscribe->setUser2($artist);
+
+                $em->persist($subscribe);
+                $em->flush();
+
+                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
+
+            }
+            
+        }
 
         return $this->render('user/artistDetail.html.twig', [
+            'form' => $form->createView(),
             'artist' => $artist,
             'songs' => $songs,
             'albums' => $albums,

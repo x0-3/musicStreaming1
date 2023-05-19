@@ -50,8 +50,9 @@ class SubscribeController extends AbstractController
     }
 
 
+    // case if the user is subscribed to the artist 
     #[Route('/subscribeTo/{id}', name: 'app_subscribeTo')]
-    public function subscribe(Request $request, EntityManagerInterface $em, User $artist): Response
+    public function deleteSubscribe(Request $request, EntityManagerInterface $em, User $artist): Response
     {
         $user = $this->getUser();
     
@@ -77,26 +78,26 @@ class SubscribeController extends AbstractController
             
             // else if the user is not subscribed then
 
-            // add the user to the artist subscriptions
-            $subscribe = new Subscribe();
+            // // add the user to the artist subscriptions
+            // $subscribe = new Subscribe();
             
-            $form = $this->createForm(SubscribeType::class, $subscribe);
-            $form->handleRequest($request);
+            // $form = $this->createForm(SubscribeType::class, $subscribe);
+            // $form->handleRequest($request);
             
-            if ($form->isSubmitted() && $form->isValid()) {
+            // if ($form->isSubmitted() && $form->isValid()) {
 
-                $subscribe->setDateFollow(new \DateTime());
-                $subscribe->setUser1($user);
-                $subscribe->setUser2($artist);
+            //     $subscribe->setDateFollow(new \DateTime());
+            //     $subscribe->setUser1($user);
+            //     $subscribe->setUser2($artist);
 
-                $em->persist($subscribe);
-                $em->flush();
+            //     $em->persist($subscribe);
+            //     $em->flush();
         
-                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);                
-            }
+            //     return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);                
+            // }
             
             return $this->render('subscribe/_addSub.html.twig', [
-                'form' => $form->createView(),
+                // 'form' => $form->createView(),
                 'artist' => $artist,
                 'userSub' => $userSub,
             ]);
