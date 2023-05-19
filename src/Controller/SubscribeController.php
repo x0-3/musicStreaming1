@@ -50,99 +50,61 @@ class SubscribeController extends AbstractController
     }
 
 
-    // // subscribe to the artist
-    // // TODO: add the unsub if the user is already subscribed to the artist
     // #[Route('/subscribeTo/{id}', name: 'app_subscribeTo')]
-    // public function subscribe(Request $request, EntityManagerInterface $em, User $artist, RequestStack $requestStack): Response
+    // public function subscribe(Request $request, EntityManagerInterface $em, User $artist): Response
     // {
+    //     $user = $this->getUser();
+    
+    //     if ($user) {        
+    
+    //         // find if the user is already subscribed to this artist
+    //         $userSub = $em->getRepository(Subscribe::class)->findOneBy([
+    //             'user1' => $user,
+    //             'user2' => $artist,
+    //         ]);
+        
+            
+    //         // if the user is already subscribed
+    //         if ($userSub !== null) {
 
-    //     $user = $this->getUser(); // get the user
-
-    //     if ($user) {
-    //         $subscribe = new Subscribe();
-
-    //         $form = $this->createForm(SubscribeType::class, $subscribe);
-
-    //         $subscribe->setDateFollow(new \DateTime());
-    //         $subscribe->setUser1($user);
-    //         $subscribe->setUser2($artist);
-
-    //         $form->handleRequest($request);
-
-    //         if ($form->isSubmitted() && $form->isValid()) {
-
-    //             $subscribe = $form->getData();
-
-    //             // ... perform some action, such as saving the task to the database
-    //             $em->persist($subscribe);
-
-    //             // actually executes the queries (i.e. the INSERT query)
+    //             $em->remove($userSub); // unsubscribe the user
     //             $em->flush();
-
+        
+    //             // redirect to the artist page
     //             return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
     //         }
+            
+    //         // else if the user is not subscribed then
+
+    //         // add the user to the artist subscriptions
+    //         $subscribe = new Subscribe();
+            
+    //         $form = $this->createForm(SubscribeType::class, $subscribe);
+    //         $form->handleRequest($request);
+            
+    //         if ($form->isSubmitted() && $form->isValid()) {
+
+    //             $subscribe->setDateFollow(new \DateTime());
+    //             $subscribe->setUser1($user);
+    //             $subscribe->setUser2($artist);
+
+    //             $em->persist($subscribe);
+    //             $em->flush();
+        
+    //             return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);                
+    //         }
+
     //         return $this->render('subscribe/addSub.html.twig', [
-    //             'form' => $form,
+    //             'form' => $form->createView(),
     //             'artist' => $artist,
     //         ]);
-    //     }  
+
+    //     }
+
+    //     // if user is not connected then redirect to the login page
+    //     return $this->redirectToRoute('app_login');
+
+    // }
     
-    // } 
-
-    #[Route('/subscribeTo/{id}', name: 'app_subscribeTo')]
-    public function subscribe(Request $request, EntityManagerInterface $em, User $artist): Response
-    {
-        $user = $this->getUser();
-    
-        if ($user) {        
-    
-            // find if the user is already subscribed to this artist
-            $userSub = $em->getRepository(Subscribe::class)->findOneBy([
-                'user1' => $user,
-                'user2' => $artist,
-            ]);
-        
-            
-            // if the user is already subscribed
-            if ($userSub) {
-
-                $em->remove($userSub); // unsubscribe the user
-                $em->flush();
-        
-                // redirect to the artist page
-                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
-            }
-            
-            // else if the user is not subscribed then
-
-            // add the user to the artist subscriptions
-            $subscribe = new Subscribe();
-            
-            $form = $this->createForm(SubscribeType::class, $subscribe);
-            $form->handleRequest($request);
-            
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                $subscribe->setDateFollow(new \DateTime());
-                $subscribe->setUser1($user);
-                $subscribe->setUser2($artist);
-
-                $em->persist($subscribe);
-                $em->flush();
-        
-                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);                
-            }
-
-            return $this->render('subscribe/addSub.html.twig', [
-                'form' => $form->createView(),
-                'artist' => $artist,
-            ]);
-
-        }
-
-        // if user is not connected then redirect to the login page
-        return $this->redirectToRoute('app_login');
-
-    }
     
 }

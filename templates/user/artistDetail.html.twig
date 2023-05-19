@@ -23,13 +23,7 @@
 
                 {% if app.user %}
 
-                    {# TODO: look into error 302 #}
-                    {{ render(controller('App\\Controller\\SubscribeController::subscribe',{ 'id': artist.id })) }} 
-                    
-                    {# <a href="{{path('app_subscribeTo', {'id': artist.id})}}">
-                        Subscribe
-                    </a>         #}
-                    {# <button>Subscribe</button> #}
+                    {% include "subscribe/_addSub.html.twig" %}
 
                 {% endif %}
             </figcaption>
