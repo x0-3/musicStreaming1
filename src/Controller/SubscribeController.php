@@ -96,6 +96,7 @@ class SubscribeController extends AbstractController
     
         if ($user) {        
     
+            // find if the user is already subscribed to this artist
             $userSub = $em->getRepository(Subscribe::class)->findOneBy([
                 'user1' => $user,
                 'user2' => $artist,
@@ -103,14 +104,16 @@ class SubscribeController extends AbstractController
         
             
             // if the user is already subscribed
-            if ($userSub !== null) {
+            if ($userSub) {
 
-                $em->remove($userSub);
+                $em->remove($userSub); // unsubscribe the user
                 $em->flush();
         
+                // redirect to the artist page
                 return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
             }
-        
+            
+            // else if the user is not subscribed then
 
             // add the user to the artist subscriptions
             $subscribe = new Subscribe();
@@ -127,9 +130,9 @@ class SubscribeController extends AbstractController
                 $em->persist($subscribe);
                 $em->flush();
         
-                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
+                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);                
             }
-        
+
             return $this->render('subscribe/addSub.html.twig', [
                 'form' => $form->createView(),
                 'artist' => $artist,
@@ -137,6 +140,7 @@ class SubscribeController extends AbstractController
 
         }
 
+        // if user is not connected then redirect to the login page
         return $this->redirectToRoute('app_login');
 
     }
