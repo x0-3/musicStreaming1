@@ -24,7 +24,9 @@
                 {# toggle between two btn if the user is sub or not to the artist #}
                 {% if userSub %}
 
-                    <a href="{{path('app_subscribeTo', {'id': artist.id})}}" class="btn btn-info">Subscribed</a>
+                    <form action="{{path('app_subscribeTo', {'id': artist.id})}}" method="post">
+                        <button type="submit">Subscribed</button>
+                    </form>
                 
                 {% else %}
 
