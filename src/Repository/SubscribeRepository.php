@@ -48,9 +48,8 @@ class SubscribeRepository extends ServiceEntityRepository
     {
 
         $query = $this->createQueryBuilder('s')
-            ->select("u.id, u.username, u.avatar, COUNT(sub.id) AS num_followers")
-            ->from('App\Entity\Subscribe', 'sub')
-            ->innerJoin('sub.user2', 'u')
+            ->select("u.id, u.username, u.avatar, COUNT(s.id) AS num_followers")
+            ->innerJoin('s.user2', 'u')
             ->groupBy('u.id, u.username, u.avatar')
             ->orderBy('num_followers', 'DESC')
             ->setMaxResults(4)
@@ -70,9 +69,8 @@ class SubscribeRepository extends ServiceEntityRepository
     {
 
         $query = $this->createQueryBuilder('s')
-            ->select("u.id, u.username, u.avatar, COUNT(sub.id) AS num_followers")
-            ->from('App\Entity\Subscribe', 'sub')
-            ->innerJoin('sub.user2', 'u')
+            ->select("u.id, u.username, u.avatar, COUNT(s.id) AS num_followers")
+            ->innerJoin('s.user2', 'u')
             ->groupBy('u.id, u.username, u.avatar')
             ->orderBy('num_followers', 'DESC')
             ->setMaxResults(20)
@@ -92,13 +90,12 @@ class SubscribeRepository extends ServiceEntityRepository
     {
 
         $query = $this->createQueryBuilder('s')
-            ->select('sub.id, u.email, us.id, us.username, us.avatar')
-            ->from('App\Entity\Subscribe', 'sub')
-            ->innerJoin('sub.user1', 'u')
-            ->innerJoin('sub.user2', 'us')
+            ->select('s.id, u.email, us.id, us.username, us.avatar')
+            ->innerJoin('s.user1', 'u')
+            ->innerJoin('s.user2', 'us')
             ->where('u.email = :email')
             ->setParameter('email', $userId)
-            ->groupBy('sub.id, u.email, us.id, us.username, u.avatar')
+            ->groupBy('s.id, u.email, us.id, us.username, u.avatar')
             ->getQuery()
             ->getResult();
 

@@ -48,11 +48,8 @@ class SongRepository extends ServiceEntityRepository
     public function findByMostLikes(): array
     {
 
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQueryBuilder()
+        $query = $this->createQueryBuilder('s')
             ->select('s.id, s.nameSong, a.cover, COUNT(ul.id) AS num_like')
-            ->from('App\Entity\Song', 's')
             ->leftJoin('s.album', 'a')
             ->leftJoin('s.likes', 'ul')
             ->groupBy('s.id, s.nameSong,  a.cover')
@@ -70,11 +67,8 @@ class SongRepository extends ServiceEntityRepository
     public function findTenMostLikes(): array
     {
 
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQueryBuilder()
+        $query = $this->createQueryBuilder('s')
             ->select('s.id,s.nameSong, a.cover, COUNT(ul.id) AS num_like')
-            ->from('App\Entity\Song', 's')
             ->leftJoin('s.album', 'a')
             ->leftJoin('s.likes', 'ul')
             ->groupBy('s.id, s.nameSong,  a.cover')
