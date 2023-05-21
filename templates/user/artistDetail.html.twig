@@ -57,22 +57,25 @@
                 <th></th>
                 <th>title</th>
                 <th>artist</th>
+                <td></td>
                 <th>time</th>
                 <th></th>
             </tr>
         </thead>
 
         <tbody>
-            
             {% for song in songs %}
                 <tr>
                     <td>
                         <figure>
-                            <img src="{{asset('uploads/' ~ song.cover)}}" alt="song img">
+                            <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
                         </figure>
                     </td>
                     <td><a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
-                    <td> <a href="{{path('app_artistDetail', {'id': artist.id})}}"> {{song.username}} </a></td>
+                    <td> <a href="{{path('app_artistDetail', {'id': artist.id})}}"> {{song.user.username}} </a></td>
+                    <td>
+                        {% include "like/_like.html.twig" %}
+                    </td>
                     <td>3:09</td>
                     <td><button><i class="fa-solid fa-plus"></i></button></td>
                 </tr>

@@ -36,6 +36,7 @@
                 <th></th>
                 <th>title</th>
                 <th>artist</th>
+                <td></td>
                 <th>time</th>
                 <th></th>
             </tr>
@@ -53,6 +54,9 @@
                     </td>
                     <td><a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
                     <td> <a href="{{path('app_artistDetail', {'id': app.user.id})}}"> {{app.user.username}} </a></td>
+                    <td>
+                        {% include "like/_like.html.twig" %}
+                    </td>
                     <td>3:09</td>
 
                     <td>
