@@ -62,7 +62,6 @@ class PlaylistController extends AbstractController
         // for the comment section 
         $user = $security->getUser();
 
-        // just set up a fresh $task object (remove the example data)
         $comment = new Comment();
         
         $form = $this->createForm(CommentType::class, $comment);

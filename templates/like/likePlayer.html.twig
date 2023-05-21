@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{song.nameSong}} - {{song.user.username}} {% endblock %}
+
+{% block body %}
+<section class="musicPlayer">
+
+    <div class="player">
+
+        <figure class="cover">
+            <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="music cover">
+        </figure>
+
+        <h3 class="trackTitle">{{song.nameSong}}</h3>
+        <h4 class="ArtistName">{{song.user.username}}</h4>
+
+        
+        <div class="controls">
+            
+            {% include "like/_like.html.twig" %}
+
+            <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
+            <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
+            <button class="fa-sharp fa-solid fa-forward" id="btnNext"></button>
+        
+            <div class="hover">
+
+                <i class="volume-icon"><span class="fa-solid fa-volume-high"></span></i>
+
+
+                <div class="audio">
+                    <input type="range" id="volume-slider">
+                    
+                </div>
+            </div>
+        </div>
+
+        {# {% for song in songs %} #}
+            <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip preload="metadata">
+            </audio>
+            
+        {# {% endfor %} #}
+
+        <div class="timeline">
+            <small class="time">0:00</small>
+
+            <div class="range-slider">
+                <input type="range" min="0" max="100" value="0" class="slider">
+            
+
+                <div class="slider-thumb"></div>
+
+                <div class="progress"></div>
+            </div>
+
+            <small class="fulltime">0:00</small>
+
+        </div>
+
+    </div>
+
+    <div class="leftSide">
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th></th>
+                    <th>title</th>
+                    <th>artist</th>
+                    <th>time</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                                
+                {% for song in songs %} 
+                   
+                    <tr>
+                        
+                        <td>
+                            <figure>
+                                <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
+                            </figure>
+                        </td>
+                        <td><a href="{{path('like_Player', {'id': song.id})}}">{{song.nameSong}}</a></td>
+                        <td> <a href="{{path('app_artistDetail', {'id': song.user.id})}}"> {{song.user.username}} </a></td>
+                        <td>0:00</td>
+                        <td><button><i class="fa-solid fa-plus"></i></button></td>
+                    
+                    </tr>
+                
+                {% endfor %}
+                
+            </tbody>
+        </table>
+
+
+        <div id="sidebar">
+            {% include('comment/_add.html.twig') %}
+        </div>
+
+        
+        <div class="comments">
+
+            {# {% for song in songs %} #}
+                
+                {% for comment in song.comments | reverse %}
+
+                    {% include('comment/_comment.html.twig') %}
+
+                {% endfor %}
+
+            {# {% endfor %} #}
+
+            
+        </div>
+
+        
+    </div>
+    
+</section>
+{% endblock %}
