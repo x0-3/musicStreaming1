@@ -18,10 +18,10 @@ let trackPlaying = true;
 
 let volumeMuted = false;
 
-let trackId = 0; 
+// let trackId = 0; 
 
 //FIXME: fetch element from database
-const tracks = [];
+// const tracks = [];
 
 // ************************************************ toggle play ************************************************//
 
@@ -53,30 +53,30 @@ function switchtrack(){
 
 // ************************************************ track source ************************************************//
 
-// FIXME: the track is undefined
-const trackScr = "uploads/music/" + tracks[trackId];
-// console.log(trackScr);
+// // FIXME: the track is undefined
+// const trackScr = "uploads/music/" + tracks[trackId];
+// // console.log(trackScr);
 
-function loadTrack(){
+// function loadTrack(){
 
-  // set the audio track source
-  audio.scr = trackScr;
+//   // set the audio track source
+//   audio.scr = trackScr;
 
-  progress.style.width = 0;
-  thumb.style.left = 0;
+//   progress.style.width = 0;
+//   thumb.style.left = 0;
 
-  // wait for the song to load
-  audio.addEventListener('loadedData', () => {
+//   // wait for the song to load
+//   audio.addEventListener('loadedData', () => {
 
-    // display the duration of the song
-    setTime(fulltime, audio.duration);
+//     // display the duration of the song
+//     setTime(fulltime, audio.duration);
 
-    // set the max value to the slider
-    slider.setAttribute("max", audio.duration);
-  });
-}
+//     // set the max value to the slider
+//     slider.setAttribute("max", audio.duration);
+//   });
+// }
 
-loadTrack();
+// loadTrack();
 
 // ************************************************ switch prev ************************************************//
 // btnPrev.addEventListener('click', () => {
@@ -246,49 +246,8 @@ volume.addEventListener("change", function(e) {
 });
 
 
-// FIXME: need to fetch info from db
-
-
-// function skipForward(url) {
-//   // let audio = document.getElementById('audio');
-//   // let slider = document.querySelector('.slider');
-//   // let progress = document.querySelector('.progress');
-//   // let playBtn = document.querySelector('#mainPlayBtn');
-//   console.log('url : ',url);
-
-//   // fetch(url)
-//   fetch(url, {
-//     body: {
-//       url: url
-//     }, // get form data
-//     method: 'POST', // get method 
-//   })
-
-
-//     .then(response => response.json())
-//     .then(data => {
-//       alert("found! ^_^");
-
-//       audio.src = data.link;
-
-//       console.log('audio src : ', audio.src);
-
-//       audio.play();
-//       playBtn.innerHTML = '<span class="fa-solid fa-pause"></span>';
-
-//       slider.value = 0;
-//       progress.style.width = '0%';
-      
-//     })
-//     .catch(function () {
-
-//       alert('not Found');
-//     });
-// }
-
-
 // ************************************************ keybinds ************************************************//
-
+// TODO:
 
 
 

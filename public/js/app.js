@@ -97,45 +97,22 @@ const handleResponse = function(response) {
       // afterbegin insert the new comment at the top of the comment list 
       commentList.insertAdjacentHTML('afterbegin', response.html); 
 
-      console.log("handleResponse - response = ", response);
-      console.log("handleResponse - response.idComment = ", response.idComment);
-
-      // const commentElements = document.querySelectorAll(`.deletebtn`);
-
-      // console.log("handleResponse -commentElements = ", commentElements);
-
-
+      // function to delete the comment from the comment list
       handleAddEventListenerOnCommentDeleteButton(document.querySelector(`#comment-${response.idComment} .deletebtn`));
-      // handleAddEventListenerOnCommentDeleteButton(response.commentElements);
     break; 
     
-    // FIXME: make it not redirect to the json endpoint
-    // if the comment has been successfully deleted then remove the comment from the comment list
-    // case 'COMMENT_DELETED_SUCCESSFULLY':
-
-    //   // Get the comment element by its ID or any other unique identifier
-    //   let commentId = response.commentId;
-    //   let commentElement = document.getElementById(commentId);
-    //   if (commentElement) {
-    //     commentElement.remove();
-    //   }
-    
-    // break;  
   }
 }
 
-
+// TODO: comment the code
 function handleAddEventListenerOnCommentDeleteButton(deleteButtonElement) {
   deleteButtonElement.addEventListener('click', function (e) {
   
     e.preventDefault(); // doens't send data 
 
-    console.log('element comment', deleteButtonElement);
-
     let url = deleteButtonElement.getAttribute('delete-url');
     deleteComment(url);
 
-    console.log('url = ', url);
   });
 }
 
@@ -149,15 +126,10 @@ function deleteComment(url) {
 
   .done(function (data) {
 
-    // console.log('data = ', data);
-
-    // let id = JSON.parse(data).id;
     let id = data.id;
 
-    console.log('id = ', id);
 
     $('#comment-' + id).remove();
-    // document.getElementById(`comment-${id}`).remove();
   })
 
   .fail(function () {
@@ -166,36 +138,8 @@ function deleteComment(url) {
   });
 }
 
-// let elementsComments = document.querySelectorAll(".deletebtn");
 
-
-// FIXME: make it not redirect to the json endpoint
 $(document).ready(function () {
-
-  // // console.log('$(".deletebtn") = ', $('.deletebtn'));
-
-  // // $('.deletebtn').on('click', function (e) {
-
-  // let elementsComments = document.querySelectorAll(".deletebtn");
-
-  // console.log("elementsComments = ", elementsComments);
-
-  // // $('.deletebtn').forEach(elementComment => {
-  // elementsComments.forEach(elementComment => {
-  //   // elementComment.on('click', function (e) {
-  //   elementComment.addEventListener('click', function (e) {
-    
-  //     e.preventDefault(); // doens't send data 
-
-  //     // let url = $(this).attr('delete-url');
-  //     let url = elementComment.getAttribute('delete-url');
-  //     deleteComment(url);
-
-  //     console.log('url = ', url);
-  //   // });
-  //   })
-  // });
-
 
   let deleteButtonElements = document.querySelectorAll(".deletebtn");
 
