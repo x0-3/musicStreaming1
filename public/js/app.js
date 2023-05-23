@@ -100,7 +100,13 @@ const handleResponse = function(response) {
       console.log("handleResponse - response = ", response);
       console.log("handleResponse - response.idComment = ", response.idComment);
 
-      handleAddEventListenerOnCommentDeleteButton(document.getElementById(`comment-${response.idComment}`));
+      // const commentElements = document.querySelectorAll(`.deletebtn`);
+
+      // console.log("handleResponse -commentElements = ", commentElements);
+
+
+      handleAddEventListenerOnCommentDeleteButton(document.querySelector(`#comment-${response.idComment} .deletebtn`));
+      // handleAddEventListenerOnCommentDeleteButton(response.commentElements);
     break; 
     
     // FIXME: make it not redirect to the json endpoint
@@ -119,18 +125,19 @@ const handleResponse = function(response) {
 }
 
 
-function handleAddEventListenerOnCommentDeleteButton(elementComment) {
-  elementComment.addEventListener('click', function (e) {
+function handleAddEventListenerOnCommentDeleteButton(deleteButtonElement) {
+  deleteButtonElement.addEventListener('click', function (e) {
   
     e.preventDefault(); // doens't send data 
 
-    let url = elementComment.getAttribute('delete-url');
+    console.log('element comment', deleteButtonElement);
+
+    let url = deleteButtonElement.getAttribute('delete-url');
     deleteComment(url);
 
     console.log('url = ', url);
-  })
+  });
 }
-
 
 function deleteComment(url) {
 
@@ -142,7 +149,7 @@ function deleteComment(url) {
 
   .done(function (data) {
 
-    console.log('data = ', data);
+    // console.log('data = ', data);
 
     // let id = JSON.parse(data).id;
     let id = data.id;
@@ -159,6 +166,7 @@ function deleteComment(url) {
   });
 }
 
+// let elementsComments = document.querySelectorAll(".deletebtn");
 
 
 // FIXME: make it not redirect to the json endpoint
@@ -188,9 +196,10 @@ $(document).ready(function () {
   //   })
   // });
 
-  let elementsComments = document.querySelectorAll(".deletebtn");
 
-  elementsComments.forEach(function(elementComment) {
+  let deleteButtonElements = document.querySelectorAll(".deletebtn");
+
+  deleteButtonElements.forEach(function(elementComment) {
     handleAddEventListenerOnCommentDeleteButton(elementComment);
   });
 

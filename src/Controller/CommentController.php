@@ -58,6 +58,7 @@ class CommentController extends AbstractController
                 'id' => $idComment
             ]);
 
+
             // return $this->render('playlist/playlistPlayer.html.twig', [
             //     'code' => 'COMMENT_DELETED_SUCCESSFULLY',
             //     'html' => $environment->render('comment/_comment.html.twig', [
