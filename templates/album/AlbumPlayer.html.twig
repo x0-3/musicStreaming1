@@ -21,11 +21,9 @@
 
             <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>        
-            {# <button class="fa-sharp fa-solid fa-forward" id="btnNext"  onclick="location.href='http://127.0.0.1:8000/album/Player/ ~ album.id ~ /song/ ~ song.id';"></button> #}
             {# <button class="fa-sharp fa-solid fa-forward" id="btnNext" onclick="skipForward('{{ asset('/uploads/' ~ songs[2].link) }}')"></button> #}
-            {# <button class="fa-sharp fa-solid fa-forward" id="btnNext" onclick="skipForward('http://127.0.0.1:8000/album/Player/4/song/15')"></button> #}
             
-            <a href="{{path('app_skipforward', {'id': album.id, 'song':song.id})}}" id="btnNext" onclick="skipForward('http://127.0.0.1:8000/album/Player/4/song/15')">next</a>
+            <a class="fa-sharp fa-solid fa-forward" href="{{path('app_skipforward', {'id': album.id, 'song':song.id})}}" id="btnNext"></a>
 
 
             <div class="hover">

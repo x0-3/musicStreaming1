@@ -258,46 +258,44 @@ volume.addEventListener("change", function(e) {
 
 
 // FIXME: need to fetch info from db
-// btnNext.addEventListener('click', function(){
-//   location.href = 
-// })
-
-function skipForward(url) {
-  // let audio = document.getElementById('audio');
-  // let slider = document.querySelector('.slider');
-  // let progress = document.querySelector('.progress');
-  // let playBtn = document.querySelector('#mainPlayBtn');
-  console.log('url : ',url);
-
-  // fetch(url)
-  fetch(url, {
-    body: {
-      url: url
-    }, // get form data
-    method: 'POST', // get method 
-  })
 
 
-    .then(response => response.json())
-    .then(data => {
-      alert("found! ^_^");
+// function skipForward(url) {
+//   // let audio = document.getElementById('audio');
+//   // let slider = document.querySelector('.slider');
+//   // let progress = document.querySelector('.progress');
+//   // let playBtn = document.querySelector('#mainPlayBtn');
+//   console.log('url : ',url);
 
-      audio.src = data.link;
+//   // fetch(url)
+//   fetch(url, {
+//     body: {
+//       url: url
+//     }, // get form data
+//     method: 'POST', // get method 
+//   })
 
-      console.log('audio src : ', audio.src);
 
-      audio.play();
-      playBtn.innerHTML = '<span class="fa-solid fa-pause"></span>';
+//     .then(response => response.json())
+//     .then(data => {
+//       alert("found! ^_^");
 
-      slider.value = 0;
-      progress.style.width = '0%';
+//       audio.src = data.link;
+
+//       console.log('audio src : ', audio.src);
+
+//       audio.play();
+//       playBtn.innerHTML = '<span class="fa-solid fa-pause"></span>';
+
+//       slider.value = 0;
+//       progress.style.width = '0%';
       
-    })
-    .catch(function () {
+//     })
+//     .catch(function () {
 
-      alert('not Found');
-    });
-}
+//       alert('not Found');
+//     });
+// }
 
 
 // ************************************************ keybinds ************************************************//

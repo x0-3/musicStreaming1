@@ -179,21 +179,19 @@ class AlbumController extends AbstractController
     }
 
 
-    // tests
-    // FIXME: get the song for an album 
+    // skip to the next song of the album
     #[Route('/skipForward/{id}/{song}', name: 'app_skipforward')]
     public function skipForward(Request $request, Album $album, Song $song): Response
     {
-        // return $this->json([0, 1, 2]);
 
-        $url = $request->get('url');
+        $songId=$song->getId(); // get the song id
 
-        $data = [
-            'link' => $url,
-        ];
+        $songId++; // increment the song id
 
-        // return $this->json($data);
-        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $song->getId()]);
+        // dd($songId);
+        
+        // redirect to the page of the next song
+        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $songId]);  
     }
 
 
@@ -203,7 +201,7 @@ class AlbumController extends AbstractController
     public function albumMusicPlayer(Album $album, RouterInterface $router, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {
         $songs = $album->getSongs(); // get the song list from the album
-        $skipForwardUrl = $router->generate('app_skipforward', ['id' => $album->getId(), 'song' => $song->getId()]);
+        // $skipForwardUrl = $router->generate('app_skipforward', ['id' => $album->getId(), 'song' => $song->getId()]);
 
         // dd($skipForwardUrl);
 
@@ -238,7 +236,7 @@ class AlbumController extends AbstractController
             'album' => $album,
             'songs' => $songs,
             'song' => $song,
-            'skipForwardUrl' => $skipForwardUrl,
+            // 'skipForwardUrl' => $skipForwardUrl,
         ]);
     }
 
