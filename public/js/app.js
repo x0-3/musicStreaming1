@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // we user window. because the onClick attribute it's defined in the global scope 
 // we need it to be defined in the global scope in order for the function to be found and called
 window.toggleTheme = function() {
-  var element = document.body;
+  let element = document.body;
   element.classList.toggle("dark");
 
   let theme = localStorage.getItem("theme");
@@ -96,6 +96,11 @@ const handleResponse = function(response) {
       // insertAdjacentHTML allows you to insert the new comment to a specific position
       // afterbegin insert the new comment at the top of the comment list 
       commentList.insertAdjacentHTML('afterbegin', response.html); 
+
+      console.log("handleResponse - response = ", response);
+      console.log("handleResponse - response.idComment = ", response.idComment);
+
+      handleAddEventListenerOnCommentDeleteButton(document.getElementById(`comment-${response.idComment}`));
     break; 
     
     // FIXME: make it not redirect to the json endpoint
@@ -103,8 +108,8 @@ const handleResponse = function(response) {
     // case 'COMMENT_DELETED_SUCCESSFULLY':
 
     //   // Get the comment element by its ID or any other unique identifier
-    //   var commentId = response.commentId;
-    //   var commentElement = document.getElementById(commentId);
+    //   let commentId = response.commentId;
+    //   let commentElement = document.getElementById(commentId);
     //   if (commentElement) {
     //     commentElement.remove();
     //   }
@@ -114,34 +119,79 @@ const handleResponse = function(response) {
 }
 
 
-// FIXME: make it not redirect to the json endpoint
-$(document).ready(function () {
-  $('.deletebtn').on('click', function (e) {
-    
+function handleAddEventListenerOnCommentDeleteButton(elementComment) {
+  elementComment.addEventListener('click', function (e) {
+  
     e.preventDefault(); // doens't send data 
 
-    var url = $(this).attr('href');
+    let url = elementComment.getAttribute('delete-url');
     deleteComment(url);
 
-    function deleteComment(url) {
+    console.log('url = ', url);
+  })
+}
 
-      $.ajax({
 
-        type: "POST",
-        url: url
-      })
+function deleteComment(url) {
 
-      .done(function (data) {
+  $.ajax({
 
-        var id = JSON.parse(data).id;
+    type: "POST",
+    url: url
+  })
 
-        $('#comment-' + id).remove();
-      })
+  .done(function (data) {
 
-      .fail(function () {
+    console.log('data = ', data);
 
-        alert('Could not be deleted');
-      });
-    }
+    // let id = JSON.parse(data).id;
+    let id = data.id;
+
+    console.log('id = ', id);
+
+    $('#comment-' + id).remove();
+    // document.getElementById(`comment-${id}`).remove();
+  })
+
+  .fail(function () {
+
+    alert('Could not be deleted');
   });
+}
+
+
+
+// FIXME: make it not redirect to the json endpoint
+$(document).ready(function () {
+
+  // // console.log('$(".deletebtn") = ', $('.deletebtn'));
+
+  // // $('.deletebtn').on('click', function (e) {
+
+  // let elementsComments = document.querySelectorAll(".deletebtn");
+
+  // console.log("elementsComments = ", elementsComments);
+
+  // // $('.deletebtn').forEach(elementComment => {
+  // elementsComments.forEach(elementComment => {
+  //   // elementComment.on('click', function (e) {
+  //   elementComment.addEventListener('click', function (e) {
+    
+  //     e.preventDefault(); // doens't send data 
+
+  //     // let url = $(this).attr('delete-url');
+  //     let url = elementComment.getAttribute('delete-url');
+  //     deleteComment(url);
+
+  //     console.log('url = ', url);
+  //   // });
+  //   })
+  // });
+
+  let elementsComments = document.querySelectorAll(".deletebtn");
+
+  elementsComments.forEach(function(elementComment) {
+    handleAddEventListenerOnCommentDeleteButton(elementComment);
+  });
+
 });

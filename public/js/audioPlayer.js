@@ -260,15 +260,21 @@ volume.addEventListener("change", function(e) {
 // FIXME: need to fetch info from db
 
 function skipForward(url) {
-  let audio = document.getElementById('audio');
-  let slider = document.querySelector('.slider');
-  let progress = document.querySelector('.progress');
-  let playBtn = document.querySelector('#mainPlayBtn');
+  // let audio = document.getElementById('audio');
+  // let slider = document.querySelector('.slider');
+  // let progress = document.querySelector('.progress');
+  // let playBtn = document.querySelector('#mainPlayBtn');
+  console.log(url);
 
   fetch(url)
+
+
     .then(response => response.json())
     .then(data => {
       audio.src = data.link;
+
+      console.log(audio.src);
+
       audio.play();
       playBtn.innerHTML = '<span class="fa-solid fa-pause"></span>';
 

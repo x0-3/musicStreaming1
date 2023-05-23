@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{songs[0].nameSong}}{% endblock %}
+{% block title %}{{song.nameSong}}{% endblock %}
 
 {% block body %}
 <section class="musicPlayer">
@@ -11,8 +11,8 @@
             <img src="{{asset('uploads/' ~ album.cover)}}" alt="music cover">
         </figure>
 
-        <h3 class="trackTitle">{{songs[0].nameSong}}</h3>
-        <h4 class="ArtistName">{{songs[0].user.username}}</h4>
+        <h3 class="trackTitle">{{song.nameSong}}</h3>
+        <h4 class="ArtistName">{{song.user.username}}</h4>
 
         
         <div class="controls">
@@ -21,7 +21,7 @@
 
             <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
-            <button class="fa-sharp fa-solid fa-forward" id="btnNext" onclick="skipForward('{{ asset('/uploads/' ~ songs[2].link) }}')"></button>
+            <button class="fa-sharp fa-solid fa-forward" id="btnNext" onclick="skipForward('{{ asset('/uploads/' ~ song.link) }}')"></button>
 
             <div class="hover">
 
@@ -37,7 +37,7 @@
 
         {# {% for song in songs %} #}
 
-            <audio id="audio" src="{{asset('uploads/' ~ songs[0].link)}}" autoplay skip preload="metadata"></audio>    
+            <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip preload="metadata"></audio>    
         {# {% endfor %} #}
 
         <div class="timeline">

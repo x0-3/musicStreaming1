@@ -1,5 +1,5 @@
 {# FIXME: fix issue not dynamique redirect to json #}
-<article id="comment">
+<article id="comment-{{comment.id}}">
 
     <figure>
         {% if comment.user.avatar != null %}
@@ -26,8 +26,9 @@
                         {% if app.user.id is same as(comment.user.id) %}
 
                             <div id="list-items">
-                                <a href="{{path('delete_comment', {'id':comment.id})}}" class="deletebtn">delete</a>
+                                {# <a href="{{path('delete_comment', {'id':comment.id})}}" class="deletebtn">delete</a> #}
                                 
+                                <p delete-url="{{path('delete_comment', {'id':comment.id})}}" class="deletebtn">delete</p>
                             </div>
                             
                         {% endif %}

@@ -42,7 +42,8 @@ class CommentService
             'code' => Comment::COMMENT_ADDED_SUCCESSFULLY,
             'html' => $this->environment->render('comment/_comment.html.twig', [
                 'comment' => $comment
-            ])
+            ]),
+            'idComment' => $comment->getId()
         ]);
     }
 
