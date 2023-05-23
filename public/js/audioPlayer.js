@@ -79,22 +79,22 @@ function loadTrack(){
 loadTrack();
 
 // ************************************************ switch prev ************************************************//
-btnPrev.addEventListener('click', () => {
+// btnPrev.addEventListener('click', () => {
 
-  trackId--;
+//   trackId--;
 
-  // if the track id is negative  
-  if (trackId < 0) {
+//   // if the track id is negative  
+//   if (trackId < 0) {
 
-    // go back to the last song
-    trackId = tracks.length - 1;
-  }
+//     // go back to the last song
+//     trackId = tracks.length - 1;
+//   }
 
-  loadTrack();
+//   loadTrack();
 
-  switchtrack();
+//   switchtrack();
 
-});
+// });
 
 // ************************************************ switch next ************************************************//
 // btnNext.addEventListener("click", nextTrack);
@@ -150,7 +150,6 @@ audio.onloadedmetadata = function() {
     // get the current audio time
     const currentAudioTime = Math.floor(audio.currentTime);
 
-    // console.log(audio.currentTime);
 
     // get the percentage
     const timePercentage = (currentAudioTime / audio.duration) * 100 + "%";
@@ -216,16 +215,6 @@ audio.onloadedmetadata = function() {
   });
 
 };
-
-
-
-
-
-
-
-
-
-
 
 
 // ************************************************ volume control ************************************************//

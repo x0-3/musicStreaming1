@@ -179,31 +179,12 @@ class AlbumController extends AbstractController
     }
 
 
-    // skip to the next song of the album
-    #[Route('/skipForward/{id}/{song}', name: 'app_skipforward')]
-    public function skipForward(Request $request, Album $album, Song $song): Response
-    {
-
-        $songId=$song->getId(); // get the song id
-
-        $songId++; // increment the song id
-
-        // dd($songId);
-        
-        // redirect to the page of the next song
-        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $songId]);  
-    }
-
-
     // music player page for an album
     // with the comment form
     #[Route('/album/Player/{id}/song/{song}', name: 'app_albumPlayer')]
     public function albumMusicPlayer(Album $album, RouterInterface $router, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {
         $songs = $album->getSongs(); // get the song list from the album
-        // $skipForwardUrl = $router->generate('app_skipforward', ['id' => $album->getId(), 'song' => $song->getId()]);
-
-        // dd($skipForwardUrl);
 
         // for the comment section 
         $user = $security->getUser();
@@ -236,9 +217,33 @@ class AlbumController extends AbstractController
             'album' => $album,
             'songs' => $songs,
             'song' => $song,
-            // 'skipForwardUrl' => $skipForwardUrl,
         ]);
     }
 
+    // skip to the next song of the album
+    #[Route('/skipForward/{id}/{song}', name: 'app_skipforward')]
+    public function skipForward(Album $album, Song $song): Response
+    {
 
+        $songId=$song->getId(); // get the song id
+
+        $songId++; // increment the song id
+
+        // redirect to the page of the next song
+        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $songId]);  
+    }
+
+
+    // play previous song of the album
+    #[Route('/prevSong/{id}/{song}', name: 'app_prevSong')]
+    public function prevSong(Album $album, Song $song): Response
+    {
+
+        $songId=$song->getId(); // get the song id
+
+        $songId--; // increment the song id
+
+        // redirect to the page of the next song
+        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $songId]);  
+    }
 }

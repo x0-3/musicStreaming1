@@ -19,7 +19,8 @@
             
             {% include "like/_like.html.twig" %}
 
-            <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
+            {# <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>     #}
+            <a href="{{path('app_prevSong', {'id': album.id, 'song':song.id})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>    
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>        
             {# <button class="fa-sharp fa-solid fa-forward" id="btnNext" onclick="skipForward('{{ asset('/uploads/' ~ songs[2].link) }}')"></button> #}
             
@@ -39,7 +40,6 @@
         </div>
         
         {# {% for song in songs %} #}
-            {# {{ dump(loop) }} #}
 
 
             <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip preload="metadata"></audio>
