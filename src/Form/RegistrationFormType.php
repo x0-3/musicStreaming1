@@ -4,15 +4,16 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 
 class RegistrationFormType extends AbstractType
@@ -23,6 +24,17 @@ class RegistrationFormType extends AbstractType
             ->add('email',TextType::class)
 
             ->add('username',TextType::class)
+
+            // ->add('roles', ChoiceType::class, [
+            //     'choices' => [
+            //         'User' => 'ROLE_USER',
+            //         'Artist'=> 'ROLE_ARTIST',
+            //     ],
+
+            //     'expanded' => true,
+            //     'multiple' => true,
+                
+            // ])
 
             ->add('avatar', FileType::class, [
                 'label' => 'image',
