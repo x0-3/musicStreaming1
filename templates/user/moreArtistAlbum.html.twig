@@ -11,6 +11,15 @@
             {% for album in albums %}
 
                 <div class="mcard">
+                    
+                    <div class="dropdown">
+                        <button class="fa-solid fa-ellipsis-vertical"></button>
+                  
+                        <div id="list-items">
+                           <a href="{{path('edit_album', {'id': album.id})}}">edit</a>
+                           <a href="{{path('delete_album', {'id': album.id})}}">delete</a>
+                        </div>
+                    </div>
 
                     <a href="{{path('app_albumDetail', {'id': album.id})}}">
 

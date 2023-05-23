@@ -19,10 +19,12 @@
             
             {% include "like/_like.html.twig" %}
 
-            {# TODO: skip and previous song #}
-            <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>    
+            <a href="{{path('playlist_prevSong', {'id': playlist.id, 'song': song.id})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>
+
+            {# <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>     #}
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
-            <button class="fa-sharp fa-solid fa-forward" id="btnNext"></button>
+            {# <button class="fa-sharp fa-solid fa-forward" id="btnNext"></button> #}
+            <a href="{{path('playlist_skipforward', {'id': playlist.id, 'song': song.id})}}" class="fa-sharp fa-solid fa-forward" id="btnNext"></a>
         
             <div class="hover">
 

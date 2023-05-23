@@ -102,10 +102,11 @@ $breakpointPhone: 767px;
                         display: none;
                     }
 
-                  .playlistCard, .mcard{
+                    .playlistCard, .mcard{
                         width: 190px;
                         margin: 0 15px;
                         display: inline-block;
+                        position: relative;
                     }
                 }
             }

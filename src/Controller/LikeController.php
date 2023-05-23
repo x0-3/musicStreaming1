@@ -88,6 +88,33 @@ class LikeController extends AbstractController
         }
 
     }
+
+    // skip to the next song of the liked songs
+    #[Route('/like/skipForward/{id}', name: 'like_skipforward')]
+    public function skipForward(Song $song): Response
+    {
+
+        $songId=$song->getId(); // get the song id
+
+        $songId++; // increment the song id
+
+        // redirect to the page of the next song
+        return $this->redirectToRoute('like_Player', ['id' => $songId]);  
+    }
+
+
+    // play previous song of the liked songs
+    #[Route('/like/prevSong/{id}', name: 'like_prevSong')]
+    public function prevSong(Song $song): Response
+    {
+
+        $songId=$song->getId(); // get the song id
+
+        $songId--; // increment the song id
+
+        // redirect to the page of the next song
+        return $this->redirectToRoute('like_Player', ['id' => $songId]);  
+    }
 }
 
 

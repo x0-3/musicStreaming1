@@ -220,8 +220,9 @@ class AlbumController extends AbstractController
         ]);
     }
 
+
     // skip to the next song of the album
-    #[Route('/skipForward/{id}/{song}', name: 'app_skipforward')]
+    #[Route('/album/skipForward/{id}/{song}', name: 'app_skipforward')]
     public function skipForward(Album $album, Song $song): Response
     {
 
@@ -235,7 +236,7 @@ class AlbumController extends AbstractController
 
 
     // play previous song of the album
-    #[Route('/prevSong/{id}/{song}', name: 'app_prevSong')]
+    #[Route('/album/prevSong/{id}/{song}', name: 'app_prevSong')]
     public function prevSong(Album $album, Song $song): Response
     {
 

@@ -92,6 +92,34 @@ class PlaylistController extends AbstractController
         ]);
     }
 
+    
+    // skip to the next song of the playlist
+    #[Route('/playlist/skipForward/{id}/{song}', name: 'playlist_skipforward')]
+    public function skipForward(Playlist $playlist, Song $song): Response
+    {
+
+        $songId=$song->getId(); // get the song id
+
+        $songId++; // increment the song id
+
+        // redirect to the page of the next song
+        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
+    }
+
+
+    // play previous song of the playlist
+    #[Route('/playlist/prevSong/{id}/{song}', name: 'playlist_prevSong')]
+    public function prevSong(Playlist $playlist, Song $song): Response
+    {
+
+        $songId=$song->getId(); // get the song id
+
+        $songId--; // increment the song id
+
+        // redirect to the page of the next song
+        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
+    }
+
 
     // create a new playlist
     #[Route('/playlist/add', name: 'add_playlist')]
