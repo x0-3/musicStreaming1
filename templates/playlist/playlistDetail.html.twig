@@ -35,12 +35,13 @@
                 {% endif %}
 
                 
+                {# toggle favorite playlist #}
                 {% if app.user %}
                     <a href="{{path('favorite_playlist', {'id': playlist.id})}}" data-action="favorite">
                 {% endif %}
 
-                    <i class="fa-solid fa-check {{ app.user in playlist.userFavorites ? 'd-none' : '' }}"></i>
-                    <i class="fa-solid fa-check {{ app.user in playlist.userFavorites ? '' : 'd-none' }}" style="color: #22b71f;"></i>
+                    <i class="fa-solid fa-check uncheck {{ app.user in playlist.userFavorites ? 'd-none' : '' }}"></i>
+                    <i class="fa-solid fa-check check {{ app.user in playlist.userFavorites ? '' : 'd-none' }}" style="color: #22b71f;"></i>
                 
                 {% if app.user %}
                     </a>

@@ -1,4 +1,5 @@
-import Like from "./like.js";
+import Like from "./Like.js";
+import Favorite from "./Favorite.js";
 
 // ********************************************* Like functionnality *****************************************************************//
 // execute function when the DOM has finished loading
@@ -16,7 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // then make a new like element imported from the javascript script
     new Like(likeElements);
   }
+
+
+  const favoriteElements = []. slice.call(document.querySelectorAll('a[data-action="favorite"]'));
     
+  if (favoriteElements) {
+    
+    new Favorite(favoriteElements);
+  }
 });
 
 
