@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\Album;
 use App\Entity\Song;
-use App\Entity\Subscribe;
 use App\Entity\User;
+use App\Entity\Album;
+use App\Entity\Subscribe;
+use App\Form\EditUserType;
 use App\Form\SubscribeType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
@@ -121,5 +123,59 @@ class UserController extends AbstractController
 
         }
 
+    }
+
+
+    // edit the user profile
+    #[Route('/profile/edit', name: 'edit_profile')]
+    public function editUser(Request $request,EntityManagerInterface $em): Response
+    {
+
+        $user = $this->getUser(); // get the current user
+
+        // if the user is logged in
+        if ($user) {
+
+            $editUserForm = $this->createForm(EditUserType::class, $user);
+
+            $editUserForm->handleRequest($request);
+            if ($editUserForm->isSubmitted() && $editUserForm->isValid()) {
+
+                $user = $editUserForm->getData();
+
+                // ... perform some action, such as saving the task to the database
+                $em->persist($user);
+
+                // actually executes the queries (i.e. the INSERT query)
+                $em->flush();
+
+
+                return $this->redirectToRoute('app_profile');
+            }
+
+            return $this->render('user/editUser.html.twig', [
+                'editUserForm' => $editUserForm,
+            ]);
+        }
+
+    }
+
+
+    // delete the user profile
+    #[Route('/profile/delete', name: 'delete_profile')]
+    public function deleteUser(EntityManagerInterface $em): Response
+    {
+
+        $user = $this->getUser(); // get the current user
+
+        // if the user is logged in
+        if ($user) {
+
+            $em->remove($user);
+            $em->flush();
+
+        }
+        return $this->redirectToRoute('app_home');
+        
     }
 }

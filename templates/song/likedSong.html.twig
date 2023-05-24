@@ -12,16 +12,20 @@
         </figure>
         <h3>Liked Songs</h3>
 
-        <div class="playerBtns">
+        {# if there is no music in the like then #}
+        {% if like|length != 0 %}
+                  
+            <div class="playerBtns">
+                <a href="{{path('like_Player', {'id': like[0].id})}}">
+                    <i class="fa-regular fa-circle-play"></i>
+                </a>
 
-            <a href="{{path('like_Player', {'id': like[0].id})}}">
-                <i class="fa-regular fa-circle-play"></i>
-            </a>
+                <a href="">
+                    <i class="fa-solid fa-shuffle"></i>
+                </a>
+            </div>
 
-            <a href="">
-                <i class="fa-solid fa-shuffle"></i>
-            </a>
-        </div>
+        {% endif %}
     </div>
 
     <table>

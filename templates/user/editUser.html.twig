@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}edit profile{% endblock %}
+
+{% block body %}
+
+{{ form_start(editUserForm) }}
+    {{ form_row(editUserForm.email) }}
+    {{ form_row(editUserForm.username) }}
+    {{ form_row(editUserForm.avatar) }}
+    {{ form_row(editUserForm.submit) }}
+
+{{ form_end(editUserForm) }}
+
+<a class="btn btn-danger" href="{{path('delete_profile')}}">delete account</a>
+
+{% endblock %}

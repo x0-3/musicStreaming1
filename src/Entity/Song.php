@@ -23,11 +23,11 @@ class Song
     private ?string $link = null;
 
     #[ORM\ManyToOne(inversedBy: 'songs')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'songs')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Album $album = null;
 
     #[ORM\ManyToOne(inversedBy: 'songs')]

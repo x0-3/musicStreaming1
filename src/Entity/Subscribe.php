@@ -18,6 +18,7 @@ class Subscribe
     private ?\DateTimeInterface $dateFollow = null;
 
     #[ORM\ManyToOne(inversedBy: 'subUser1')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?User $user1 = null; // user that is subscribed to an artist
 
     #[ORM\ManyToOne(inversedBy: 'subUser2')]

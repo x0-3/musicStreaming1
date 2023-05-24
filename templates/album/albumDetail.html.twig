@@ -11,16 +11,20 @@
         </figure>
         <h3>{{album.nameAlbum}}</h3>
 
-        <div class="playerBtns">
+        {% if songs|length != 0 %}
+            
+            <div class="playerBtns">
 
-            <a href="{{path('app_albumPlayer', {'id': album.id, 'song': songs[0].id})}}">
-                <i class="fa-regular fa-circle-play"></i>
-            </a>
+                <a href="{{path('app_albumPlayer', {'id': album.id, 'song': songs[0].id})}}">
+                    <i class="fa-regular fa-circle-play"></i>
+                </a>
 
-            <a href="#">
-                <i class="fa-solid fa-shuffle"></i>
-            </a>
-        </div>
+                <a href="#">
+                    <i class="fa-solid fa-shuffle"></i>
+                </a>
+            </div>
+            
+        {% endif %}
     </div>
 
     {% if app.user %}
