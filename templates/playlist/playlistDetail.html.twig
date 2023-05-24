@@ -35,6 +35,7 @@
                 {% endif %}
 
                 
+                {# TODO: fix css #}
                 {# toggle favorite playlist #}
                 {% if app.user %}
                     <a href="{{path('favorite_playlist', {'id': playlist.id})}}" data-action="favorite">
