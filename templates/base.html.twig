@@ -52,7 +52,8 @@
     
                     <div class="dropdown-content">
     
-                        {% if app.user %}
+                        {# if the user is an artist then show profile link #}
+                        {% if app.user and is_granted('ROLE_ARTIST') %}
                             
                             <div class="profile">
                                 
@@ -61,15 +62,19 @@
                                     Profile
                                 </a>
                             </div>
-                        {% endif %}
+                        
+                            {# else show setting link to edit the user info #}
+                        {% else %}
 
-                        <div class="setting">
-    
-                            <a href="#">
-                                <i class="fa-solid fa-gear"></i>
-                                Settings
-                            </a>
-                        </div>
+                            <div class="setting">
+        
+                                <a href="{{path('edit_profile')}}">
+                                    <i class="fa-solid fa-gear"></i>
+                                    Settings
+                                </a>
+                            </div>
+
+                        {% endif %}
     
                         <div class="logout">
 
