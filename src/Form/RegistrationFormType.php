@@ -25,16 +25,15 @@ class RegistrationFormType extends AbstractType
 
             ->add('username',TextType::class)
 
-            // ->add('roles', ChoiceType::class, [
-            //     'choices' => [
-            //         'User' => 'ROLE_USER',
-            //         'Artist'=> 'ROLE_ARTIST',
-            //     ],
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'User' => 'ROLE_USER',
+                    'Artist'=> 'ROLE_ARTIST',
+                ],
 
-            //     'expanded' => true,
-            //     'multiple' => true,
-                
-            // ])
+                'expanded' => true,
+                'multiple' => true,
+            ])
 
             ->add('avatar', FileType::class, [
                 'label' => 'image',

@@ -46,6 +46,17 @@ class EditUserType extends AbstractType
             )
             ->add('email', EmailType::class)
             ->add('username', TextType::class)
+
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'User' => 'ROLE_USER',
+                    'Artist'=> 'ROLE_ARTIST',
+                ],
+
+                'expanded' => true,
+                'multiple' => true,
+            ])
+            
             ->add('submit', SubmitType::class)
             // ->add('roles')
             // ->add('password')
