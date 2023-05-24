@@ -158,11 +158,13 @@ class UserController extends AbstractController
             ]);
         }
 
+        return $this->redirectToRoute('app_home');
+
     }
 
 
     // delete the user profile
-    #[Route('/profile/delete', name: 'delete_profile')]
+    #[Route('/user/delete', name: 'delete_profile')]
     public function deleteUser(EntityManagerInterface $em): Response
     {
 
