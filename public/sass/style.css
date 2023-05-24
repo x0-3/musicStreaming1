@@ -204,6 +204,32 @@
 * body .dropdown:hover #list-items {
   display: block;
 }
+* body .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+* body .modal .modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+* body .modal .modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
 * body section.home {
   display: flex;
   flex-direction: column;
@@ -780,6 +806,10 @@ body.dark section.playlistDetail .playlistHeader h3, body.dark section.artistDet
 }
 body.dark section.playlistDetail .playlistHeader .playerBtns a, body.dark section.artistDetail .playlistHeader .playerBtns a, body.dark section.musicPlayer .playlistHeader .playerBtns a {
   color: white;
+}
+body.dark section.playlistDetail .uncheck, body.dark section.playlistDetail .check, body.dark section.artistDetail .uncheck, body.dark section.artistDetail .check, body.dark section.musicPlayer .uncheck, body.dark section.musicPlayer .check {
+  margin-left: 8px;
+  font-size: larger;
 }
 body.dark section.playlistDetail th, body.dark section.playlistDetail tr, body.dark section.playlistDetail i, body.dark section.playlistDetail td a, body.dark section.artistDetail th, body.dark section.artistDetail tr, body.dark section.artistDetail i, body.dark section.artistDetail td a, body.dark section.musicPlayer th, body.dark section.musicPlayer tr, body.dark section.musicPlayer i, body.dark section.musicPlayer td a {
   color: white;

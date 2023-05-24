@@ -12,6 +12,19 @@
 
 {{ form_end(editUserForm) }}
 
-<a class="btn btn-danger" href="{{path('delete_profile')}}">delete account</a>
+{# <a class="btn btn-danger" href="{{path('delete_profile')}}">delete account</a> #}
+
+
+<button class="btn btn-danger" id="myBtn">delete account</button>
+
+<div id="myModal" class="modal">
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Are you sure you want to delete your account ?</p>
+    <a class="btn btn-danger" href="{{path('delete_profile')}}">delete account</a>
+  </div>
+
+</div>
 
 {% endblock %}
