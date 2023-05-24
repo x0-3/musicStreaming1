@@ -53,12 +53,11 @@ class EditUserType extends AbstractType
                     'Artist'=> 'ROLE_ARTIST',
                 ],
 
-                'expanded' => true,
                 'multiple' => true,
             ])
             
             ->add('submit', SubmitType::class)
-            // ->add('roles')
+            
             // ->add('password')
             // ->add('isVerified')
             // ->add('likes')

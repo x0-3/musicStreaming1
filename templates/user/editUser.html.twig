@@ -5,8 +5,10 @@
 {% block body %}
 
 {{ form_start(editUserForm) }}
+
     {{ form_row(editUserForm.email) }}
     {{ form_row(editUserForm.username) }}
+    {{ form_row(editUserForm.roles) }}
     {{ form_row(editUserForm.avatar) }}
     {{ form_row(editUserForm.submit) }}
 

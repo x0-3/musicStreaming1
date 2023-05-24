@@ -1,7 +1,7 @@
 const playBtn = document.querySelector("#mainPlayBtn");
 const audio = document.querySelector("#audio");
 const btnPrev = document.querySelector("#btnPrev");
-const btnNext = document.querySelector("#btnNext");
+// const btnNext = document.querySelector("#btnNext");
 const trackTitle = document.querySelector(".trackTitle");
 const ArtistName = document.querySelector(".ArtistName");
 const cover = document.querySelector(".cover");

@@ -30,9 +30,8 @@ class RegistrationFormType extends AbstractType
                     'User' => 'ROLE_USER',
                     'Artist'=> 'ROLE_ARTIST',
                 ],
-
-                'expanded' => true,
                 'multiple' => true,
+
             ])
 
             ->add('avatar', FileType::class, [
