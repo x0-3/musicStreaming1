@@ -34,6 +34,10 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_ARTIST }
 
+    role_hierarchy:
+        ROLE_ARTIST: ROLE_USER # each artist is a user
+        ROLE_ADMIN: ROLE_ARTIST # each admin is an artist and user
+
 when@test:
     security:
         password_hashers:
