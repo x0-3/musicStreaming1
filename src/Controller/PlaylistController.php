@@ -243,6 +243,31 @@ class PlaylistController extends AbstractController
     }
 
 
+    // add / remove a playlist from favorites
+    #[Route('/favorite_playlist/{id}', name: 'favorite_playlist')]
+    public function favorite(Playlist $playlist, EntityManagerInterface $em)
+    {
+        $user = $this->getUser(); // get user in session
+
+        // if the user has like the song the remove the like
+        if ($playlist->isPlaylistByUser($user)) {
+
+            $playlist->removeUserFavorite($user);
+            $em->flush();
+
+            // return a json response
+            return $this->json(['message' => 'the favorites has been removed']);
+        }
+
+        // else add the like
+        $playlist->addUserFavorite($user);
+        $em->flush();
+
+        // return a json response
+        return $this->json(['message' => 'the favorites has been added']);
+        
+    }
+
 
     // detailed page for one playlist
     #[Route('/playlist/{id}', name: 'playlist_detail')]

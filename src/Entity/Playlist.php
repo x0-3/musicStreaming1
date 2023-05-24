@@ -143,4 +143,10 @@ class Playlist
         return $this;
     }
 
+    public function isPlaylistByUser(User $user): bool
+    {
+
+        return $this->userFavorites->contains($user);
+
+    }
 }

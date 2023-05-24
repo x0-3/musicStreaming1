@@ -20,11 +20,11 @@
             
                 {# if the playlist owner is the same as the user in session then show button #}
                 {% if playlist.user.id is same as(app.user.id) %}
-
+                
                     <div class="dropdown">
-
+                        
                         <i class="fa-solid fa-ellipsis-vertical"></i>
-
+                        
                         <div class="dropdown-content">
                             
                             <a href="{{path('edit_playlist', {'id': playlist.id})}}">Edit</a>
@@ -33,6 +33,19 @@
                     </div>
                     
                 {% endif %}
+
+                
+                {% if app.user %}
+                    <a href="{{path('favorite_playlist', {'id': playlist.id})}}" data-action="favorite">
+                {% endif %}
+
+                    <i class="fa-solid fa-check {{ app.user in playlist.userFavorites ? 'd-none' : '' }}"></i>
+                    <i class="fa-solid fa-check {{ app.user in playlist.userFavorites ? '' : 'd-none' }}" style="color: #22b71f;"></i>
+                
+                {% if app.user %}
+                    </a>
+                {% endif %}
+            
                 
             {% endif %}
 
