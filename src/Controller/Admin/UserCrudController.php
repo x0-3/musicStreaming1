@@ -4,10 +4,13 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -44,6 +47,12 @@ class UserCrudController extends AbstractCrudController
         ])
         ->renderExpanded()
         ->allowMultipleChoices();
+        
+        yield BooleanField::new('isVerified');
+
+        // FIXME: make it that the user is logged out after the fiel is changed
+        yield BooleanField::new('isBanned')->renderAsSwitch(true);
+
     }
    
 }

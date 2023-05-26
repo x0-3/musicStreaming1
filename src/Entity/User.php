@@ -65,6 +65,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Album::class)]
     private Collection $albums;
 
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $isBanned = false;
+
 
 
     public function __construct()
@@ -420,6 +423,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $album->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsBanned(): ?bool
+    {
+        return $this->isBanned;
+
+    }
+
+    public function setIsBanned(bool $isBanned): self
+    {
+        $this->isBanned = $isBanned;
 
         return $this;
     }
