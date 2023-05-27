@@ -26,12 +26,24 @@
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                         
                         <div class="dropdown-content">
-                            <a href="{{path('add_toPlaylist', {'id': playlist.id})}}">add Songs</a>
+                            <p id="myBtn">add Songs</p>
                             <a href="{{path('edit_playlist', {'id': playlist.id})}}">Edit</a>
                             <a href="{{path('delete_playlist', {'id': playlist.id})}}">Delete</a>
                         </div>
                     </div>
-                    
+
+
+                    <div id="myModal" class="modal">
+
+                        <div class="modal-content">
+
+                            <span class="close">&times;</span>
+
+                            {{ render(controller('App\\Controller\\PlaylistController::addSongs', { 'id': playlist.id } )) }}
+                        </div>
+
+                    </div>
+
                 {% endif %}
 
                 

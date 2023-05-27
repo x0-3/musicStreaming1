@@ -271,7 +271,7 @@ class PlaylistController extends AbstractController
 
 
     #[Route('/playlist/song/{id}', name: 'add_toPlaylist')]
-    public function new(Request $request, Playlist $playlist, EntityManagerInterface $em): Response
+    public function addSongs(Request $request, Playlist $playlist, EntityManagerInterface $em): Response
     {
         $user = $this->getUser(); // get user in session
 
@@ -298,6 +298,7 @@ class PlaylistController extends AbstractController
 
         return $this->render('playlist/addSongPlaylist.html.twig', [
             'form' => $form,
+            'playlist' => $playlist
         ]);
     }
 

@@ -1,11 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Add a new playlist{% endblock %}
-
-{% block body %}
-
-
-{{ form_start(form)}}
+{{ form_start(form, {'action': path('add_toPlaylist', {'id': playlist.id})} )}}
 
 
     {# {{form_row(formAddPlaylist.playlistName)}}
@@ -16,5 +9,3 @@
 
 
 {{form_end(form)}}
-
-{% endblock %}

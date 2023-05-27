@@ -15,17 +15,14 @@ class PlaylistSongsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('image')
-            // ->add('playlistName')
-            // ->add('dateCreated')
-            // ->add('user')
+
             ->add('songs', EntityType::class, [
                 'class' => Song::class,
                 'choice_label' => 'nameSong',
                 'multiple' => true,
                 'expanded' => true,
             ])
-            // ->add('userFavorites')
+            
             ->add('submit', SubmitType::class)
         ;
     }
