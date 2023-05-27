@@ -77,13 +77,13 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/',
-                        'match' => true,
-                        'message' => 'The password must be minimum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character',
-                    ])
-                ],
+                // 'constraints' => [
+                //     new Regex([
+                //         'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/',
+                //         'match' => true,
+                //         'message' => 'The password must be minimum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character',
+                //     ])
+                // ],
             ])
         ;
     }

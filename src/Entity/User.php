@@ -69,7 +69,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?bool $isBanned = false;
 
 
-
     public function __construct()
     {
         $this->songs = new ArrayCollection();
@@ -427,11 +426,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getIsBanned(): ?bool
+    public function isBanned(): ?bool
     {
         return $this->isBanned;
 
     }
+
 
     public function setIsBanned(bool $isBanned): self
     {
@@ -439,6 +439,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
 
 }

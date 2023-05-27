@@ -4,8 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -44,6 +42,7 @@ class UserCrudController extends AbstractCrudController
         ->setChoices([
             'User' => 'ROLE_USER',
             'Artist'=> 'ROLE_ARTIST',
+            'blocked'=> 'ROLE_BLOCKED',
         ])
         ->renderExpanded()
         ->allowMultipleChoices();
