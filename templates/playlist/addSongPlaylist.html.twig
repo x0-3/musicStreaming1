@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add a new playlist{% endblock %}
+
+{% block body %}
+
+
+{{ form_start(form)}}
+
+
+    {# {{form_row(formAddPlaylist.playlistName)}}
+    {{form_row(formAddPlaylist.image)}} #}
+    {# {{form_row(formAddPlaylist.user)}} #}
+    {{form_row(form.songs)}}
+    {{form_row(form.submit)}}
+
+
+{{form_end(form)}}
+
+{% endblock %}

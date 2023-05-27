@@ -26,7 +26,7 @@
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                         
                         <div class="dropdown-content">
-                            
+                            <a href="{{path('add_toPlaylist', {'id': playlist.id})}}">add Songs</a>
                             <a href="{{path('edit_playlist', {'id': playlist.id})}}">Edit</a>
                             <a href="{{path('delete_playlist', {'id': playlist.id})}}">Delete</a>
                         </div>

@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use App\Entity\Playlist;
 use App\Entity\Song;
 use App\Form\CommentType;
+use App\Form\PlaylistSongsType;
 use App\Form\PlaylistType;
 use App\Service\CommentService;
 use App\Service\FileUploader;
@@ -268,6 +269,37 @@ class PlaylistController extends AbstractController
         
     }
 
+
+    #[Route('/playlist/song/{id}', name: 'add_toPlaylist')]
+    public function new(Request $request, Playlist $playlist, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser(); // get user in session
+
+        $form = $this->createForm(PlaylistSongsType::class, $playlist);
+
+        if ($user) {
+            
+            $form->handleRequest($request);
+            
+            if ($form->isSubmitted() && $form->isValid()) {
+    
+                $playlist = $form->getData();
+    
+                // ... perform some action, such as saving the task to the database
+                $em->persist($playlist);
+    
+                // actually executes the queries (i.e. the INSERT query)
+                $em->flush();
+    
+                return $this->redirectToRoute('playlist_detail', ['id' => $playlist->getId()]);
+            }
+    
+        }
+
+        return $this->render('playlist/addSongPlaylist.html.twig', [
+            'form' => $form,
+        ]);
+    }
 
     // detailed page for one playlist
     #[Route('/playlist/{id}', name: 'playlist_detail')]
