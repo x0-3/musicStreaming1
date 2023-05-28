@@ -57,9 +57,20 @@
                         {% include "like/_like.html.twig" %}
                     </td>
                     <td>0:00</td>
-                    <td><button><i class="fa-solid fa-plus"></i></button></td>
+                    <td><button><i id="myBtn" class="fa-solid fa-plus"></i></button></td>
                 </tr>
             
+                {# FIXME: not adding songs in db #}
+                <div id="myModal" class="modal">
+
+                    <div class="modal-content">
+
+                        <span class="close">&times;</span>
+
+                        {{ render(controller('App\\Controller\\SongController::addSong', { 'id': song.id } )) }}
+                    </div>
+
+                </div>
             {% endfor %}
 
         </tbody>

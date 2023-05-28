@@ -6,6 +6,7 @@ use App\Entity\Album;
 use App\Entity\Comment;
 use App\Entity\Playlist;
 use App\Entity\Song;
+use App\Form\AddSongsToPlaylistType;
 use App\Form\CommentType;
 use App\Form\SongType;
 use App\Service\CommentService;
@@ -181,6 +182,40 @@ class SongController extends AbstractController
         }
     }
     
+
+    // FIXME: not adding songs in db
+    #[Route('/song/playlist/{id}', name: 'add_toSongsPlaylist')]
+    public function addSong(Request $request, Song $song, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser(); // get user in session
+
+        $form = $this->createForm(AddSongsToPlaylistType::class, $song);
+
+        if ($user) {
+            
+            $form->handleRequest($request);
+            
+            if ($form->isSubmitted() && $form->isValid()) {
+    
+                $song = $form->getData();
+    
+                // ... perform some action, such as saving the task to the database
+                $em->persist($song);
+    
+                // actually executes the queries (i.e. the INSERT query)
+                $em->flush();
+    
+                return $this->redirectToRoute('app_like');
+            }
+    
+        }
+
+        return $this->render('song/addSongsToPlaylist.html.twig', [
+            'form' => $form,
+            'song' => $song
+        ]);
+    }
+
 
     // song player for one song
     // with comment form
