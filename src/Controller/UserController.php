@@ -35,6 +35,17 @@ class UserController extends AbstractController
 
         $user = $this->getUser();
 
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         // page without subscriptions functionality
         $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
         $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
@@ -103,10 +114,21 @@ class UserController extends AbstractController
 
     // ************************************************* profil page ********************************************************** //
     #[Route('/profile', name: 'app_profile')]
-    public function profilPage(EntityManagerInterface $em, Security $security): Response
+    public function profilPage(EntityManagerInterface $em): Response
     {
         
-        $user =  $security->getUser();
+        $user =  $this->getUser();
+
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         if ($user) {
             
@@ -132,6 +154,17 @@ class UserController extends AbstractController
     {
 
         $user = $this->getUser(); // get the current user
+
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         // if the user is logged in
         if ($user) {
@@ -169,6 +202,17 @@ class UserController extends AbstractController
     {
 
         $user = $this->getUser(); // get the current user
+
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         // if the user is logged in
         if ($user) {

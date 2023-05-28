@@ -2,23 +2,24 @@
 
 namespace App\Controller;
 
-use App\Entity\Album;
-use App\Entity\Comment;
-use App\Entity\Genre;
 use App\Entity\Song;
+use App\Entity\User;
+use App\Entity\Album;
+use App\Entity\Genre;
+use App\Entity\Comment;
 use App\Form\AlbumType;
 use App\Form\CommentType;
-use App\Service\CommentService;
 use App\Service\FileUploader;
+use App\Service\CommentService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AlbumController extends AbstractController
 {
@@ -56,6 +57,17 @@ class AlbumController extends AbstractController
     {
 
         $user =  $security->getUser(); // get the user in session        
+
+        // check to see if the user is banned 
+        $isBanned = $entityManager->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         if($user){
 
@@ -101,6 +113,17 @@ class AlbumController extends AbstractController
     {
 
         $user =  $security->getUser(); // get the user in session        
+
+        // check to see if the user is banned 
+        $isBanned = $entityManager->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         $albumOwner = $album->getUser(); // get the owner of the album
 
@@ -182,12 +205,23 @@ class AlbumController extends AbstractController
     // music player page for an album
     // with the comment form
     #[Route('/album/Player/{id}/song/{song}', name: 'app_albumPlayer')]
-    public function albumMusicPlayer(Album $album, RouterInterface $router, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
+    public function albumMusicPlayer(EntityManagerInterface $em, Album $album, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {
         $songs = $album->getSongs(); // get the song list from the album
 
         // for the comment section 
         $user = $security->getUser();
+
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         // just set up a fresh $task object (remove the example data)
         $comment = new Comment();

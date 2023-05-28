@@ -26,6 +26,17 @@ class SubscribeController extends AbstractController
         if ($token) {
             $userId = $token->getUser()->getUserIdentifier(); // get the user email
 
+            // check to see if the user is banned 
+            $isBanned = $em->getRepository(User::class)->findOneBy([
+                'email' => $userId,
+                'isBanned' => true
+            ]);
+
+            // if he is then force his account to be logged out
+            if ($isBanned) {
+                return $this->redirectToRoute('app_logout');
+            }
+
             $subs = $em->getRepository(Subscribe::class)->findUserSubscriber($userId); // get the user subscriptions
 
             return $this->render('subscribe/ArtistSubscribe.html.twig', [
@@ -52,9 +63,20 @@ class SubscribeController extends AbstractController
 
     // case if the user is subscribed to the artist 
     #[Route('/subscribeTo/{id}', name: 'app_subscribeTo')]
-    public function deleteSubscribe(Request $request, EntityManagerInterface $em, User $artist): Response
+    public function deleteSubscribe(EntityManagerInterface $em, User $artist): Response
     {
         $user = $this->getUser();
+
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
     
         if ($user) {        
     
@@ -74,30 +96,8 @@ class SubscribeController extends AbstractController
                 // redirect to the artist page
                 return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
             }
-
-            
-            // else if the user is not subscribed then
-
-            // // add the user to the artist subscriptions
-            // $subscribe = new Subscribe();
-            
-            // $form = $this->createForm(SubscribeType::class, $subscribe);
-            // $form->handleRequest($request);
-            
-            // if ($form->isSubmitted() && $form->isValid()) {
-
-            //     $subscribe->setDateFollow(new \DateTime());
-            //     $subscribe->setUser1($user);
-            //     $subscribe->setUser2($artist);
-
-            //     $em->persist($subscribe);
-            //     $em->flush();
-        
-            //     return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);                
-            // }
             
             return $this->render('subscribe/_addSub.html.twig', [
-                // 'form' => $form->createView(),
                 'artist' => $artist,
                 'userSub' => $userSub,
             ]);

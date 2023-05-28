@@ -2,25 +2,26 @@
 
 namespace App\Controller;
 
+use App\Entity\Song;
+use App\Entity\User;
 use App\Entity\Album;
+use Twig\Environment;
+use App\Form\SongType;
 use App\Entity\Comment;
 use App\Entity\Playlist;
-use App\Entity\Song;
-use App\Form\AddSongsToPlaylistType;
 use App\Form\CommentType;
-use App\Form\SongType;
-use App\Service\CommentService;
 use App\Service\FileUploader;
+use App\Service\CommentService;
+use App\Form\AddSongsToPlaylistType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Twig\Environment;
 
 class SongController extends AbstractController
 {
@@ -42,7 +43,18 @@ class SongController extends AbstractController
     #[Route('/song/{id}/add', name: 'add_song')]
     public function add(EntityManagerInterface $em, Request $request, Security $security, FileUploader $fileUploader, Album $album)
     {
-        $user =  $security->getUser(); // get the user in session        
+        $user =  $security->getUser(); // get the user in session   
+        
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         // if the user is connected then proceed with the form submission
         if ($user) {
@@ -94,10 +106,21 @@ class SongController extends AbstractController
 
     // edit song 
     #[Route('/song/edit/{id}', name: 'edit_song')]
-    public function edit(EntityManagerInterface $em, Request $request, Security $security, FileUploader $fileUploader, Song $song)
+    public function edit(EntityManagerInterface $em, Request $request, FileUploader $fileUploader, Song $song)
     {
-        $user =  $security->getUser(); // get the user in session        
+        $user =  $this->getUser(); // get the user in session        
         $songOwner = $song->getUser(); // owner of the song
+
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         // if the user is the same as the song owner
         if ($songOwner === $user) {
@@ -142,9 +165,20 @@ class SongController extends AbstractController
 
     // delete song
     #[Route('/song/delete/{id}', name: 'delete_song')]
-    public function delete(EntityManagerInterface $em, Song $song, Security $security)
+    public function delete(EntityManagerInterface $em, Song $song)
     {
-        $user =  $security->getUser(); // get the user in session        
+        $user =  $this->getUser(); // get the user in session  
+        
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         $songOwner = $song->getUser(); // owner of the song
 
@@ -168,6 +202,17 @@ class SongController extends AbstractController
         if ($token) {
             $userEmail = $token->getUser()->getUserIdentifier(); // get user email
 
+            // check to see if the user is banned 
+            $isBanned = $em->getRepository(User::class)->findOneBy([
+                'email' => $userEmail,
+                'isBanned' => true
+            ]);
+
+            // if he is then force his account to be logged out
+            if ($isBanned) {
+                return $this->redirectToRoute('app_logout');
+            }
+
             $repo = $em->getRepository(Song::class);
     
             $like =  $repo->findlikedSongs($userEmail); // find like song for the user
@@ -188,6 +233,17 @@ class SongController extends AbstractController
     public function addSong(Request $request, Song $song, EntityManagerInterface $em): Response
     {
         $user = $this->getUser(); // get user in session
+
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         $form = $this->createForm(AddSongsToPlaylistType::class, $song);
 
@@ -220,11 +276,22 @@ class SongController extends AbstractController
     // song player for one song
     // with comment form
     #[Route('/song/{id}', name: 'app_songPlayer')]
-    public function songPlayer(Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
+    public function songPlayer(Song $song, RequestStack $requestStack, CommentService $commentService, EntityManagerInterface $em): Response
     {
 
         // for the comment section 
-        $user = $security->getUser();
+        $user = $this->getUser();
+
+        // check to see if the user is banned 
+        $isBanned = $em->getRepository(User::class)->findOneBy([
+            'email' => $user,
+            'isBanned' => true
+        ]);
+
+        // if he is then force his account to be logged out
+        if ($isBanned) {
+            return $this->redirectToRoute('app_logout');
+        }
 
         // just set up a fresh $task object (remove the example data)
         $comment = new Comment();

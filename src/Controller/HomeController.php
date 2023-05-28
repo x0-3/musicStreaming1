@@ -82,6 +82,17 @@ class HomeController extends AbstractController
         if ($token) {  
             $user = $tokenStorage->getToken()->getUserIdentifier(); //get the user identifier (email)
 
+            // check to see if the user is banned 
+            $isBanned = $em->getRepository(User::class)->findOneBy([
+                'email' => $user,
+                'isBanned' => true
+            ]);
+
+            // if he is then force his account to be logged out
+            if ($isBanned) {
+                return $this->redirectToRoute('app_logout');
+            }
+
             $favoritePlaylists = $em->getRepository(Playlist::class)->findFavoritePlaylists($user); //find the user's favorite playlists
 
             return $this->render('home/favoritePlaylists.html.twig', [
