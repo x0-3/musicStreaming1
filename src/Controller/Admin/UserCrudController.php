@@ -22,11 +22,6 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        // return [
-        //     IdField::new('id'),
-        //     TextField::new('title'),
-        //     TextEditorField::new('description'),
-        // ];
 
         yield EmailField::new('email');
 
@@ -48,7 +43,6 @@ class UserCrudController extends AbstractCrudController
         
         yield BooleanField::new('isVerified');
 
-        // FIXME: make it that the user is logged out after the fiel is changed
         yield BooleanField::new('isBanned')->renderAsSwitch(true);
 
     }
