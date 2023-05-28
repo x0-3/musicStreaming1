@@ -66,7 +66,6 @@ window.closeNav = function() {
   document.getElementById("mySidepanel").style.width = "0";
 }
 
-
 // ********************************************** Modal ****************************************************************** * // 
 
 // Get the modal
@@ -94,93 +93,3 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
-// ********************************************* add comment form *****************************************************************//
-const formComment = document.querySelector('#commentForm'); 
-const commentList = document.querySelector('.comments');
-
-// listen for comment form submission
-formComment.addEventListener('submit', function(e){
-
-  e.preventDefault(); // doesn't send form to server
-
-  // fetch the comment from server
-  fetch(this.action, {
-    body: new FormData(e.target), // get form data
-    method: 'POST', // get method 
-
-  })
-  // the response is returned as a JSON object
-  .then(response => response.json())
-  
-  // then the json is redirected to the the handleResponse function
-  .then(json => {
-
-    handleResponse(json);
-  })
-
-})
-
-
-const handleResponse = function(response) {
-
-  switch (response.code){
-
-    // if the comment is successful then place the comment in the comment list
-    case 'COMMENT_ADDED_SUCCESSFULLY':
-
-      // insertAdjacentHTML allows you to insert the new comment to a specific position
-      // afterbegin insert the new comment at the top of the comment list 
-      commentList.insertAdjacentHTML('afterbegin', response.html); 
-
-      // function to delete the comment from the comment list
-      handleAddEventListenerOnCommentDeleteButton(document.querySelector(`#comment-${response.idComment} .deletebtn`));
-    break; 
-    
-  }
-}
-
-// TODO: comment the code
-function handleAddEventListenerOnCommentDeleteButton(deleteButtonElement) {
-  deleteButtonElement.addEventListener('click', function (e) {
-  
-    e.preventDefault(); // doens't send data 
-
-    let url = deleteButtonElement.getAttribute('delete-url');
-    deleteComment(url);
-
-  });
-}
-
-function deleteComment(url) {
-
-  $.ajax({
-
-    type: "POST",
-    url: url
-  })
-
-  .done(function (data) {
-
-    let id = data.id;
-
-
-    $('#comment-' + id).remove();
-  })
-
-  .fail(function () {
-
-    alert('Could not be deleted');
-  });
-}
-
-
-$(document).ready(function () {
-
-  let deleteButtonElements = document.querySelectorAll(".deletebtn");
-
-  deleteButtonElements.forEach(function(elementComment) {
-    handleAddEventListenerOnCommentDeleteButton(elementComment);
-  });
-
-});
