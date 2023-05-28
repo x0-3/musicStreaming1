@@ -264,12 +264,12 @@ class SongController extends AbstractController
                 return $this->redirectToRoute('app_like');
             }
     
+            return $this->render('song/addSongsToPlaylist.html.twig', [
+                'form' => $form,
+                'song' => $song
+            ]);
         }
 
-        return $this->render('song/addSongsToPlaylist.html.twig', [
-            'form' => $form,
-            'song' => $song
-        ]);
     }
 
 
