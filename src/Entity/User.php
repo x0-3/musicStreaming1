@@ -128,6 +128,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function isBanned(): ?bool
+    {
+        return $this->isBanned;
+    }
+
+    public function setIsBanned(bool $isBanned): self
+    {
+        $this->isBanned = $isBanned;
+
+        return $this;
+    }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -422,20 +434,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $album->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    public function isBanned(): ?bool
-    {
-        return $this->isBanned;
-
-    }
-
-
-    public function setIsBanned(bool $isBanned): self
-    {
-        $this->isBanned = $isBanned;
 
         return $this;
     }

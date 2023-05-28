@@ -42,7 +42,6 @@ class UserCrudController extends AbstractCrudController
         ->setChoices([
             'User' => 'ROLE_USER',
             'Artist'=> 'ROLE_ARTIST',
-            'blocked'=> 'ROLE_BLOCKED',
         ])
         ->renderExpanded()
         ->allowMultipleChoices();

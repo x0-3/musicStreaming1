@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Playlist;
 use App\Entity\Song;
+use App\Entity\User;
+use App\Entity\Playlist;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class HomeController extends AbstractController
@@ -20,13 +21,26 @@ class HomeController extends AbstractController
         $playlists = $em->getRepository(Playlist::class)->findByMostFollow(); //find by most followed playlists
         $songs = $em->getRepository(Song::class)->findByMostLikes(); //find the most like songs        
         
-        $token = $tokenStorage->getToken();
-        
+        $token = $tokenStorage->getToken();   
+
         if ($token) {  
+
             $user = $tokenStorage->getToken()->getUserIdentifier(); //get user identifier (email)
 
-            $favoritePlaylists = $em->getRepository(Playlist::class)->find4FavoritePlaylists($user); //find the user's favorite playlists
+            // check to see if the user is banned 
+            $isBanned = $em->getRepository(User::class)->findOneBy([
+                'email' => $user,
+                'isBanned' => true
+            ]);
+    
+            // if he is then force his account to be logged out
+            if ($isBanned) {
+                return $this->redirectToRoute('app_logout');
+            }
 
+            
+            $favoritePlaylists = $em->getRepository(Playlist::class)->find4FavoritePlaylists($user); //find the user's favorite playlists
+            
             return $this->render('home/index.html.twig', [
                 'playlists' => $playlists,
                 'songs' => $songs,
