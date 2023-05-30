@@ -3,9 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\Song;
+use App\Model\SearchBar;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\From;
 use Doctrine\Persistence\ManagerRegistry;
+use EasyCorp\Bundle\EasyAdminBundle\Contracts\Orm\EntityPaginatorInterface;
+
+
 
 /**
  * @extends ServiceEntityRepository<Song>
@@ -121,7 +125,41 @@ class SongRepository extends ServiceEntityRepository
             ->where('l.email = :email')
             ->setParameter('email', $userEmail)
             ->getQuery()
-           ->getResult()
+            ->getResult()
+        ;
+
+    }
+
+
+
+    // searchBar query
+   /**
+    * @return Song[] Returns an array of Song objects
+    */
+    public function findBySearch(SearchBar $searchBar): array
+    {
+        // SELECT *
+        // FROM song s 
+        // INNER JOIN album a 
+        // ON s.album_id = a.id
+        // INNER JOIN user u
+        // ON s.user_id = u.id
+        // WHERE u.username LIKE '%tw%'
+        // OR s.name_song LIKE '%belong%'
+        // OR a.name_album LIKE '%I Used%'
+
+
+        return $this->createQueryBuilder('s')
+            ->select('s.id ,s.nameSong, a.cover , u.username ')
+            ->innerJoin('s.album', 'a')
+            ->innerJoin('s.user', 'u')
+            ->andWhere('s.nameSong LIKE :q')
+            ->orWhere('a.nameAlbum LIKE :q')
+            ->orWhere('u.username LIKE :q')
+            ->setParameter('q', "%{$searchBar->q}%")
+            // ->orderBy('a.releaseDate', 'DESC')
+            ->getQuery()
+            ->getResult()
         ;
 
     }
@@ -131,14 +169,14 @@ class SongRepository extends ServiceEntityRepository
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
+    //    return $this->createQueryBuilder('s')
+    //        ->andWhere('s.exampleField = :val')
+    //        ->setParameter('val', $value)
+    //        ->orderBy('s.id', 'ASC')
+    //        ->setMaxResults(10)
+    //        ->getQuery()
+    //        ->getResult()
+    //    ;
 //    }
 
 //    public function findOneBySomeField($value): ?Song

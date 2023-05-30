@@ -3,41 +3,48 @@
 namespace App\Controller;
 
 use App\Entity\Song;
-use App\Entity\User;
 use App\Entity\Playlist;
+use App\Form\SearchBarType;
+use App\Model\SearchBar;
+use App\Repository\SongRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class HomeController extends AbstractController
 {
     // main page
     #[Route('/home', name: 'app_home')]
-    public function index(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
+    public function index(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, Request $request, SongRepository $songRepository): Response
     {
 
         $playlists = $em->getRepository(Playlist::class)->findByMostFollow(); //find by most followed playlists
         $songs = $em->getRepository(Song::class)->findByMostLikes(); //find the most like songs        
         
+
+        // searchBar
+        $searchBar = new SearchBar();
+
+        $form = $this->createForm(SearchBarType::class, $searchBar);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // put the request query at getInt to get new post from value
+            $searchBar->page = $request->query->getInt('page', 1);
+
+            $songs = $songRepository->findBySearch($searchBar);
+        }
+
+
         $token = $tokenStorage->getToken();   
 
         if ($token) {  
 
             $user = $tokenStorage->getToken()->getUserIdentifier(); //get user identifier (email)
-
-            // check to see if the user is banned 
-            // $isBanned = $em->getRepository(User::class)->findOneBy([
-            //     'email' => $user,
-            //     'isBanned' => true
-            // ]);
-    
-            // // if he is then force his account to be logged out
-            // if ($isBanned) {
-            //     return $this->redirectToRoute('app_logout');
-            // }
-
             
             $favoritePlaylists = $em->getRepository(Playlist::class)->find4FavoritePlaylists($user); //find the user's favorite playlists
             
@@ -52,6 +59,7 @@ class HomeController extends AbstractController
         } else {
 
             return $this->render('home/index.html.twig', [
+                'form' => $form->createView(),
                 'playlists' => $playlists,
                 'songs' => $songs,
 
@@ -81,17 +89,6 @@ class HomeController extends AbstractController
         
         if ($token) {  
             $user = $tokenStorage->getToken()->getUserIdentifier(); //get the user identifier (email)
-
-            // // check to see if the user is banned 
-            // $isBanned = $em->getRepository(User::class)->findOneBy([
-            //     'email' => $user,
-            //     'isBanned' => true
-            // ]);
-
-            // // if he is then force his account to be logged out
-            // if ($isBanned) {
-            //     return $this->redirectToRoute('app_logout');
-            // }
 
             $favoritePlaylists = $em->getRepository(Playlist::class)->findFavoritePlaylists($user); //find the user's favorite playlists
 
