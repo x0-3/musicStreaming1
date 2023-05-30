@@ -77,8 +77,12 @@
     
                         li{
     
-                            a {
+                            .menuItem{
                                 color: white;
+                                cursor: pointer;
+                            }
+
+                            a {
                                 text-decoration: none;
                                 margin: 40px;
                                 font-family: 'Playfair Display', serif;
