@@ -12,7 +12,7 @@ class Comment
     const COMMENT_ADDED_SUCCESSFULLY = 'COMMENT_ADDED_SUCCESSFULLY';
     const COMMENT_ERROR = 'COMMENT_ERROR';
 
-    const COMMENT_DELETED_SUCCESSFULLY = 'COMMENT_DELETED_SUCCESSFULLY';
+    // const COMMENT_DELETED_SUCCESSFULLY = 'COMMENT_DELETED_SUCCESSFULLY';
 
 
     #[ORM\Id]
@@ -27,7 +27,7 @@ class Comment
     private ?\DateTimeInterface $dateMess = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]

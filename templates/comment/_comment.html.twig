@@ -1,16 +1,28 @@
 <article id="comment-{{comment.id}}">
 
     <figure>
-        {% if comment.user.avatar != null %}
-            <img src="{{asset('uploads/' ~ comment.user.avatar)}}" alt="profile picture">
+        {% if comment.user != null %}
 
-        {% else %}
-            <img src="{{asset('assets/img/profil_pic.png')}}" alt="profile picture">
+            {% if comment.user.avatar != null %}
+                <img src="{{asset('uploads/' ~ comment.user.avatar)}}" alt="profile picture">
+
+            {% else %}
+                <img src="{{asset('assets/img/profil_pic.png')}}" alt="profile picture">
+
+            {% endif %}
+
+            {% else %}
+                <img src="{{asset('assets/img/profil_pic.png')}}" alt="profile picture">
 
         {% endif %}
 
         <figcaption>
-            <a href="{{path('app_artistDetail', {'id':comment.user.id })}}">{{comment.user.username}}</a>
+            {% if comment.user != null %}
+                <a href="{{path('app_artistDetail', {'id':comment.user.id })}}">{{comment.user.username}}</a>
+                
+            {% else %}
+                <a href="#">account disabled</a>
+            {% endif %}
 
             {# if the user is connected then show the comment param section #}
             {% if app.user %}
