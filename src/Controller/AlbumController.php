@@ -59,15 +59,15 @@ class AlbumController extends AbstractController
         $user =  $security->getUser(); // get the user in session        
 
         // check to see if the user is banned 
-        $isBanned = $entityManager->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $entityManager->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         if($user){
 
@@ -115,15 +115,15 @@ class AlbumController extends AbstractController
         $user =  $security->getUser(); // get the user in session        
 
         // check to see if the user is banned 
-        $isBanned = $entityManager->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $entityManager->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         $albumOwner = $album->getUser(); // get the owner of the album
 
@@ -213,15 +213,15 @@ class AlbumController extends AbstractController
         $user = $security->getUser();
 
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         // just set up a fresh $task object (remove the example data)
         $comment = new Comment();

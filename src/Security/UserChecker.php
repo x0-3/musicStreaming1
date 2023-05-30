@@ -17,6 +17,7 @@ class UserChecker implements UserCheckerInterface
 
         if ($user->isBanned()) {
 
+            session_unset();
             // the message passed to this exception is meant to be displayed to the user
             throw new CustomUserMessageAccountStatusException('Your account has been banned.');
         }

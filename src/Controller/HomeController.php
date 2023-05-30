@@ -28,15 +28,15 @@ class HomeController extends AbstractController
             $user = $tokenStorage->getToken()->getUserIdentifier(); //get user identifier (email)
 
             // check to see if the user is banned 
-            $isBanned = $em->getRepository(User::class)->findOneBy([
-                'email' => $user,
-                'isBanned' => true
-            ]);
+            // $isBanned = $em->getRepository(User::class)->findOneBy([
+            //     'email' => $user,
+            //     'isBanned' => true
+            // ]);
     
-            // if he is then force his account to be logged out
-            if ($isBanned) {
-                return $this->redirectToRoute('app_logout');
-            }
+            // // if he is then force his account to be logged out
+            // if ($isBanned) {
+            //     return $this->redirectToRoute('app_logout');
+            // }
 
             
             $favoritePlaylists = $em->getRepository(Playlist::class)->find4FavoritePlaylists($user); //find the user's favorite playlists
@@ -82,16 +82,16 @@ class HomeController extends AbstractController
         if ($token) {  
             $user = $tokenStorage->getToken()->getUserIdentifier(); //get the user identifier (email)
 
-            // check to see if the user is banned 
-            $isBanned = $em->getRepository(User::class)->findOneBy([
-                'email' => $user,
-                'isBanned' => true
-            ]);
+            // // check to see if the user is banned 
+            // $isBanned = $em->getRepository(User::class)->findOneBy([
+            //     'email' => $user,
+            //     'isBanned' => true
+            // ]);
 
-            // if he is then force his account to be logged out
-            if ($isBanned) {
-                return $this->redirectToRoute('app_logout');
-            }
+            // // if he is then force his account to be logged out
+            // if ($isBanned) {
+            //     return $this->redirectToRoute('app_logout');
+            // }
 
             $favoritePlaylists = $em->getRepository(Playlist::class)->findFavoritePlaylists($user); //find the user's favorite playlists
 

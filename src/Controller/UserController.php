@@ -36,15 +36,15 @@ class UserController extends AbstractController
         $user = $this->getUser();
 
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         // page without subscriptions functionality
         $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
@@ -120,15 +120,15 @@ class UserController extends AbstractController
         $user =  $this->getUser();
 
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         if ($user) {
             
@@ -156,15 +156,15 @@ class UserController extends AbstractController
         $user = $this->getUser(); // get the current user
 
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         // if the user is logged in
         if ($user) {
@@ -204,15 +204,15 @@ class UserController extends AbstractController
         $user = $this->getUser(); // get the current user
 
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         // if the user is logged in
         if ($user) {

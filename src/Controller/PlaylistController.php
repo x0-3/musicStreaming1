@@ -34,15 +34,15 @@ class PlaylistController extends AbstractController
             $userEmail = $token->getUser()->getUserIdentifier(); // get the user email
 
             // check to see if the user is banned 
-            $isBanned = $em->getRepository(User::class)->findOneBy([
-                'email' => $userEmail,
-                'isBanned' => true
-            ]);
+            // $isBanned = $em->getRepository(User::class)->findOneBy([
+            //     'email' => $userEmail,
+            //     'isBanned' => true
+            // ]);
 
-            // if he is then force his account to be logged out
-            if ($isBanned) {
-                return $this->redirectToRoute('app_logout');
-            }
+            // // if he is then force his account to be logged out
+            // if ($isBanned) {
+            //     return $this->redirectToRoute('app_logout');
+            // }
             
             $repo = $em->getRepository(Playlist::class); // get the playlist repository
 
@@ -76,15 +76,15 @@ class PlaylistController extends AbstractController
         $user = $security->getUser();
 
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         $comment = new Comment();
         
@@ -152,15 +152,15 @@ class PlaylistController extends AbstractController
         $user =  $security->getUser(); // get the user in session   
         
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         // if the user is connected then proceed with the form submission
         if ($user) {
@@ -212,15 +212,15 @@ class PlaylistController extends AbstractController
         $user =  $security->getUser(); // get the user in session  
         
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         $playlistOwner = $playlist->getUser(); // owner of the playlist
 
@@ -278,15 +278,15 @@ class PlaylistController extends AbstractController
         $user =  $security->getUser(); // get the user in session      
         
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         $playlistOwner = $playlist->getUser(); // owner of the playlist
 
@@ -307,15 +307,15 @@ class PlaylistController extends AbstractController
         $user = $this->getUser(); // get user in session
 
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         // if the user has like the song the remove the like
         if ($playlist->isPlaylistByUser($user)) {
@@ -344,15 +344,15 @@ class PlaylistController extends AbstractController
         $user = $this->getUser(); // get user in session
 
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         $form = $this->createForm(PlaylistSongsType::class, $playlist);
 

@@ -33,15 +33,15 @@ class CommentController extends AbstractController
         $user =  $security->getUser(); // get the user in session   
         
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
 
         $commentOwner = $comment->getUser(); // owner of the comment
 

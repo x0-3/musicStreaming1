@@ -27,15 +27,15 @@ class SubscribeController extends AbstractController
             $userId = $token->getUser()->getUserIdentifier(); // get the user email
 
             // check to see if the user is banned 
-            $isBanned = $em->getRepository(User::class)->findOneBy([
-                'email' => $userId,
-                'isBanned' => true
-            ]);
+            // $isBanned = $em->getRepository(User::class)->findOneBy([
+            //     'email' => $userId,
+            //     'isBanned' => true
+            // ]);
 
-            // if he is then force his account to be logged out
-            if ($isBanned) {
-                return $this->redirectToRoute('app_logout');
-            }
+            // // if he is then force his account to be logged out
+            // if ($isBanned) {
+            //     return $this->redirectToRoute('app_logout');
+            // }
 
             $subs = $em->getRepository(Subscribe::class)->findUserSubscriber($userId); // get the user subscriptions
 
@@ -68,15 +68,15 @@ class SubscribeController extends AbstractController
         $user = $this->getUser();
 
         // check to see if the user is banned 
-        $isBanned = $em->getRepository(User::class)->findOneBy([
-            'email' => $user,
-            'isBanned' => true
-        ]);
+        // $isBanned = $em->getRepository(User::class)->findOneBy([
+        //     'email' => $user,
+        //     'isBanned' => true
+        // ]);
 
-        // if he is then force his account to be logged out
-        if ($isBanned) {
-            return $this->redirectToRoute('app_logout');
-        }
+        // // if he is then force his account to be logged out
+        // if ($isBanned) {
+        //     return $this->redirectToRoute('app_logout');
+        // }
     
         if ($user) {        
     
