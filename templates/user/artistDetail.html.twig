@@ -11,7 +11,7 @@
 
             {% if artist.avatar == null %}
               
-                <img src="{{asset('assets/img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
+                <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
             {% else %}
             
                 <img src="{{asset('uploads/' ~ artist.avatar)}}" alt="profile picture"> 
@@ -128,7 +128,7 @@
 
                         {% if artistMostSub.avatar == null %}
                             <figure>
-                                <img src="{{asset('assets/img/profil_pic.png')}}" alt="album cover">
+                                <img src="{{asset('img/profil_pic.png')}}" alt="album cover">
                             </figure>
 
                         {% else %}
