@@ -26,17 +26,6 @@ class SubscribeController extends AbstractController
         if ($token) {
             $userId = $token->getUser()->getUserIdentifier(); // get the user email
 
-            // check to see if the user is banned 
-            // $isBanned = $em->getRepository(User::class)->findOneBy([
-            //     'email' => $userId,
-            //     'isBanned' => true
-            // ]);
-
-            // // if he is then force his account to be logged out
-            // if ($isBanned) {
-            //     return $this->redirectToRoute('app_logout');
-            // }
-
             $subs = $em->getRepository(Subscribe::class)->findUserSubscriber($userId); // get the user subscriptions
 
             return $this->render('subscribe/ArtistSubscribe.html.twig', [
@@ -66,17 +55,6 @@ class SubscribeController extends AbstractController
     public function deleteSubscribe(EntityManagerInterface $em, User $artist): Response
     {
         $user = $this->getUser();
-
-        // check to see if the user is banned 
-        // $isBanned = $em->getRepository(User::class)->findOneBy([
-        //     'email' => $user,
-        //     'isBanned' => true
-        // ]);
-
-        // // if he is then force his account to be logged out
-        // if ($isBanned) {
-        //     return $this->redirectToRoute('app_logout');
-        // }
     
         if ($user) {        
     

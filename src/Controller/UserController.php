@@ -35,17 +35,6 @@ class UserController extends AbstractController
 
         $user = $this->getUser();
 
-        // check to see if the user is banned 
-        // $isBanned = $em->getRepository(User::class)->findOneBy([
-        //     'email' => $user,
-        //     'isBanned' => true
-        // ]);
-
-        // // if he is then force his account to be logged out
-        // if ($isBanned) {
-        //     return $this->redirectToRoute('app_logout');
-        // }
-
         // page without subscriptions functionality
         $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
         $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
@@ -119,17 +108,6 @@ class UserController extends AbstractController
         
         $user =  $this->getUser();
 
-        // check to see if the user is banned 
-        // $isBanned = $em->getRepository(User::class)->findOneBy([
-        //     'email' => $user,
-        //     'isBanned' => true
-        // ]);
-
-        // // if he is then force his account to be logged out
-        // if ($isBanned) {
-        //     return $this->redirectToRoute('app_logout');
-        // }
-
         if ($user) {
             
             $albums = $em->getRepository(Album::class)->findBy(['user' => $user],['releaseDate'=>'DESC'], 5);
@@ -155,17 +133,6 @@ class UserController extends AbstractController
 
         $user = $this->getUser(); // get the current user
 
-        // check to see if the user is banned 
-        // $isBanned = $em->getRepository(User::class)->findOneBy([
-        //     'email' => $user,
-        //     'isBanned' => true
-        // ]);
-
-        // // if he is then force his account to be logged out
-        // if ($isBanned) {
-        //     return $this->redirectToRoute('app_logout');
-        // }
-
         // if the user is logged in
         if ($user) {
 
@@ -176,10 +143,7 @@ class UserController extends AbstractController
 
                 $user = $editUserForm->getData();
 
-                // ... perform some action, such as saving the task to the database
                 $em->persist($user);
-
-                // actually executes the queries (i.e. the INSERT query)
                 $em->flush();
 
 
@@ -202,17 +166,6 @@ class UserController extends AbstractController
     {
 
         $user = $this->getUser(); // get the current user
-
-        // check to see if the user is banned 
-        // $isBanned = $em->getRepository(User::class)->findOneBy([
-        //     'email' => $user,
-        //     'isBanned' => true
-        // ]);
-
-        // // if he is then force his account to be logged out
-        // if ($isBanned) {
-        //     return $this->redirectToRoute('app_logout');
-        // }
 
         // if the user is logged in
         if ($user) {

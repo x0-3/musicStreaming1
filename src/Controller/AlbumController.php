@@ -56,18 +56,7 @@ class AlbumController extends AbstractController
     public function add(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, Security $security): Response
     {
 
-        $user =  $security->getUser(); // get the user in session        
-
-        // check to see if the user is banned 
-        // $isBanned = $entityManager->getRepository(User::class)->findOneBy([
-        //     'email' => $user,
-        //     'isBanned' => true
-        // ]);
-
-        // // if he is then force his account to be logged out
-        // if ($isBanned) {
-        //     return $this->redirectToRoute('app_logout');
-        // }
+        $user =  $security->getUser(); // get the user in session 
 
         if($user){
 
@@ -112,18 +101,7 @@ class AlbumController extends AbstractController
     public function edit(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, Album $album, Security $security): Response
     {
 
-        $user =  $security->getUser(); // get the user in session        
-
-        // check to see if the user is banned 
-        // $isBanned = $entityManager->getRepository(User::class)->findOneBy([
-        //     'email' => $user,
-        //     'isBanned' => true
-        // ]);
-
-        // // if he is then force his account to be logged out
-        // if ($isBanned) {
-        //     return $this->redirectToRoute('app_logout');
-        // }
+        $user =  $security->getUser(); // get the user in session 
 
         $albumOwner = $album->getUser(); // get the owner of the album
 
@@ -211,17 +189,6 @@ class AlbumController extends AbstractController
 
         // for the comment section 
         $user = $security->getUser();
-
-        // check to see if the user is banned 
-        // $isBanned = $em->getRepository(User::class)->findOneBy([
-        //     'email' => $user,
-        //     'isBanned' => true
-        // ]);
-
-        // // if he is then force his account to be logged out
-        // if ($isBanned) {
-        //     return $this->redirectToRoute('app_logout');
-        // }
 
         // just set up a fresh $task object (remove the example data)
         $comment = new Comment();

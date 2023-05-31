@@ -30,18 +30,7 @@ class CommentController extends AbstractController
     public function delete(EntityManagerInterface $em, Comment $comment, Security $security): JsonResponse
     {
 
-        $user =  $security->getUser(); // get the user in session   
-        
-        // check to see if the user is banned 
-        // $isBanned = $em->getRepository(User::class)->findOneBy([
-        //     'email' => $user,
-        //     'isBanned' => true
-        // ]);
-
-        // // if he is then force his account to be logged out
-        // if ($isBanned) {
-        //     return $this->redirectToRoute('app_logout');
-        // }
+        $user =  $security->getUser(); // get the user in session
 
         $commentOwner = $comment->getUser(); // owner of the comment
 
