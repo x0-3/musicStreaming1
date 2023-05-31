@@ -20,7 +20,6 @@ let volumeMuted = false;
 
 // let trackId = 0; 
 
-//FIXME: fetch element from database
 // const tracks = [];
 
 // ************************************************ toggle play ************************************************//
@@ -53,7 +52,6 @@ function switchtrack(){
 
 // ************************************************ track source ************************************************//
 
-// // FIXME: the track is undefined
 // const trackScr = "uploads/music/" + tracks[trackId];
 // // console.log(trackScr);
 
