@@ -49,6 +49,7 @@ class HomeController extends AbstractController
             $favoritePlaylists = $em->getRepository(Playlist::class)->find4FavoritePlaylists($user); //find the user's favorite playlists
             
             return $this->render('home/index.html.twig', [
+                'form' => $form->createView(),
                 'playlists' => $playlists,
                 'songs' => $songs,
                 'favoritePlaylists' => $favoritePlaylists,

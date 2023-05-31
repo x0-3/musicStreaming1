@@ -125,7 +125,7 @@
                             padding: 26px 19px;
                             font-size: large;
     
-                            .setting, .logout , .profile{
+                            .setting, .logout , .profile, .admin{
                                 margin-bottom: 10px;
     
                             }
@@ -1049,7 +1049,7 @@
     }
 }
 
-
+// TODO: finish dark mode
 body.dark{
     background-color: #36454F;
 
