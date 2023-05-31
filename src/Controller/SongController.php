@@ -184,7 +184,7 @@ class SongController extends AbstractController
     }
     
 
-    // FIXME: not adding songs in db
+    // FIXME: not adding songs in db change view to html form
     #[Route('/song/playlist/{id}', name: 'add_toSongsPlaylist')]
     public function addSong(Request $request, Song $song, EntityManagerInterface $em): Response
     {
@@ -197,10 +197,11 @@ class SongController extends AbstractController
         if ($user) {
             
             $form->handleRequest($request);
-            
+                       
             if ($form->isSubmitted() && $form->isValid()) {
-
+                
                 $song = $form->getData();
+        
     
                 $em->persist($song);
                 $em->flush();

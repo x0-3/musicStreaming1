@@ -93,13 +93,10 @@ class PlaylistRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('p')
             ->select('p.id, p.image, p.playlistName, p.dateCreated')
-            // ->from('App\Entity\Playlist', 'p')
             ->leftJoin('p.user', 'u')
             ->where('u.email = :email')
             ->setParameter('email', $userEmail)
-            ->orderBy('p.dateCreated', 'DESC')
-
-        ;
+            ->orderBy('p.dateCreated', 'DESC');
         
         $query = $query->getQuery();
 

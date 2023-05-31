@@ -1,5 +1,9 @@
-// FIXME: not adding songs in db
+{% extends 'base.html.twig' %}
 
+{% block title %}Hello SongController!{% endblock %}
+
+{% block body %}
+{# FIXME: #}
 {{ form_start(form, {'action': path('add_toSongsPlaylist', {'id': song.id})} )}}
 
 
@@ -13,3 +17,5 @@
 
 
 {{form_end(form)}}
+
+{% endblock %}

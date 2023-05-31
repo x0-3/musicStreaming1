@@ -358,14 +358,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function isSubToArtist(Subscribe $user): bool
-    // {
-    //     if ($this->subUser1->contains($user)) {
-
-    //         return $this->subUser1->contains($user);
-    //     }
-    // }
-
     /**
      * @return Collection<int, Subscribe>
      */

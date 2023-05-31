@@ -57,11 +57,11 @@
                         {% include "like/_like.html.twig" %}
                     </td>
                     <td>0:00</td>
-                    <td><button><i id="myBtn" class="fa-solid fa-plus"></i></button></td>
+                    <td><button><a href="{{path('add_toSongsPlaylist', {'id': song.id})}}" id="myBtn" class="fa-solid fa-plus"></a></button></td>
                 </tr>
             
                 {# FIXME: not adding songs in db #}
-                <div id="myModal" class="modal">
+                {# <div id="myModal" class="modal">
 
                     <div class="modal-content">
 
@@ -70,7 +70,7 @@
                         {{ render(controller('App\\Controller\\SongController::addSong', { 'id': song.id } )) }}
                     </div>
 
-                </div>
+                </div> #}
             {% endfor %}
 
         </tbody>
