@@ -20,11 +20,7 @@
             {% include "like/_like.html.twig" %}
 
             <a href="{{path('like_prevSong', {'id': song.id})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>
-
-            {# <button class="fa-sharp fa-solid fa-backward" id="btnPrev"></button>     #}
-            <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
-            {# <button class="fa-sharp fa-solid fa-forward" id="btnNext"></button> #}
-        
+            <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>        
             <a href="{{path('like_skipforward', {'id': song.id})}}" class="fa-sharp fa-solid fa-forward" id="btnNext"></a>
 
 
@@ -40,12 +36,9 @@
             </div>
         </div>
 
-        {# {% for song in songs %} #}
-            <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip preload="metadata">
-            </audio>
+        <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip preload="metadata">
+        </audio>
             
-        {# {% endfor %} #}
-
         <div class="timeline">
             <small class="time">0:00</small>
 

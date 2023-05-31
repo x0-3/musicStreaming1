@@ -38,11 +38,10 @@
             </div>
         </div>
 
-        {# {% for song in songs %} #}
-            <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip preload="metadata">
-            </audio>
+
+        <audio id="audio" src="{{asset('uploads/' ~ song.link)}}" autoplay skip preload="metadata">
+        </audio>
             
-        {# {% endfor %} #}
 
         <div class="timeline">
             <small class="time">0:00</small>
