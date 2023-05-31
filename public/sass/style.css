@@ -703,6 +703,18 @@
 * body section.more .listItems .mcard {
   margin: 36px;
 }
+* body section.more .searchItems {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+* body section.more .searchItems .mcard {
+  margin: 36px;
+}
+* body section.more .searchItems .mcard h3 {
+  margin: 12px;
+}
 * body section.login {
   display: flex;
   flex-direction: row-reverse;
@@ -760,6 +772,16 @@
 }
 * body section.login .loginForm .register_reset a {
   color: black;
+}
+* body form {
+  display: flex;
+}
+* body form button.fa-solid.fa-magnifying-glass {
+  border: none;
+  background-color: #36454F;
+  color: white;
+  border-radius: 0 10px 10px 0;
+  padding: 20px;
 }
 * body footer {
   margin-top: 50px;

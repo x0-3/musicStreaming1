@@ -8,10 +8,14 @@
 
         {% include "home/_searchBar.html.twig" %}
 
-        <div class="listItems">
+        <div class="searchItems">
 
+            {% if songs == null %}
+                
+                <h2 class="mt-5">No result</h2>
+            {% endif %}
+            
             {% for song in songs %}
-
 
                 <div class="mcard">
 
@@ -19,16 +23,22 @@
 
                         <figure>
                             <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
-                            
-                            <figcaption>
-                                
-                                <h3>{{song.nameSong}}</h3>
-                                <h3>{{song.nameAlbum}}</h3>
-                                <h5>{{song.username}}</h5>
-                            </figcaption>
-                        </figure>
 
+                        </figure>
+                        
+                        <h3>{{song.nameSong}}</h3>
                     </a>
+
+                    <div class="albumArtist">
+
+                        <a href="#">
+                            <h3>{{song.nameAlbum}}</h3>
+                        </a>
+                        <a href="#">
+                            <h3>{{song.username}}</h3>
+                        </a>
+                    </div>
+
                 </div>
 
             {% endfor %}
