@@ -150,14 +150,13 @@ class SongRepository extends ServiceEntityRepository
 
 
         return $this->createQueryBuilder('s')
-            ->select('s.id ,s.nameSong, a.cover , u.username ')
+            ->select('s.id ,s.nameSong, a.cover, a.nameAlbum, u.username ')
             ->innerJoin('s.album', 'a')
             ->innerJoin('s.user', 'u')
             ->andWhere('s.nameSong LIKE :q')
             ->orWhere('a.nameAlbum LIKE :q')
             ->orWhere('u.username LIKE :q')
             ->setParameter('q', "%{$searchBar->q}%")
-            // ->orderBy('a.releaseDate', 'DESC')
             ->getQuery()
             ->getResult()
         ;

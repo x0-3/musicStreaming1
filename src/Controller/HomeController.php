@@ -23,9 +23,39 @@ class HomeController extends AbstractController
 
         $playlists = $em->getRepository(Playlist::class)->findByMostFollow(); //find by most followed playlists
         $songs = $em->getRepository(Song::class)->findByMostLikes(); //find the most like songs        
-        
 
-        // searchBar
+        $token = $tokenStorage->getToken();   
+
+        if ($token) {  
+
+            $user = $tokenStorage->getToken()->getUserIdentifier(); //get user identifier (email)
+            
+            $favoritePlaylists = $em->getRepository(Playlist::class)->find4FavoritePlaylists($user); //find the user's favorite playlists
+            
+            return $this->render('home/index.html.twig', [
+                'playlists' => $playlists,
+                'songs' => $songs,
+                'favoritePlaylists' => $favoritePlaylists,
+
+            ]);
+
+            // if the user isn't signed in, render the page without the favorites list 
+        } else {
+
+            return $this->render('home/index.html.twig', [
+                'playlists' => $playlists,
+                'songs' => $songs,
+
+            ]);
+        }
+    }
+
+
+    // searchBar
+    #[Route('/search', name: 'search')]
+    public function search(Request $request, SongRepository $songRepository): Response
+    {
+
         $searchBar = new SearchBar();
 
         $form = $this->createForm(SearchBarType::class, $searchBar);
@@ -37,35 +67,20 @@ class HomeController extends AbstractController
             $searchBar->page = $request->query->getInt('page', 1);
 
             $songs = $songRepository->findBySearch($searchBar);
-        }
 
-
-        $token = $tokenStorage->getToken();   
-
-        if ($token) {  
-
-            $user = $tokenStorage->getToken()->getUserIdentifier(); //get user identifier (email)
-            
-            $favoritePlaylists = $em->getRepository(Playlist::class)->find4FavoritePlaylists($user); //find the user's favorite playlists
-            
-            return $this->render('home/index.html.twig', [
+            return $this->render('home/searchPage.html.twig', [
                 'form' => $form->createView(),
-                'playlists' => $playlists,
                 'songs' => $songs,
-                'favoritePlaylists' => $favoritePlaylists,
-
-            ]);
-
-            // if the user isn't signed in, render the page without the favorites list 
-        } else {
-
-            return $this->render('home/index.html.twig', [
-                'form' => $form->createView(),
-                'playlists' => $playlists,
-                'songs' => $songs,
-
+    
             ]);
         }
+
+        return $this->render('home/searchPage.html.twig', [
+            'form' => $form->createView(),
+            'songs' => $songRepository,
+        ]);
+
+ 
     }
 
 

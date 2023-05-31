@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SearchPage{% endblock %}
+
+{% block body %}
+
+    <section class="more">
+
+        {% include "home/_searchBar.html.twig" %}
+
+        <div class="listItems">
+
+            {% for song in songs %}
+
+
+                <div class="mcard">
+
+                    <a href="{{path('app_songPlayer', {'id': song.id})}}">
+
+                        <figure>
+                            <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
+                            
+                            <figcaption>
+                                
+                                <h3>{{song.nameSong}}</h3>
+                                <h3>{{song.nameAlbum}}</h3>
+                                <h5>{{song.username}}</h5>
+                            </figcaption>
+                        </figure>
+
+                    </a>
+                </div>
+
+            {% endfor %}
+            
+        </div>
+    </section>
+{% endblock %}
+

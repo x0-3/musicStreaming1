@@ -45,10 +45,7 @@ class SongType extends AbstractType
 
             // ->add('user')
 
-            // ->add('album', EntityType::class,[
-            //     'class' =>Album::class,
-            //     'choice_label' => 'nameAlbum',
-            // ])
+            // ->add('album')
 
             ->add('genre', EntityType::class,[
                 'class' =>Genre::class,
