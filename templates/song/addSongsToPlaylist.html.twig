@@ -1,21 +1,21 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Hello SongController!{% endblock %}
 
-{% block body %}
+{% block body %} #}
 {# FIXME: #}
-{{ form_start(form, {'action': path('add_toSongsPlaylist', {'id': song.id})} )}}
 
 
-    {# {{form_row(formAddPlaylist.playlistName)}}
-    {{form_row(formAddPlaylist.image)}} #}
-    {# {{form_row(formAddPlaylist.user)}} #}
-    {{form_row(form.playlists)}}
-    {{form_row(form.submit)}}
+<form action="" method="post">
 
-    {{ dump(playlists) }}
+    {% for playlist in playlists %}
+    
+        <label for="playlist">{{playlist.playlistName}}</label>
+        <input type="checkbox" name="_playlist" value="{{playlist.id}}">
+    {% endfor %}
 
+    <input type="submit" value="send" />
+        
+</form>
 
-{{form_end(form)}}
-
-{% endblock %}
+{# {% endblock %} #}

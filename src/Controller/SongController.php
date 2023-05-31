@@ -182,39 +182,43 @@ class SongController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
-    
+
 
     // FIXME: not adding songs in db change view to html form
-    #[Route('/song/playlist/{id}', name: 'add_toSongsPlaylist')]
-    public function addSong(Request $request, Song $song, EntityManagerInterface $em): Response
+    #[Route('/song/playlistForm/{id}', name: 'form_toSongsPlaylist')]
+    public function addSongRender(Song $song, EntityManagerInterface $em): Response
     {
         $user = $this->getUser()->getUserIdentifier(); // get user in session
 
-        $form = $this->createForm(AddSongsToPlaylistType::class, $song);
-
         $playlists = $em->getRepository(Playlist::class)->findPlaylistUser($user);
 
-        if ($user) {
-            
-            $form->handleRequest($request);
-                       
-            if ($form->isSubmitted() && $form->isValid()) {
-                
-                $song = $form->getData();
-        
+        return $this->render('song/addSongsToPlaylist.html.twig',[
+            'playlists'=> $playlists,
+            'song'=> $song,
+        ]);
+
+
+    }
     
-                $em->persist($song);
-                $em->flush();
-    
-                return $this->redirectToRoute('app_like');
-            }
-    
-            return $this->render('song/addSongsToPlaylist.html.twig', [
-                'form' => $form->createView(),
-                'playlists' => $playlists,
-                'song' => $song
-            ]);
+    // FIXME: not adding songs in db change view to html form
+    #[Route('/song/playlist/{id}', name: 'add_toSongsPlaylist', methods: ['POST'])]
+    public function addSong(Request $request, Song $song, EntityManagerInterface $em): Response
+    {
+        // $user = $this->getUser()->getUserIdentifier(); // get user in session
+
+        // $playlists = $em->getRepository(Playlist::class)->findPlaylistUser($user);
+
+        if($request->isMethod('POST'))
+        {   
+
+            $playlist = $request->request->get('_playlist');
+            $song->getId();
+
+
+            $em->persist($song);
+            $em->flush();
         }
+        return $this->redirectToRoute('app_like');
 
     }
 
