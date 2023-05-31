@@ -31,10 +31,10 @@
                     <button class="fa-solid fa-ellipsis-vertical"></button>
 
                     {# if the id of the comment is not null then show the button #}
-                    {% if comment.id is not null %}
+                    {% if comment.id != null %}
 
                         {# if the user is the owner of the comment then show the delete #}
-                        {% if app.user.id is same as(comment.user.id) %}
+                        {% if app.user  == comment.user %}
 
                             <div id="list-items">
 
