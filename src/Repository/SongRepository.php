@@ -58,7 +58,7 @@ class SongRepository extends ServiceEntityRepository
             ->leftJoin('s.likes', 'ul')
             ->groupBy('s.id, s.nameSong,  a.cover')
             ->orderBy('num_like', 'DESC')
-            ->setMaxResults(4)
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult();
             

@@ -81,7 +81,7 @@ class AlbumRepository extends ServiceEntityRepository
             ->setParameter('id', $artistId)
             ->groupBy('a.id, a.nameAlbum, a.cover, a.releaseDate')
             ->orderBy('a.releaseDate', ' DESC')
-            ->setMaxResults(4);
+            ->setMaxResults(5);
 
         $query = $query->getQuery();
 

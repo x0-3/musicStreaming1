@@ -97,6 +97,7 @@ class UserController extends AbstractController
 
         return $this->render('user/moreArtistAlbum.html.twig', [
             'albums' => $albums,
+            'artist' => $artist,
         ]);
     }
 

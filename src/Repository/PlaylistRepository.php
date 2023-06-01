@@ -53,7 +53,7 @@ class PlaylistRepository extends ServiceEntityRepository
             ->leftJoin('p.userFavorites', 'pu')
             ->groupBy('p.id, p.playlistName')
             ->orderBy('num_followers', 'DESC')
-            ->setMaxResults(4)
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult();
 
@@ -116,7 +116,7 @@ class PlaylistRepository extends ServiceEntityRepository
            ->leftJoin('p.userFavorites', 'pu')
            ->where('pu.email = :email')
            ->setParameter('email', $userEmail)
-           ->setMaxResults(4)
+           ->setMaxResults(5)
            ->getQuery()
            ->getResult()
        ;
