@@ -100,10 +100,11 @@ class PlaylistController extends AbstractController
     public function skipForward(Playlist $playlist, Song $song): Response
     {
 
+        
         $songId=$song->getId(); // get the song id
-
+        
         $songId++; // increment the song id
-
+        
         // redirect to the page of the next song
         return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
     }

@@ -9,6 +9,7 @@ use App\Entity\Genre;
 use App\Entity\Comment;
 use App\Form\AlbumType;
 use App\Form\CommentType;
+use App\Repository\SongRepository;
 use App\Service\FileUploader;
 use App\Service\CommentService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -188,7 +189,7 @@ class AlbumController extends AbstractController
         $songs = $album->getSongs(); // get the song list from the album
 
         // for the comment section 
-        $user = $security->getUser();
+        $user = $this->getUser();
 
         // just set up a fresh $task object (remove the example data)
         $comment = new Comment();
@@ -223,29 +224,95 @@ class AlbumController extends AbstractController
 
 
     // skip to the next song of the album
-    #[Route('/album/skipForward/{id}/{song}', name: 'app_skipforward')]
-    public function skipForward(Album $album, Song $song): Response
+    #[Route('/album/skipForward/{id}/{songId}', name: 'app_skipforward')]
+    public function skipForward(Album $album, EntityManagerInterface $entityManager, $songId, SongRepository $songRepository): Response
     {
 
-        $songId=$song->getId(); // get the song id
+        // Get the list of songs in the album
+        $albumSongs = $album->getSongs();
 
-        $songId++; // increment the song id
+        $currentIndex = null; // set the current array index to null
+        
+        // Find the index of the current song in the list
+        foreach ($albumSongs as $index => $song) {
 
-        // redirect to the page of the next song
-        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $songId]);  
+            // if the song id the same as the current songId
+            if ($song->getId() == $songId) {
+
+                // then set the current index to the index of the current song
+                $currentIndex = $index;
+                
+            }
+        }
+
+
+        // if the current song is is not null and if there is a next song
+        if ($currentIndex !== null && isset($albumSongs[$currentIndex + 1])) {
+        // Get the next song ID
+            $nextSongId = $albumSongs[$currentIndex + 1]->getId();
+
+            // Update the ID of the song
+            $song = $songRepository->find($nextSongId);
+            $song->setId($nextSongId);
+
+            // Persist the changes
+            $entityManager->persist($song);
+            $entityManager->flush();
+
+            // Redirect to the page of the next song
+            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $nextSongId]);
+            
+        } elseif (!isset($albumSongs[$currentIndex + 1])) {
+
+            $firstSong = $albumSongs[0]->getId();
+
+            // Update the ID of the song
+            $song = $songRepository->find($firstSong);
+            $song->setId($firstSong);
+
+            // Persist the changes
+            $entityManager->persist($song);
+            $entityManager->flush();
+
+            // redirect it to the first song in the album
+            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $firstSong]);
+        }
+
     }
 
-
     // play previous song of the album
-    #[Route('/album/prevSong/{id}/{song}', name: 'app_prevSong')]
-    public function prevSong(Album $album, Song $song): Response
+    #[Route('/album/prevSong/{id}/{songId}', name: 'app_prevSong')]
+    public function prevSong(Album $album, $songId, SongRepository $songRepository, EntityManagerInterface $em): Response
     {
 
-        $songId=$song->getId(); // get the song id
+        $albumSongID = $album->getSongs();
 
-        $songId--; // increment the song id
+        $currentIndex = null;
 
-        // redirect to the page of the next song
+        foreach ($albumSongID as $index=>$song) {
+
+            if ($song->getId() == $songId) {
+                
+                $currentIndex = $index;
+            }
+        }
+
+
+        if ($currentIndex !== null && isset($albumSongID[$currentIndex - 1])) {
+            
+            $prevSong = $albumSongID[$currentIndex - 1]->getId();
+
+            $song = $songRepository->find($prevSong);
+            $song->setId($prevSong);
+
+            $em ->persist($song);
+            $em ->flush();
+
+            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $prevSong]);
+
+        }
+
+        // redirect to the page of the song
         return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $songId]);  
     }
 }

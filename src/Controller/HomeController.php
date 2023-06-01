@@ -18,7 +18,7 @@ class HomeController extends AbstractController
 {
     // main page
     #[Route('/home', name: 'app_home')]
-    public function index(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, Request $request, SongRepository $songRepository): Response
+    public function index(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
     {
 
         $playlists = $em->getRepository(Playlist::class)->findByMostFollow(); //find by most followed playlists

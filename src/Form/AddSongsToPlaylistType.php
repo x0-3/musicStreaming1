@@ -26,7 +26,7 @@ class AddSongsToPlaylistType extends AbstractType
             // ->add('genre')
             // ->add('likes')
 
-            // FIXME: not adding songs in db
+            // TODO: delete this file
             ->add('playlists', EntityType::class, [
                 'class' => Playlist::class,
                 'choice_label' => 'playlistName',

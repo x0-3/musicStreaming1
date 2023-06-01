@@ -19,9 +19,9 @@
             
             {% include "like/_like.html.twig" %}
 
-            <a href="{{path('app_prevSong', {'id': album.id, 'song':song.id})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>    
+            <a href="{{path('app_prevSong', {'id': album.id, 'songId':song.id})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>    
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>                    
-            <a class="fa-sharp fa-solid fa-forward" href="{{path('app_skipforward', {'id': album.id, 'song':song.id})}}" id="btnNext"></a>
+            <a class="fa-sharp fa-solid fa-forward" href="{{path('app_skipforward', {'id': album.id, 'songId':song.id})}}" id="btnNext"></a>
 
 
             <div class="hover">
