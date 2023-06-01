@@ -24,16 +24,16 @@ let volumeMuted = false;
 
 // ************************************************ toggle play ************************************************//
 
-function togglePlay() {
-    var playButton = document.getElementById("mainPlayBtn");
+window.togglePlay = function() {
+  var playButton = document.getElementById("mainPlayBtn");
 
-    if (audio.paused) {
-        audio.play();
-        playButton.innerHTML = '<span class="fa-solid fa-pause"></span>';
-    } else {
-        audio.pause();
-        playButton.innerHTML = '<span class="fa-solid fa-circle-play"></span>';
-    }
+  if (audio.paused) {
+      audio.play();
+      playButton.innerHTML = '<span class="fa-solid fa-pause"></span>';
+  } else {
+      audio.pause();
+      playButton.innerHTML = '<span class="fa-solid fa-circle-play"></span>';
+  }
 }
 
 

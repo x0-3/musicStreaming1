@@ -4,6 +4,7 @@ import './styles/sass/app.css';
 // start the Stimulus application
 import './bootstrap.js';
 
+import "./js/audioPlayer.js";
 
 import Like from "./js/Like.js";
 import Favorite from "./js/Favorite.js";

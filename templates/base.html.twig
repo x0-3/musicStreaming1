@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="{{asset('assets/img/2.png')}}">
+        <link rel="icon" href="{{asset('img/2.png')}}">
 
         {% block stylesheets %}
             <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -141,7 +141,7 @@
 
         {% block javascripts %}
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-            <script src="{{ asset('/js/audioPlayer.js')}}"></script>
+            {# <script src="{{ asset('/js/audioPlayer.js')}}"></script> #}
 
             {# added the type module in order to be able to import a class #}
             {# <script type="module" src="{{ asset('/js/app.js')}}"></script> #}
