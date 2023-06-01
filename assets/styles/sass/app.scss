@@ -463,7 +463,7 @@
         section.playlistDetail, section.artistDetail, section.musicPlayer {
 
             img, table{
-                box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
+                box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
                 border-radius: 10px;
 
             }
@@ -480,7 +480,7 @@
                 }            
 
                 figure {
-                    width: 16%;
+                    width: 20%;
 
                     img {
                         width: 100%;
@@ -543,7 +543,7 @@
             }
 
             table{
-                width: 98%;
+                width: 100%;
                 margin: auto;
                 border-collapse: collapse;
                 font-family: 'Montserrat', sans-serif;
@@ -553,11 +553,13 @@
                 }
 
                 thead {
-                    text-align: left;
+                    text-align: center;
                     height: 9vh;
                 }
 
                 tbody{
+
+                    text-align: center;
 
                     tr{
                         td{
@@ -566,7 +568,7 @@
 
                             figure {
                                 width: 30%;
-                                margin: 5px 0 0 29px;
+                                margin: 5px 0 5px 29px;
 
                                 img {
                                     width: 100%;
@@ -758,7 +760,7 @@
 
             .player{
                 margin-left: 21px;
-                width: 40%;
+                width: 36%;
                 flex-direction: column;
                 align-items: center;
                 display: flex;
