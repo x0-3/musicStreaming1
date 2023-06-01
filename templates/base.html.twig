@@ -27,7 +27,7 @@
             </figure>
     
             <div class="mySidepanel" id="mySidepanel">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="javascript:void(0)" class="closebtn">&times;</a>
                 <nav>
                     <ul>
                         <li><a class="menuItem" href="{{path('app_home')}}">Home</a></li>
@@ -79,13 +79,16 @@
                         {# else show setting link to edit the user info #}
                         {% else %}
 
-                            <div class="setting">
-        
-                                <a href="{{path('edit_profile')}}">
-                                    <i class="fa-solid fa-gear"></i>
-                                    Settings
-                                </a>
-                            </div>
+                            {% if app.user %}
+                                
+                                <div class="setting">
+            
+                                    <a href="{{path('edit_profile')}}">
+                                        <i class="fa-solid fa-gear"></i>
+                                        Settings
+                                    </a>
+                                </div>
+                            {% endif %}
 
                         {% endif %}
     
@@ -114,7 +117,7 @@
                 
             </div>
     
-            <button class="openbtn" onclick="openNav()">&#9776;</button>
+            <button class="openbtn">&#9776;</button>
         </header>
 
         <main>
@@ -142,6 +145,7 @@
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
             {{ encore_entry_script_tags('app')}}
+            {{ encore_entry_script_tags('audioPlayer')}}
 
         {% endblock %}
     </body>

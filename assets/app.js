@@ -1,6 +1,5 @@
 import Like from "./js/Like.js";
 import Favorite from "./js/Favorite.js";
-import "./audioPlayer.js";
 
 // ********************************************* Like functionnality *****************************************************************//
 // execute function when the DOM has finished loading
@@ -57,15 +56,19 @@ window.toggleTheme = function() {
 
 
 // ********************************************** Hamburger menu ****************************************************************** * // 
-/* Set the width of the sidebar to 250px (show it) */
-window.openNav = function() {
-  document.getElementById("mySidepanel").style.width = "250px";
-}
+const menu = document.querySelector('.openbtn');
+const closeElem =  document.querySelector('.closebtn');
 
-/* Set the width of the sidebar to 0 (hide it) */
-window.closeNav = function() {
+menu.addEventListener('click', () => {
+
+  document.getElementById("mySidepanel").style.width = "250px";
+  
+} )
+
+closeElem.addEventListener('click', () => {
   document.getElementById("mySidepanel").style.width = "0";
-}
+  
+} )
 
 // ********************************************** Modal ****************************************************************** * // 
 
