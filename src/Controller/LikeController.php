@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Service\CommentService;
+use App\Repository\SongRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -91,29 +92,86 @@ class LikeController extends AbstractController
 
     // skip to the next song of the liked songs
     #[Route('/like/skipForward/{id}', name: 'like_skipforward')]
-    public function skipForward(Song $song): Response
+    public function skipForward($id, SongRepository $songRepository, EntityManagerInterface $em): Response
     {
 
-        $songId=$song->getId(); // get the song id
+        $user = $this->getUser()->getUserIdentifier();
 
-        $songId++; // increment the song id
+        $likeSongs = $em ->getRepository(Song::class)->findlikedSongs($user);
 
-        // redirect to the page of the next song
-        return $this->redirectToRoute('like_Player', ['id' => $songId]);  
+        $currentIndex = null;
+
+        foreach ($likeSongs as $key => $song) {
+            
+            if ($song->getId() == $id) {
+
+                $currentIndex = $key;
+            }
+        }
+
+        if (isset($likeSongs[$currentIndex + 1])) {
+            
+            $nextSong = $likeSongs[$currentIndex + 1]->getId();
+
+            $song = $songRepository->find($nextSong);
+            $song->setId($nextSong);
+
+            $em->persist($song);
+            $em->flush();
+
+            return $this->redirectToRoute('like_Player', ['id' => $nextSong]);
+        
+        } elseif (!isset($likeSongs[$currentIndex +  1])) {
+
+            $firstSongId = $likeSongs[0]->getId();
+            
+            $song = $songRepository->find($firstSongId);
+            $song->setId($firstSongId);
+
+            $em->persist($song);
+            $em->flush();
+            
+            return $this->redirectToRoute('like_Player', ['id' => $firstSongId]);
+
+        }
     }
 
 
     // play previous song of the liked songs
     #[Route('/like/prevSong/{id}', name: 'like_prevSong')]
-    public function prevSong(Song $song): Response
+    public function prevSong($id, EntityManagerInterface $em, songRepository $songRepository): Response
     {
 
-        $songId=$song->getId(); // get the song id
+        $user = $this->getUser()->getUserIdentifier();
 
-        $songId--; // increment the song id
+        $likeSongs = $em ->getRepository(Song::class)->findlikedSongs($user);
 
-        // redirect to the page of the next song
-        return $this->redirectToRoute('like_Player', ['id' => $songId]);  
+        $currentIndex = null;
+
+        foreach ($likeSongs as $key => $song) {
+            
+            if ($song->getId() == $id) {
+
+                $currentIndex = $key;
+            }
+        }
+
+        if (isset($likeSongs[$currentIndex - 1])) {
+            
+            $nextSong = $likeSongs[$currentIndex - 1]->getId();
+
+            $song = $songRepository->find($nextSong);
+            $song->setId($nextSong);
+
+            $em->persist($song);
+            $em->flush();
+
+            return $this->redirectToRoute('like_Player', ['id' => $nextSong]);
+        
+        }
+
+        return $this->redirectToRoute('like_Player', ['id' => $id]);
+
     }
 }
 

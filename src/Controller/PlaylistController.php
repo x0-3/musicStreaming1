@@ -10,6 +10,7 @@ use App\Form\CommentType;
 use App\Form\PlaylistType;
 use App\Service\FileUploader;
 use App\Form\PlaylistSongsType;
+use App\Repository\SongRepository;
 use App\Service\CommentService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -96,30 +97,85 @@ class PlaylistController extends AbstractController
 
     
     // skip to the next song of the playlist
-    #[Route('/playlist/skipForward/{id}/{song}', name: 'playlist_skipforward')]
-    public function skipForward(Playlist $playlist, Song $song): Response
+    #[Route('/playlist/skipForward/{id}/{songId}', name: 'playlist_skipforward')]
+    public function skipForward(Playlist $playlist, $songId, SongRepository $songRepository, EntityManagerInterface $em): Response
     {
 
-        
-        $songId=$song->getId(); // get the song id
-        
-        $songId++; // increment the song id
-        
-        // redirect to the page of the next song
-        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
+        $playlistSongs = $playlist->getSongs();
+
+        $currentIndex = null;
+
+        foreach ($playlistSongs as $key => $song) {
+            
+            if ($song->getId() == $songId) {
+                
+                $currentIndex = $key;
+            }
+        }
+
+
+        if (isset($playlistSongs[$currentIndex + 1])) {
+
+            $nextSongId = $playlistSongs[$currentIndex + 1]->getId();
+
+            $song = $songRepository->find($nextSongId);
+            $song->setId($nextSongId);
+
+            $em->persist($song);
+            $em->flush();
+
+
+            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $nextSongId]);
+
+        } elseif (!isset($playlistSongs[$currentIndex + 1])) {
+            
+            $firstSongId = $playlistSongs[0]->getId();
+
+            $song = $songRepository->find($firstSongId);
+            $song->setId($firstSongId);
+
+            $em->persist($song);
+            $em->flush();
+
+
+            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $firstSongId]);
+        }
+     
     }
 
 
     // play previous song of the playlist
-    #[Route('/playlist/prevSong/{id}/{song}', name: 'playlist_prevSong')]
-    public function prevSong(Playlist $playlist, Song $song): Response
+    #[Route('/playlist/prevSong/{id}/{songId}', name: 'playlist_prevSong')]
+    public function prevSong(Playlist $playlist, $songId, SongRepository $songRepository, EntityManagerInterface $em): Response
     {
 
-        $songId=$song->getId(); // get the song id
+        $playlistSongs = $playlist->getSongs();
 
-        $songId--; // increment the song id
+        $currentIndex = null;
 
-        // redirect to the page of the next song
+        foreach ($playlistSongs as $key => $song) {
+            
+            if ($song->getId() == $songId) {
+                
+                $currentIndex = $key;
+            }
+        }
+
+        if (isset($playlistSongs[$currentIndex - 1])) {
+
+            $nextSongId = $playlistSongs[$currentIndex - 1]->getId();
+
+            $song = $songRepository->find($nextSongId);
+            $song->setId($nextSongId);
+
+            $em->persist($song);
+            $em->flush();
+
+
+            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $nextSongId]);
+
+        } 
+
         return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
     }
 

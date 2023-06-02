@@ -246,8 +246,8 @@ class AlbumController extends AbstractController
         }
 
 
-        // if the current song is is not null and if there is a next song
-        if ($currentIndex !== null && isset($albumSongs[$currentIndex + 1])) {
+        // if there is a next song in the album
+        if (isset($albumSongs[$currentIndex + 1])) {
         // Get the next song ID
             $nextSongId = $albumSongs[$currentIndex + 1]->getId();
 
@@ -298,7 +298,7 @@ class AlbumController extends AbstractController
         }
 
 
-        if ($currentIndex !== null && isset($albumSongID[$currentIndex - 1])) {
+        if (isset($albumSongID[$currentIndex - 1])) {
             
             $prevSong = $albumSongID[$currentIndex - 1]->getId();
 
