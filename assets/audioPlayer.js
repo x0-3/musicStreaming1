@@ -291,14 +291,15 @@ const handleResponse = function(response) {
   }
 }
 
-// TODO: comment the code
+// Function to handle the click event on comment delete buttons
 function handleAddEventListenerOnCommentDeleteButton(deleteButtonElement) {
   deleteButtonElement.addEventListener('click', function (e) {
   
-    e.preventDefault(); // doens't send data 
+    e.preventDefault(); // Prevent the default behavior of the click event
 
+    // Get the URL from the delete button
     let url = deleteButtonElement.getAttribute('delete-url');
-    deleteComment(url);
+    deleteComment(url); // Call the deleteComment function with the comment URL
 
   });
 }
@@ -307,15 +308,18 @@ function deleteComment(url) {
 
   $.ajax({
 
-    type: "POST",
-    url: url
+    type: "POST", // method used to delete the comment
+    url: url // Specify the URL of the comment to be deleted
   })
 
   .done(function (data) {
 
+    // Once the comment is successfully deleted
+
+    // Get the ID of the deleted comment
     let id = data.id;
 
-
+    // Remove the comment from the page by selecting its ID
     $('#comment-' + id).remove();
   })
 
@@ -327,9 +331,12 @@ function deleteComment(url) {
 
 
 $(document).ready(function () {
+  // When the document is ready
 
+  // Get all the delete button elements from the HTML
   let deleteButtonElements = document.querySelectorAll(".deletebtn");
 
+  // Attach a click event listener to each delete button element
   deleteButtonElements.forEach(function(elementComment) {
     handleAddEventListenerOnCommentDeleteButton(elementComment);
   });
@@ -338,7 +345,7 @@ $(document).ready(function () {
 
 
 // ************************************************ keybinds ************************************************//
-// TODO:
+// TODO: keybindings for pause button, next button, previous button and mute button
 
 
 
