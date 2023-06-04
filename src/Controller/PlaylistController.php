@@ -370,7 +370,7 @@ class PlaylistController extends AbstractController
     
         }
 
-        return $this->render('playlist/addSongPlaylist.html.twig', [
+        return $this->render('playlist/_addSongPlaylist.html.twig', [
             'form' => $form,
             'playlist' => $playlist
         ]);
