@@ -57,7 +57,7 @@ class PlaylistController extends AbstractController
     // music player page for one playlist
     // with the comment form
     #[Route('/musicPlayer/{id}/song/{song}', name: 'playlist_player')]
-    public function playlistPlayer(EntityManagerInterface $em, Playlist $playlist, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
+    public function playlistPlayer(Playlist $playlist, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {
 
         $songs = $playlist->getSongs(); // get the list of songs from the playlist
@@ -177,6 +177,20 @@ class PlaylistController extends AbstractController
         } 
 
         return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
+    }
+
+    // FIXME: find a way to render it in a template
+    // shuffles the song inside the playlist
+    #[Route('/playlist/shuffle/{id}/song/{song}', name: 'shuffle_playlist')]
+    public function shufflePlaylist(Playlist $playlist, $shuffledSong, SongRepository $songRepository): Response
+    {
+
+        $shuffledSong = $playlist->getSongs()->toArray();
+        
+        shuffle($shuffledSong);
+        
+        dd($shuffledSong);
+
     }
 
 

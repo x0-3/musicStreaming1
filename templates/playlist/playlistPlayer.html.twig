@@ -68,14 +68,14 @@
                     <th>title</th>
                     <th>artist</th>
                     <th>time</th>
-                    <th></th>
+                    {# <th><a href="{{path('shuffle_playlist', {'id': playlist.id, 'shuffledSong': song.id})}}">shuffle</a></th> #}
                 </tr>
             </thead>
 
             <tbody>
                                 
                 {% for song in playlist.songs %} 
-                   
+                
                     <tr>
                         
                         <td>
