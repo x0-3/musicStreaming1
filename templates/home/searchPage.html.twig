@@ -4,47 +4,78 @@
 
 {% block body %}
 
-    <section class="more">
+    <section class="search">
 
         {% include "home/_searchBar.html.twig" %}
 
         <div class="searchItems">
+            <h1>Results</h1>
 
             {% if songs == null %}
                 
                 <h2 class="mt-5">No result</h2>
             {% endif %}
             
+            <div class="d-flex">
+
+                
+                {% for artist in artists %}    
             
-            {% for artist in artists %}    
-        
-                {% if "ROLE_ARTIST" in artist.getRoles %}
+                    {% if "ROLE_ARTIST" in artist.getRoles %}
 
-                    <a href="{{path('app_artistDetail', {'id': artist.id})}}">{{artist.username}} </a>
-                    
-                {% endif %}
+                        <a href="{{path('app_artistDetail', {'id': artist.id})}}" class="text-decoration-none text-body mt-5 h-25">
 
-            {% endfor %}
+                            <figure class="w-75">
 
-                    
-            {% for song in songs %}
+                                <img src="{{asset('uploads/' ~ artist.avatar)}}" class="rounded-circle w-100" alt="profile picture">
+                            </figure>
+                            
 
-                <div class="mcard">
+                            <div class="flex">
 
-                    <a href="{{path('app_songPlayer', {'id': song.id})}}">
+                                
+                                {{artist.username}}
+                                <h3>Subscriber Count : {{artist.subUser2 |length}} </h3>
+                            </div>
 
-                        <figure>
-                            <img src="{{asset('uploads/' ~ song.cover)}}" alt="song image">
+                        </a>
+                            
 
-                        </figure>
+                    {% endif %}
+
+                {% endfor %}
+
                         
-                        <h3>{{song.nameSong}}</h3>
-                    </a>
+                <table class="mt-5 h-25">
 
-                </div>
+                    <thead>
+            
+                        <tr>
+                            <th></th>
+                            <th>title</th>
+                            <th>artist</th>
+                        </tr>
+                    </thead>
+            
+                    <tbody>
+            
+                        {% for song in songs %}
+                            <tr>
+                                <td>
+                                    <figure>
+                                        <img src="{{asset('uploads/' ~ song.cover)}}" alt="song img">
+                                    </figure>
+                                </td>
+                                <td> <a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
+                                <td>{{song.username}}</td>
+    
+                            </tr>
+                        {% endfor %}
+            
+                    </tbody>
+                </table>
 
-            {% endfor %}
-
+            </div>
 
             {% for album in albums %}
                 
