@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Album;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Model\SearchBar;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Album>
@@ -86,6 +87,26 @@ class AlbumRepository extends ServiceEntityRepository
         $query = $query->getQuery();
 
         return $query->execute();
+    }
+
+   /**
+    * @return Album[] Returns an array of Album objects
+    */
+    public function findBySearch(SearchBar $searchBar): array
+    {
+
+        // SELECT *
+        // FROM album a 
+        // WHERE a.name_album LIKE '%m%'
+        
+        return $this->createQueryBuilder('a')
+            ->select('a')
+            ->andWhere('a.nameAlbum LIKE :q')
+            ->setParameter('q', "%{$searchBar->q}%")
+            ->getQuery()
+            ->getResult()
+        ;
+
     }
 
 //    /**

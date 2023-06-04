@@ -142,20 +142,13 @@ class SongRepository extends ServiceEntityRepository
         // FROM song s 
         // INNER JOIN album a 
         // ON s.album_id = a.id
-        // INNER JOIN user u
-        // ON s.user_id = u.id
-        // WHERE u.username LIKE '%tw%'
         // OR s.name_song LIKE '%belong%'
-        // OR a.name_album LIKE '%I Used%'
 
 
         return $this->createQueryBuilder('s')
-            ->select('s.id, s.nameSong, a.cover, a.nameAlbum, u.username ')
+            ->select('s.id, s.nameSong, a.cover ')
             ->innerJoin('s.album', 'a')
-            ->innerJoin('s.user', 'u')
             ->andWhere('s.nameSong LIKE :q')
-            ->orWhere('a.nameAlbum LIKE :q')
-            ->orWhere('u.username LIKE :q')
             ->setParameter('q', "%{$searchBar->q}%")
             ->getQuery()
             ->getResult()

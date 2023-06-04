@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Song;
+use App\Entity\Album;
 use App\Entity\Playlist;
-use App\Form\SearchBarType;
 use App\Model\SearchBar;
+use App\Form\SearchBarType;
+use App\Repository\AlbumRepository;
 use App\Repository\SongRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class HomeController extends AbstractController
@@ -53,7 +56,7 @@ class HomeController extends AbstractController
 
     // searchBar
     #[Route('/search', name: 'search')]
-    public function search(Request $request, SongRepository $songRepository): Response
+    public function search(Request $request, SongRepository $songRepository, UserRepository $userRepository, AlbumRepository $albumRepository): Response
     {
 
         $searchBar = new SearchBar();
@@ -67,17 +70,22 @@ class HomeController extends AbstractController
             $searchBar->page = $request->query->getInt('page', 1);
 
             $songs = $songRepository->findBySearch($searchBar);
+            $artists = $userRepository->findBySearch($searchBar);
+            $albums = $albumRepository->findBySearch($searchBar);
 
             return $this->render('home/searchPage.html.twig', [
                 'form' => $form->createView(),
                 'songs' => $songs,
-    
+                'artists' => $artists,
+                'albums' => $albums,
             ]);
         }
 
         return $this->render('home/searchPage.html.twig', [
             'form' => $form->createView(),
             'songs' => $songRepository,
+            'artists' => $userRepository,
+            'albums' => $albumRepository,
         ]);
 
  

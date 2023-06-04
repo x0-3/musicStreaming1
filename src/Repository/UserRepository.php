@@ -3,11 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Model\SearchBar;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -54,6 +55,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
 
         $this->save($user, true);
+    }
+
+   /**
+    * @return User[] Returns an array of User objects
+    */
+    public function findBySearch(SearchBar $searchBar): array
+    {
+
+        // SELECT *
+        // FROM user u 
+        // WHERE u.username LIKE '%h%'
+        
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->andWhere('u.username LIKE :q')
+            ->setParameter('q', "%{$searchBar->q}%")
+            ->getQuery()
+            ->getResult()
+        ;
+
     }
 
 //    /**

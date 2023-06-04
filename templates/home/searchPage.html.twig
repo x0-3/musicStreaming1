@@ -15,6 +15,18 @@
                 <h2 class="mt-5">No result</h2>
             {% endif %}
             
+            
+            {% for artist in artists %}    
+        
+                {% if "ROLE_ARTIST" in artist.getRoles %}
+
+                    <a href="{{path('app_artistDetail', {'id': artist.id})}}">{{artist.username}} </a>
+                    
+                {% endif %}
+
+            {% endfor %}
+
+                    
             {% for song in songs %}
 
                 <div class="mcard">
@@ -22,22 +34,31 @@
                     <a href="{{path('app_songPlayer', {'id': song.id})}}">
 
                         <figure>
-                            <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
+                            <img src="{{asset('uploads/' ~ song.cover)}}" alt="song image">
 
                         </figure>
                         
                         <h3>{{song.nameSong}}</h3>
                     </a>
 
-                    <div class="albumArtist">
+                </div>
 
-                        <a href="#">
-                            <h3>{{song.nameAlbum}}</h3>
-                        </a>
-                        <a href="#">
-                            <h3>{{song.username}}</h3>
-                        </a>
-                    </div>
+            {% endfor %}
+
+
+            {% for album in albums %}
+                
+                <div class="mcard">
+
+                    <a href="{{path('app_albumDetail', {'id': album.id})}}">
+
+                        <figure>
+                            <img src="{{asset('uploads/' ~ album.cover)}}" alt="album image">
+
+                        </figure>
+                        
+                        <h3>{{album.nameAlbum}}</h3>
+                    </a>
 
                 </div>
 
