@@ -294,7 +294,9 @@
   margin: auto;
 }
 * body section.playlistList .myPlaylist .mainCard {
-  width: 46%;
+  width: 38%;
+  position: relative;
+  /* height: 222px; */
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
@@ -304,7 +306,8 @@
   color: #36454F;
 }
 * body section.playlistList .myPlaylist .mainCard a figure {
-  height: 41vh;
+  height: 38vh;
+  margin: 0;
 }
 * body section.playlistList .myPlaylist .mainCard a figure img {
   position: relative;
@@ -312,8 +315,8 @@
 }
 * body section.playlistList .myPlaylist .mainCard a figure figcaption {
   position: absolute;
-  top: 67vh;
-  left: 2%;
+  top: 25vh;
+  left: 5%;
 }
 * body section.playlistList .myPlaylist .mcard {
   margin: 0 58px 40px 0;
@@ -603,9 +606,9 @@
   display: none;
 }
 * body section.musicPlayer .player .controls {
-  width: 24%;
+  width: 38%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin: 20px auto;
 }
@@ -876,7 +879,7 @@ body.dark footer ul li a, body.dark footer small {
     width: 100%;
   }
   body section.playlistList .myPlaylist .mainCard a figure figcaption {
-    top: 51vh;
+    top: 32vh;
     left: 5%;
   }
   body section.playlistList .myPlaylist .mcard {
@@ -991,8 +994,7 @@ body.dark footer ul li a, body.dark footer small {
     height: 253px;
   }
   body section.playlistList .myPlaylist .mainCard a figure figcaption {
-    position: absolute;
-    top: 386px;
+    top: 25vh;
     left: 5%;
   }
   body section.playlistList .myPlaylist .mcard {

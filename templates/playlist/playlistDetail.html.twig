@@ -48,7 +48,7 @@
 
                 
                 {# toggle favorite playlist #}
-                {% if app.user %}
+                {# {% if app.user %}
                     <a href="{{path('favorite_playlist', {'id': playlist.id})}}" data-action="favorite">
                 {% endif %}
 
@@ -57,7 +57,7 @@
                 
                 {% if app.user %}
                     </a>
-                {% endif %}
+                {% endif %} #}
             
                 
             {% endif %}
@@ -74,9 +74,20 @@
                     <i class="fa-regular fa-circle-play"></i>
                 </a>
 
-                <a href="">
+                {# <a href="">
                     <i class="fa-solid fa-shuffle"></i>
-                </a>
+                </a> #}
+
+                {% if app.user %}
+                    <a href="{{path('favorite_playlist', {'id': playlist.id})}}" data-action="favorite">
+                {% endif %}
+
+                    <i class="fa-solid fa-check uncheck {{ app.user in playlist.userFavorites ? 'd-none' : '' }}"></i>
+                    <i class="fa-solid fa-check check {{ app.user in playlist.userFavorites ? '' : 'd-none' }}" style="color: #22b71f;"></i>
+                
+                {% if app.user %}
+                    </a>
+                {% endif %}
                     
             </div>
             
