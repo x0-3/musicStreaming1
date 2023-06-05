@@ -179,17 +179,17 @@ class PlaylistController extends AbstractController
         return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
     }
 
-    // FIXME: find a way to render it in a template
+    // FIXME: 
     // shuffles the song inside the playlist
-    #[Route('/playlist/shuffle/{id}/song/{song}', name: 'shuffle_playlist')]
-    public function shufflePlaylist(Playlist $playlist, $shuffledSong, SongRepository $songRepository): Response
+    #[Route('/playlist/shuffle/{id}/song/{songId}', name: 'shuffle_playlist')]
+    public function shufflePlaylist(Playlist $playlist, $songId, SongRepository $songRepository, EntityManagerInterface $em): Response
     {
 
         $shuffledSong = $playlist->getSongs()->toArray();
         
         shuffle($shuffledSong);
-        
-        dd($shuffledSong);
+
+        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
 
     }
 
@@ -198,7 +198,7 @@ class PlaylistController extends AbstractController
     #[Route('/playlist/add', name: 'add_playlist')]
     public function add(EntityManagerInterface $em, Playlist $playlist = null, Request $request, Security $security, FileUploader $fileUploader)
     {
-        $user =  $security->getUser(); // get the user in session
+        $user =  $this->getUser(); // get the user in session
 
         // if the user is connected then proceed with the form submission
         if ($user) {

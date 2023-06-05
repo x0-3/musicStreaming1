@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{playlist.playlistName}} - {{song.nameSong}} {{song.user.username}} {% endblock %}
+{# {% block title %}{{playlist.playlistName}} - {{song.nameSong}} {{song.user.username}} {% endblock %} #}
+{% block title %}{{playlist.playlistName}}{% endblock %}
 
 {% block body %}
 <section class="musicPlayer">
@@ -68,13 +69,16 @@
                     <th>title</th>
                     <th>artist</th>
                     <th>time</th>
-                    {# <th><a href="{{path('shuffle_playlist', {'id': playlist.id, 'shuffledSong': song.id})}}">shuffle</a></th> #}
+                    <th><a href="{{path('shuffle_playlist', {'id': playlist.id, 'songId': song.id})}}">shuffle</a></th>
                 </tr>
             </thead>
 
             <tbody>
+
+                
                                 
-                {% for song in playlist.songs %} 
+                {% for song in songs %} 
+                
                 
                     <tr>
                         
