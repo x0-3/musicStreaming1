@@ -15,14 +15,14 @@
                 <h2 class="mt-5">No result</h2>
             {% endif %}
             
-            <div class="d-flex">
+            <div class="d-flex w-100">
 
                 
                 {% for artist in artists %}    
             
                     {% if "ROLE_ARTIST" in artist.getRoles %}
 
-                        <a href="{{path('app_artistDetail', {'id': artist.id})}}" class="text-decoration-none text-body mt-5 h-25">
+                        <a href="{{path('app_artistDetail', {'id': artist.id})}}" class="text-decoration-none text-body mt-5 h-25 m-auto">
 
                             <figure class="w-75">
 
@@ -45,7 +45,7 @@
                 {% endfor %}
 
                         
-                <table class="mt-5 h-25">
+                <table class="mt-5 h-25 w-50">
             
                     <tbody>
             
@@ -67,23 +67,27 @@
 
             </div>
 
-            {% for album in albums %}
-                
-                <div class="mcard">
+            <div class="d-flex w-100">
 
-                    <a href="{{path('app_albumDetail', {'id': album.id})}}">
+                {% for album in albums %}
+                    
+                    <div class="mcard">
+    
+                        <a href="{{path('app_albumDetail', {'id': album.id})}}">
+    
+                            <figure>
+                                <img src="{{asset('uploads/' ~ album.cover)}}" alt="album image">
+    
+                            </figure>
+                            
+                            <h3>{{album.nameAlbum}}</h3>
+                        </a>
+    
+                    </div>
+    
+                {% endfor %}
+            </div>
 
-                        <figure>
-                            <img src="{{asset('uploads/' ~ album.cover)}}" alt="album image">
-
-                        </figure>
-                        
-                        <h3>{{album.nameAlbum}}</h3>
-                    </a>
-
-                </div>
-
-            {% endfor %}
             
         </div>
     </section>
