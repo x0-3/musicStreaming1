@@ -440,7 +440,7 @@
   cursor: pointer;
   color: black;
 }
-* body section.playlistDetail table tbody tr td button i, * body section.artistDetail table tbody tr td button i, * body section.musicPlayer table tbody tr td button i, * body section.search table tbody tr td button i {
+* body section.playlistDetail table tbody tr td button a, * body section.playlistDetail table tbody tr td button i, * body section.artistDetail table tbody tr td button a, * body section.artistDetail table tbody tr td button i, * body section.musicPlayer table tbody tr td button a, * body section.musicPlayer table tbody tr td button i, * body section.search table tbody tr td button a, * body section.search table tbody tr td button i {
   font-size: x-large;
 }
 * body section.playlistDetail table tbody tr td .dropdown, * body section.artistDetail table tbody tr td .dropdown, * body section.musicPlayer table tbody tr td .dropdown, * body section.search table tbody tr td .dropdown {

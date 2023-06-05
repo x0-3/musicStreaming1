@@ -87,6 +87,10 @@
                                         <a href="{{path('edit_song', {'id': song.id})}}">edit</a>
                                         <a href="{{path('delete_song', {'id': song.id})}}">delete</a>
 
+                                    {% else %}
+
+                                        <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}">add Playlist</a>
+
                                     {% endif %}
                                 {% endif %}
 

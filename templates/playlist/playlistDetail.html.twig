@@ -44,21 +44,7 @@
 
                     </div>
 
-                {% endif %}
-
-                
-                {# toggle favorite playlist #}
-                {# {% if app.user %}
-                    <a href="{{path('favorite_playlist', {'id': playlist.id})}}" data-action="favorite">
-                {% endif %}
-
-                    <i class="fa-solid fa-check uncheck {{ app.user in playlist.userFavorites ? 'd-none' : '' }}"></i>
-                    <i class="fa-solid fa-check check {{ app.user in playlist.userFavorites ? '' : 'd-none' }}" style="color: #22b71f;"></i>
-                
-                {% if app.user %}
-                    </a>
-                {% endif %} #}
-            
+                {% endif %}        
                 
             {% endif %}
 
@@ -123,7 +109,14 @@
                         {% include "like/_like.html.twig" %}
                     </td>
                     <td>0:00</td>
-                    <td><button><i class="fa-solid fa-plus"></i></button></td>
+
+                    {% if app.user %}
+                        
+                        <td><button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" id="myBtn" class="fa-solid fa-plus"></a></button></td>
+                    
+                    {% else %}
+                        <td><button><i class="fa-solid fa-plus"></i></button></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
 

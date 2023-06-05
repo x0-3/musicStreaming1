@@ -13,6 +13,7 @@ use App\Form\CommentType;
 use App\Service\FileUploader;
 use App\Service\CommentService;
 use App\Form\AddSongsToPlaylistType;
+use App\Repository\PlaylistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -184,7 +185,7 @@ class SongController extends AbstractController
     }
 
 
-    // FIXME: not adding songs in db change view to html form
+    // view for the add song page
     #[Route('/song/playlistForm/{id}', name: 'form_toSongsPlaylist')]
     public function addSongRender(Song $song, EntityManagerInterface $em): Response
     {
@@ -200,25 +201,25 @@ class SongController extends AbstractController
 
     }
     
-    // FIXME: not adding songs in db change view to html form
-    #[Route('/song/playlist/{id}', name: 'add_toSongsPlaylist', methods: ['POST'])]
-    public function addSong(Request $request, Song $song, EntityManagerInterface $em): Response
-    {
-        // $user = $this->getUser()->getUserIdentifier(); // get user in session
 
-        // $playlists = $em->getRepository(Playlist::class)->findPlaylistUser($user);
+    // add song to a playlist
+    #[Route('/song/playlist/{id}', name: 'add_toSongsPlaylist')]
+    public function addSong(Request $request, Song $song, EntityManagerInterface $em, PlaylistRepository $playlistRepository): Response
+    {
 
         if($request->isMethod('POST'))
         {   
 
-            $playlist = $request->request->get('_playlist');
-            $song->getId();
+            $playlistId = $request->request->get('_playlist');
+            $playlist = $playlistRepository->find($playlistId);
+            
+            $playlist->addSong($song);
 
-
-            $em->persist($song);
+            $em->persist($playlist);
             $em->flush();
+
+            return $this->redirectToRoute('app_like');
         }
-        return $this->redirectToRoute('app_like');
 
     }
 
