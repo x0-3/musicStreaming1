@@ -3,7 +3,9 @@
     <figure>
         {% if comment.user != null %}
 
-            {% if comment.user.avatar != null %}
+            {% if comment.user.googleId %}
+                <img src="{{ asset(comment.user.avatar )}}" alt="avatar">
+            {% elseif comment.user.avatar != null %}
                 <img src="{{asset('uploads/' ~ comment.user.avatar)}}" alt="profile picture">
 
             {% else %}
