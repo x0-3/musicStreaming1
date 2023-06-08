@@ -9,7 +9,11 @@
     <div class="playlistHeader">
 
         <figure>
-            <img src="{{asset('uploads/' ~ playlist.image)}}" alt="playlist image">
+            {% if playlist.image == null %}
+                <img src="{{asset('img/dee-XhvEvfXQoSY-unsplash.jpg')}}" alt="playlist image">
+            {% else %}
+                <img src="{{asset('uploads/' ~ playlist.image)}}" alt="playlist image">
+            {% endif %}
         </figure>
 
         <div class="playlistName">

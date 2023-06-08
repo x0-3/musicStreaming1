@@ -1098,9 +1098,22 @@ body.dark{
         }
     }
 
+    h4{
+        color: #7DF9FF;
+    }
+
     .title a {
         background-color: #7DF9FF;
         color: #36454F;
+    }
+
+    .dropdown button {
+        background-color: white;
+        color: #36454F;
+    }
+
+    i.fa-solid.fa-plus {
+        color: black !important;
     }
 
     section.playlistList {
@@ -1151,8 +1164,58 @@ body.dark{
             color: white;
         }
 
-        button {
+        .controls button {
             color: white;
+
+            &:hover{
+                color: #7DF9FF;
+
+            }
+
+        }
+
+        .player {
+
+            .controls {
+
+                a, span.fa-solid.fa-pause{
+                    color: white;
+        
+                    &:hover{
+                        color: #7DF9FF;
+
+                    }
+        
+                }
+                .hover .audio #volume-slider{
+
+                    background: white;
+
+                    &::-webkit-slider-thumb{
+                        box-shadow: -400px 0 0 400px #7DF9FF;
+                    }
+                }
+            }
+            
+
+            .timeline{
+
+                .slider{
+                    background: white;
+
+                    &::-webkit-slider-thumb{
+                        box-shadow: -400px 0 0 400px #7DF9FF;
+                    }
+                }
+            }
+        }
+
+        .comments article {
+            background-color: white;
+
+            figure figcaption a {
+                color: #36454F;
+            }
         }
 
 

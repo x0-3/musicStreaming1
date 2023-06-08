@@ -20,7 +20,7 @@
 
         <figcaption>
             {% if comment.user != null %}
-                <a href="{{path('app_artistDetail', {'id':comment.user.id })}}">{{comment.user.username}}</a>
+                <a href="{{path('app_artistDetail', {'id':comment.user.username })}}">{{comment.user.username}}</a>
                 
             {% else %}
                 <a href="#">account disabled</a>

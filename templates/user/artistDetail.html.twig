@@ -4,155 +4,162 @@
 
 {% block body %}
 
-<section class="artistDetail">
+{% if artist.roles == ["ROLE_USER"] %}
 
-    <div class="hero">
-        <figure>
+    <h3>This user doesn't have a profile page.</h3>
 
-            {% if artist.avatar == null %}
-              
-                <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
-            {% else %}
-            
-                <img src="{{asset('uploads/' ~ artist.avatar)}}" alt="profile picture"> 
-            {% endif %}
-            
+{% else %}
+    <section class="artistDetail">
 
-            <figcaption>
-                <h1>{{artist.username}}</h1>
+        <div class="hero">
+            <figure>
 
-                {# toggle between two btn if the user is sub or not to the artist #}
-                {% if userSub %}
-
-                    <form action="{{path('app_subscribeTo', {'id': artist.username})}}" method="post">
-                        <button type="submit">Subscribed</button>
-                    </form>
+                {% if artist.avatar == null %}
                 
+                    <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
                 {% else %}
-
-                    {% include "subscribe/_addSub.html.twig" %}
-
+                
+                    <img src="{{asset('uploads/' ~ artist.avatar)}}" alt="profile picture"> 
                 {% endif %}
+                
 
+                <figcaption>
+                    <h1>{{artist.username}}</h1>
 
-                {# count the nb if subscriber of an artist #}
-                {% if artist.subUser2|length <= 1 %}
-                    <h3>{{artist.subUser2|length}} subcriber</h3>
+                    {# toggle between two btn if the user is sub or not to the artist #}
+                    {% if userSub %}
+
+                        <form action="{{path('app_subscribeTo', {'id': artist.username})}}" method="post">
+                            <button type="submit">Subscribed</button>
+                        </form>
                     
-                {% else %}
-                    <h3>{{artist.subUser2|length}} subcribers</h3>
+                    {% else %}
 
-                {% endif %}
+                        {% include "subscribe/_addSub.html.twig" %}
 
-            </figcaption>
-        </figure>
-    </div>
+                    {% endif %}
 
 
-    <table>
+                    {# count the nb if subscriber of an artist #}
+                    {% if artist.subUser2|length <= 1 %}
+                        <h3>{{artist.subUser2|length}} subcriber</h3>
+                        
+                    {% else %}
+                        <h3>{{artist.subUser2|length}} subcribers</h3>
 
-        <thead>
+                    {% endif %}
 
-            <tr>
-                <th></th>
-                <th>title</th>
-                <th>artist</th>
-                <td></td>
-                <th>time</th>
-                <th></th>
-            </tr>
-        </thead>
+                </figcaption>
+            </figure>
+        </div>
 
-        <tbody>
-            {% for song in songs %}
+
+        <table>
+
+            <thead>
+
                 <tr>
-                    <td>
-                        <figure>
-                            <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
-                        </figure>
-                    </td>
-                    <td><a href="{{path('app_songPlayer', {'id': song.uuid})}}">{{song.nameSong}} </a></td>
-                    <td> <a href="{{path('app_artistDetail', {'id': artist.username})}}"> {{song.user.username}} </a></td>
-                    <td>
-                        {% include "like/_like.html.twig" %}
-                    </td>
-                    <td>3:09</td>
-                    <td><button><i class="fa-solid fa-plus"></i></button></td>
+                    <th></th>
+                    <th>title</th>
+                    <th>artist</th>
+                    <td></td>
+                    <th>time</th>
+                    <th></th>
                 </tr>
+            </thead>
 
-            {% endfor %}
-        </tbody>
-    </table>
+            <tbody>
+                {% for song in songs %}
+                    <tr>
+                        <td>
+                            <figure>
+                                <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
+                            </figure>
+                        </td>
+                        <td><a href="{{path('app_songPlayer', {'id': song.uuid})}}">{{song.nameSong}} </a></td>
+                        <td> <a href="{{path('app_artistDetail', {'id': artist.username})}}"> {{song.user.username}} </a></td>
+                        <td>
+                            {% include "like/_like.html.twig" %}
+                        </td>
+                        <td>3:09</td>
+                        <td><button><i class="fa-solid fa-plus"></i></button></td>
+                    </tr>
 
-    <div class="album">
+                {% endfor %}
+            </tbody>
+        </table>
 
-        <div class="title">
+        <div class="album">
 
-            <h1>Albums</h1>
-            <a href="{{path('app_artistAlbum', {'id': artist.id})}}">More</a>
-        </div>
+            <div class="title">
 
-        <div class="cards">
+                <h1>Albums</h1>
+                <a href="{{path('app_artistAlbum', {'id': artist.id})}}">More</a>
+            </div>
 
-            {% for album in albums %}
-            
-                <div class="mcard">
-                    <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
+            <div class="cards">
 
-                        <figure>
-                            <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">
-                        </figure>
-                        
-                        <h3>{{album.nameAlbum}} </h3>
-                    </a>
-                </div>
-            {% endfor %}
-
-        </div>
-    </div>
-
-    <div class="artist">
-
-        <div class="title">
-
-            <h1>Most Popular Artists</h1>
-            <a href="{{path('app_similarArtist')}}">More</a>
-        </div>
-
-        <div class="cards">
-
-            {% for artistMostSub in artistMostSub %}
+                {% for album in albums %}
                 
-                <div class="mcard">
-                    <a href="{{path('app_artistDetail', {'id': artistMostSub.username})}}">
+                    <div class="mcard">
+                        <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
 
-                        {% if artistMostSub.avatar == null %}
                             <figure>
-                                <img src="{{asset('img/profil_pic.png')}}" alt="album cover">
-                            </figure>
-
-                        {% else %}
-                            <figure>
-                                <img src="{{asset('uploads/' ~ artistMostSub.avatar)}}" alt="album cover">
+                                <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">
                             </figure>
                             
-                        {% endif %}
-                        
-                        <h3>{{artistMostSub.username}}</h3>
+                            <h3>{{album.nameAlbum}} </h3>
+                        </a>
+                    </div>
+                {% endfor %}
 
-                        {% if artist.subUser2|length <= 1 %}
-                            <h3>{{artist.subUser2|length}} subcriber</h3>
-                            
-                        {% else %}
-                            <h3>{{artist.subUser2|length}} subcribers</h3>
-        
-                        {% endif %}
-                    </a>
-                </div>
-            
-            {% endfor %}
-
+            </div>
         </div>
-    </div>
-</section>
+
+        <div class="artist">
+
+            <div class="title">
+
+                <h1>Most Popular Artists</h1>
+                <a href="{{path('app_similarArtist')}}">More</a>
+            </div>
+
+            <div class="cards">
+
+                {% for artistMostSub in artistMostSub %}
+                    
+                    <div class="mcard">
+                        <a href="{{path('app_artistDetail', {'id': artistMostSub.username})}}">
+
+                            {% if artistMostSub.avatar == null %}
+                                <figure>
+                                    <img src="{{asset('img/profil_pic.png')}}" alt="album cover">
+                                </figure>
+
+                            {% else %}
+                                <figure>
+                                    <img src="{{asset('uploads/' ~ artistMostSub.avatar)}}" alt="album cover">
+                                </figure>
+                                
+                            {% endif %}
+                            
+                            <h3>{{artistMostSub.username}}</h3>
+
+                            {% if artistMostSub.num_followers <= 1 %}
+                                <h3>{{artistMostSub.num_followers}} subcriber</h3>
+                                
+                            {% else %}
+                                <h3>{{artistMostSub.num_followers}} subcribers</h3>
+            
+                            {% endif %}
+                        </a>
+                    </div>
+                
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+{% endif %}
+
 {% endblock %}

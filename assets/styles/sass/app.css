@@ -819,9 +819,19 @@ body.dark h3 {
 body.dark h3:hover {
   color: #7DF9FF;
 }
+body.dark h4 {
+  color: #7DF9FF;
+}
 body.dark .title a {
   background-color: #7DF9FF;
   color: #36454F;
+}
+body.dark .dropdown button {
+  background-color: white;
+  color: #36454F;
+}
+body.dark i.fa-solid.fa-plus {
+  color: black !important;
 }
 body.dark section.playlistList .title .nav .artistLink {
   color: #7DF9FF;
@@ -845,8 +855,35 @@ body.dark section.playlistDetail .uncheck, body.dark section.playlistDetail .che
 body.dark section.playlistDetail th, body.dark section.playlistDetail tr, body.dark section.playlistDetail i, body.dark section.playlistDetail td a, body.dark section.artistDetail th, body.dark section.artistDetail tr, body.dark section.artistDetail i, body.dark section.artistDetail td a, body.dark section.musicPlayer th, body.dark section.musicPlayer tr, body.dark section.musicPlayer i, body.dark section.musicPlayer td a {
   color: white;
 }
-body.dark section.playlistDetail button, body.dark section.artistDetail button, body.dark section.musicPlayer button {
+body.dark section.playlistDetail .controls button, body.dark section.artistDetail .controls button, body.dark section.musicPlayer .controls button {
   color: white;
+}
+body.dark section.playlistDetail .controls button:hover, body.dark section.artistDetail .controls button:hover, body.dark section.musicPlayer .controls button:hover {
+  color: #7DF9FF;
+}
+body.dark section.playlistDetail .player .controls a, body.dark section.playlistDetail .player .controls span.fa-solid.fa-pause, body.dark section.artistDetail .player .controls a, body.dark section.artistDetail .player .controls span.fa-solid.fa-pause, body.dark section.musicPlayer .player .controls a, body.dark section.musicPlayer .player .controls span.fa-solid.fa-pause {
+  color: white;
+}
+body.dark section.playlistDetail .player .controls a:hover, body.dark section.playlistDetail .player .controls span.fa-solid.fa-pause:hover, body.dark section.artistDetail .player .controls a:hover, body.dark section.artistDetail .player .controls span.fa-solid.fa-pause:hover, body.dark section.musicPlayer .player .controls a:hover, body.dark section.musicPlayer .player .controls span.fa-solid.fa-pause:hover {
+  color: #7DF9FF;
+}
+body.dark section.playlistDetail .player .controls .hover .audio #volume-slider, body.dark section.artistDetail .player .controls .hover .audio #volume-slider, body.dark section.musicPlayer .player .controls .hover .audio #volume-slider {
+  background: white;
+}
+body.dark section.playlistDetail .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.artistDetail .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.musicPlayer .player .controls .hover .audio #volume-slider::-webkit-slider-thumb {
+  box-shadow: -400px 0 0 400px #7DF9FF;
+}
+body.dark section.playlistDetail .player .timeline .slider, body.dark section.artistDetail .player .timeline .slider, body.dark section.musicPlayer .player .timeline .slider {
+  background: white;
+}
+body.dark section.playlistDetail .player .timeline .slider::-webkit-slider-thumb, body.dark section.artistDetail .player .timeline .slider::-webkit-slider-thumb, body.dark section.musicPlayer .player .timeline .slider::-webkit-slider-thumb {
+  box-shadow: -400px 0 0 400px #7DF9FF;
+}
+body.dark section.playlistDetail .comments article, body.dark section.artistDetail .comments article, body.dark section.musicPlayer .comments article {
+  background-color: white;
+}
+body.dark section.playlistDetail .comments article figure figcaption a, body.dark section.artistDetail .comments article figure figcaption a, body.dark section.musicPlayer .comments article figure figcaption a {
+  color: #36454F;
 }
 body.dark section.genreSongs h2 {
   color: #7DF9FF;
