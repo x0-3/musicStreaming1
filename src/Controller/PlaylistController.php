@@ -56,9 +56,11 @@ class PlaylistController extends AbstractController
 
     // music player page for one playlist
     // with the comment form
-    #[Route('/musicPlayer/{id}/song/{song}', name: 'playlist_player')]
-    public function playlistPlayer(Playlist $playlist, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
+    #[Route('/musicPlayer/{id}/song/{songId}', name: 'playlist_player')]
+    public function playlistPlayer($id, EntityManagerInterface $em, $songId, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {
+        $playlist = $em->getRepository(Playlist::class)->findOneBy(['id'=>$id]);
+        $song = $em->getRepository(Song::class)->findOneBy(['id'=>$songId]);
 
         $songs = $playlist->getSongs(); // get the list of songs from the playlist
 
@@ -125,7 +127,7 @@ class PlaylistController extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $nextSongId]);
+            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $nextSongId]);
 
         } elseif (!isset($playlistSongs[$currentIndex + 1])) {
             
@@ -138,7 +140,7 @@ class PlaylistController extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $firstSongId]);
+            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $firstSongId]);
         }
      
     }
@@ -172,11 +174,11 @@ class PlaylistController extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $nextSongId]);
+            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $nextSongId]);
 
         } 
 
-        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
+        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songId]);  
     }
 
     // FIXME: 
@@ -189,7 +191,7 @@ class PlaylistController extends AbstractController
         
         shuffle($shuffledSong);
 
-        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'song' => $songId]);  
+        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songId]);  
 
     }
 
@@ -245,8 +247,11 @@ class PlaylistController extends AbstractController
 
     // edit playlists
     #[Route('/playlist/{id}/edit', name: 'edit_playlist')]
-    public function edit(EntityManagerInterface $em, Playlist $playlist, Request $request, Security $security, FileUploader $fileUploader)
+    public function edit(EntityManagerInterface $em, $id, Request $request, Security $security, FileUploader $fileUploader)
     {
+
+        $playlist = $em->getRepository(Playlist::class)->findOneBy(['uuid' => $id]);
+
         $user =  $security->getUser(); // get the user in session 
 
 
@@ -365,7 +370,7 @@ class PlaylistController extends AbstractController
                 // actually executes the queries (i.e. the INSERT query)
                 $em->flush();
     
-                return $this->redirectToRoute('playlist_detail', ['id' => $playlist->getId()]);
+                return $this->redirectToRoute('playlist_detail', ['id' => $playlist->getUuid()]);
             }
     
         }
@@ -378,8 +383,10 @@ class PlaylistController extends AbstractController
 
     // detailed page for one playlist
     #[Route('/playlist/{id}', name: 'playlist_detail')]
-    public function detailPlaylist(Playlist $playlist): Response
+    public function detailPlaylist($id, EntityManagerInterface $em): Response
     {
+
+        $playlist = $em->getRepository(Playlist::class)->findOneBy(['uuid' => $id]);
 
         $songs = $playlist->getSongs();
 

@@ -48,10 +48,10 @@ class PlaylistRepository extends ServiceEntityRepository
         // $entityManager = $this->getEntityManager();
         
         $query = $this->createQueryBuilder('p')
-            ->select('p.id, p.image, p.playlistName, COUNT(pu.id) AS num_followers')
+            ->select('p.id, p.uuid, p.image, p.playlistName, COUNT(pu.id) AS num_followers')
             // ->from('App\Entity\Playlist', 'p')
             ->leftJoin('p.userFavorites', 'pu')
-            ->groupBy('p.id, p.playlistName')
+            ->groupBy('p.id, p.uuid, p.playlistName')
             ->orderBy('num_followers', 'DESC')
             ->setMaxResults(5)
             ->getQuery()
@@ -69,7 +69,7 @@ class PlaylistRepository extends ServiceEntityRepository
     {
         
         $query = $this->createQueryBuilder('p')
-            ->select('p.id, p.image, p.playlistName, COUNT(pu.id) AS num_followers')
+            ->select('p.id, p.uuid, p.image, p.playlistName, COUNT(pu.id) AS num_followers')
             // ->from('App\Entity\Playlist', 'p')
             ->leftJoin('p.userFavorites', 'pu')
             ->groupBy('p.id, p.playlistName')
@@ -92,7 +92,7 @@ class PlaylistRepository extends ServiceEntityRepository
         // $entityManager = $this->getEntityManager();
 
         $query = $this->createQueryBuilder('p')
-            ->select('p.id, p.image, p.playlistName, p.dateCreated')
+            ->select('p.id, p.uuid, p.image, p.playlistName, p.dateCreated')
             ->leftJoin('p.user', 'u')
             ->where('u.email = :email')
             ->setParameter('email', $userEmail)
@@ -129,7 +129,7 @@ class PlaylistRepository extends ServiceEntityRepository
    public function findFavoritePlaylists($userEmail): array
     {
        return $this->createQueryBuilder('p')
-           ->select('p.id, p.image, p.playlistName, pu.email')
+           ->select('p.id, p.uuid, p.image, p.playlistName, pu.email')
         //    ->from('App\Entity\Playlist', 'pl')
            ->leftJoin('p.userFavorites', 'pu')
            ->where('pu.email = :email')

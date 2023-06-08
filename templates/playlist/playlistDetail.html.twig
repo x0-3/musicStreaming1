@@ -27,7 +27,7 @@
                         
                         <div class="dropdown-content">
                             <p id="myBtn">add Songs</p>
-                            <a href="{{path('edit_playlist', {'id': playlist.id})}}">Edit</a>
+                            <a href="{{path('edit_playlist', {'id': playlist.uuid})}}">Edit</a>
                             <a href="{{path('delete_playlist', {'id': playlist.id})}}">Delete</a>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
         
             <div class="playerBtns">
 
-                <a href="{{path('playlist_player', {'id': playlist.id, 'song':songs[0].id })}}">
+                <a href="{{path('playlist_player', {'id': playlist.id, 'songId':songs[0].id })}}">
                     <i class="fa-regular fa-circle-play"></i>
                 </a>
 
@@ -103,8 +103,8 @@
                             <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
                         </figure>
                     </td>
-                    <td> <a href="{{path('playlist_player', {'id': playlist.id, 'song': song.id})}}">{{song.nameSong}} </a></td>
-                    <td> <a href="{{path('app_artistDetail', {'id': song.user.id})}}"> {{song.user.username}} </a></td>
+                    <td> <a href="{{path('playlist_player', {'id': playlist.id, 'songId': song.id})}}">{{song.nameSong}} </a></td>
+                    <td> <a href="{{path('app_artistDetail', {'id': song.user.username})}}"> {{song.user.username}} </a></td>
                     <td>
                         {% include "like/_like.html.twig" %}
                     </td>

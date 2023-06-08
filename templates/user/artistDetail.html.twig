@@ -24,7 +24,7 @@
                 {# toggle between two btn if the user is sub or not to the artist #}
                 {% if userSub %}
 
-                    <form action="{{path('app_subscribeTo', {'id': artist.id})}}" method="post">
+                    <form action="{{path('app_subscribeTo', {'id': artist.username})}}" method="post">
                         <button type="submit">Subscribed</button>
                     </form>
                 
@@ -71,8 +71,8 @@
                             <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
                         </figure>
                     </td>
-                    <td><a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
-                    <td> <a href="{{path('app_artistDetail', {'id': artist.id})}}"> {{song.user.username}} </a></td>
+                    <td><a href="{{path('app_songPlayer', {'id': song.uuid})}}">{{song.nameSong}} </a></td>
+                    <td> <a href="{{path('app_artistDetail', {'id': artist.username})}}"> {{song.user.username}} </a></td>
                     <td>
                         {% include "like/_like.html.twig" %}
                     </td>
@@ -97,7 +97,7 @@
             {% for album in albums %}
             
                 <div class="mcard">
-                    <a href="{{path('app_albumDetail', {'id': album.id})}}">
+                    <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
 
                         <figure>
                             <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">
@@ -124,7 +124,7 @@
             {% for artistMostSub in artistMostSub %}
                 
                 <div class="mcard">
-                    <a href="{{path('app_artistDetail', {'id': artistMostSub.id})}}">
+                    <a href="{{path('app_artistDetail', {'id': artistMostSub.username})}}">
 
                         {% if artistMostSub.avatar == null %}
                             <figure>

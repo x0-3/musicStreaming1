@@ -75,7 +75,7 @@ class AlbumRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQueryBuilder()
-            ->select('a.id, a.nameAlbum, a.cover, a.releaseDate')
+            ->select('a.id, a.uuid, a.nameAlbum, a.cover, a.releaseDate')
             ->from('App\Entity\Song', 's')
             ->innerJoin('s.album', 'a')
             ->andWhere('s.user = :id')

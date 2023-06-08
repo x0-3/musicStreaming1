@@ -22,7 +22,7 @@
             
                     {% if "ROLE_ARTIST" in artist.getRoles %}
 
-                        <a href="{{path('app_artistDetail', {'id': artist.id})}}" class="text-decoration-none text-body mt-5 h-25 m-auto">
+                        <a href="{{path('app_artistDetail', {'id': artist.username})}}" class="text-decoration-none text-body mt-5 h-25 m-auto">
 
                             <figure class="w-75">
 
@@ -56,7 +56,7 @@
                                         <img src="{{asset('uploads/' ~ song.cover)}}" alt="song img">
                                     </figure>
                                 </td>
-                                <td> <a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
+                                <td> <a href="{{path('app_songPlayer', {'id': song.uuid})}}">{{song.nameSong}} </a></td>
                                 <td>{{song.username}}</td>
 
                                 {% if app.user %}
@@ -81,7 +81,7 @@
                     
                     <div class="mcard">
     
-                        <a href="{{path('app_albumDetail', {'id': album.id})}}">
+                        <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
     
                             <figure>
                                 <img src="{{asset('uploads/' ~ album.cover)}}" alt="album image">

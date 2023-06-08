@@ -227,8 +227,10 @@ class SongController extends AbstractController
     // song player for one song
     // with comment form
     #[Route('/song/{id}', name: 'app_songPlayer')]
-    public function songPlayer(Song $song, RequestStack $requestStack, CommentService $commentService, EntityManagerInterface $em): Response
+    public function songPlayer($id, RequestStack $requestStack, CommentService $commentService, EntityManagerInterface $em): Response
     {
+
+        $song = $em->getRepository(Song::class)->findOneBy(['uuid'=>$id]);
 
         // for the comment section 
         $user = $this->getUser();

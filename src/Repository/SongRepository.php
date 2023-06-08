@@ -5,9 +5,7 @@ namespace App\Repository;
 use App\Entity\Song;
 use App\Model\SearchBar;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\Expr\From;
 use Doctrine\Persistence\ManagerRegistry;
-use EasyCorp\Bundle\EasyAdminBundle\Contracts\Orm\EntityPaginatorInterface;
 
 
 
@@ -53,7 +51,7 @@ class SongRepository extends ServiceEntityRepository
     {
 
         $query = $this->createQueryBuilder('s')
-            ->select('s.id, s.nameSong, a.cover, COUNT(ul.id) AS num_like')
+            ->select('s.id, s.uuid, s.nameSong, a.cover, COUNT(ul.id) AS num_like')
             ->leftJoin('s.album', 'a')
             ->leftJoin('s.likes', 'ul')
             ->groupBy('s.id, s.nameSong,  a.cover')
@@ -72,7 +70,7 @@ class SongRepository extends ServiceEntityRepository
     {
 
         $query = $this->createQueryBuilder('s')
-            ->select('s.id,s.nameSong, a.cover, COUNT(ul.id) AS num_like')
+            ->select('s.id, s.uuid, s.nameSong, a.cover, COUNT(ul.id) AS num_like')
             ->leftJoin('s.album', 'a')
             ->leftJoin('s.likes', 'ul')
             ->groupBy('s.id, s.nameSong,  a.cover')
@@ -146,7 +144,7 @@ class SongRepository extends ServiceEntityRepository
 
 
         return $this->createQueryBuilder('s')
-            ->select('s.id, s.nameSong, a.cover, u.username ')
+            ->select('s.id, s.uuid, s.nameSong, a.cover, u.username ')
             ->innerJoin('s.album', 'a')
             ->andWhere('s.nameSong LIKE :q')
             ->innerJoin('s.user', 'u')

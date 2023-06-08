@@ -19,7 +19,7 @@
                 
                     <div class="mcard">
                         
-                        <a href="{{path('app_albumDetail', {'id': album.id})}}">
+                        <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
                             
                             <figure>
                                 <img src="{{asset('uploads/' ~ album.cover)}} "alt="album cover">
@@ -42,7 +42,7 @@
 
                 {% for genre in genres %}
 
-                    <a href="{{path('app_genre', {'id': genre.id})}}">{{genre.genreName}}</a>
+                    <a href="{{path('app_genre', {'id': genre.uuid})}}">{{genre.genreName}}</a>
                 
                 {% endfor %}
             

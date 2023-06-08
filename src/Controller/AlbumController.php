@@ -169,8 +169,10 @@ class AlbumController extends AbstractController
 
     // detail page of one album
     #[Route('/album/{id}', name: 'app_albumDetail')]
-    public function albumDetail(Album $album): Response
+    public function albumDetail($id, EntityManagerInterface $em): Response
     {        
+
+        $album = $em->getRepository(Album::class)->findOneBy(['uuid' => $id]);
 
         $songs = $album->getSongs();
 
@@ -183,9 +185,12 @@ class AlbumController extends AbstractController
 
     // music player page for an album
     // with the comment form
-    #[Route('/album/Player/{id}/song/{song}', name: 'app_albumPlayer')]
-    public function albumMusicPlayer(EntityManagerInterface $em, Album $album, Song $song, Security $security, RequestStack $requestStack, CommentService $commentService): Response
+    #[Route('/album/Player/{id}/song/{songId}', name: 'app_albumPlayer')]
+    public function albumMusicPlayer(EntityManagerInterface $em, $id, $songId, Security $security, RequestStack $requestStack, CommentService $commentService): Response
     {
+        $album= $em->getRepository(Album::class)->findOneBy(['id' => $id]);
+        $song= $em->getRepository(Song::class)->findOneBy(['id' => $songId]);
+
         $songs = $album->getSongs(); // get the song list from the album
 
         // for the comment section 
@@ -260,7 +265,7 @@ class AlbumController extends AbstractController
             $entityManager->flush();
 
             // Redirect to the page of the next song
-            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $nextSongId]);
+            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $nextSongId]);
             
         } elseif (!isset($albumSongs[$currentIndex + 1])) {
 
@@ -275,7 +280,7 @@ class AlbumController extends AbstractController
             $entityManager->flush();
 
             // redirect it to the first song in the album
-            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $firstSong]);
+            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $firstSong]);
         }
 
     }
@@ -283,7 +288,7 @@ class AlbumController extends AbstractController
     // play previous song of the album
     #[Route('/album/prevSong/{id}/{songId}', name: 'app_prevSong')]
     public function prevSong(Album $album, $songId, SongRepository $songRepository, EntityManagerInterface $em): Response
-    {
+    {   
 
         $albumSongID = $album->getSongs();
 
@@ -308,11 +313,11 @@ class AlbumController extends AbstractController
             $em ->persist($song);
             $em ->flush();
 
-            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $prevSong]);
+            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $prevSong]);
 
         }
 
         // redirect to the page of the song
-        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'song' => $songId]);  
+        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $songId]);  
     }
 }

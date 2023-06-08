@@ -19,7 +19,7 @@
             {% for playlist in playlists %}
                 
                 <div class="playlistCard">
-                    <a href="{{path('playlist_detail', {'id' : playlist.id})}}">
+                    <a href="{{path('playlist_detail', {'id' : playlist.uuid})}}">
                         
                         <figure>
                             <img src="{{asset('uploads/' ~ playlist.image)}}" alt="playlist image">
@@ -52,7 +52,7 @@
                     
                     <div class="playlistCard">
 
-                        <a href="{{path('playlist_detail', {'id' : favorite.id})}}">
+                        <a href="{{path('playlist_detail', {'id' : favorite.uuid})}}">
                             <figure>
                                 <img src="{{asset('uploads/' ~ favorite.image)}}" alt="playlist image">
                             </figure>
@@ -82,7 +82,7 @@
             {% for song in songs %}            
                 <div class="playlistCard">
                     
-                    <a href="{{path('app_songPlayer', {'id': song.id})}}">
+                    <a href="{{path('app_songPlayer', {'id': song.uuid})}}">
                         
                         <figure>
                             <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">

@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\GenreRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\GenreRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: GenreRepository::class)]
 class Genre
@@ -14,6 +15,9 @@ class Genre
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(type:"uuid", unique:true)]
+    private $uuid;
 
     #[ORM\Column(length: 255)]
     private ?string $genreName = null;
@@ -24,6 +28,7 @@ class Genre
     public function __construct()
     {
         $this->songs = new ArrayCollection();
+        $this->uuid = Uuid::uuid4();
     }
 
     public function getId(): ?int
@@ -69,6 +74,26 @@ class Genre
                 $song->setGenre(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of uuid
+     */ 
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * Set the value of uuid
+     *
+     * @return  self
+     */ 
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }

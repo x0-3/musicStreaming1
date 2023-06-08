@@ -52,8 +52,10 @@ class SubscribeController extends AbstractController
 
     // case if the user is subscribed to the artist 
     #[Route('/subscribeTo/{id}', name: 'app_subscribeTo')]
-    public function deleteSubscribe(EntityManagerInterface $em, User $artist): Response
+    public function deleteSubscribe(EntityManagerInterface $em, $id): Response
     {
+        $artist = $em->getRepository(User::class)->findOneBy(['username'=> $id]);
+
         $user = $this->getUser();
     
         if ($user) {        
@@ -72,7 +74,7 @@ class SubscribeController extends AbstractController
                 $em->flush();
         
                 // redirect to the artist page
-                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
+                return $this->redirectToRoute('app_artistDetail', ['id' => $id]);
             }
             
             return $this->render('subscribe/_addSub.html.twig', [

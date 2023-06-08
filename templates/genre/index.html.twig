@@ -10,7 +10,7 @@
     
             <div class="songCard">
 
-                <a href="{{path('app_songPlayer', {'id': song.id})}}">
+                <a href="{{path('app_songPlayer', {'id': song.uuid})}}">
 
                     <figure>
                         <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song cover">
@@ -20,7 +20,7 @@
 
                         <h3>{{song.nameSong}} </h3>
                         
-                        <a href="{{path('app_artistDetail', {'id': song.user.id})}}">
+                        <a href="{{path('app_artistDetail', {'id': song.user.username})}}">
                             <h5>{{song.user.username}} </h5>
                         </a>
                     </div>

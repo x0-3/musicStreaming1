@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\PlaylistRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Uuid;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PlaylistRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: PlaylistRepository::class)]
 class Playlist
@@ -15,6 +16,9 @@ class Playlist
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(type:"uuid", unique:true)]
+    private $uuid;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
@@ -40,6 +44,7 @@ class Playlist
     {
         $this->songs = new ArrayCollection();
         $this->userFavorites = new ArrayCollection();
+        $this->uuid = Uuid::uuid4();
     }
 
     public function getId(): ?int
@@ -148,5 +153,25 @@ class Playlist
 
         return $this->userFavorites->contains($user);
 
+    }
+
+    /**
+     * Get the value of uuid
+     */ 
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * Set the value of uuid
+     *
+     * @return  self
+     */ 
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
+
+        return $this;
     }
 }

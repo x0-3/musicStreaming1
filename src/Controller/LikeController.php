@@ -46,8 +46,10 @@ class LikeController extends AbstractController
     // music player like song
     // with the comment form
     #[Route('/likePlayer/song/{id}', name: 'like_Player')]
-    public function likePlayer(Song $song, EntityManagerInterface $em, RequestStack $requestStack, CommentService $commentService): Response
+    public function likePlayer($id, EntityManagerInterface $em, RequestStack $requestStack, CommentService $commentService): Response
     {
+
+        $song = $em->getRepository(Song::class)->findOneBy(['id' => $id]);
 
         $user = $this->getUser();
 

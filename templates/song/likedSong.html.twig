@@ -44,7 +44,7 @@
 
         <tbody>
 
-            {% for key,song in like %}
+            {% for song in like %}
                 <tr>
                     <td>
                         <figure>
@@ -52,7 +52,7 @@
                         </figure>
                     </td>
                     <td><a href="{{path('like_Player', {'id': song.id})}}"> {{song.nameSong}} </a></td>
-                    <td> <a href="{{path('app_artistDetail', {'id': song.user.id})}}"> {{song.user.username}} </a></td>
+                    <td> <a href="{{path('app_artistDetail', {'id': song.user.username})}}"> {{song.user.username}} </a></td>
                     <td>
                         {% include "like/_like.html.twig" %}
                     </td>

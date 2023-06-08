@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\SongRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Uuid;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SongRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: SongRepository::class)]
 class Song
@@ -15,6 +16,9 @@ class Song
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(type:"uuid", unique:true)]
+    private $uuid;
 
     #[ORM\Column(length: 255)]
     private ?string $nameSong = null;
@@ -48,6 +52,7 @@ class Song
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->playlists = new ArrayCollection();
+        $this->uuid = Uuid::uuid4();
     }
 
     public function setId(int $id): self
@@ -213,4 +218,24 @@ class Song
         return $this;
     }
 
+
+    /**
+     * Get the value of uuid
+     */ 
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * Set the value of uuid
+     *
+     * @return  self
+     */ 
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
 }

@@ -79,14 +79,14 @@
                     
                     <td>
                         <figure>
-                            <a href="{{path('app_songPlayer',{'id': song.id} )}}">
+                            <a href="{{path('app_songPlayer',{'id': song.uuid} )}}">
 
                                 <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
                             </a>
                         </figure>
                     </td>
-                    <td><a href="{{path('app_songPlayer',{'id': song.id} )}}">{{song.nameSong}}</a></td>
-                    <td> <a href="{{path('app_artistDetail', {'id':song.user.id })}}"> {{song.user.username}}</a></td>
+                    <td><a href="{{path('app_songPlayer',{'id': song.uuid} )}}">{{song.nameSong}}</a></td>
+                    <td> <a href="{{path('app_artistDetail', {'id':song.user.username })}}"> {{song.user.username}}</a></td>
                     <td><small class="fulltime">0:00</small></td>
                     <td><button><i class="fa-solid fa-plus"></i></button></td>
                 

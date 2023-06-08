@@ -95,7 +95,7 @@ class SubscribeRepository extends ServiceEntityRepository
             ->innerJoin('s.user2', 'us')
             ->where('u.email = :email')
             ->setParameter('email', $userId)
-            ->groupBy('s.id, u.email, us.id, us.username, u.avatar')
+            ->groupBy('s.id ,u.email, us.id, us.username, u.avatar')
             ->getQuery()
             ->getResult();
 

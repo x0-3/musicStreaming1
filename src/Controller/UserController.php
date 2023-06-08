@@ -30,8 +30,10 @@ class UserController extends AbstractController
     // page for the detail of another user  
     // with subscription form
     #[Route('/artist/{id}', name: 'app_artistDetail')]
-    public function artistPage(User $artist, EntityManagerInterface $em, Request $request): Response
+    public function artistPage($id, EntityManagerInterface $em, Request $request): Response
     {
+
+        $artist = $em->getRepository(User::class)->findOneBy(['username'=> $id]);
 
         $user = $this->getUser();
 
@@ -71,7 +73,7 @@ class UserController extends AbstractController
                 $em->persist($subscribe);
                 $em->flush();
 
-                return $this->redirectToRoute('app_artistDetail', ['id' => $artist->getId()]);
+                return $this->redirectToRoute('app_artistDetail', ['id' => $id]);
 
             }
             
