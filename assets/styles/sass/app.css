@@ -392,9 +392,12 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  margin: 0;
+  cursor: pointer;
 }
 * body section.playlistDetail .playlistHeader .playlistName .dropdown:hover .dropdown-content, * body section.artistDetail .playlistHeader .playlistName .dropdown:hover .dropdown-content, * body section.musicPlayer .playlistHeader .playlistName .dropdown:hover .dropdown-content, * body section.search .playlistHeader .playlistName .dropdown:hover .dropdown-content {
   display: block;
+  border-radius: 10px;
 }
 * body section.playlistDetail .playlistHeader .playerBtns a, * body section.artistDetail .playlistHeader .playerBtns a, * body section.musicPlayer .playlistHeader .playerBtns a, * body section.search .playlistHeader .playerBtns a {
   text-decoration: none;
@@ -724,8 +727,8 @@
 * body section.login {
   display: flex;
   flex-direction: row-reverse;
-  width: 61%;
-  margin: 44px auto;
+  width: 68%;
+  margin: 93px auto;
   align-items: center;
   box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);
   border-radius: 10px;
@@ -778,6 +781,7 @@
 }
 * body section.login .loginForm .register_reset a {
   color: black;
+  text-decoration: none;
 }
 * body form {
   display: flex;
@@ -788,6 +792,10 @@
   color: white;
   border-radius: 0 10px 10px 0;
   padding: 20px;
+}
+* body form .form-check {
+  display: flex;
+  align-items: center;
 }
 * body footer {
   margin-top: 50px;
@@ -894,6 +902,9 @@ body.dark section.playlistDetail .dropdown button {
 }
 body.dark section.genreSongs h2 {
   color: #7DF9FF;
+}
+body.dark section.login label, body.dark section.login a {
+  color: white !important;
 }
 body.dark footer ul li a, body.dark footer small {
   color: white;
