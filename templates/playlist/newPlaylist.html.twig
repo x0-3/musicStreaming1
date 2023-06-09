@@ -5,7 +5,7 @@
 {% block body %}
 
 
-{{ form_start(formAddPlaylist)}}
+{{ form_start(formAddPlaylist, { 'attr' : { 'class': 'd-flex flex-column w-50 m-auto' } })}}
 
 
     {{form_row(formAddPlaylist.playlistName)}}

@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<form action="{{path('add_toSongsPlaylist', {'id': song.id})}}" method="post">
+<form action="{{path('add_toSongsPlaylist', {'id': song.id})}}" method="post" class="d-flex flex-column w-50 m-auto">
 
     {% for playlist in playlists %}
     

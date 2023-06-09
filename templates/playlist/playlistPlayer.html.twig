@@ -90,8 +90,9 @@
                         <td><a href="{{path('playlist_player', {'id': playlist.id, 'songId': song.id})}}">{{song.nameSong}}</a></td>
                         <td> <a href="{{path('app_artistDetail', {'id': song.user.username})}}"> {{song.user.username}} </a></td>
                         <td>0:00</td>
-                        <td><button><i class="fa-solid fa-plus"></i></button></td>
-                    
+                        {# <td><button><i class="fa-solid fa-plus"></i></button></td> #}
+                        <td><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus"></a></td> 
+
                     </tr>
                 
                 {% endfor %}
