@@ -189,8 +189,8 @@
 }
 * body .dropdown #list-items {
   display: none;
-  position: relative;
-  bottom: 35px;
+  position: absolute;
+  bottom: 0px;
   z-index: 1;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
 }
@@ -831,7 +831,7 @@ body.dark .dropdown button {
   color: #36454F;
 }
 body.dark i.fa-solid.fa-plus {
-  color: black !important;
+  color: white !important;
 }
 body.dark section.playlistList .title .nav .artistLink {
   color: #7DF9FF;
@@ -842,48 +842,55 @@ body.dark section.playlistList .myPlaylist .mainCard a, body.dark section.playli
 body.dark section.listArtist .artistCard a {
   color: white;
 }
-body.dark section.playlistDetail .playlistHeader h3, body.dark section.artistDetail .playlistHeader h3, body.dark section.musicPlayer .playlistHeader h3 {
+body.dark section.playlistDetail .playlistHeader h3, body.dark section.artistDetail .playlistHeader h3, body.dark section.musicPlayer .playlistHeader h3, body.dark section.search .playlistHeader h3 {
   color: #7DF9FF;
 }
-body.dark section.playlistDetail .playlistHeader .playerBtns a, body.dark section.artistDetail .playlistHeader .playerBtns a, body.dark section.musicPlayer .playlistHeader .playerBtns a {
+body.dark section.playlistDetail .playlistHeader .playerBtns a, body.dark section.artistDetail .playlistHeader .playerBtns a, body.dark section.musicPlayer .playlistHeader .playerBtns a, body.dark section.search .playlistHeader .playerBtns a {
   color: white;
 }
-body.dark section.playlistDetail .uncheck, body.dark section.playlistDetail .check, body.dark section.artistDetail .uncheck, body.dark section.artistDetail .check, body.dark section.musicPlayer .uncheck, body.dark section.musicPlayer .check {
+body.dark section.playlistDetail .uncheck, body.dark section.playlistDetail .check, body.dark section.artistDetail .uncheck, body.dark section.artistDetail .check, body.dark section.musicPlayer .uncheck, body.dark section.musicPlayer .check, body.dark section.search .uncheck, body.dark section.search .check {
   margin-left: 8px;
   font-size: larger;
 }
-body.dark section.playlistDetail th, body.dark section.playlistDetail tr, body.dark section.playlistDetail i, body.dark section.playlistDetail td a, body.dark section.artistDetail th, body.dark section.artistDetail tr, body.dark section.artistDetail i, body.dark section.artistDetail td a, body.dark section.musicPlayer th, body.dark section.musicPlayer tr, body.dark section.musicPlayer i, body.dark section.musicPlayer td a {
+body.dark section.playlistDetail th, body.dark section.playlistDetail tr, body.dark section.playlistDetail i, body.dark section.playlistDetail td a, body.dark section.artistDetail th, body.dark section.artistDetail tr, body.dark section.artistDetail i, body.dark section.artistDetail td a, body.dark section.musicPlayer th, body.dark section.musicPlayer tr, body.dark section.musicPlayer i, body.dark section.musicPlayer td a, body.dark section.search th, body.dark section.search tr, body.dark section.search i, body.dark section.search td a {
   color: white;
 }
-body.dark section.playlistDetail .controls button, body.dark section.artistDetail .controls button, body.dark section.musicPlayer .controls button {
+body.dark section.playlistDetail .controls a, body.dark section.artistDetail .controls a, body.dark section.musicPlayer .controls a, body.dark section.search .controls a {
+  width: 12%;
+}
+body.dark section.playlistDetail .controls a button, body.dark section.artistDetail .controls a button, body.dark section.musicPlayer .controls a button, body.dark section.search .controls a button {
   color: white;
 }
-body.dark section.playlistDetail .controls button:hover, body.dark section.artistDetail .controls button:hover, body.dark section.musicPlayer .controls button:hover {
+body.dark section.playlistDetail .controls a button:hover, body.dark section.artistDetail .controls a button:hover, body.dark section.musicPlayer .controls a button:hover, body.dark section.search .controls a button:hover {
   color: #7DF9FF;
 }
-body.dark section.playlistDetail .player .controls a, body.dark section.playlistDetail .player .controls span.fa-solid.fa-pause, body.dark section.artistDetail .player .controls a, body.dark section.artistDetail .player .controls span.fa-solid.fa-pause, body.dark section.musicPlayer .player .controls a, body.dark section.musicPlayer .player .controls span.fa-solid.fa-pause {
+body.dark section.playlistDetail .player .controls a, body.dark section.playlistDetail .player .controls span.fa-solid.fa-pause, body.dark section.artistDetail .player .controls a, body.dark section.artistDetail .player .controls span.fa-solid.fa-pause, body.dark section.musicPlayer .player .controls a, body.dark section.musicPlayer .player .controls span.fa-solid.fa-pause, body.dark section.search .player .controls a, body.dark section.search .player .controls span.fa-solid.fa-pause {
   color: white;
 }
-body.dark section.playlistDetail .player .controls a:hover, body.dark section.playlistDetail .player .controls span.fa-solid.fa-pause:hover, body.dark section.artistDetail .player .controls a:hover, body.dark section.artistDetail .player .controls span.fa-solid.fa-pause:hover, body.dark section.musicPlayer .player .controls a:hover, body.dark section.musicPlayer .player .controls span.fa-solid.fa-pause:hover {
+body.dark section.playlistDetail .player .controls a:hover, body.dark section.playlistDetail .player .controls span.fa-solid.fa-pause:hover, body.dark section.artistDetail .player .controls a:hover, body.dark section.artistDetail .player .controls span.fa-solid.fa-pause:hover, body.dark section.musicPlayer .player .controls a:hover, body.dark section.musicPlayer .player .controls span.fa-solid.fa-pause:hover, body.dark section.search .player .controls a:hover, body.dark section.search .player .controls span.fa-solid.fa-pause:hover {
   color: #7DF9FF;
 }
-body.dark section.playlistDetail .player .controls .hover .audio #volume-slider, body.dark section.artistDetail .player .controls .hover .audio #volume-slider, body.dark section.musicPlayer .player .controls .hover .audio #volume-slider {
+body.dark section.playlistDetail .player .controls .hover .audio #volume-slider, body.dark section.artistDetail .player .controls .hover .audio #volume-slider, body.dark section.musicPlayer .player .controls .hover .audio #volume-slider, body.dark section.search .player .controls .hover .audio #volume-slider {
   background: white;
 }
-body.dark section.playlistDetail .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.artistDetail .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.musicPlayer .player .controls .hover .audio #volume-slider::-webkit-slider-thumb {
+body.dark section.playlistDetail .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.artistDetail .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.musicPlayer .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.search .player .controls .hover .audio #volume-slider::-webkit-slider-thumb {
   box-shadow: -400px 0 0 400px #7DF9FF;
 }
-body.dark section.playlistDetail .player .timeline .slider, body.dark section.artistDetail .player .timeline .slider, body.dark section.musicPlayer .player .timeline .slider {
+body.dark section.playlistDetail .player .timeline .slider, body.dark section.artistDetail .player .timeline .slider, body.dark section.musicPlayer .player .timeline .slider, body.dark section.search .player .timeline .slider {
   background: white;
 }
-body.dark section.playlistDetail .player .timeline .slider::-webkit-slider-thumb, body.dark section.artistDetail .player .timeline .slider::-webkit-slider-thumb, body.dark section.musicPlayer .player .timeline .slider::-webkit-slider-thumb {
+body.dark section.playlistDetail .player .timeline .slider::-webkit-slider-thumb, body.dark section.artistDetail .player .timeline .slider::-webkit-slider-thumb, body.dark section.musicPlayer .player .timeline .slider::-webkit-slider-thumb, body.dark section.search .player .timeline .slider::-webkit-slider-thumb {
   box-shadow: -400px 0 0 400px #7DF9FF;
 }
-body.dark section.playlistDetail .comments article, body.dark section.artistDetail .comments article, body.dark section.musicPlayer .comments article {
+body.dark section.playlistDetail .comments article, body.dark section.artistDetail .comments article, body.dark section.musicPlayer .comments article, body.dark section.search .comments article {
   background-color: white;
 }
-body.dark section.playlistDetail .comments article figure figcaption a, body.dark section.artistDetail .comments article figure figcaption a, body.dark section.musicPlayer .comments article figure figcaption a {
+body.dark section.playlistDetail .comments article figure figcaption a, body.dark section.artistDetail .comments article figure figcaption a, body.dark section.musicPlayer .comments article figure figcaption a, body.dark section.search .comments article figure figcaption a {
   color: #36454F;
+}
+body.dark section.playlistDetail .dropdown button {
+  background-color: transparent;
+  color: white !important;
 }
 body.dark section.genreSongs h2 {
   color: #7DF9FF;

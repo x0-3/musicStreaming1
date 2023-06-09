@@ -248,10 +248,11 @@
 
             #list-items {
                 display: none;
-                // position: absolute;
-                position: relative;
+                position: absolute;
+                // position: relative;
 
-                bottom: 35px;
+                bottom: 0px;
+                // bottom: 35px;
                 z-index: 1;
                 box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
                 
@@ -1113,7 +1114,7 @@ body.dark{
     }
 
     i.fa-solid.fa-plus {
-        color: black !important;
+        color: white !important;
     }
 
     section.playlistList {
@@ -1138,7 +1139,7 @@ body.dark{
         color: white;
     }
 
-    section.playlistDetail, section.artistDetail, section.musicPlayer{
+    section.playlistDetail, section.artistDetail, section.musicPlayer, section.search{
         
         .playlistHeader {
             
@@ -1164,15 +1165,21 @@ body.dark{
             color: white;
         }
 
-        .controls button {
-            color: white;
+        .controls a {
+            width: 12%;
 
-            &:hover{
-                color: #7DF9FF;
-
+            button {
+                color: white;
+    
+                &:hover{
+                    color: #7DF9FF;
+    
+                }
+    
             }
 
         }
+        
 
         .player {
 
@@ -1221,6 +1228,12 @@ body.dark{
 
     }
 
+    section.playlistDetail{
+        .dropdown button {
+            background-color: transparent;
+            color: white !important;
+        }
+    }
 
     section.genreSongs {
         h2{

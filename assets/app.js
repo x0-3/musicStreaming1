@@ -1,3 +1,9 @@
+// any CSS you import will output into a single css file (app.css in this case)
+import './styles/sass/app.css';
+
+// start the Stimulus application
+import './bootstrap.js';
+
 import Like from "./js/Like.js";
 import Favorite from "./js/Favorite.js";
 
@@ -99,8 +105,3 @@ window.onclick = function(event) {
 }
 
 
-// any CSS you import will output into a single css file (app.css in this case)
-import './styles/sass/app.css';
-
-// start the Stimulus application
-import './bootstrap.js';

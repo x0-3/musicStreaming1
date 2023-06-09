@@ -437,11 +437,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->username;
-    }
-
     public function getGoogleId(): ?string
     {
         return $this->googleId;
@@ -473,5 +468,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->uuid = $uuid;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->username;
     }
 }
