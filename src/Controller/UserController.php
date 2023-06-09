@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
@@ -166,6 +167,8 @@ class UserController extends AbstractController
     public function deleteUser(EntityManagerInterface $em): Response
     {
 
+        $session = new Session();
+
         $user = $this->getUser(); // get the current user
 
         // if the user is logged in
@@ -174,8 +177,10 @@ class UserController extends AbstractController
             $em->remove($user);
             $em->flush();
 
+            $session->invalidate(); // remove the user from the session (invalidate() removes everything that is inside the session)
+
         }
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('app_logout');
         
     }
 }
