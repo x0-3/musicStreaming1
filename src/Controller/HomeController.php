@@ -7,9 +7,10 @@ use App\Entity\Album;
 use App\Entity\Playlist;
 use App\Model\SearchBar;
 use App\Form\SearchBarType;
-use App\Repository\AlbumRepository;
 use App\Repository\SongRepository;
 use App\Repository\UserRepository;
+use App\Repository\AlbumRepository;
+use App\Repository\PlaylistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,7 +57,7 @@ class HomeController extends AbstractController
 
     // searchBar
     #[Route('/search', name: 'search')]
-    public function search(Request $request, SongRepository $songRepository, UserRepository $userRepository, AlbumRepository $albumRepository): Response
+    public function search(Request $request, SongRepository $songRepository, UserRepository $userRepository, AlbumRepository $albumRepository, PlaylistRepository $playlistRepository): Response
     {
 
         $searchBar = new SearchBar();
@@ -72,12 +73,14 @@ class HomeController extends AbstractController
             $songs = $songRepository->findBySearch($searchBar);
             $artists = $userRepository->findBySearch($searchBar);
             $albums = $albumRepository->findBySearch($searchBar);
+            $playlists = $playlistRepository->findBySearch($searchBar);
 
             return $this->render('home/searchPage.html.twig', [
                 'form' => $form->createView(),
                 'songs' => $songs,
                 'artists' => $artists,
                 'albums' => $albums,
+                'playlists' => $playlists,
             ]);
         }
 
@@ -86,6 +89,7 @@ class HomeController extends AbstractController
             'songs' => $songRepository,
             'artists' => $userRepository,
             'albums' => $albumRepository,
+            'playlists' => $playlistRepository,
         ]);
 
  

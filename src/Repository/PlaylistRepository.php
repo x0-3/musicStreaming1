@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Playlist;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Model\SearchBar;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Playlist>
@@ -140,6 +141,26 @@ class PlaylistRepository extends ServiceEntityRepository
        ;
     }
 
+    
+   /**
+    * @return Playlist[] Returns an array of Album objects
+    */
+    public function findBySearch(SearchBar $searchBar): array
+    {
+
+        // SELECT *
+        // FROM playlist p 
+        // WHERE p.playlist_name LIKE '%p%'
+        
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->andWhere('p.playlistName LIKE :q')
+            ->setParameter('q', "%{$searchBar->q}%")
+            ->getQuery()
+            ->getResult()
+        ;
+
+    }
 
 //    /**
 //     * @return Playlist[] Returns an array of Playlist objects

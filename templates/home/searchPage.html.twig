@@ -43,11 +43,12 @@
 
                 {% endfor %}
 
-                        
                 <table class="mt-5 h-25 w-50">
             
                     <tbody>
-            
+                        
+                        <h2>Songs</h2>
+
                         {% for song in songs %}
                             <tr>
                                 <td>
@@ -71,28 +72,63 @@
             
                     </tbody>
                 </table>
+                
+            </div>
+
+            <div class="d-flex w-100">
+
+                {% if albums != null %}
+
+                    <h2>Albums</h2>
+
+                    {% for album in albums %}
+                        
+                        <div class="mcard">
+        
+                            <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
+        
+                                <figure>
+                                    <img src="{{asset('uploads/' ~ album.cover)}}" alt="album image">
+        
+                                </figure>
+                                
+                                <h3>{{album.nameAlbum}}</h3>
+                            </a>
+        
+                        </div>
+        
+                    {% endfor %}
+                {% endif %}
 
             </div>
 
             <div class="d-flex w-100">
 
-                {% for album in albums %}
-                    
-                    <div class="mcard">
-    
-                        <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
-    
-                            <figure>
-                                <img src="{{asset('uploads/' ~ album.cover)}}" alt="album image">
-    
-                            </figure>
-                            
-                            <h3>{{album.nameAlbum}}</h3>
-                        </a>
-    
-                    </div>
-    
-                {% endfor %}
+                
+                {% if playlists != null %}
+
+                    <h2>Playlists</h2>
+
+                    {% for playlist in playlists %}
+                        
+                        <div class="mcard">
+        
+                            <a href="{{path('playlist_detail', {'id': playlist.uuid})}}">
+        
+                                <figure>
+                                    <img src="{{asset('uploads/' ~ playlist.image)}}" alt="album image">
+        
+                                </figure>
+                                
+                                <h3>{{playlist.playlistName}}</h3>
+                            </a>
+        
+                        </div>
+        
+                    {% endfor %}
+
+                {% endif %}
+                
             </div>
 
             
