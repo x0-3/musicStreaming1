@@ -10,7 +10,7 @@
 
         <div class="searchItems">
 
-            {% if songs == null %}
+            {% if songs == null and albums == null and playlists == null and artists == null %}
                 
                 <h2 class="mt-5">No result</h2>
             {% endif %}
@@ -77,9 +77,9 @@
 
             <div class="d-flex w-100">
 
-                {% if albums != null %}
+                {# {% if albums|length %} #}
 
-                    <h2>Albums</h2>
+                    <h2>Albums</h2> 
 
                     {% for album in albums %}
                         
@@ -98,14 +98,14 @@
                         </div>
         
                     {% endfor %}
-                {% endif %}
+                {# {% endif %} #}
 
             </div>
 
             <div class="d-flex w-100">
 
                 
-                {% if playlists != null %}
+                {# {% if playlists != null %} #}
 
                     <h2>Playlists</h2>
 
@@ -127,7 +127,7 @@
         
                     {% endfor %}
 
-                {% endif %}
+                {# {% endif %} #}
                 
             </div>
 
