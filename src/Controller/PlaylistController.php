@@ -53,6 +53,19 @@ class PlaylistController extends AbstractController
         }
     }
 
+    // FIXME: change vue element to order the shuffled songs
+    // shuffles the song inside the playlist
+    #[Route('/playlist/shuffle/{id}/song/{songs}', name: 'shuffle_playlist')]
+    public function shufflePlaylist(Playlist $playlist, $songs)
+    {
+
+        $songs = $playlist->getSongs()->toArray();
+        
+        shuffle($songs);
+
+        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songs[0]->getId()]);  
+    }
+
 
     // music player page for one playlist
     // with the comment form
@@ -181,19 +194,7 @@ class PlaylistController extends AbstractController
         return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songId]);  
     }
 
-    // FIXME: 
-    // shuffles the song inside the playlist
-    #[Route('/playlist/shuffle/{id}/song/{songId}', name: 'shuffle_playlist')]
-    public function shufflePlaylist(Playlist $playlist, $songId, SongRepository $songRepository, EntityManagerInterface $em): Response
-    {
 
-        $shuffledSong = $playlist->getSongs()->toArray();
-        
-        shuffle($shuffledSong);
-
-        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songId]);  
-
-    }
 
 
     // create a new playlist
