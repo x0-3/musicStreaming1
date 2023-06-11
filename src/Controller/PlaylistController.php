@@ -63,10 +63,11 @@ class PlaylistController extends AbstractController
         
         shuffle($songs);
 
-        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songs[0]->getId()]);  
+        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songs[0]->getId(), 'isShuffled' => true]);  
     }
 
 
+    // FIXME: change vue element to order the shuffled songs
     // music player page for one playlist
     // with the comment form
     #[Route('/musicPlayer/{id}/song/{songId}', name: 'playlist_player')]
@@ -102,11 +103,26 @@ class PlaylistController extends AbstractController
                         
         }
 
+
+        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+        if ($isShuffled == true) {
+
+            return $this->render('playlist/playlistPlayer.html.twig', [
+                'formAddComment' => $form->createView(),
+                'playlist' => $playlist,
+                'songs' => $songs,
+                'song' => $song,
+                'isShuffled' => $isShuffled,
+            ]);
+        }
+
         return $this->render('playlist/playlistPlayer.html.twig', [
             'formAddComment' => $form->createView(),
             'playlist' => $playlist,
             'songs' => $songs,
             'song' => $song,
+            'isShuffled' => $isShuffled,
         ]);
     }
 
@@ -193,8 +209,6 @@ class PlaylistController extends AbstractController
 
         return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songId]);  
     }
-
-
 
 
     // create a new playlist
