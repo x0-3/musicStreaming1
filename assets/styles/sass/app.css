@@ -841,6 +841,9 @@ body.dark .dropdown button {
 body.dark i.fa-solid.fa-plus {
   color: white !important;
 }
+body.dark label.form-label {
+  color: white;
+}
 body.dark section.playlistList .title .nav .artistLink {
   color: #7DF9FF;
 }

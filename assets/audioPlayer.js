@@ -244,6 +244,26 @@ volume.addEventListener("change", function(e) {
 });
 
 
+function toggleMute(){
+
+  // if the volume is not muted
+  if (volumeMuted === false) {
+    
+    // then change the icon
+    volumeIcon.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+    audio.volume = 0; // set the volume to 0
+
+    volumeMuted = true; // set the variable to true
+
+  } else {
+
+    // then change the icon
+    volumeIcon.innerHTML = `<i class="fa-solid fa-volume-low"></i>`;
+    audio.volume = 0.3; // set the volume
+
+    volumeMuted = false; // set the variable to false
+  }
+}
 
 
 // ********************************************* add comment form *****************************************************************//
@@ -347,6 +367,19 @@ $(document).ready(function () {
 // ************************************************ keybinds ************************************************//
 // TODO: keybindings for pause button, next button, previous button and mute button
 
+document.addEventListener("keydown", e => {
+
+  e.preventDefault();
+
+  if (e.key.toLowerCase() === "k" && e.shiftKey) {
+    togglePlay();
+  }
+  
+  if (e.key.toLowerCase() === "m" && e.shiftKey) {
+    toggleMute();
+  }
+
+});
 
 
 

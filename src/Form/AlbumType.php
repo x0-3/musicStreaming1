@@ -17,7 +17,7 @@ class AlbumType extends AbstractType
     {
         $builder
             ->add('cover', FileType::class, [
-                'label' => false,
+                'label' => 'Album cover',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -42,9 +42,9 @@ class AlbumType extends AbstractType
             ])
 
             ->add('nameAlbum',TextType::class, [
-                'label' => false,
+                'label' => 'Name',
                 'attr' => [
-                    'placeholder' => 'Name of the album'
+                    'placeholder' => 'Enter the name of the album'
                 ]
             ])
         

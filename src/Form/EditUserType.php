@@ -19,7 +19,7 @@ class EditUserType extends AbstractType
     {
         $builder
             ->add('avatar', FileType::class,[
-                'label' => false,
+                'label' => 'profile Picture',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -46,10 +46,10 @@ class EditUserType extends AbstractType
             
             )
             ->add('email', EmailType::class, [
-                'label' => false,
+                'label' => 'Email',
             ])
             ->add('username', TextType::class, [
-                'label' => false,
+                'label' => 'username',
             ])
 
             ->add('roles', ChoiceType::class, [
@@ -59,7 +59,7 @@ class EditUserType extends AbstractType
                 ],
 
                 'multiple' => true,
-                'label' => false,
+                'label' => 'Roles',
             ])
             
             ->add('submit', SubmitType::class)

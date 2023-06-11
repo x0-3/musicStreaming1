@@ -19,14 +19,14 @@ class SongType extends AbstractType
     {
         $builder
             ->add('nameSong', TextType::class, [
-                'label' => false,
+                'label' => 'Name',
                 'attr' => [
-                    'placeholder' => 'Name of the Song'
+                    'placeholder' => 'What\'s the name of your song'
                 ]
             ])
 
             ->add('link', FileType::class, [
-                'label' => false,
+                'label' => 'Music Link',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -56,7 +56,7 @@ class SongType extends AbstractType
             ->add('genre', EntityType::class,[
                 'class' =>Genre::class,
                 'choice_label' => 'genreName',
-                'label' => false,
+                'label' => 'Music Genre',
             ])
 
             ->add('submit',SubmitType::class)

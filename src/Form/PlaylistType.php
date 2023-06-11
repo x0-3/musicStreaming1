@@ -17,7 +17,7 @@ class PlaylistType extends AbstractType
     {
         $builder
             ->add('image', FileType::class, [
-                'label' => false,
+                'label' => 'Playlist Image',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -43,9 +43,9 @@ class PlaylistType extends AbstractType
             ])
 
             ->add('playlistName',TextType::class, [
-                'label' => false,
+                'label' => 'Name',
                 'attr' => [
-                    'placeholder' => 'Playlist Name',
+                    'placeholder' => 'Enter a name for youre playlist',
                 ]
             ])
 
