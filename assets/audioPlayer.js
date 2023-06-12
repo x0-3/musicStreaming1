@@ -1,7 +1,5 @@
 const playBtn = document.querySelector("#mainPlayBtn");
 const audio = document.querySelector("#audio");
-const btnPrev = document.querySelector("#btnPrev");
-// const btnNext = document.querySelector("#btnNext");
 const trackTitle = document.querySelector(".trackTitle");
 const ArtistName = document.querySelector(".ArtistName");
 const cover = document.querySelector(".cover");
@@ -365,7 +363,9 @@ $(document).ready(function () {
 
 
 // ************************************************ keybinds ************************************************//
-// TODO: keybindings for pause button, next button, previous button and mute button
+const btnNext = document.getElementById("btnNext");
+const btnPrev = document.querySelector("#btnPrev");
+
 
 document.addEventListener("keydown", e => {
 
@@ -379,18 +379,11 @@ document.addEventListener("keydown", e => {
     toggleMute();
   }
 
+  if (e.key.toLowerCase() === "n" && e.shiftKey) {
+    btnNext.click();
+  }
+  
+  if (e.key.toLowerCase() === "p" && e.shiftKey) {
+    btnPrev.click();
+  }
 });
-
-
-
-
-
-
-
-  
-
-
-  
-  
-  
-  

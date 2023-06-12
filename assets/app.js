@@ -105,3 +105,22 @@ window.onclick = function(event) {
 }
 
 
+// copy link to clipboard
+let copyBtn = document.getElementById("copyBtn");
+
+copyBtn.addEventListener('click', () => {
+
+  console.log(copyBtn);
+  // Get the text field
+  var copyLink = document.getElementById("copyLink");
+
+  // Select the text field
+  copyLink.select();
+  copyLink.setSelectionRange(0, 99999); // For mobile devices
+
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyLink.value);
+
+  // Alert the copied text
+  // alert("Copied the text: " + copyLink.value);
+})
