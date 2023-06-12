@@ -98,7 +98,7 @@ class SongRepository extends ServiceEntityRepository
             ->setParameter('id', $artistId)
             ->groupBy('s.id, s.nameSong,  a.cover')
             ->orderBy('COUNT(ul.id)', 'DESC')
-            ->setMaxResults(3);
+            ->setMaxResults(5);
             
             
             

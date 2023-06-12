@@ -362,7 +362,8 @@ class PlaylistController extends AbstractController
         
     }
 
-
+    
+    // TODO: remove or find a better way to display
     // add songs to a playlist
     #[Route('/playlist/song/{id}', name: 'add_toPlaylist')]
     public function addSongs(Request $request, Playlist $playlist, EntityManagerInterface $em): Response

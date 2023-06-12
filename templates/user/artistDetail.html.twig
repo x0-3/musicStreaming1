@@ -82,7 +82,8 @@
                             {% include "like/_like.html.twig" %}
                         </td>
                         <td>3:09</td>
-                        <td><button><i class="fa-solid fa-plus"></i></button></td>
+                        {# <td><button><i class="fa-solid fa-plus"></i></button></td> #}
+                        <td><button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" id="myBtn" class="fa-solid fa-plus"></a></button></td>
                     </tr>
 
                 {% endfor %}
@@ -101,16 +102,52 @@
 
                 {% for album in albums %}
                 
-                    <div class="mcard">
-                        <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
+                    {% if album|length > 3 %}
 
-                            <figure>
-                                <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">
-                            </figure>
-                            
-                            <h3>{{album.nameAlbum}} </h3>
-                        </a>
-                    </div>
+                        <div class="mcard">
+                            <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
+
+                                <figure>
+                                    <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">
+                                </figure>
+                                
+                                <h3>{{album.nameAlbum}} </h3>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <div class="album">
+
+            <div class="title">
+
+                <h1>Singles</h1>
+                {# <a href="{{path('app_artistAlbum', {'id': artist.id})}}">More</a> #}
+            </div>
+
+            <div class="cards">
+
+                {% for album in albums %}
+
+                    {% if album|length <= 3 %}
+
+                        <div class="mcard">
+
+                            <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
+
+                                <figure>
+                                    <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">
+                                </figure>
+                                
+                                <h3>{{album.nameAlbum}} </h3>
+                            </a>
+                        </div>
+                    {% endif %}
+                
                 {% endfor %}
 
             </div>
