@@ -8,11 +8,15 @@
 
     {% for playlist in playlists %}
     
-        <label for="playlist">{{playlist.playlistName}}</label>
-        <input type="checkbox" name="_playlist" value="{{playlist.id}}">
+        <div class="d-flex w-100">
+
+            <input type="checkbox" name="_playlist" value="{{playlist.id}}" class="form-check-input">
+            <label for="playlist" class="form-check-label">{{playlist.playlistName}}</label>
+        </div>
+
     {% endfor %}
 
-    <input type="submit" value="add" />
+    <input type="submit" value="add" class="btn btn-dark"/>
         
 </form>
 

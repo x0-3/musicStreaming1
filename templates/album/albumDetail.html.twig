@@ -9,7 +9,52 @@
         <figure>
             <img src="{{asset('uploads/' ~ album.cover)}}" alt="playlist image">
         </figure>
-        <h3>{{album.nameAlbum}}</h3>
+
+        <div class="playlistName">
+
+            <h3>{{album.nameAlbum}}</h3>
+    
+            {% if app.user %}
+                
+                <div class="dropdown">
+                    
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+    
+                    <div class="dropdown-content">
+    
+                        <p id="myBtn">
+                            <i class="fa-solid fa-share"></i>
+                            share
+                        </p>
+    
+                    </div>
+                </div>
+                
+    
+                <div id="myModal" class="modal">
+    
+                    <div class="modal-content w-50">
+    
+                        <div class="d-flex justify-content-between">
+    
+                            <h2>Share</h2>  
+                            <span class="close">&times;</span>
+                        </div>
+                        
+    
+                        <a class="fa-brands fa-facebook mt-3" style="color: #365899; text-decoration: none; font-size: xxx-large;" href="http://www.facebook.com/share.php?u={{absolute_url(path('app_albumDetail', {'id' : album.uuid}))}}&layout&size&appId=1427200851369139&width=77&height=20" target="_blank"></a> 
+                    
+                        <div class="d-flex mt-3">
+    
+                            <input type="text" value="{{absolute_url(path('app_albumDetail', {'id' : album.uuid}))}}" id="copyLink" class="w-100 p-1">
+                            <button id="copyBtn" class="bg-dark border-0 text-white">Copy</button>
+                        </div>
+    
+                    </div>
+    
+                </div>
+            {% endif %}
+        </div>
 
         {% if songs|length != 0 %}
             

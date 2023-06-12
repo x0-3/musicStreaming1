@@ -22,21 +22,32 @@
 
             {% if app.user %}
             
-                {# if the playlist owner is the same as the user in session then show button #}
-                {% if playlist.user.id is same as(app.user.id) %}
-                
-                    <div class="dropdown">
+                <div class="dropdown">
+                    
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                    <div class="dropdown-content">
+
+                        <p id="myBtn">
+                            <i class="fa-solid fa-share"></i>
+                            share
+                        </p>
+
+                        {# if the playlist owner is the same as the user in session then show button #}
+                        {% if playlist.user.id is same as(app.user.id) %}
                         
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                        
-                        <div class="dropdown-content">
-                            <p id="myBtn">add Songs</p>
+                            {# TODO: remove or find a better way to display #}
+                            {# <p id="myBtn">add Songs</p> #}
+
                             <a href="{{path('edit_playlist', {'id': playlist.uuid})}}">Edit</a>
                             <a href="{{path('delete_playlist', {'id': playlist.id})}}">Delete</a>
-                        </div>
+                        {% endif %} 
+
                     </div>
+                </div>
 
-
+                {# TODO: remove or find a better way to display #}
+                {# {% if playlist.user.id is same as(app.user.id) %}
                     <div id="myModal" class="modal">
 
                         <div class="modal-content">
@@ -48,7 +59,31 @@
 
                     </div>
 
-                {% endif %}        
+                {% endif %}    #}
+                
+
+                <div id="myModal" class="modal">
+
+                    <div class="modal-content w-50">
+
+                        <div class="d-flex justify-content-between">
+
+                            <h2>Share</h2>  
+                            <span class="close">&times;</span>
+                        </div>
+                        
+
+                        <a class="fa-brands fa-facebook mt-3" style="color: #365899; text-decoration: none; font-size: xxx-large;" href="http://www.facebook.com/share.php?u={{absolute_url(path('playlist_detail', {'id' : playlist.uuid}))}}&layout&size&appId=1427200851369139&width=77&height=20" target="_blank"></a> 
+                    
+                        <div class="d-flex mt-3">
+
+                            <input type="text" value="{{absolute_url(path('playlist_detail', {'id' : playlist.uuid}))}}" id="copyLink" class="w-100 p-1">
+                            <button id="copyBtn" class="bg-dark border-0 text-white">Copy</button>
+                        </div>
+
+                    </div>
+
+                </div>
                 
             {% endif %}
 
@@ -79,9 +114,6 @@
                     </a>
                 {% endif %}
                     
-                <a href="http://www.facebook.com/share.php?u={{absolute_url(path('playlist_detail', {'id' : playlist.uuid}))}}&layout&size&appId=1427200851369139&width=77&height=20" target="_blank">
-                    <i class="fa-brands fa-square-facebook"></i>
-                </a> 
             </div>
             
         {% endif %}
