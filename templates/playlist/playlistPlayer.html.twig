@@ -20,9 +20,10 @@
             
             {% include "like/_like.html.twig" %}
 
-            <a href="{{path('playlist_prevSong', {'id': playlist.id, 'songId': song.id})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>
+            {# TODO: add to album page #}
+            <a href="{{path('playlist_prevSong', {'id': playlist.id, 'songId': song.id, 'isShuffled': app.request.query.get('isShuffled', false)})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
-            <a href="{{path('playlist_skipforward', {'id': playlist.id, 'songId': song.id})}}" class="fa-sharp fa-solid fa-forward" id="btnNext"></a>
+            <a href="{{path('playlist_skipforward', {'id': playlist.id, 'songId': song.id, 'isShuffled': app.request.query.get('isShuffled', false)})}}" class="fa-sharp fa-solid fa-forward" id="btnNext"></a>
         
             <div class="hover">
 
@@ -69,13 +70,13 @@
                     <th>title</th>
                     <th>artist</th>
                     <th>time</th>
-                    <th><a href="{{path('shuffle_playlist', {'id': playlist.id, 'songs': song.id})}}">shuffle</a></th>
+                    <th><a href="{{path('shuffle_playlist', {'id': playlist.id})}}">shuffle</a></th>
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody id="songs-list">
 
-                {{ dump(isShuffled) }}
+                {# {{ dump(isShuffled) }} #}
                                 
                 {% for song in songs %} 
                 

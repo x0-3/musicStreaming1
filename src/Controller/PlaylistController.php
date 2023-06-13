@@ -3,21 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Song;
-use App\Entity\User;
 use App\Entity\Comment;
 use App\Entity\Playlist;
 use App\Form\CommentType;
 use App\Form\PlaylistType;
 use App\Service\FileUploader;
 use App\Form\PlaylistSongsType;
-use App\Repository\SongRepository;
 use App\Service\CommentService;
+use App\Repository\SongRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -53,30 +55,43 @@ class PlaylistController extends AbstractController
         }
     }
 
-    // FIXME: change vue element to order the shuffled songs
+
+    // TODO: comment / add to album page
     // shuffles the song inside the playlist
-    #[Route('/playlist/shuffle/{id}/song/{songs}', name: 'shuffle_playlist')]
-    public function shufflePlaylist(Playlist $playlist, $songs)
-    {
+    #[Route('/playlist/shuffle/{id}', name: 'shuffle_playlist')]
+    public function shufflePlaylist(Playlist $playlist, EntityManagerInterface $entityManager, SessionInterface $session)
+    { 
 
         $songs = $playlist->getSongs()->toArray();
-        
         shuffle($songs);
-
-        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songs[0]->getId(), 'isShuffled' => true]);  
+    
+        $shuffledSongOrder = array_map(fn($song) => $song->getId(), $songs);
+    
+        $session->set('shuffled_song_order', $shuffledSongOrder);
+    
+        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $shuffledSongOrder[0], 'isShuffled' => true]);
+        
     }
 
 
-    // FIXME: change vue element to order the shuffled songs
     // music player page for one playlist
     // with the comment form
     #[Route('/musicPlayer/{id}/song/{songId}', name: 'playlist_player')]
-    public function playlistPlayer($id, EntityManagerInterface $em, $songId, Security $security, RequestStack $requestStack, CommentService $commentService): Response
+    public function playlistPlayer($id, EntityManagerInterface $em, $songId, Security $security, RequestStack $requestStack, CommentService $commentService, SessionInterface $session): Response
     {
         $playlist = $em->getRepository(Playlist::class)->findOneBy(['id'=>$id]);
         $song = $em->getRepository(Song::class)->findOneBy(['id'=>$songId]);
 
-        $songs = $playlist->getSongs(); // get the list of songs from the playlist
+        // $songs = $playlist->getSongs(); // get the list of songs from the playlist
+
+        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+        if ($isShuffled) {
+            $shuffledSongOrder = $session->get('shuffled_song_order', []);
+            $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $playlist->getSongs());
+        } else {
+            $songs = $playlist->getSongs();
+        }
 
         // for the comment section 
         $user = $security->getUser();
@@ -103,20 +118,6 @@ class PlaylistController extends AbstractController
                         
         }
 
-
-        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
-
-        if ($isShuffled == true) {
-
-            return $this->render('playlist/playlistPlayer.html.twig', [
-                'formAddComment' => $form->createView(),
-                'playlist' => $playlist,
-                'songs' => $songs,
-                'song' => $song,
-                'isShuffled' => $isShuffled,
-            ]);
-        }
-
         return $this->render('playlist/playlistPlayer.html.twig', [
             'formAddComment' => $form->createView(),
             'playlist' => $playlist,
@@ -124,19 +125,28 @@ class PlaylistController extends AbstractController
             'song' => $song,
             'isShuffled' => $isShuffled,
         ]);
+
     }
 
     
     // skip to the next song of the playlist
     #[Route('/playlist/skipForward/{id}/{songId}', name: 'playlist_skipforward')]
-    public function skipForward(Playlist $playlist, $songId, SongRepository $songRepository, EntityManagerInterface $em): Response
+    public function skipForward(Playlist $playlist, $songId, SongRepository $songRepository, EntityManagerInterface $em, RequestStack $requestStack, SessionInterface $session): Response
     {
 
-        $playlistSongs = $playlist->getSongs();
+        // $songs = $playlist->getSongs();
+        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+        if ($isShuffled) {
+            $shuffledSongOrder = $session->get('shuffled_song_order', []);
+            $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $playlist->getSongs());
+        } else {
+            $songs = $playlist->getSongs();
+        }
 
         $currentIndex = null;
 
-        foreach ($playlistSongs as $key => $song) {
+        foreach ($songs as $key => $song) {
             
             if ($song->getId() == $songId) {
                 
@@ -145,9 +155,9 @@ class PlaylistController extends AbstractController
         }
 
 
-        if (isset($playlistSongs[$currentIndex + 1])) {
+        if (isset($songs[$currentIndex + 1])) {
 
-            $nextSongId = $playlistSongs[$currentIndex + 1]->getId();
+            $nextSongId = $songs[$currentIndex + 1]->getId();
 
             $song = $songRepository->find($nextSongId);
             $song->setId($nextSongId);
@@ -156,11 +166,11 @@ class PlaylistController extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $nextSongId]);
+            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $nextSongId, 'isShuffled' => $isShuffled]);
 
-        } elseif (!isset($playlistSongs[$currentIndex + 1])) {
+        } elseif (!isset($songs[$currentIndex + 1])) {
             
-            $firstSongId = $playlistSongs[0]->getId();
+            $firstSongId = $songs[0]->getId();
 
             $song = $songRepository->find($firstSongId);
             $song->setId($firstSongId);
@@ -169,7 +179,7 @@ class PlaylistController extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $firstSongId]);
+            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $firstSongId, 'isShuffled' => $isShuffled]);
         }
      
     }
@@ -177,14 +187,23 @@ class PlaylistController extends AbstractController
 
     // play previous song of the playlist
     #[Route('/playlist/prevSong/{id}/{songId}', name: 'playlist_prevSong')]
-    public function prevSong(Playlist $playlist, $songId, SongRepository $songRepository, EntityManagerInterface $em): Response
+    public function prevSong(Playlist $playlist, $songId, SongRepository $songRepository, EntityManagerInterface $em, RequestStack $requestStack, SessionInterface $session): Response
     {
 
-        $playlistSongs = $playlist->getSongs();
+        // $songs = $playlist->getSongs();
+
+        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+        if ($isShuffled) {
+            $shuffledSongOrder = $session->get('shuffled_song_order', []);
+            $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $playlist->getSongs());
+        } else {
+            $songs = $playlist->getSongs();
+        }
 
         $currentIndex = null;
 
-        foreach ($playlistSongs as $key => $song) {
+        foreach ($songs as $key => $song) {
             
             if ($song->getId() == $songId) {
                 
@@ -192,9 +211,9 @@ class PlaylistController extends AbstractController
             }
         }
 
-        if (isset($playlistSongs[$currentIndex - 1])) {
+        if (isset($songs[$currentIndex - 1])) {
 
-            $nextSongId = $playlistSongs[$currentIndex - 1]->getId();
+            $nextSongId = $songs[$currentIndex - 1]->getId();
 
             $song = $songRepository->find($nextSongId);
             $song->setId($nextSongId);
@@ -203,13 +222,27 @@ class PlaylistController extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $nextSongId]);
+            return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $nextSongId, 'isShuffled' => $isShuffled]);
 
         } 
 
-        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songId]);  
+        return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $songId, 'isShuffled' => $isShuffled]);  
     }
 
+
+    private function getShuffledSongsFromOrder(array $songOrder, Collection $songs): ArrayCollection
+    {
+        $shuffledSongs = new ArrayCollection();
+    
+        foreach ($songOrder as $songId) {
+            $song = $songs->filter(fn($s) => $s->getId() === $songId)->first();
+            if ($song) {
+                $shuffledSongs->add($song);
+            }
+        }
+    
+        return $shuffledSongs;
+    }
 
     // create a new playlist
     #[Route('/playlist/add', name: 'add_playlist')]
