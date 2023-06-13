@@ -122,6 +122,9 @@
                             {% else %}
                                 <button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus"></a></button>
                             {% endif %}
+
+                        {% else %}
+                            <button><i class="fa-solid fa-plus"></i></button>
                         {% endif %}
 
                     </td>

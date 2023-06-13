@@ -86,7 +86,16 @@
                         <td> <a href="{{path('app_albumPlayer', {'id': album.id, 'songId': song.id})}}">{{song.nameSong}}</a></td>
                         <td> <a href="{{path('app_artistDetail', {'id': song.user.username})}}"> {{song.user.username}} </a></td>
                         <td>0:00</td>
-                        <td><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus"></a></td> 
+                        <td>
+                            
+                            {% if app.user %}
+                                
+                                <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus"></a>
+
+                            {% else %}
+                                <button><i class="fa-solid fa-plus"></i></button>
+                            {% endif %}
+                        </td> 
 
                     </tr>
                 

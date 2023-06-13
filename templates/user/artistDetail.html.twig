@@ -83,7 +83,16 @@
                         </td>
                         <td>3:09</td>
                         {# <td><button><i class="fa-solid fa-plus"></i></button></td> #}
-                        <td><button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" id="myBtn" class="fa-solid fa-plus"></a></button></td>
+                        <td>
+                            {% if app.user %}
+                            
+                                <button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" id="myBtn" class="fa-solid fa-plus"></a></button>
+                            {% else %}
+                            
+                                <button><i class="fa-solid fa-plus"></i></button>
+                            {% endif %}
+                            
+                        </td>
                     </tr>
 
                 {% endfor %}
