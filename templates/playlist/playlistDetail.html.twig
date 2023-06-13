@@ -149,13 +149,40 @@
                     </td>
                     <td>0:00</td>
 
-                    {% if app.user %}
-                        
-                        <td><button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" id="myBtn" class="fa-solid fa-plus"></a></button></td>
-                    
-                    {% else %}
-                        <td><button><i class="fa-solid fa-plus"></i></button></td>
-                    {% endif %}
+                    <td>
+
+                        {% if app.user %}
+
+                            <div class="dropdown">
+
+                                <button><i class="fa-solid fa-plus"></i></button>
+                                
+                                <div id="list-items">
+                                    
+                                    {% if app.user %}
+                                        
+                                        {# if the user is the owner of the song #}
+                                        {% if app.user.id is same as(playlist.user.id) %}
+
+                                            <a href="{{path('remove_SongsPlaylist', {'playlist':playlist.id, 'id': song.id})}}">delete</a>
+                                            <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}">add Playlist</a>
+
+                                        {% else %}
+
+                                            <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}">add Playlist</a>
+
+                                        {% endif %}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+
+                        {% else %}
+                            <td><button><i class="fa-solid fa-plus"></i></button></td>
+                        {% endif %}
+
+                    </td>
+
                 </tr>
             {% endfor %}
 

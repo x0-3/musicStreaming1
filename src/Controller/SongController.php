@@ -75,7 +75,7 @@ class SongController extends AbstractController
                 $em->persist($song); // prepare
                 $em->flush(); // execute
 
-                return $this->redirectToRoute('app_albumDetail',['id'=>$album->getId()]);
+                return $this->redirectToRoute('app_albumDetail',['id'=>$album->getUuid()]);
             }
 
             // vue to show form
@@ -88,7 +88,7 @@ class SongController extends AbstractController
         } else {
             
             // else return to the current page
-            return $this->redirectToRoute('app_albumDetail',['id'=>$album->getId()]);
+            return $this->redirectToRoute('app_albumDetail',['id'=>$album->getUuid()]);
         }
     }
 
@@ -125,7 +125,7 @@ class SongController extends AbstractController
                 $em->persist($song); // prepare
                 $em->flush(); // execute
 
-                return $this->redirectToRoute('app_profile', ['id' => $song->getAlbum()->getId()]);
+                return $this->redirectToRoute('app_profile', ['id' => $song->getAlbum()->getUuid()]);
             }
 
             // vue to show form
@@ -137,7 +137,7 @@ class SongController extends AbstractController
         } else  {
 
             // if the user isn't the song owner then redirect to current album page
-            return $this->redirectToRoute('app_albumDetail', ['id' => $song->getAlbum()->getId()]);
+            return $this->redirectToRoute('app_albumDetail', ['id' => $song->getAlbum()->getUuid()]);
         }
     }
 
@@ -156,7 +156,7 @@ class SongController extends AbstractController
             $em->flush();
         }
         
-        return $this->redirectToRoute('app_albumDetail', ['id' => $song->getAlbum()->getId()]);
+        return $this->redirectToRoute('app_albumDetail', ['id' => $song->getAlbum()->getUuid()]);
         
     }
 
@@ -212,15 +212,30 @@ class SongController extends AbstractController
 
             $playlistId = $request->request->get('_playlist');
             $playlist = $playlistRepository->find($playlistId);
-            
+                
             $playlist->addSong($song);
+
 
             $em->persist($playlist);
             $em->flush();
 
-            return $this->redirectToRoute('app_like');
+            return $this->redirectToRoute('playlist_detail', ['id' => $playlist->getuuid()]);
         }
 
+    }
+
+
+    // remove song from a playlist 
+    #[Route('/song/{playlist}/{id}', name: 'remove_SongsPlaylist')]
+    public function RemoveSong(Song $song, Playlist $playlist, EntityManagerInterface $em): Response
+    { 
+
+        $playlist->removeSong($song);
+
+        $em->persist($playlist);
+        $em->flush();
+
+        return $this->redirectToRoute('playlist_detail', ['id' => $playlist->getuuid()]);
     }
 
 

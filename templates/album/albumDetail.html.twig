@@ -13,47 +13,31 @@
         <div class="playlistName">
 
             <h3>{{album.nameAlbum}}</h3>
-    
-            {% if app.user %}
-                
-                <div class="dropdown">
-                    
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-    
-                    <div class="dropdown-content">
-    
-                        <p id="myBtn">
-                            <i class="fa-solid fa-share"></i>
-                            share
-                        </p>
-    
+
+            <a href="#" class="fa-solid fa-share text-black text-decoration-none" id="myBtn"></a>
+
+            <div id="myModal" class="modal">
+
+                <div class="modal-content w-50">
+
+                    <div class="d-flex justify-content-between">
+
+                        <h2>Share</h2>  
+                        <span class="close">&times;</span>
                     </div>
-                </div>
-                
-    
-                <div id="myModal" class="modal">
-    
-                    <div class="modal-content w-50">
-    
-                        <div class="d-flex justify-content-between">
-    
-                            <h2>Share</h2>  
-                            <span class="close">&times;</span>
-                        </div>
-                        
-    
-                        <a class="fa-brands fa-facebook mt-3" style="color: #365899; text-decoration: none; font-size: xxx-large;" href="http://www.facebook.com/share.php?u={{absolute_url(path('app_albumDetail', {'id' : album.uuid}))}}&layout&size&appId=1427200851369139&width=77&height=20" target="_blank"></a> 
                     
-                        <div class="d-flex mt-3">
-    
-                            <input type="text" value="{{absolute_url(path('app_albumDetail', {'id' : album.uuid}))}}" id="copyLink" class="w-100 p-1">
-                            <button id="copyBtn" class="bg-dark border-0 text-white">Copy</button>
-                        </div>
-    
+
+                    <a class="fa-brands fa-facebook mt-3" style="color: #365899; text-decoration: none; font-size: xxx-large;" href="http://www.facebook.com/share.php?u={{absolute_url(path('app_albumDetail', {'id' : album.uuid}))}}&layout&size&appId=1427200851369139&width=77&height=20" target="_blank"></a> 
+                
+                    <div class="d-flex mt-3">
+
+                        <input type="text" value="{{absolute_url(path('app_albumDetail', {'id' : album.uuid}))}}" id="copyLink" class="w-100 p-1">
+                        <button id="copyBtn" class="bg-dark border-0 text-white">Copy</button>
                     </div>
-    
+
                 </div>
-            {% endif %}
+
+            </div>
         </div>
 
         {% if songs|length != 0 %}
@@ -119,31 +103,29 @@
                     <td>0:00</td>
                     <td>
                         
-                        <div class="dropdown">
-                            <button><i class="fa-solid fa-plus"></i></button>
-                            
-                            <div id="list-items">
-                                
-                                {% if app.user %}
-                                    
-                                    {# if the user is the owner of the song #}
-                                    {% if app.user.id is same as(song.user.id) %}
+                        {% if app.user %}
 
+                            {% if app.user.id is same as(song.user.id) %}
+                                <div class="dropdown">
+                                    <button><i class="fa-solid fa-plus"></i></button>
+                                    
+                                    <div id="list-items">
+                                        
+                                        {# if the user is the owner of the song #}
                                         <a href="{{path('edit_song', {'id': song.id})}}">edit</a>
                                         <a href="{{path('delete_song', {'id': song.id})}}">delete</a>
+                                        <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}">add to playlist</a>
+                                       
+                                    </div>
+                                </div>
 
-                                    {% else %}
-
-                                        <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}">add Playlist</a>
-
-                                    {% endif %}
-                                {% endif %}
-
-                            </div>
-                        </div>
-
+                            {% else %}
+                                <button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus"></a></button>
+                            {% endif %}
+                        {% endif %}
 
                     </td>
+
                 </tr>
             {% endfor %}
             
