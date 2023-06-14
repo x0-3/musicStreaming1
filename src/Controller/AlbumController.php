@@ -9,17 +9,20 @@ use App\Entity\Genre;
 use App\Entity\Comment;
 use App\Form\AlbumType;
 use App\Form\CommentType;
-use App\Repository\SongRepository;
 use App\Service\FileUploader;
 use App\Service\CommentService;
+use App\Repository\SongRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AlbumController extends AbstractController
@@ -183,15 +186,42 @@ class AlbumController extends AbstractController
     }
 
 
+    // TODO: comment this out
+    #[Route('/album/shuffle/{id}', name: 'shuffle_album')]
+    public function shuffleAlbums(Album $album, SessionInterface $session): Response
+    {
+
+        $songs = $album->getSongs()->toArray();
+        shuffle($songs);
+
+        $shuffledSongOrder = array_map(fn($song) => $song->getId(), $songs);
+
+        $session->set('shuffled_song_order', $shuffledSongOrder);
+
+        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $shuffledSongOrder[0], 'isShuffled' => true]);
+    }
+
+
     // music player page for an album
     // with the comment form
     #[Route('/album/Player/{id}/song/{songId}', name: 'app_albumPlayer')]
-    public function albumMusicPlayer(EntityManagerInterface $em, $id, $songId, Security $security, RequestStack $requestStack, CommentService $commentService): Response
+    public function albumMusicPlayer(EntityManagerInterface $em, $id, $songId, RequestStack $requestStack, CommentService $commentService, SessionInterface $session): Response
     {
         $album= $em->getRepository(Album::class)->findOneBy(['id' => $id]);
         $song= $em->getRepository(Song::class)->findOneBy(['id' => $songId]);
 
-        $songs = $album->getSongs(); // get the song list from the album
+        // $songs = $album->getSongs(); // get the song list from the album
+
+        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+        if ($isShuffled) {
+            
+            $shuffledSongOrder = $session->get('shuffled_song_order', []);
+            $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $album->getSongs());
+        } else {
+
+            $songs = $album->getSongs(); // get the song list from the album
+        }
 
         // for the comment section 
         $user = $this->getUser();
@@ -224,22 +254,34 @@ class AlbumController extends AbstractController
             'album' => $album,
             'songs' => $songs,
             'song' => $song,
+            'isShuffled' => $isShuffled,
         ]);
     }
 
 
     // skip to the next song of the album
     #[Route('/album/skipForward/{id}/{songId}', name: 'app_skipforward')]
-    public function skipForward(Album $album, EntityManagerInterface $entityManager, $songId, SongRepository $songRepository): Response
+    public function skipForward(Album $album, EntityManagerInterface $entityManager, $songId, SongRepository $songRepository, RequestStack $requestStack, SessionInterface $session): Response
     {
 
         // Get the list of songs in the album
-        $albumSongs = $album->getSongs();
+        // $albumSongs = $album->getSongs();
+
+        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+        if ($isShuffled) {
+            
+            $shuffledSongOrder = $session->get('shuffled_song_order', []);
+            $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $album->getSongs());
+        } else {
+
+            $songs = $album->getSongs(); // get the song list from the album
+        }
 
         $currentIndex = null; // set the current array index to null
         
         // Find the index of the current song in the list
-        foreach ($albumSongs as $index => $song) {
+        foreach ($songs as $index => $song) {
 
             // if the song id the same as the current songId
             if ($song->getId() == $songId) {
@@ -252,9 +294,9 @@ class AlbumController extends AbstractController
 
 
         // if there is a next song in the album
-        if (isset($albumSongs[$currentIndex + 1])) {
+        if (isset($songs[$currentIndex + 1])) {
         // Get the next song ID
-            $nextSongId = $albumSongs[$currentIndex + 1]->getId();
+            $nextSongId = $songs[$currentIndex + 1]->getId();
 
             // Update the ID of the song
             $song = $songRepository->find($nextSongId);
@@ -265,11 +307,11 @@ class AlbumController extends AbstractController
             $entityManager->flush();
 
             // Redirect to the page of the next song
-            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $nextSongId]);
+            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $nextSongId, 'isShuffled' => $isShuffled]);
             
-        } elseif (!isset($albumSongs[$currentIndex + 1])) {
+        } elseif (!isset($songs[$currentIndex + 1])) {
 
-            $firstSong = $albumSongs[0]->getId();
+            $firstSong = $songs[0]->getId();
 
             // Update the ID of the song
             $song = $songRepository->find($firstSong);
@@ -280,21 +322,32 @@ class AlbumController extends AbstractController
             $entityManager->flush();
 
             // redirect it to the first song in the album
-            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $firstSong]);
+            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $firstSong, 'isShuffled' => $isShuffled]);
         }
 
     }
 
     // play previous song of the album
     #[Route('/album/prevSong/{id}/{songId}', name: 'app_prevSong')]
-    public function prevSong(Album $album, $songId, SongRepository $songRepository, EntityManagerInterface $em): Response
+    public function prevSong(Album $album, $songId, SongRepository $songRepository, EntityManagerInterface $em, RequestStack $requestStack, SessionInterface $session): Response
     {   
 
-        $albumSongID = $album->getSongs();
+        // $albumSongID = $album->getSongs();
+
+        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+        if ($isShuffled) {
+            
+            $shuffledSongOrder = $session->get('shuffled_song_order', []);
+            $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $album->getSongs());
+        } else {
+
+            $songs = $album->getSongs(); // get the song list from the album
+        }
 
         $currentIndex = null;
 
-        foreach ($albumSongID as $index=>$song) {
+        foreach ($songs as $index=>$song) {
 
             if ($song->getId() == $songId) {
                 
@@ -303,9 +356,9 @@ class AlbumController extends AbstractController
         }
 
 
-        if (isset($albumSongID[$currentIndex - 1])) {
+        if (isset($songs[$currentIndex - 1])) {
             
-            $prevSong = $albumSongID[$currentIndex - 1]->getId();
+            $prevSong = $songs[$currentIndex - 1]->getId();
 
             $song = $songRepository->find($prevSong);
             $song->setId($prevSong);
@@ -313,11 +366,27 @@ class AlbumController extends AbstractController
             $em ->persist($song);
             $em ->flush();
 
-            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $prevSong]);
+            return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $prevSong, 'isShuffled' => $isShuffled]);
 
         }
 
         // redirect to the page of the song
-        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $songId]);  
+        return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $songId, 'isShuffled' => $isShuffled]);  
+    }
+    
+
+    private function getShuffledSongsFromOrder(array $songOrder, Collection $songs): ArrayCollection
+    {
+    
+        $shuffledSongs = new ArrayCollection();
+    
+        foreach ($songOrder as $songId) {
+            $song = $songs->filter(fn($s) => $s->getId() === $songId)->first();
+            if ($song) {
+                $shuffledSongs->add($song);
+            }
+        }
+    
+        return $shuffledSongs;
     }
 }

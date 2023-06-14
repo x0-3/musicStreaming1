@@ -20,7 +20,7 @@
             
             {% include "like/_like.html.twig" %}
 
-            {# TODO: add to album page #}
+            {# TODO: comment this out #}
             <a href="{{path('playlist_prevSong', {'id': playlist.id, 'songId': song.id, 'isShuffled': app.request.query.get('isShuffled', false)})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>
             <a href="{{path('playlist_skipforward', {'id': playlist.id, 'songId': song.id, 'isShuffled': app.request.query.get('isShuffled', false)})}}" class="fa-sharp fa-solid fa-forward" id="btnNext"></a>
@@ -75,8 +75,6 @@
             </thead>
 
             <tbody id="songs-list">
-
-                {# {{ dump(isShuffled) }} #}
                                 
                 {% for song in songs %} 
                 

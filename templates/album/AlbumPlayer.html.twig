@@ -19,9 +19,10 @@
             
             {% include "like/_like.html.twig" %}
 
-            <a href="{{path('app_prevSong', {'id': album.id, 'songId':song.id})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>    
+            {# TODO: comment this out #}
+            <a href="{{path('app_prevSong', {'id': album.id, 'songId':song.id, 'isShuffled': app.request.query.get('isShuffled', false)})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>    
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>                    
-            <a class="fa-sharp fa-solid fa-forward" href="{{path('app_skipforward', {'id': album.id, 'songId':song.id})}}" id="btnNext"></a>
+            <a class="fa-sharp fa-solid fa-forward" href="{{path('app_skipforward', {'id': album.id, 'songId':song.id, 'isShuffled': app.request.query.get('isShuffled', false)})}}" id="btnNext"></a>
 
 
             <div class="hover">
@@ -68,13 +69,13 @@
                     <th>title</th>
                     <th>artist</th>
                     <th>time</th>
-                    <th></th>
+                    <th><a href="{{path('shuffle_album', {'id': album.id})}}">shuffle</a></th>
                 </tr>
             </thead>
 
             <tbody>
                                 
-                {% for song in album.songs %} 
+                {% for song in songs %} 
                    
                     <tr>
                         

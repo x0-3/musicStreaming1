@@ -55,11 +55,11 @@ class PlaylistController extends AbstractController
         }
     }
 
-
-    // TODO: comment / add to album page
+    
+    // TODO: comment this out
     // shuffles the song inside the playlist
     #[Route('/playlist/shuffle/{id}', name: 'shuffle_playlist')]
-    public function shufflePlaylist(Playlist $playlist, EntityManagerInterface $entityManager, SessionInterface $session)
+    public function shufflePlaylist(Playlist $playlist, SessionInterface $session)
     { 
 
         $songs = $playlist->getSongs()->toArray();
@@ -86,6 +86,7 @@ class PlaylistController extends AbstractController
 
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
+        // if the song is shuffled then get the order of the shuffled song
         if ($isShuffled) {
             $shuffledSongOrder = $session->get('shuffled_song_order', []);
             $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $playlist->getSongs());

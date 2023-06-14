@@ -9,9 +9,12 @@ use App\Form\CommentType;
 use App\Service\CommentService;
 use App\Repository\SongRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LikeController extends AbstractController
@@ -43,10 +46,29 @@ class LikeController extends AbstractController
     }
 
 
+    // TODO: comment this out
+    #[Route('/like/shuffle', name: 'shuffle_like')]
+    public function shuffleLike(SessionInterface $session, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser()->getUserIdentifier();
+
+        // get the user song list
+        $songs = $em -> getRepository(Song::class)->findlikedSongs($user);
+
+        shuffle($songs);
+
+        $shuffledSongOrder = array_map(fn($song) => $song->getId(), $songs);
+
+        $session->set('shuffled_song_order', $shuffledSongOrder);
+
+        return $this->redirectToRoute('like_Player', ['id' => $shuffledSongOrder[0], 'isShuffled' => true]);
+    }
+
+
     // music player like song
     // with the comment form
     #[Route('/likePlayer/song/{id}', name: 'like_Player')]
-    public function likePlayer($id, EntityManagerInterface $em, RequestStack $requestStack, CommentService $commentService): Response
+    public function likePlayer($id, EntityManagerInterface $em, RequestStack $requestStack, CommentService $commentService, SessionInterface $session): Response
     {
 
         $song = $em->getRepository(Song::class)->findOneBy(['id' => $id]);
@@ -61,7 +83,19 @@ class LikeController extends AbstractController
 
         if($user){
 
-            $songs = $em -> getRepository(Song::class)->findlikedSongs($userIdentifier); // get all like songs of the user
+            $likeSongs = $em -> getRepository(Song::class)->findlikedSongs($userIdentifier); // get all like songs of the user
+
+            $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+            if ($isShuffled) {
+                
+                $shuffledSongOrder = $session->get('shuffled_song_order', []);
+
+                $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $likeSongs);
+            } else {
+    
+                $songs = $likeSongs;
+            }
             
             // comment form
             $request = $requestStack->getMainRequest(); // get the request from the request stack
@@ -82,7 +116,9 @@ class LikeController extends AbstractController
             return $this->render('like/likePlayer.html.twig', [
                 'formAddComment' => $form->createView(),
                 'songs'=> $songs,
-                'song'=> $song
+                'song'=> $song,
+                'isShuffled' => $isShuffled,
+
             ]);
 
         } else {
@@ -94,16 +130,27 @@ class LikeController extends AbstractController
 
     // skip to the next song of the liked songs
     #[Route('/like/skipForward/{id}', name: 'like_skipforward')]
-    public function skipForward($id, SongRepository $songRepository, EntityManagerInterface $em): Response
+    public function skipForward($id, SongRepository $songRepository, EntityManagerInterface $em, RequestStack $requestStack, SessionInterface $session): Response
     {
 
         $user = $this->getUser()->getUserIdentifier();
 
         $likeSongs = $em ->getRepository(Song::class)->findlikedSongs($user);
 
+        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+        if ($isShuffled) {
+            
+            $shuffledSongOrder = $session->get('shuffled_song_order', []);
+            $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $likeSongs);
+        } else {
+
+            $songs = $likeSongs; // get the song list from the album
+        }
+
         $currentIndex = null;
 
-        foreach ($likeSongs as $key => $song) {
+        foreach ($songs as $key => $song) {
             
             if ($song->getId() == $id) {
 
@@ -111,9 +158,9 @@ class LikeController extends AbstractController
             }
         }
 
-        if (isset($likeSongs[$currentIndex + 1])) {
+        if (isset($songs[$currentIndex + 1])) {
             
-            $nextSong = $likeSongs[$currentIndex + 1]->getId();
+            $nextSong = $songs[$currentIndex + 1]->getId();
 
             $song = $songRepository->find($nextSong);
             $song->setId($nextSong);
@@ -121,11 +168,11 @@ class LikeController extends AbstractController
             $em->persist($song);
             $em->flush();
 
-            return $this->redirectToRoute('like_Player', ['id' => $nextSong]);
+            return $this->redirectToRoute('like_Player', ['id' => $nextSong, 'isShuffled' => $isShuffled]);
         
-        } elseif (!isset($likeSongs[$currentIndex +  1])) {
+        } elseif (!isset($songs[$currentIndex +  1])) {
 
-            $firstSongId = $likeSongs[0]->getId();
+            $firstSongId = $songs[0]->getId();
             
             $song = $songRepository->find($firstSongId);
             $song->setId($firstSongId);
@@ -133,7 +180,7 @@ class LikeController extends AbstractController
             $em->persist($song);
             $em->flush();
             
-            return $this->redirectToRoute('like_Player', ['id' => $firstSongId]);
+            return $this->redirectToRoute('like_Player', ['id' => $firstSongId, 'isShuffled' => $isShuffled]);
 
         }
     }
@@ -141,16 +188,27 @@ class LikeController extends AbstractController
 
     // play previous song of the liked songs
     #[Route('/like/prevSong/{id}', name: 'like_prevSong')]
-    public function prevSong($id, EntityManagerInterface $em, songRepository $songRepository): Response
+    public function prevSong($id, EntityManagerInterface $em, songRepository $songRepository, RequestStack $requestStack, SessionInterface $session): Response
     {
 
         $user = $this->getUser()->getUserIdentifier();
 
         $likeSongs = $em ->getRepository(Song::class)->findlikedSongs($user);
 
+        $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
+
+        if ($isShuffled) {
+            
+            $shuffledSongOrder = $session->get('shuffled_song_order', []);
+            $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $likeSongs);
+        } else {
+
+            $songs = $likeSongs; // get the song list from the album
+        }
+
         $currentIndex = null;
 
-        foreach ($likeSongs as $key => $song) {
+        foreach ($songs as $key => $song) {
             
             if ($song->getId() == $id) {
 
@@ -158,9 +216,9 @@ class LikeController extends AbstractController
             }
         }
 
-        if (isset($likeSongs[$currentIndex - 1])) {
+        if (isset($songs[$currentIndex - 1])) {
             
-            $nextSong = $likeSongs[$currentIndex - 1]->getId();
+            $nextSong = $songs[$currentIndex - 1]->getId();
 
             $song = $songRepository->find($nextSong);
             $song->setId($nextSong);
@@ -168,12 +226,30 @@ class LikeController extends AbstractController
             $em->persist($song);
             $em->flush();
 
-            return $this->redirectToRoute('like_Player', ['id' => $nextSong]);
+            return $this->redirectToRoute('like_Player', ['id' => $nextSong, 'isShuffled' => $isShuffled]);
         
         }
 
-        return $this->redirectToRoute('like_Player', ['id' => $id]);
+        return $this->redirectToRoute('like_Player', ['id' => $id, 'isShuffled' => $isShuffled]);
 
+    }
+
+
+    private function getShuffledSongsFromOrder(array $songOrder, array $songs): ArrayCollection
+    {
+    
+        $shuffledSongs = new ArrayCollection();
+    
+        foreach ($songOrder as $songId) {
+            foreach ($songs as $song) {
+                if ($song->getId() === $songId) {
+                    $shuffledSongs->add($song);
+                    break;
+                }
+            }
+        }
+    
+        return $shuffledSongs;
     }
 }
 
