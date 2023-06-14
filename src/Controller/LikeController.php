@@ -46,7 +46,6 @@ class LikeController extends AbstractController
     }
 
 
-    // TODO: comment this out
     #[Route('/like/shuffle', name: 'shuffle_like')]
     public function shuffleLike(SessionInterface $session, EntityManagerInterface $em): Response
     {
@@ -57,8 +56,10 @@ class LikeController extends AbstractController
 
         shuffle($songs);
 
+        // Create an array of shuffled songs Ids
         $shuffledSongOrder = array_map(fn($song) => $song->getId(), $songs);
 
+        // store the song order in the session
         $session->set('shuffled_song_order', $shuffledSongOrder);
 
         return $this->redirectToRoute('like_Player', ['id' => $shuffledSongOrder[0], 'isShuffled' => true]);
@@ -86,9 +87,11 @@ class LikeController extends AbstractController
             $likeSongs = $em -> getRepository(Song::class)->findlikedSongs($userIdentifier); // get all like songs of the user
 
             $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
-
+            
+            // if the song is shuffled then get the order of the shuffled song
             if ($isShuffled) {
                 
+                // get the ordered list of the shuffled song that is in session
                 $shuffledSongOrder = $session->get('shuffled_song_order', []);
 
                 $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $likeSongs);
@@ -139,8 +142,10 @@ class LikeController extends AbstractController
 
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
+        // if the song is shuffled then get the order of the shuffled song
         if ($isShuffled) {
             
+            // get the ordered list of the shuffled song that is in session
             $shuffledSongOrder = $session->get('shuffled_song_order', []);
             $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $likeSongs);
         } else {
@@ -197,8 +202,10 @@ class LikeController extends AbstractController
 
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
+        // if the song is shuffled then get the order of the shuffled song
         if ($isShuffled) {
-            
+        
+            // get the ordered list of the shuffled song that is in session
             $shuffledSongOrder = $session->get('shuffled_song_order', []);
             $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $likeSongs);
         } else {
@@ -238,11 +245,16 @@ class LikeController extends AbstractController
     private function getShuffledSongsFromOrder(array $songOrder, array $songs): ArrayCollection
     {
     
+        // store the order of the shuffle list
         $shuffledSongs = new ArrayCollection();
     
         foreach ($songOrder as $songId) {
             foreach ($songs as $song) {
+
+                // if the song has the same id as the current id in the array 
                 if ($song->getId() === $songId) {
+
+                    // then add the song to the shuffledSongs collection
                     $shuffledSongs->add($song);
                     break;
                 }

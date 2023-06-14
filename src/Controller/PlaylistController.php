@@ -41,7 +41,6 @@ class PlaylistController extends AbstractController
             $playlists = $repo->findPlaylistUser($userEmail); // get the playlist created by the user
             
             $like = $em->getRepository(Song::class)->findlikedSongs($userEmail);
-            // $like =  $repo->findlikedSongs($userEmail); //get the liked songs of the user
 
             return $this->render('playlist/myPlaylist.html.twig', [
                 'playlists'=> $playlists,
@@ -56,17 +55,18 @@ class PlaylistController extends AbstractController
     }
 
     
-    // TODO: comment this out
     // shuffles the song inside the playlist
     #[Route('/playlist/shuffle/{id}', name: 'shuffle_playlist')]
     public function shufflePlaylist(Playlist $playlist, SessionInterface $session)
     { 
-
+        // get the songs of an playlist 
         $songs = $playlist->getSongs()->toArray();
         shuffle($songs);
-    
+
+        // Create an array of shuffled songs Ids
         $shuffledSongOrder = array_map(fn($song) => $song->getId(), $songs);
-    
+
+        // store the song order in the session
         $session->set('shuffled_song_order', $shuffledSongOrder);
     
         return $this->redirectToRoute('playlist_player', ['id' => $playlist->getId(), 'songId' => $shuffledSongOrder[0], 'isShuffled' => true]);
@@ -82,15 +82,16 @@ class PlaylistController extends AbstractController
         $playlist = $em->getRepository(Playlist::class)->findOneBy(['id'=>$id]);
         $song = $em->getRepository(Song::class)->findOneBy(['id'=>$songId]);
 
-        // $songs = $playlist->getSongs(); // get the list of songs from the playlist
-
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
         // if the song is shuffled then get the order of the shuffled song
         if ($isShuffled) {
+
+            // get the ordered list of the shuffled song that is in session
             $shuffledSongOrder = $session->get('shuffled_song_order', []);
             $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $playlist->getSongs());
         } else {
+
             $songs = $playlist->getSongs();
         }
 
@@ -139,6 +140,8 @@ class PlaylistController extends AbstractController
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
         if ($isShuffled) {
+
+            // get the ordered list of the shuffled song that is in session
             $shuffledSongOrder = $session->get('shuffled_song_order', []);
             $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $playlist->getSongs());
         } else {
@@ -196,9 +199,12 @@ class PlaylistController extends AbstractController
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
         if ($isShuffled) {
+
+            // get the ordered list of the shuffled song that is in session
             $shuffledSongOrder = $session->get('shuffled_song_order', []);
             $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $playlist->getSongs());
         } else {
+
             $songs = $playlist->getSongs();
         }
 
@@ -233,17 +239,24 @@ class PlaylistController extends AbstractController
 
     private function getShuffledSongsFromOrder(array $songOrder, Collection $songs): ArrayCollection
     {
+        // store the shuffled song order
         $shuffledSongs = new ArrayCollection();
     
         foreach ($songOrder as $songId) {
+
+            // filter is used to find the song with the same id
             $song = $songs->filter(fn($s) => $s->getId() === $songId)->first();
+            
+            // if there is a song with the same id
             if ($song) {
+                // then add the song to the shuffledSongs collection
                 $shuffledSongs->add($song);
             }
         }
     
         return $shuffledSongs;
     }
+
 
     // create a new playlist
     #[Route('/playlist/add', name: 'add_playlist')]

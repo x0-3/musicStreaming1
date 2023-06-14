@@ -19,7 +19,6 @@
             
             {% include "like/_like.html.twig" %}
 
-            {# TODO: comment this out #}
             <a href="{{path('app_prevSong', {'id': album.id, 'songId':song.id, 'isShuffled': app.request.query.get('isShuffled', false)})}}" class="fa-sharp fa-solid fa-backward" id="btnPrev"></a>    
             <button id="mainPlayBtn" onclick="togglePlay()"><span class="fa-solid fa-pause"></span></button>                    
             <a class="fa-sharp fa-solid fa-forward" href="{{path('app_skipforward', {'id': album.id, 'songId':song.id, 'isShuffled': app.request.query.get('isShuffled', false)})}}" id="btnNext"></a>
@@ -60,7 +59,7 @@
     </div>
 
     <div class="leftSide">
-        <table>
+        {# <table>
 
             <thead>
 
@@ -69,14 +68,18 @@
                     <th>title</th>
                     <th>artist</th>
                     <th>time</th>
-                    <th><a href="{{path('shuffle_album', {'id': album.id})}}">shuffle</a></th>
+                    <th>
+                        <a href="{{path('shuffle_album', {'id': album.id})}}">
+                            <i class="fa-solid fa-shuffle fs-4"></i>
+                        </a>
+                    </th>
                 </tr>
             </thead>
 
             <tbody>
-                                
+    
                 {% for song in songs %} 
-                   
+                
                     <tr>
                         
                         <td>
@@ -92,20 +95,58 @@
                             {% if app.user %}
                                 
                                 <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus"></a>
-
+    
                             {% else %}
                                 <button><i class="fa-solid fa-plus"></i></button>
                             {% endif %}
                         </td> 
-
+    
                     </tr>
-                
+            
                 {% endfor %}
-                
+     
             </tbody>
-        </table>
+        </table> #}
+        
+        {# TODO:find a better place for it #}
+        <a href="{{path('shuffle_album', {'id': album.id})}}">
+            <i class="fa-solid fa-shuffle fs-4"></i>
+        </a>
 
+        <div class="table overflow-auto" style="height:272px; ">
+            <table>
+                <tr>
+                    {% for song in songs %} 
+                
+                        <tr>
+                            
+                            <td>
+                                <figure>
+                                    <img src="{{asset('uploads/' ~ album.cover)}}" alt="song img">
+                                </figure>
+                            </td>
+                            <td> <a href="{{path('app_albumPlayer', {'id': album.id, 'songId': song.id})}}">{{song.nameSong}}</a></td>
+                            <td> <a href="{{path('app_artistDetail', {'id': song.user.username})}}"> {{song.user.username}} </a></td>
+                            <td>0:00</td>
+                            <td>
+                                
+                                {% if app.user %}
+                                    
+                                    <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus" target="_blank"></a>
+        
+                                {% else %}
+                                    <button><i class="fa-solid fa-plus"></i></button>
+                                {% endif %}
+                            </td> 
+        
+                        </tr>
+                
+                    {% endfor %}
+                </tr>
+            </table>  
+        </div>
 
+        
         <div id="sidebar">
             {% include('comment/_add.html.twig') %}
         </div>

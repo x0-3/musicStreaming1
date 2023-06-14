@@ -346,7 +346,7 @@
   color: #030303;
   font-family: "Montserrat", sans-serif;
 }
-* body section.playlistDetail img, * body section.playlistDetail table, * body section.artistDetail img, * body section.artistDetail table, * body section.musicPlayer img, * body section.musicPlayer table, * body section.search img, * body section.search table {
+* body section.playlistDetail img, * body section.playlistDetail table, * body section.playlistDetail .table, * body section.artistDetail img, * body section.artistDetail table, * body section.artistDetail .table, * body section.musicPlayer img, * body section.musicPlayer table, * body section.musicPlayer .table, * body section.search img, * body section.search table, * body section.search .table {
   box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
   border-radius: 10px;
 }
@@ -616,6 +616,7 @@
   margin: 20px auto;
 }
 * body section.musicPlayer .player .controls button, * body section.musicPlayer .player .controls a {
+  width: 12%;
   background: none;
   border: none;
   font-size: x-large;
@@ -866,13 +867,10 @@ body.dark section.playlistDetail .uncheck, body.dark section.playlistDetail .che
 body.dark section.playlistDetail th, body.dark section.playlistDetail tr, body.dark section.playlistDetail i, body.dark section.playlistDetail td a, body.dark section.artistDetail th, body.dark section.artistDetail tr, body.dark section.artistDetail i, body.dark section.artistDetail td a, body.dark section.musicPlayer th, body.dark section.musicPlayer tr, body.dark section.musicPlayer i, body.dark section.musicPlayer td a, body.dark section.search th, body.dark section.search tr, body.dark section.search i, body.dark section.search td a {
   color: white;
 }
-body.dark section.playlistDetail .controls a, body.dark section.artistDetail .controls a, body.dark section.musicPlayer .controls a, body.dark section.search .controls a {
-  width: 12%;
-}
-body.dark section.playlistDetail .controls a button, body.dark section.artistDetail .controls a button, body.dark section.musicPlayer .controls a button, body.dark section.search .controls a button {
+body.dark section.playlistDetail .controls button, body.dark section.artistDetail .controls button, body.dark section.musicPlayer .controls button, body.dark section.search .controls button {
   color: white;
 }
-body.dark section.playlistDetail .controls a button:hover, body.dark section.artistDetail .controls a button:hover, body.dark section.musicPlayer .controls a button:hover, body.dark section.search .controls a button:hover {
+body.dark section.playlistDetail .controls button:hover, body.dark section.artistDetail .controls button:hover, body.dark section.musicPlayer .controls button:hover, body.dark section.search .controls button:hover {
   color: #7DF9FF;
 }
 body.dark section.playlistDetail .player .controls a, body.dark section.playlistDetail .player .controls span.fa-solid.fa-pause, body.dark section.artistDetail .player .controls a, body.dark section.artistDetail .player .controls span.fa-solid.fa-pause, body.dark section.musicPlayer .player .controls a, body.dark section.musicPlayer .player .controls span.fa-solid.fa-pause, body.dark section.search .player .controls a, body.dark section.search .player .controls span.fa-solid.fa-pause {

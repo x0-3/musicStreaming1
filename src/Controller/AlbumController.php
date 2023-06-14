@@ -186,16 +186,18 @@ class AlbumController extends AbstractController
     }
 
 
-    // TODO: comment this out
     #[Route('/album/shuffle/{id}', name: 'shuffle_album')]
     public function shuffleAlbums(Album $album, SessionInterface $session): Response
     {
 
+        // get the songs of an album 
         $songs = $album->getSongs()->toArray();
-        shuffle($songs);
+        shuffle($songs); 
 
+        // Create an array of shuffled songs Ids
         $shuffledSongOrder = array_map(fn($song) => $song->getId(), $songs);
 
+        // store the song order in the session
         $session->set('shuffled_song_order', $shuffledSongOrder);
 
         return $this->redirectToRoute('app_albumPlayer', ['id' => $album->getId(), 'songId' => $shuffledSongOrder[0], 'isShuffled' => true]);
@@ -210,12 +212,11 @@ class AlbumController extends AbstractController
         $album= $em->getRepository(Album::class)->findOneBy(['id' => $id]);
         $song= $em->getRepository(Song::class)->findOneBy(['id' => $songId]);
 
-        // $songs = $album->getSongs(); // get the song list from the album
-
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
         if ($isShuffled) {
             
+            // get the ordered list of the shuffled song that is in session
             $shuffledSongOrder = $session->get('shuffled_song_order', []);
             $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $album->getSongs());
         } else {
@@ -264,13 +265,11 @@ class AlbumController extends AbstractController
     public function skipForward(Album $album, EntityManagerInterface $entityManager, $songId, SongRepository $songRepository, RequestStack $requestStack, SessionInterface $session): Response
     {
 
-        // Get the list of songs in the album
-        // $albumSongs = $album->getSongs();
-
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
         if ($isShuffled) {
             
+            // get the ordered list of the shuffled song that is in session
             $shuffledSongOrder = $session->get('shuffled_song_order', []);
             $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $album->getSongs());
         } else {
@@ -332,12 +331,11 @@ class AlbumController extends AbstractController
     public function prevSong(Album $album, $songId, SongRepository $songRepository, EntityManagerInterface $em, RequestStack $requestStack, SessionInterface $session): Response
     {   
 
-        // $albumSongID = $album->getSongs();
-
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
         if ($isShuffled) {
             
+            // get the ordered list of the shuffled song that is in session
             $shuffledSongOrder = $session->get('shuffled_song_order', []);
             $songs = $this->getShuffledSongsFromOrder($shuffledSongOrder, $album->getSongs());
         } else {
@@ -378,11 +376,18 @@ class AlbumController extends AbstractController
     private function getShuffledSongsFromOrder(array $songOrder, Collection $songs): ArrayCollection
     {
     
+        // store the shuffled song order
         $shuffledSongs = new ArrayCollection();
     
         foreach ($songOrder as $songId) {
+
+            // filter is used to find the song with the same id
             $song = $songs->filter(fn($s) => $s->getId() === $songId)->first();
+
+            // if there is a song with the same id
             if ($song) {
+
+                // then add the song to the shuffledSongs collection
                 $shuffledSongs->add($song);
             }
         }

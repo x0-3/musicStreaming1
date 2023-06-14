@@ -103,9 +103,9 @@
                     <i class="fa-regular fa-circle-play"></i>
                 </a>
 
-                {# <a href="{{path('shuffle_playlist', {'id': playlist.id, 'songId': songs[0].id})}}">
+                <a href="{{path('shuffle_playlist', {'id': playlist.id})}}">
                     <i class="fa-solid fa-shuffle"></i>
-                </a> #}
+                </a>
 
                 {% if app.user %}
                     <a href="{{path('favorite_playlist', {'id': playlist.id})}}" data-action="favorite">
