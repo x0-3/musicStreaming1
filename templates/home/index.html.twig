@@ -58,7 +58,16 @@
 
                         <a href="{{path('playlist_detail', {'id' : favorite.uuid})}}">
                             <figure>
-                                <img src="{{asset('uploads/' ~ favorite.image)}}" alt="playlist image">
+
+                                {% if favorite.image != null %}
+                                    
+                                    <img src="{{asset('uploads/' ~ favorite.image)}}" alt="playlist image">
+
+                                {% else %}
+
+                                    <img src="{{asset('img/dee-XhvEvfXQoSY-unsplash.jpg')}}" alt="playlist image">
+                                {% endif %}
+                                
                             </figure>
 
                             <h3>{{favorite.playlistName}}</h3>

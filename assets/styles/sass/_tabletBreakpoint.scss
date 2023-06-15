@@ -32,9 +32,34 @@ $breakpointTablet: 768px;
             } 
         }
 
-        section.home .playlistCards .playlistCard a figure{
-            width: 100%;
+
+        section.home, section.artistDetail, section.newRelease {
+            .playlist, .album, .artist{
+
+                .playlistCards{
+                    margin: 0px 66px 41px 66px;
+                }
+
+                .playlistCards, .cards{
+                    display: block;
+                    overflow-x: auto;
+                    white-space: nowrap;
+
+                    &::-webkit-scrollbar{
+                        display: none;
+                    }
+
+                    .playlistCard, .mcard{
+                        width: 190px;
+                        margin: 0 15px;
+                        display: inline-block;
+                        position: relative;
+                    }
+                }
+            }
         }
+        
+            
 
         .mcard{
             width: 21%;
@@ -79,6 +104,10 @@ $breakpointTablet: 768px;
 
             width: 95%;
 
+            .player .controls a {
+                width: auto;
+            }
+
             table{
                 width: 100%;
 
@@ -92,6 +121,16 @@ $breakpointTablet: 768px;
                 } 
             }
         }
+
+        section.listArtist .artistCard {
+
+            min-height: 14vh;    
+            figure {
+                width: 10%;
+            }  
+        }
+        
+  
 
         section.login{
             width: 66%;

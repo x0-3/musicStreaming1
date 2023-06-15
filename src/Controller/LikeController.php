@@ -3,13 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Song;
-use App\Entity\User;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Service\CommentService;
 use App\Repository\SongRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;

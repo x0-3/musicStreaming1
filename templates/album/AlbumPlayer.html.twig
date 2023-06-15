@@ -113,36 +113,34 @@
             <i class="fa-solid fa-shuffle fs-4"></i>
         </a>
 
-        <div class="table overflow-auto" style="height:272px; ">
+        <div class="table overflow-auto" style="max-height:272px; ">
             <table>
-                <tr>
-                    {% for song in songs %} 
-                
-                        <tr>
+                {% for song in songs %} 
+            
+                    <tr>
+                        
+                        <td>
+                            <figure>
+                                <img src="{{asset('uploads/' ~ album.cover)}}" alt="song img">
+                            </figure>
+                        </td>
+                        <td> <a href="{{path('app_albumPlayer', {'id': album.id, 'songId': song.id})}}">{{song.nameSong}}</a></td>
+                        <td> <a href="{{path('app_artistDetail', {'id': song.user.username})}}"> {{song.user.username}} </a></td>
+                        <td>0:00</td>
+                        <td>
                             
-                            <td>
-                                <figure>
-                                    <img src="{{asset('uploads/' ~ album.cover)}}" alt="song img">
-                                </figure>
-                            </td>
-                            <td> <a href="{{path('app_albumPlayer', {'id': album.id, 'songId': song.id})}}">{{song.nameSong}}</a></td>
-                            <td> <a href="{{path('app_artistDetail', {'id': song.user.username})}}"> {{song.user.username}} </a></td>
-                            <td>0:00</td>
-                            <td>
+                            {% if app.user %}
                                 
-                                {% if app.user %}
-                                    
-                                    <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus" target="_blank"></a>
-        
-                                {% else %}
-                                    <button><i class="fa-solid fa-plus"></i></button>
-                                {% endif %}
-                            </td> 
-        
-                        </tr>
-                
-                    {% endfor %}
-                </tr>
+                                <a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus" target="_blank"></a>
+    
+                            {% else %}
+                                <button><i class="fa-solid fa-plus"></i></button>
+                            {% endif %}
+                        </td> 
+    
+                    </tr>
+            
+                {% endfor %}
             </table>  
         </div>
 

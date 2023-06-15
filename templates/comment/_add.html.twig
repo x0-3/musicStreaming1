@@ -1,6 +1,10 @@
 {{ form_start(formAddComment, {'attr': {'id': 'commentForm'}})}} 
 
-    {{form_row(formAddComment.text)}}
+    <div class="w-100">
+
+        {{form_row(formAddComment.text)}}
+    </div>
+    
     {{form_row(formAddComment.submit)}}
 
 {{form_end(formAddComment)}}

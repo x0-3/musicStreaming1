@@ -106,7 +106,7 @@
             <i class="fa-solid fa-shuffle fs-4"></i>
         </a>
 
-        <div class="table overflow-auto" style="height:272px; ">
+        <div class="table overflow-auto" style="max-height:272px; ">
 
             <table>
 
@@ -124,7 +124,7 @@
                             <td><a href="{{path('playlist_player', {'id': playlist.id, 'songId': song.id})}}">{{song.nameSong}}</a></td>
                             <td> <a href="{{path('app_artistDetail', {'id': song.user.username})}}"> {{song.user.username}} </a></td>
                             <td>0:00</td>
-                            <td><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus"></a></td> 
+                            <td><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus" target="_blank"></a></td> 
 
                         </tr>
                     
@@ -133,11 +133,10 @@
             </table>  
         </div>
 
-        <div id="sidebar">
-            {% include('comment/_add.html.twig') %}
-        </div>
-
         
+        {% include('comment/_add.html.twig') %}
+
+
         <div class="comments">
    
             {% for comment in song.comments | reverse %}

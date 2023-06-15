@@ -3,23 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Song;
-use App\Entity\User;
 use App\Entity\Album;
-use Twig\Environment;
 use App\Form\SongType;
 use App\Entity\Comment;
 use App\Entity\Playlist;
 use App\Form\CommentType;
 use App\Service\FileUploader;
 use App\Service\CommentService;
-use App\Form\AddSongsToPlaylistType;
 use App\Repository\PlaylistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

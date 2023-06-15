@@ -3,6 +3,14 @@
     margin: 0;
     box-sizing: border-box;
 
+    ::-webkit-scrollbar {
+        width: .45rem;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(27, 27, 27, .4);
+        border-radius: 3px;
+    }
+
     h1,h3{
         font-family: 'Montserrat', sans-serif;
     }
@@ -120,7 +128,7 @@
                         .dropdown-content{
                             display: flex;
                             flex-direction: column;
-                            width: 11%;
+                            min-width: 8%;
                             border-radius: 10px;
                             padding: 26px 19px;
                             font-size: large;
@@ -311,10 +319,12 @@
 
             .playlistCards{
                 display: flex;
-                justify-content: space-evenly;
+                // justify-content: space-evenly;
+                margin: 65px 67px 41px 101px;
 
                 .playlistCard{
-                    width: 18%;
+                    width: 20%;
+                    margin-right: 54px;
 
                     a{
 
@@ -759,7 +769,7 @@
 
                     p{
                         margin-left: 71px;
-                        color: #737272;
+                        color: #cfcfcf;
                     }
 
                 }
@@ -826,7 +836,7 @@
                     margin: 20px auto;
 
                     button, a{
-                        width: 12%;
+                        // width: 12%;
                         background: none;
                         border: none;
                         font-size: x-large;

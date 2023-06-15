@@ -93,6 +93,10 @@ $breakpointPhone: 767px;
         section.home, section.artistDetail, section.newRelease {
             .playlist, .album, .artist{
 
+                .playlistCards{
+                    margin: 0;
+                }
+
                 .playlistCards, .cards{
                     display: block;
                     overflow-x: auto;
@@ -165,7 +169,11 @@ $breakpointPhone: 767px;
         }
 
         section.playlistDetail {
+
             min-height: 67vh;
+            .playlistHeader figure {
+                width: 34%;
+            }
         }
 
         section.playlistDetail ,section.artistDetail , section.musicPlayer{
@@ -191,15 +199,7 @@ $breakpointPhone: 767px;
             }
             .leftSide {
                 width: 100%;
-            }
-
-            form {
-                margin: 32px 5px;
-
-                input[type=text] {
-                    width: 60%;
-                }
-            }
+            } 
 
             .comments article p {
                 margin-left: 37px;

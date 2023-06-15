@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Song;
-use App\Entity\Album;
 use App\Entity\Playlist;
 use App\Model\SearchBar;
 use App\Form\SearchBarType;
