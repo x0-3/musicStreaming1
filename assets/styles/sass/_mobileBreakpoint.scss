@@ -220,6 +220,17 @@ $breakpointPhone: 767px;
             }
         }
 
+        section.search{
+            .searchGrid{
+                flex-direction: column!important;
+
+                table{
+                    width: 100%!important;
+                
+                }
+            }
+        }
+
         footer {
             display: flex;
             flex-direction: column;

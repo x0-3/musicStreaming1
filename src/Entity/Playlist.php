@@ -39,6 +39,9 @@ class Playlist
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'favoritePlaylists')]
     private Collection $userFavorites;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
 
     public function __construct()
     {
@@ -182,6 +185,18 @@ class Playlist
     public function setUuid($uuid)
     {
         $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

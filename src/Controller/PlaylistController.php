@@ -294,7 +294,8 @@ class PlaylistController extends AbstractController
                 $em->persist($playlist); // prepare
                 $em->flush(); // execute
 
-                return $this->redirectToRoute('app_myPlaylist');
+                // return $this->redirectToRoute('app_myPlaylist');
+                return $this->redirectToRoute('playlist_detail');
             }
 
             // vue to show form

@@ -48,7 +48,13 @@ class PlaylistType extends AbstractType
                     'placeholder' => 'Enter a name for youre playlist',
                 ]
             ])
-
+            
+            ->add('description',TextType::class, [
+                'label' => 'Playlist description',
+                'attr' => [
+                    'placeholder' => 'tell us what your playlist is about',
+                ]
+            ])
             // ->add('dateCreated')
             // ->add('user')
             // ->add('songs')
