@@ -20,7 +20,6 @@ security:
             
             lazy: true
             provider: app_user_provider
-            # custom_authenticator: App\Security\LogInAuthenticator
             custom_authenticators:
                - App\Security\LogInAuthenticator
                - App\Security\MyGoogleAuthenticator
@@ -35,6 +34,10 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
             entry_point: App\Security\LogInAuthenticator
+            remember_me: 
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 1 week
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:

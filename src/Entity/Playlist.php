@@ -127,17 +127,6 @@ class Playlist
         return $this;
     }
 
-    // TODO: Remove
-    // /**
-    //  * Update the shuffled order of songs in the playlist
-    //  *
-    //  * @param Collection|Song[] $shuffledSongs
-    //  */
-    // public function updateShuffledSongs(Collection $shuffledSongs): void
-    // {
-    //     $this->songs = $shuffledSongs;
-    // }
-
     /**
      * @return Collection<int, User>
      */
