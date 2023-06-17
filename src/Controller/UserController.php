@@ -8,6 +8,7 @@ use App\Entity\Album;
 use App\Entity\Subscribe;
 use App\Form\EditUserType;
 use App\Form\SubscribeType;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -130,7 +131,7 @@ class UserController extends AbstractController
 
     // edit the user profile
     #[Route('/user/edit', name: 'edit_profile')]
-    public function editUser(Request $request,EntityManagerInterface $em): Response
+    public function editUser(Request $request,EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
 
         $user = $this->getUser(); // get the current user
@@ -144,6 +145,20 @@ class UserController extends AbstractController
             if ($editUserForm->isSubmitted() && $editUserForm->isValid()) {
 
                 $user = $editUserForm->getData();
+
+                // avatar upload 
+                $avatar = $editUserForm->get('avatar')->getData(); // get the image data
+                if ($avatar) { // if the image is uploaded
+                    $imageFileName = $fileUploader->upload($avatar); // upload the image
+                    $user->setAvatar($imageFileName); // set the image
+                }
+                
+                // poster upload
+                $poster = $editUserForm->get('poster')->getData(); // get the image data
+                if ($poster) { // if the image is uploaded
+                    $imageFileName = $fileUploader->upload($poster); // upload the image
+                    $user->setPoster($imageFileName); // set the image
+                }
 
                 $em->persist($user);
                 $em->flush();

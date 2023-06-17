@@ -10,12 +10,12 @@
 
         <figure>
 
-            {% if app.user.avatar == null %}
+            {% if app.user.poster == null %}
               
                 <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
             {% else %}
             
-                <img src="{{asset('uploads/' ~ app.user.avatar)}}" alt="profile picture"> 
+                <img src="{{asset('uploads/' ~ app.user.poster)}}" alt="profile picture"> 
             {% endif %}
             
 
@@ -53,7 +53,7 @@
                         </figure>
                     </td>
                     <td><a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
-                    <td> <a href="{{path('app_artistDetail', {'id': app.user.id})}}"> {{app.user.username}} </a></td>
+                    <td> <a href="{{path('app_artistDetail', {'id': app.user.username})}}"> {{app.user.username}} </a></td>
                     <td>
                         {% include "like/_like.html.twig" %}
                     </td>

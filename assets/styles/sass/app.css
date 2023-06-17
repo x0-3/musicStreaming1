@@ -10,7 +10,7 @@
   background-color: rgba(27, 27, 27, 0.4);
   border-radius: 3px;
 }
-* h1, * h3 {
+* h1, * h2, * h3 {
   font-family: "Montserrat", sans-serif;
 }
 * h3 {
@@ -19,7 +19,7 @@
 * h3:hover {
   color: #36454F;
 }
-* h1 {
+* h1, * h2 {
   font-size: larger;
   color: #36454F;
 }
@@ -28,6 +28,9 @@
 }
 * body main {
   min-height: 67vh;
+}
+* body .card {
+  background-color: #36454F !important;
 }
 * body header {
   background-color: #36454F;
@@ -458,19 +461,32 @@
   position: relative;
 }
 * body section.artistDetail .hero figure {
-  display: flex;
-  align-items: flex-end;
-  width: 93%;
-  margin: 35px auto;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  position: relative;
 }
 * body section.artistDetail .hero figure img {
-  width: 13%;
+  width: 100%;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  top: -23vh;
+  position: relative;
 }
 * body section.artistDetail .hero figure figcaption {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-left: 16px;
+  position: absolute;
+  top: 220px;
+}
+* body section.artistDetail .hero figure figcaption h1 {
+  color: white;
+  font-size: xxx-large;
 }
 * body section.artistDetail .hero figure figcaption button {
   padding: 9px;

@@ -13,46 +13,53 @@
 
         <div class="hero">
             <figure>
-
-                {% if artist.avatar == null %}
+                
+                {% if artist.poster == null %}
                 
                     <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
                 {% else %}
                 
-                    <img src="{{asset('uploads/' ~ artist.avatar)}}" alt="profile picture"> 
+                    <img src="{{asset('uploads/' ~ artist.poster)}}" alt="profile picture"> 
                 {% endif %}
                 
 
-                <figcaption>
-                    <h1>{{artist.username}}</h1>
+                <figcaption class="flex-column">
 
-                    {# toggle between two btn if the user is sub or not to the artist #}
-                    {% if userSub %}
+                    <div class="d-flex flex-row">
 
-                        <form action="{{path('app_subscribeTo', {'id': artist.username})}}" method="post">
-                            <button type="submit">Subscribed</button>
-                        </form>
-                    
-                    {% else %}
+                        <h1>{{artist.username}}</h1>
 
-                        {% include "subscribe/_addSub.html.twig" %}
+                        {# toggle between two btn if the user is sub or not to the artist #}
+                        {% if userSub %}
 
-                    {% endif %}
+                            <form action="{{path('app_subscribeTo', {'id': artist.username})}}" method="post">
+                                <button type="submit">Subscribed</button>
+                            </form>
+                        
+                        {% else %}
 
+                            {% include "subscribe/_addSub.html.twig" %}
+
+                        {% endif %}
+                    </div>
 
                     {# count the nb if subscriber of an artist #}
                     {% if artist.subUser2|length <= 1 %}
-                        <h3>{{artist.subUser2|length}} subcriber</h3>
+                        <h3 class="text-light">{{artist.subUser2|length}} subcriber</h3>
                         
                     {% else %}
-                        <h3>{{artist.subUser2|length}} subcribers</h3>
+                        <h3 class="text-light">{{artist.subUser2|length}} subcribers</h3>
 
                     {% endif %}
+
 
                 </figcaption>
             </figure>
         </div>
 
+        <div class="title">
+            <h2>Most Liked</h2>
+        </div>
 
         <table>
 
@@ -82,11 +89,10 @@
                             {% include "like/_like.html.twig" %}
                         </td>
                         <td>3:09</td>
-                        {# <td><button><i class="fa-solid fa-plus"></i></button></td> #}
                         <td>
                             {% if app.user %}
                             
-                                <button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" id="myBtn" class="fa-solid fa-plus"></a></button>
+                                <button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" id="myBtn" class="fa-solid fa-plus" target="_blank"></a></button>
                             {% else %}
                             
                                 <button><i class="fa-solid fa-plus"></i></button>
@@ -103,7 +109,7 @@
 
             <div class="title">
 
-                <h1>Albums</h1>
+                <h2>Albums</h2>
                 <a href="{{path('app_artistAlbum', {'id': artist.id})}}">More</a>
             </div>
 
@@ -134,8 +140,7 @@
 
             <div class="title">
 
-                <h1>Singles</h1>
-                {# <a href="{{path('app_artistAlbum', {'id': artist.id})}}">More</a> #}
+                <h2>Singles</h2>
             </div>
 
             <div class="cards">
@@ -162,11 +167,40 @@
             </div>
         </div>
 
+        {# TODO: add Modal #}
+        <div class="about">
+
+            <div class="title">
+                <h2>About</h2>
+            </div>
+
+            <div class="card m-5 d-flex flex-row">
+                <figure>
+                    <img  class="rounded-circle" src="{{asset('uploads/' ~ artist.avatar)}}" alt="{{artist.username}} image">
+                    
+                </figure>
+                
+                <figcaption class="d-flex flex-column">
+
+                    {% if artist.subUser2|length <= 1 %}
+                        <h3 class="text-light">{{artist.subUser2|length}} subcriber</h3>
+                    
+                    {% else %}
+                        <h3 class="text-light">{{artist.subUser2|length}} subcribers</h3>
+
+                    {% endif %}
+                    <p class="text-light">{{artist.bio}} </p>
+                </figcaption>
+
+            </div>
+        </div>
+
+
         <div class="artist">
 
             <div class="title">
 
-                <h1>Most Popular Artists</h1>
+                <h2>Most Popular Artists</h2>
                 <a href="{{path('app_similarArtist')}}">More</a>
             </div>
 

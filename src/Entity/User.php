@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -77,6 +78,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $poster = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $bio = null;
 
 
     public function __construct()
@@ -486,6 +490,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPoster(?string $poster): self
     {
         $this->poster = $poster;
+
+        return $this;
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
 
         return $this;
     }
