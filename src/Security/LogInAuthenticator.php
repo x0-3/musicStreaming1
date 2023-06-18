@@ -27,6 +27,16 @@ class LogInAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): Passport
     {
+        $honeyPot = false; // set the honeypot value to false 
+
+        // TODO: remove exception
+        // if the honeypot is not empty and the form input is equal to true throw an exception
+        if (!empty ($request->request->get('fenetre', '')) && $request->request->get('fenetre', '') == true) {
+        
+            $honeyPot = true; // set the honeypot value to true
+            throw new \Exception("spam detected"); // show an error message
+        }
+
         $email = $request->request->get('email', '');
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
