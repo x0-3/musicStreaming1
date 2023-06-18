@@ -22,6 +22,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('audioPlayer', './assets/audioPlayer.js')
+    .addEntry('tarteaucitron', './assets/js/tarteaucitron.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -145,10 +145,12 @@
         </footer>
 
         {% block javascripts %}
+            <script src="{{asset('/tarteaucitron/tarteaucitron.js')}}"></script>
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
             {{ encore_entry_script_tags('app')}}
             {{ encore_entry_script_tags('audioPlayer')}}
+            {{ encore_entry_script_tags('tarteaucitron')}}
         {% endblock %}
     </body>
 </html>
