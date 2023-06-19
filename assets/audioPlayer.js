@@ -361,29 +361,29 @@ $(document).ready(function () {
 
 });
 
-
 // ************************************************ keybinds ************************************************//
-const btnNext = document.getElementById("btnNext");
-const btnPrev = document.querySelector("#btnPrev");
+// TODO: fix keybinds 
+// const btnNext = document.getElementById("btnNext");
+// const btnPrev = document.querySelector("#btnPrev");
 
 
-document.addEventListener("keydown", e => {
+// document.addEventListener("keydown", e => {
 
-  e.preventDefault();
+//   e.preventDefault();
 
-  if (e.key.toLowerCase() === "k" && e.shiftKey) {
-    togglePlay();
-  }
+//   if (e.key.toLowerCase() === "k" && e.shiftKey) {
+//     togglePlay();
+//   }
   
-  if (e.key.toLowerCase() === "m" && e.shiftKey) {
-    toggleMute();
-  }
+//   if (e.key.toLowerCase() === "m" && e.shiftKey) {
+//     toggleMute();
+//   }
 
-  if (e.key.toLowerCase() === "n" && e.shiftKey) {
-    btnNext.click();
-  }
+//   if (e.key.toLowerCase() === "n" && e.shiftKey) {
+//     btnNext.click();
+//   }
   
-  if (e.key.toLowerCase() === "p" && e.shiftKey) {
-    btnPrev.click();
-  }
-});
+//   if (e.key.toLowerCase() === "p" && e.shiftKey) {
+//     btnPrev.click();
+//   }
+// });
