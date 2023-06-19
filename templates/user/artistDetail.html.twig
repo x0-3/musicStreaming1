@@ -167,34 +167,73 @@
             </div>
         </div>
 
-        {# TODO: add Modal #}
-        <div class="about">
+        {% if artist.bio != null %}
+            
+            <div class="about">
 
-            <div class="title">
-                <h2>About</h2>
+                <div class="title">
+                    <h2>About</h2>
+                </div>
+
+                <div class="card m-5 d-flex flex-column p-3"  id="myBtn">
+                    <figure>
+                        <img class="rounded-circle" src="{{asset('uploads/' ~ artist.avatar)}}" alt="{{artist.username}} image">
+                        
+                    </figure>
+                    
+                    <figcaption class="d-flex flex-column p-5">
+
+                        {% if artist.subUser2|length <= 1 %}
+                            <h3 class="text-light">{{artist.subUser2|length}} subcriber</h3>
+                        
+                        {% else %}
+                            <h3 class="text-light">{{artist.subUser2|length}} subcribers</h3>
+
+                        {% endif %}
+
+                        {# TODO: set limit for num of char 234 #}
+                        {% if artist.bio|length > 234 %}
+                            
+                            <p class="text-light">{{artist.bio}}... </p>
+
+                        {% else %}
+                            <p class="text-light">{{artist.bio}} </p>
+
+                        {% endif %}
+                    </figcaption>
+
+                </div>
             </div>
 
-            <div class="card m-5 d-flex flex-row">
-                <figure>
-                    <img  class="rounded-circle" src="{{asset('uploads/' ~ artist.avatar)}}" alt="{{artist.username}} image">
+            {# TODO: style modal #}
+            <div id="myModal" class="modal">
+
+                <div class="modal-content w-50">
+    
+                    <span class="close">&times;</span>
+
+                    {% if artist.poster != null %}
                     
-                </figure>
-                
-                <figcaption class="d-flex flex-column">
+                        <figure>
+                            <img class="w-100" src="{{asset('uploads/' ~ artist.poster)}}" alt="{{artist.username}} image">
+
+                        </figure>  
+                    {% endif %}
 
                     {% if artist.subUser2|length <= 1 %}
-                        <h3 class="text-light">{{artist.subUser2|length}} subcriber</h3>
+                        <h3>{{artist.subUser2|length}} subcriber</h3>
                     
                     {% else %}
-                        <h3 class="text-light">{{artist.subUser2|length}} subcribers</h3>
+                        <h3>{{artist.subUser2|length}} subcribers</h3>
 
                     {% endif %}
-                    <p class="text-light">{{artist.bio}} </p>
-                </figcaption>
 
+                    <p>{{artist.bio}} </p>
+    
+                </div>
+    
             </div>
-        </div>
-
+        {% endif %}
 
         <div class="artist">
 
