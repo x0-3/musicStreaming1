@@ -15,6 +15,7 @@ class UserChecker implements UserCheckerInterface
             return;
         }
 
+        // if the user is banned then block them from logging in
         if ($user->isBanned()) {
 
             session_unset();

@@ -16,26 +16,26 @@ class userVoter extends Voter
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
-        $user = $token->getUser();
-
+        $user = $token->getUser(); // get the user
+    
         if (!$user instanceof User) {
             return false;
         }
-
-        elseif ($user->isBanned())
-        {
+    
+        // if the user is banned then logout the user
+        if ($user->isBanned()) {
             session_unset();
-
-            return false;
-
-        } elseif ($user->getRoles() == ['ROLE_USER']) 
-        {
-
             return false;
         }
-
+    
+        // if the user has the role user in the array of roles
+        if (in_array('ROLE_USER', $user->getRoles())) {
+            return false;
+        }
+    
         return true;
     }
+    
 
     
 }
