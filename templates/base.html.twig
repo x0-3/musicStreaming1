@@ -151,6 +151,38 @@
             {{ encore_entry_script_tags('app')}}
             {{ encore_entry_script_tags('audioPlayer')}}
             {{ encore_entry_script_tags('tarteaucitron')}}
+
+            <script>
+
+                // Add an event listener to the roles field
+                document.addEventListener('DOMContentLoaded', function() {
+                    var rolesField = document.getElementById('edit_user_roles');
+                    rolesField.addEventListener('change', toggleFields);
+                });
+
+                // Function to toggle the 'poster' and 'bio' fields based on the selected role
+                function toggleFields() {
+                    var rolesField = document.getElementById('edit_user_roles');
+                    var selectedRoles = Array.from(rolesField.selectedOptions).map(function(option) {
+                        return option.value;
+                    });
+
+                    var posterField = document.getElementById('edit_user_poster');
+                    var bioField = document.getElementById('edit_user_bio');
+
+                    if (selectedRoles.includes('ROLE_ARTIST')) {
+                        posterField.style.display = 'block';
+                        bioField.style.display = 'block';
+                    } else {
+                        posterField.style.display = 'none';
+                        bioField.style.display = 'none';
+                    }
+                }
+
+                // Call the toggleFields function initially to set the initial state
+                toggleFields();
+
+            </script>
         {% endblock %}
     </body>
 </html>

@@ -44,6 +44,7 @@ class EditUserType extends AbstractType
                     ])
                 ],
             ])
+
             ->add('poster', FileType::class,[
                 'label' => 'poster',
 
@@ -77,8 +78,11 @@ class EditUserType extends AbstractType
             ])
             ->add('bio', TextareaType::class, [
                 'label' => 'bio',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Tell us more about you !',
+                ],
             ])
-
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'User' => 'ROLE_USER',
@@ -96,6 +100,8 @@ class EditUserType extends AbstractType
             // ->add('likes')
             // ->add('favoritePlaylists')
         ;
+
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void
