@@ -32,8 +32,8 @@
                         {# toggle between two btn if the user is sub or not to the artist #}
                         {% if userSub %}
 
-                            <form action="{{path('app_subscribeTo', {'id': artist.username})}}" method="post">
-                                <button type="submit">Subscribed</button>
+                            <form action="{{path('app_subscribeTo', {'id': artist.username})}}" method="post" class="mb-3">
+                                <button class="btn-primary btn" type="submit">Subscribed</button>
                             </form>
                         
                         {% else %}
@@ -92,7 +92,7 @@
                         <td>
                             {% if app.user %}
                             
-                                <button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" id="myBtn" class="fa-solid fa-plus" target="_blank"></a></button>
+                                <button><a href="{{path('form_toSongsPlaylist', {'id': song.id})}}" class="fa-solid fa-plus" target="_blank"></a></button>
                             {% else %}
                             
                                 <button><i class="fa-solid fa-plus"></i></button>
@@ -175,11 +175,14 @@
                     <h2>About</h2>
                 </div>
 
-                <div class="card m-5 d-flex flex-column p-3"  id="myBtn">
-                    <figure>
-                        <img class="rounded-circle" src="{{asset('uploads/' ~ artist.avatar)}}" alt="{{artist.username}} image">
-                        
-                    </figure>
+                <div class="card m-5 d-flex flex-column p-3" id="myBtn">
+
+                    {% if app.user.poster != null %}
+                        <figure>
+                            <img class="rounded-circle" src="{{asset('uploads/' ~ artist.avatar)}}" alt="{{artist.username}} image">
+                            
+                        </figure>
+                    {% endif %}
                     
                     <figcaption class="d-flex flex-column p-5">
 
@@ -191,49 +194,59 @@
 
                         {% endif %}
 
-                        {# TODO: set limit for num of char 234 #}
-                        {% if artist.bio|length > 234 %}
+                        <p class="text-light">
                             
-                            <p class="text-light">{{artist.bio}}... </p>
-
-                        {% else %}
-                            <p class="text-light">{{artist.bio}} </p>
-
-                        {% endif %}
+                            {# if the lenght of the bio is sup to 234 then cut the array and add ...  #}
+                            {{ artist.bio|length > 242 ? artist.bio|slice(0, 242) ~ '...' : artist.bio  }}
+                        </p>
                     </figcaption>
 
                 </div>
             </div>
 
-            {# TODO: style modal #}
             <div id="myModal" class="modal">
-
-                <div class="modal-content w-50">
     
-                    <span class="close">&times;</span>
-
+                <div class="modal-content w-50 h-100 overflow-auto p-0 rounded-5 m-auto">
+    
+                    <span class="close position-absolute m-2 text-danger">&times;</span>
+    
                     {% if artist.poster != null %}
                     
                         <figure>
-                            <img class="w-100" src="{{asset('uploads/' ~ artist.poster)}}" alt="{{artist.username}} image">
-
+                            <img class="w-100 rounded-5" src="{{asset('uploads/' ~ artist.poster)}}" alt="{{artist.username}} image">
+    
                         </figure>  
                     {% endif %}
 
-                    {% if artist.subUser2|length <= 1 %}
-                        <h3>{{artist.subUser2|length}} subcriber</h3>
                     
-                    {% else %}
-                        <h3>{{artist.subUser2|length}} subcribers</h3>
+                    <div class="d-flex">
 
-                    {% endif %}
+                        <div class="w-25 p-2">
 
-                    <p>{{artist.bio}} </p>
+                            {% if artist.subUser2|length <= 1 %}
+                                <h3 class="fw-bold">{{artist.subUser2|length}} subcriber</h3>
+                            
+                            {% else %}
+                                <h3 class="fw-bold">{{artist.subUser2|length}} subcribers</h3>
+            
+                            {% endif %}
+                        </div>
+
+
+                        <article class="d-flex flex-column w-75">
+
+                            <h2><b>{{artist.username}}</b>  </h2>
+                            
+                            <p>{{artist.bio}}</p>
+                        </article>
+
+                    </div>
     
                 </div>
     
             </div>
         {% endif %}
+
 
         <div class="artist">
 

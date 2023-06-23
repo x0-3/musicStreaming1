@@ -123,18 +123,18 @@
 
         {% if app.user.bio != null %}
             
-            <div class="about" id="myBtn">
+            <div class="about">
 
                 <div class="title">
                     <h2>About</h2>
                 </div>
 
-                <div class="card m-5 d-flex flex-column p-3">
+                <div class="card m-5 d-flex flex-column p-3"  id="myBtn">
 
-                    {% if app.user.poster != null %}
+                    {% if app.user.avatar != null %}
 
                         <figure>
-                            <img class="rounded-circle" src="{{asset('uploads/' ~ app.user.poster)}}" alt="{{app.user.username}} image">
+                            <img class="rounded-circle" src="{{asset('uploads/' ~ app.user.avatar)}}" alt="{{app.user.username}} image">
 
                         </figure>  
                     {% endif %}
@@ -149,45 +149,54 @@
                             <h3 class="text-light">{{app.user.subUser2|length}} subcribers</h3>
 
                         {% endif %}
-
-                        {# TODO: set limit for num of char 234 #}
-                        {% if app.user.bio|length > 234 %}
+  
+                        <p class="text-light">
                             
-                            <p class="text-light">{{app.user.bio}}... </p>
-
-                        {% else %}
-                            <p class="text-light">{{app.user.bio}} </p>
-
-                        {% endif %}
+                            {# if the lenght of the bio is sup to 234 then cut the array and add ...  #}
+                            {{ app.user.bio|length > 242 ? app.user.bio|slice(0, 242) ~ '...' : app.user.bio  }}
+                        </p>
                     </figcaption>
 
                 </div>
             </div>
 
-            {# TODO: style modal, sub count #}
             <div id="myModal" class="modal">
-
-                <div class="modal-content w-50">
     
-                    <span class="close">&times;</span>
-
+                <div class="modal-content w-50 h-100 overflow-auto p-0 rounded-5 m-auto">
+    
+                    <span class="close position-absolute m-2 text-danger">&times;</span>
+    
                     {% if app.user.poster != null %}
                     
                         <figure>
-                            <img class="rounded-circle" src="{{asset('uploads/' ~ app.user.poster)}}" alt="{{app.user.username}} image">
-
+                            <img class="w-100 rounded-5" src="{{asset('uploads/' ~ app.user.poster)}}" alt="{{app.user.username}} image">
+    
                         </figure>  
                     {% endif %}
 
-                    {% if app.user.subUser2|length <= 1 %}
-                        <h3>{{app.user.subUser2|length}} subcriber</h3>
                     
-                    {% else %}
-                        <h3>{{app.user.subUser2|length}} subcribers</h3>
+                    <div class="d-flex">
 
-                    {% endif %}
+                        <div class="w-25 p-2">
 
-                    <p>{{app.user.bio}} </p>
+                            {% if app.user.subUser2|length <= 1 %}
+                                <h3 class="fw-bold">{{app.user.subUser2|length}} subcriber</h3>
+                            
+                            {% else %}
+                                <h3 class="fw-bold">{{app.user.subUser2|length}} subcribers</h3>
+            
+                            {% endif %}
+                        </div>
+
+
+                        <article class="d-flex flex-column w-75">
+
+                            <h2><b>{{app.user.username}}</b>  </h2>
+                            
+                            <p>{{app.user.bio}}</p>
+                        </article>
+
+                    </div>
     
                 </div>
     
