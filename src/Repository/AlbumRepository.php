@@ -41,35 +41,11 @@ class AlbumRepository extends ServiceEntityRepository
     }
 
 
-    // find the four most recent albums for one artist
-   /**
-    * @return Album[] Returns an array of Album objects
-    */
-   public function findBy4MostRecentAlbumArtist($artistId): array
-   {
-
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQueryBuilder()
-            ->select('a.id, a.nameAlbum, a.cover, a.releaseDate')
-            ->from('App\Entity\Song', 's')
-            ->innerJoin('s.album', 'a')
-            ->andWhere('s.user = :id')
-            ->setParameter('id', $artistId)
-            ->groupBy('a.id, a.nameAlbum, a.cover, a.releaseDate')
-            ->orderBy('a.releaseDate', ' DESC');
-
-        $query = $query->getQuery();
-
-        return $query->execute();
-    }
-
-
     // find most recent albums for one artist
    /**
     * @return Album[] Returns an array of Album objects
     */
-   public function findByMostRecentAlbumArtist($artistId): array
+   public function findByMostRecentAlbumArtist($artistId, $limit = null): array
    {
 
         $entityManager = $this->getEntityManager();
@@ -82,7 +58,7 @@ class AlbumRepository extends ServiceEntityRepository
             ->setParameter('id', $artistId)
             ->groupBy('a.id, a.nameAlbum, a.cover, a.releaseDate')
             ->orderBy('a.releaseDate', ' DESC')
-            ->setMaxResults(5);
+            ->setMaxResults($limit);
 
         $query = $query->getQuery();
 

@@ -47,7 +47,7 @@ class SongRepository extends ServiceEntityRepository
     /**
     * @return Song[] Returns an array of Song objects
     */
-    public function findByMostLikes(): array
+    public function findByMostLikes($limit = null): array
     {
 
         $query = $this->createQueryBuilder('s')
@@ -56,26 +56,7 @@ class SongRepository extends ServiceEntityRepository
             ->leftJoin('s.likes', 'ul')
             ->groupBy('s.id, s.nameSong,  a.cover')
             ->orderBy('num_like', 'DESC')
-            ->setMaxResults(5)
-            ->getQuery()
-            ->getResult();
-            
-        return $query;
-    }
-
-    /**
-    * @return Song[] Returns an array of Song objects
-    */
-    public function findTenMostLikes(): array
-    {
-
-        $query = $this->createQueryBuilder('s')
-            ->select('s.id, s.uuid, s.nameSong, a.cover, COUNT(ul.id) AS num_like')
-            ->leftJoin('s.album', 'a')
-            ->leftJoin('s.likes', 'ul')
-            ->groupBy('s.id, s.nameSong,  a.cover')
-            ->orderBy('num_like', 'DESC')
-            ->setMaxResults(10)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
             

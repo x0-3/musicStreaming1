@@ -38,7 +38,7 @@ class SubscribeController extends AbstractController
     public function mostPopularArtist(EntityManagerInterface $em ): Response
     {
 
-        $artistMostSub = $em->getRepository(Subscribe::class)->findByMostSubscribers(); //find the artist's with the most subscribers 
+        $artistMostSub = $em->getRepository(Subscribe::class)->findByMostSubscribers(20); //find the artist's with the most subscribers 
 
         return $this->render('subscribe/mostSubscribers.html.twig', [
             'artistMostSub' => $artistMostSub,

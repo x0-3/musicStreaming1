@@ -28,7 +28,7 @@ class SongController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
 
-        $songs = $em->getRepository(Song::class)->findTenMostLikes(); // find the top ten like song
+        $songs = $em->getRepository(Song::class)->findByMostLikes(20); // find the top ten like song
 
         return $this->render('song/mostLiked.html.twig', [
             'songs'=> $songs,

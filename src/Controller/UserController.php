@@ -39,8 +39,8 @@ class UserController extends AbstractController
 
         // page without subscriptions functionality
         $songs = $em->getRepository(Song::class)->findByArtistMostLike($artist); //find the artist's most like songs
-        $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
-        $artistMostSub = $em->getRepository(Subscribe::class)->find4ByMostSubscribers(); //find the artist's with the most subscribers 
+        $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist, 5); //find the artist's most recent albums
+        $artistMostSub = $em->getRepository(Subscribe::class)->findByMostSubscribers(4); //find the artist's with the most subscribers 
 
         
         // if the user is the artist then redirect to the profile page

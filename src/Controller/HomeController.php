@@ -25,8 +25,8 @@ class HomeController extends AbstractController
     public function index(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
     {
 
-        $playlists = $em->getRepository(Playlist::class)->findByMostFollow(); //find by most followed playlists
-        $songs = $em->getRepository(Song::class)->findByMostLikes(); //find the most like songs   
+        $playlists = $em->getRepository(Playlist::class)->findByMostFollow(5); //find by most followed playlists
+        $songs = $em->getRepository(Song::class)->findByMostLikes(5); //find the most like songs   
     
 
         $token = $tokenStorage->getToken();   
@@ -35,7 +35,7 @@ class HomeController extends AbstractController
 
             $user = $tokenStorage->getToken()->getUserIdentifier(); //get user identifier (email)
             
-            $favoritePlaylists = $em->getRepository(Playlist::class)->find4FavoritePlaylists($user); //find the user's favorite playlists
+            $favoritePlaylists = $em->getRepository(Playlist::class)->findFavoritePlaylists($user, 5); //find the user's favorite playlists
             $artists = $em->getRepository(Subscribe::class)->findUserSubscriber($user, 10);
 
 
@@ -104,7 +104,7 @@ class HomeController extends AbstractController
     public function TopFollowedPlaylists(EntityManagerInterface $em): Response
     {
 
-        $playlists = $em->getRepository(Playlist::class)->findByMoreMostFollow(); //find followed playlists ordered by most followed
+        $playlists = $em->getRepository(Playlist::class)->findByMostFollow(20); //find followed playlists ordered by most followed
 
         return $this->render('home/recommended.html.twig', [
             'playlists' => $playlists,

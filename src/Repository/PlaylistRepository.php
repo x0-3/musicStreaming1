@@ -40,42 +40,19 @@ class PlaylistRepository extends ServiceEntityRepository
         }
     }
 
-    // like recommendations
+    // favorite recommendations
    /**
     * @return Playlist[] Returns an array of Playlist objects
     */
-   public function findByMostFollow(): array
+   public function findByMostFollow($limit = null): array
     {
-        // $entityManager = $this->getEntityManager();
         
         $query = $this->createQueryBuilder('p')
             ->select('p.id, p.uuid, p.image, p.playlistName, COUNT(pu.id) AS num_followers')
-            // ->from('App\Entity\Playlist', 'p')
             ->leftJoin('p.userFavorites', 'pu')
             ->groupBy('p.id, p.uuid, p.playlistName')
             ->orderBy('num_followers', 'DESC')
-            ->setMaxResults(5)
-            ->getQuery()
-            ->getResult();
-
-        return $query;
-
-    }
-
-    // find top 10 of the most followed playlists
-   /**
-    * @return Playlist[] Returns an array of Playlist objects
-    */
-   public function findByMoreMostFollow(): array
-    {
-        
-        $query = $this->createQueryBuilder('p')
-            ->select('p.id, p.uuid, p.image, p.playlistName, COUNT(pu.id) AS num_followers')
-            // ->from('App\Entity\Playlist', 'p')
-            ->leftJoin('p.userFavorites', 'pu')
-            ->groupBy('p.id, p.playlistName')
-            ->orderBy('num_followers', 'DESC')
-            ->setMaxResults(10)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
 
@@ -90,7 +67,6 @@ class PlaylistRepository extends ServiceEntityRepository
     */
    public function findPlaylistUser($userEmail): array
    {
-        // $entityManager = $this->getEntityManager();
 
         $query = $this->createQueryBuilder('p')
             ->select('p.id, p.uuid, p.image, p.playlistName, p.dateCreated')
@@ -105,37 +81,19 @@ class PlaylistRepository extends ServiceEntityRepository
     }
 
 
-    // find user top 4 favorite playlist
-   /**
-    * @return Playlist[] Returns an array of Playlist objects
-    */
-   public function find4FavoritePlaylists($userEmail): array
-    {
-       return $this->createQueryBuilder('p')
-           ->select('p.id, p.image, p.playlistName, pu.email')
-        //    ->from('App\Entity\Playlist', 'pl')
-           ->leftJoin('p.userFavorites', 'pu')
-           ->where('pu.email = :email')
-           ->setParameter('email', $userEmail)
-           ->setMaxResults(5)
-           ->getQuery()
-           ->getResult()
-       ;
-    }
-
     // find user favorites playlists
    /**
     * @return Playlist[] Returns an array of Playlist objects
     */
-   public function findFavoritePlaylists($userEmail): array
+   public function findFavoritePlaylists($userEmail, $limit = null): array
     {
        return $this->createQueryBuilder('p')
            ->select('p.id, p.uuid, p.image, p.playlistName, pu.email')
-        //    ->from('App\Entity\Playlist', 'pl')
            ->leftJoin('p.userFavorites', 'pu')
            ->where('pu.email = :email')
            ->setParameter('email', $userEmail)
            ->groupBy('p.id, p.image, p.playlistName, pu.email')
+           ->setMaxResults($limit)
            ->getQuery()
            ->getResult()
        ;
