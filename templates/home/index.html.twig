@@ -6,24 +6,27 @@
 
 <section class="home">
 
-    <div class="subscriptions">
+    {% if app.user %}
+        
+        <div class="subscriptions">
 
-        <div class="avatar">
+            <div class="avatar">
 
-            {% for artist in artists %}
-            
-                <figure>
-    
-                    <a href="{{path('app_artistDetail', {'id': artist.username})}}">
-                    
-                        <img class=" rounded-circle w-100" src="{{asset('/uploads/' ~ artist.avatar)}}" alt="{{artist.username}} profile picture">
-                    </a>
-                </figure>
-            {% endfor %}
+                {% for artist in artists %}
+                
+                    <figure>
+        
+                        <a href="{{path('app_artistDetail', {'id': artist.username})}}">
+                        
+                            <img class=" rounded-circle w-100" src="{{asset('/uploads/' ~ artist.avatar)}}" alt="{{artist.username}} profile picture">
+                        </a>
+                    </figure>
+                {% endfor %}
+
+            </div>
 
         </div>
-
-    </div>
+    {% endif %}
 
 
     <div class="main">

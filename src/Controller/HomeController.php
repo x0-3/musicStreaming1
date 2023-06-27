@@ -36,7 +36,8 @@ class HomeController extends AbstractController
             $user = $tokenStorage->getToken()->getUserIdentifier(); //get user identifier (email)
             
             $favoritePlaylists = $em->getRepository(Playlist::class)->find4FavoritePlaylists($user); //find the user's favorite playlists
-            $artists = $em->getRepository(Subscribe::class)->findUserSubscriber($user);
+            $artists = $em->getRepository(Subscribe::class)->findUserSubscriber($user, 10);
+
 
             return $this->render('home/index.html.twig', [
                 'playlists' => $playlists,

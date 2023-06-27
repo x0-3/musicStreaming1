@@ -86,7 +86,7 @@ class SubscribeRepository extends ServiceEntityRepository
    /**
     * @return Subscribe[] Returns an array of Subscribe objects
     */
-   public function findUserSubscriber($userId): array
+   public function findUserSubscriber($userId, $limit = null): array
     {
 
         $query = $this->createQueryBuilder('s')
@@ -96,6 +96,7 @@ class SubscribeRepository extends ServiceEntityRepository
             ->where('u.email = :email')
             ->setParameter('email', $userId)
             ->groupBy('s.id ,u.email, us.id, us.username, u.avatar')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
 
