@@ -29,113 +29,111 @@
     {% endif %}
 
 
-    <div class="main">
+
+    <div class="playlist">
+
+        <div class="title">
+
+            <h1>Recommended</h1>
+            <a href="{{path('more_recommended')}}">More</a>
+        </div>
+
+        <div class="playlistCards">
+
+            {% for playlist in playlists %}
+                
+                <div class="playlistCard">
+                    <a href="{{path('playlist_detail', {'id' : playlist.uuid})}}">
+                        
+                        <figure>
+                            {% if playlist.image == null %}
+                                <img src="{{asset('img/dee-XhvEvfXQoSY-unsplash.jpg')}}" alt="playlist image">
+                            {% else %}
+                                <img src="{{asset('uploads/' ~ playlist.image)}}" alt="playlist image">
+                            {% endif %}
+                        </figure>
+                        
+                        <h3>{{playlist.playlistName}}</h3>
+                    </a>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {# if the user is connected and has a favorite playlist #}
+    {% if (app.user) and (favoritePlaylists != null) %}
 
         <div class="playlist">
-    
+
             <div class="title">
-    
-                <h1>Recommended</h1>
-                <a href="{{path('more_recommended')}}">More</a>
+
+                <h1>Your Favorite Playlists</h1>
+                <a href="{{path('app_favorites')}}">More</a>
             </div>
-    
+
             <div class="playlistCards">
-    
-                {% for playlist in playlists %}
-                    
-                    <div class="playlistCard">
-                        <a href="{{path('playlist_detail', {'id' : playlist.uuid})}}">
-                            
-                            <figure>
-                                {% if playlist.image == null %}
-                                    <img src="{{asset('img/dee-XhvEvfXQoSY-unsplash.jpg')}}" alt="playlist image">
-                                {% else %}
-                                    <img src="{{asset('uploads/' ~ playlist.image)}}" alt="playlist image">
-                                {% endif %}
-                            </figure>
-                            
-                            <h3>{{playlist.playlistName}}</h3>
-                        </a>
-                    </div>
-                {% endfor %}
-    
-            </div>
-    
-        </div>
-    
-        {# if the user is connected and has a favorite playlist #}
-        {% if (app.user) and (favoritePlaylists != null) %}
-    
-            <div class="playlist">
-    
-                <div class="title">
-    
-                    <h1>Your Favorite Playlists</h1>
-                    <a href="{{path('app_favorites')}}">More</a>
-                </div>
-    
-                <div class="playlistCards">
-                    
-      
-                    {% for favorite in app.user.favoritePlaylists %}
-                        
-                        <div class="playlistCard">
-    
-                            <a href="{{path('playlist_detail', {'id' : favorite.uuid})}}">
-                                <figure>
-    
-                                    {% if favorite.image != null %}
-                                        
-                                        <img src="{{asset('uploads/' ~ favorite.image)}}" alt="playlist image">
-    
-                                    {% else %}
-    
-                                        <img src="{{asset('img/dee-XhvEvfXQoSY-unsplash.jpg')}}" alt="playlist image">
-                                    {% endif %}
-                                    
-                                </figure>
-    
-                                <h3>{{favorite.playlistName}}</h3>
-    
-                            </a>
-                        </div>
-                    {% endfor %}
-    
-                </div>
-    
-            </div>
-    
-        {% endif %}
-    
-        <div class="playlist">
-    
-            <div class="title">
-    
-                <h1>Most liked songs</h1>
-                <a href="{{path('app_mostLiked')}}">More</a>
-            </div>
-    
-            <div class="playlistCards">
-                            
-                {% for song in songs %}            
-                    <div class="playlistCard">
-                        
-                        <a href="{{path('app_songPlayer', {'id': song.uuid})}}">
-                            
-                            <figure>
-                                <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
-                            </figure>
-                            
-                            <h3>{{song.nameSong}} </h3>
-                        </a>
-                        
-                    </div>
-                {% endfor %}
-    
                 
-            </div>
     
+                {% for favorite in app.user.favoritePlaylists %}
+                    
+                    <div class="playlistCard">
+
+                        <a href="{{path('playlist_detail', {'id' : favorite.uuid})}}">
+                            <figure>
+
+                                {% if favorite.image != null %}
+                                    
+                                    <img src="{{asset('uploads/' ~ favorite.image)}}" alt="playlist image">
+
+                                {% else %}
+
+                                    <img src="{{asset('img/dee-XhvEvfXQoSY-unsplash.jpg')}}" alt="playlist image">
+                                {% endif %}
+                                
+                            </figure>
+
+                            <h3>{{favorite.playlistName}}</h3>
+
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+
         </div>
+
+    {% endif %}
+
+    <div class="playlist">
+
+        <div class="title">
+
+            <h1>Most liked songs</h1>
+            <a href="{{path('app_mostLiked')}}">More</a>
+        </div>
+
+        <div class="playlistCards">
+                        
+            {% for song in songs %}            
+                <div class="playlistCard">
+                    
+                    <a href="{{path('app_songPlayer', {'id': song.uuid})}}">
+                        
+                        <figure>
+                            <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
+                        </figure>
+                        
+                        <h3>{{song.nameSong}} </h3>
+                    </a>
+                    
+                </div>
+            {% endfor %}
+
+            
+        </div>
+
     </div>
 
 </section>

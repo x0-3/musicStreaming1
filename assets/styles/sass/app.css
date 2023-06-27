@@ -150,7 +150,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 65px 67px 41px 76px;
+  padding: 65px 67px 41px 76px;
 }
 * body .title a {
   text-decoration: none;
@@ -243,19 +243,15 @@
   font-weight: bold;
   cursor: pointer;
 }
-* body section.home {
-  display: flex;
-  flex-direction: row;
-}
 * body section.home .subscriptions {
   box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
   background-color: #36454F;
   width: 5%;
-  border-radius: 0 10px 10px 0;
-  -webkit-border-radius: 0 10px 10px;
-  -moz-border-radius: 0 10px 10px;
-  -ms-border-radius: 0 10px 10px;
-  -o-border-radius: 0 10px 10px;
+  border-radius: 0 25px 25px 0;
+  -webkit-border-radius: 0 25px 25px 0;
+  -moz-border-radius: 0 25px 25px 0;
+  -ms-border-radius: 0 25px 25px 0;
+  -o-border-radius: 0 25px 25px 0;
   position: fixed;
   height: 100vh;
 }
@@ -887,6 +883,9 @@
     width: 30%;
     font-size: x-large;
   }
+  body .subscriptions {
+    display: none;
+  }
   body section.home .playlist .playlistCards, body section.home .album .playlistCards, body section.home .artist .playlistCards, body section.artistDetail .playlist .playlistCards, body section.artistDetail .album .playlistCards, body section.artistDetail .artist .playlistCards, body section.newRelease .playlist .playlistCards, body section.newRelease .album .playlistCards, body section.newRelease .artist .playlistCards {
     margin: 0px 66px 41px 66px;
   }
@@ -1031,7 +1030,10 @@
     border: none;
   }
   body .title {
-    margin: 65px 18px 41px 14px;
+    padding: 65px 18px 41px 14px;
+  }
+  body .subscriptions {
+    display: none;
   }
   body section.home .playlist .playlistCards, body section.home .album .playlistCards, body section.home .artist .playlistCards, body section.artistDetail .playlist .playlistCards, body section.artistDetail .album .playlistCards, body section.artistDetail .artist .playlistCards, body section.newRelease .playlist .playlistCards, body section.newRelease .album .playlistCards, body section.newRelease .artist .playlistCards {
     margin: 0;

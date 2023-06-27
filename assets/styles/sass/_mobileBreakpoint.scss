@@ -87,7 +87,11 @@ $breakpointPhone: 767px;
         }
 
         .title{
-            margin: 65px 18px 41px 14px;
+            padding: 65px 18px 41px 14px;
+        }
+
+        .subscriptions{
+            display: none;
         }
 
         section.home, section.artistDetail, section.newRelease {

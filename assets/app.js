@@ -104,23 +104,46 @@ window.onclick = function(event) {
   }
 }
 
+// Add an event listener to the roles field
+document.addEventListener('DOMContentLoaded', function() {
+  var rolesField = document.getElementById('edit_user_roles');
+  rolesField.addEventListener('change', toggleFields);
+});
 
-// copy link to clipboard
-let copyBtn = document.getElementById("copyBtn");
+// Function to toggle the 'poster' and 'bio' fields based on the selected role
+function toggleFields() {
+  var rolesField = document.getElementById('edit_user_roles');
+  var selectedRoles = Array.from(rolesField.selectedOptions).map(function(option) {
+      return option.value;
+  });
 
-copyBtn.addEventListener('click', () => {
+var artistFormElem = document.getElementById('artistForm');
 
-  console.log(copyBtn);
-  // Get the text field
-  var copyLink = document.getElementById("copyLink");
+  if (selectedRoles.includes('ROLE_ARTIST')) {
+    artistFormElem.style.display = 'block';
+  } else {
+    artistFormElem.style.display = 'none';
+  }
+}
 
-  // Select the text field
-  copyLink.select();
-  copyLink.setSelectionRange(0, 99999); // For mobile devices
+// Call the toggleFields function initially to set the initial state
+toggleFields();
 
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(copyLink.value);
 
-  // Alert the copied text
-  // alert("Copied the text: " + copyLink.value);
-})
+// // copy link to clipboard
+// let copyBtn = document.getElementById("copyBtn");
+
+// copyBtn.addEventListener('click', () => {
+
+//   console.log(copyBtn);
+//   // Get the text field
+//   var copyLink = document.getElementById("copyLink");
+
+//   // Select the text field
+//   copyLink.select();
+//   copyLink.setSelectionRange(0, 99999); // For mobile devices
+
+//   // Copy the text inside the text field
+//   navigator.clipboard.writeText(copyLink.value);
+
+// })

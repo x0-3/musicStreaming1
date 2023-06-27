@@ -10,8 +10,13 @@
   {{ form_row(editUserForm.username) }}
   {{ form_row(editUserForm.roles) }}
   {{ form_row(editUserForm.avatar) }}
-  {{ form_row(editUserForm.poster) }}
-  {{ form_row(editUserForm.bio) }}
+
+  <div id="artistForm">
+
+    {{ form_row(editUserForm.poster) }}
+    {{ form_row(editUserForm.bio) }}
+  </div>
+
   {{ form_row(editUserForm.submit) }}
 
 {{ form_end(editUserForm) }}

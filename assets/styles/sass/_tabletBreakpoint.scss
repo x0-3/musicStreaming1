@@ -34,6 +34,10 @@ $breakpointTablet: 768px;
             } 
         }
 
+        .subscriptions{
+            display: none;
+        }
+
 
         section.home, section.artistDetail, section.newRelease {
             .playlist, .album, .artist{
