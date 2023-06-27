@@ -10,6 +10,8 @@ $breakpointTablet: 768px;
         }
         
         header{
+            height: 7vh;
+
             .mySidepanel{
 
                 nav{
@@ -62,7 +64,15 @@ $breakpointTablet: 768px;
             
 
         .mcard{
-            width: 21%;
+            width: 30%;
+        }
+
+        section.search{
+            
+            table tbody tr td figure{
+                
+                width: 55%!important;
+            } 
         }
 
         section.playlistList{
@@ -116,6 +126,9 @@ $breakpointTablet: 768px;
                         td{
                             width: 17%;
 
+                            figure{
+                                width:65%;
+                            }
                         }
                     } 
                 } 
@@ -126,10 +139,21 @@ $breakpointTablet: 768px;
 
             min-height: 14vh;    
             figure {
-                width: 10%;
+                width: 15%;
             }  
         }
         
+        section.artistDetail .hero figure{
+            height: 28vh;
+
+            img{
+                top:-6vh;
+            }
+
+            figcaption{
+                top:18vh;
+            }
+        }
   
 
         section.login{
@@ -139,6 +163,14 @@ $breakpointTablet: 768px;
                 width: 50%;
                 padding: 45px;
             }
+        }
+
+        section.genreSongs .songCard a{
+            width: 16%;
+        }
+
+        .modal .modal-content{
+            width: 95%!important;
         }
     }
 

@@ -51,7 +51,6 @@
             align-items: center;
             justify-content: space-around;
             box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
-            border-radius: 0 0 20px 20px;
 
             figure{
                 width: 5%;
@@ -319,8 +318,40 @@
 
         section.home{
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
 
+            .subscriptions{
+                box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
+                background-color: #36454F;
+                width: 27%;
+                border-radius: 0 10px 10px 0;
+                -webkit-border-radius: 0 10px 10px ;
+                -moz-border-radius: 0 10px 10px ;
+                -ms-border-radius: 0 10px 10px ;
+                -o-border-radius: 0 10px 10px ;
+
+                .avatar{
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-height: 90vh;
+                
+                    figure{
+                        width: 88%;
+    
+                        img{
+                            width: 100%;
+                            border-radius: 100%;
+                            -webkit-border-radius: 100%;
+                            -moz-border-radius: 100%;
+                            -ms-border-radius: 100%;
+                            -o-border-radius: 100%;
+                        }
+                    }
+                }
+
+            }
 
             .playlistCards{
                 display: flex;
@@ -636,12 +667,11 @@
                     // margin: 35px auto;
 
                     width: 100%;
-                    height: 50vh;
+                    height: 55vh;
                     overflow: hidden;
                     position: relative;
 
                     img{
-                        //width: 13%;
                         width: 100%;
                         border-radius: 0;
                         -webkit-border-radius: 0;
@@ -663,7 +693,7 @@
                         align-items: flex-start;
                         margin-left: 16px;
                         position: absolute;
-                        top: 220px;
+                        top: 39vh;
 
                         h1{
                             color: white;
@@ -1116,6 +1146,7 @@
                     display: flex;
                     list-style: none;
                     justify-content: space-evenly;
+                    padding: 0;
                 
                     li{
 

@@ -38,7 +38,6 @@
   align-items: center;
   justify-content: space-around;
   box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
-  border-radius: 0 0 20px 20px;
 }
 * body header figure {
   width: 5%;
@@ -246,7 +245,35 @@
 }
 * body section.home {
   display: flex;
+  flex-direction: row;
+}
+* body section.home .subscriptions {
+  box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
+  background-color: #36454F;
+  width: 27%;
+  border-radius: 0 10px 10px 0;
+  -webkit-border-radius: 0 10px 10px;
+  -moz-border-radius: 0 10px 10px;
+  -ms-border-radius: 0 10px 10px;
+  -o-border-radius: 0 10px 10px;
+}
+* body section.home .subscriptions .avatar {
+  display: flex;
+  align-items: center;
   flex-direction: column;
+  justify-content: center;
+  min-height: 90vh;
+}
+* body section.home .subscriptions .avatar figure {
+  width: 88%;
+}
+* body section.home .subscriptions .avatar figure img {
+  width: 100%;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
 }
 * body section.home .playlistCards {
   display: flex;
@@ -463,7 +490,7 @@
 }
 * body section.artistDetail .hero figure {
   width: 100%;
-  height: 50vh;
+  height: 55vh;
   overflow: hidden;
   position: relative;
 }
@@ -483,7 +510,7 @@
   align-items: flex-start;
   margin-left: 16px;
   position: absolute;
-  top: 220px;
+  top: 39vh;
 }
 * body section.artistDetail .hero figure figcaption h1 {
   color: white;
@@ -829,6 +856,7 @@
   display: flex;
   list-style: none;
   justify-content: space-evenly;
+  padding: 0;
 }
 * body footer .legal ul li a {
   text-decoration: none;
@@ -843,6 +871,9 @@
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   body main {
     min-height: 76vh;
+  }
+  body header {
+    height: 7vh;
   }
   body header .mySidepanel nav ul li a {
     margin: 15px;
@@ -869,7 +900,10 @@
     position: relative;
   }
   body .mcard {
-    width: 21%;
+    width: 30%;
+  }
+  body section.search table tbody tr td figure {
+    width: 55% !important;
   }
   body section.playlistList .title .nav {
     width: 26%;
@@ -896,11 +930,23 @@
   body section.musicPlayer table tbody tr td {
     width: 17%;
   }
+  body section.musicPlayer table tbody tr td figure {
+    width: 65%;
+  }
   body section.listArtist .artistCard {
     min-height: 14vh;
   }
   body section.listArtist .artistCard figure {
-    width: 10%;
+    width: 15%;
+  }
+  body section.artistDetail .hero figure {
+    height: 28vh;
+  }
+  body section.artistDetail .hero figure img {
+    top: -6vh;
+  }
+  body section.artistDetail .hero figure figcaption {
+    top: 18vh;
   }
   body section.login {
     width: 66%;
@@ -908,6 +954,12 @@
   body section.login .loginForm {
     width: 50%;
     padding: 45px;
+  }
+  body section.genreSongs .songCard a {
+    width: 16%;
+  }
+  body .modal .modal-content {
+    width: 95% !important;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -994,18 +1046,18 @@
     position: relative;
   }
   body .mcard {
-    width: 22%;
-    margin: auto;
+    width: 30%;
+    margin: 9px auto;
   }
   body section.playlistList .title .nav {
     width: 42%;
   }
   body section.playlistList .myPlaylist .mainCard {
     width: auto;
-    height: 253px;
+    height: 222px;
   }
   body section.playlistList .myPlaylist .mainCard a figure figcaption {
-    top: 25vh;
+    top: 18vh;
     left: 5%;
   }
   body section.playlistList .myPlaylist .mcard {
@@ -1018,14 +1070,32 @@
   body section.playlistDetail {
     min-height: 67vh;
   }
+  body section.playlistDetail .playlistHeader {
+    margin: 60px 0;
+  }
   body section.playlistDetail .playlistHeader figure {
-    width: 34%;
+    width: 50%;
+  }
+  body section.playlistDetail .playlistHeader a#myBtn {
+    margin-left: 5px;
+  }
+  body section.playlistDetail .playlistHeader i.fa-regular.fa-circle-play, body section.playlistDetail .playlistHeader a {
+    font-size: x-large;
   }
   body section.playlistDetail table tbody tr td figure, body section.artistDetail table tbody tr td figure, body section.musicPlayer table tbody tr td figure {
     width: 56%;
   }
+  body section.artistDetail .hero figure {
+    height: auto;
+  }
   body section.artistDetail .hero figure img {
-    width: 26%;
+    top: auto;
+  }
+  body section.artistDetail .hero figure figcaption {
+    top: 13vh;
+  }
+  body .modal .modal-content {
+    width: 100% !important;
   }
   body section.musicPlayer {
     flex-direction: column;
@@ -1057,6 +1127,9 @@
   }
   body section.search .searchGrid table {
     width: 100% !important;
+  }
+  body section.genreSongs .songCard a {
+    width: 24%;
   }
   body footer {
     display: flex;

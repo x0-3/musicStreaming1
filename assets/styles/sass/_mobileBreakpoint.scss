@@ -117,8 +117,8 @@ $breakpointPhone: 767px;
         }
 
         .mcard {
-            width: 22%;
-            margin: auto;
+            width: 30%;
+            margin: 9px auto;
         }
 
         section.playlistList {
@@ -138,14 +138,13 @@ $breakpointPhone: 767px;
                 
                 .mainCard {
                     width: auto;
-                    height: 253px;
+                    height: 222px;
                     
                     a{
                         figure{
                             figcaption {
                             
-                                // position: absolute;
-                                top: 25vh;
+                                top: 18vh;
                                 left: 5%;
                             } 
                         } 
@@ -171,8 +170,22 @@ $breakpointPhone: 767px;
         section.playlistDetail {
 
             min-height: 67vh;
-            .playlistHeader figure {
-                width: 34%;
+
+            .playlistHeader {
+                margin: 60px 0;
+
+                figure {
+                    width: 50%;
+                }
+
+                a#myBtn{
+                    margin-left: 5px;
+                }
+
+                i.fa-regular.fa-circle-play, a{
+                    font-size: x-large;
+
+                }
             }
         }
 
@@ -182,8 +195,21 @@ $breakpointPhone: 767px;
             }
         }
 
-        section.artistDetail .hero figure img {
-            width: 26%;
+        section.artistDetail .hero figure {
+            // width: 26%;
+            height: auto;
+
+            img {
+                top: auto;
+            }
+
+            figcaption{
+                top: 13vh;
+            }
+        }
+
+        .modal .modal-content{
+            width: 100%!important;
         }
 
         section.musicPlayer {
@@ -229,6 +255,10 @@ $breakpointPhone: 767px;
                 
                 }
             }
+        }
+
+        section.genreSongs .songCard a{
+            width: 24%;
         }
 
         footer {
