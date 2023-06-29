@@ -355,33 +355,37 @@
 
             }
 
-            .playlistCards{
-                display: flex;
-                // justify-content: space-evenly;
-                margin: 65px 67px 41px 101px;
-
-                .playlistCard{
-                    width: 20%;
-                    margin-right: 54px;
-
-                    a{
-
-                        text-decoration: none;
-                        color: black;
-
-                        figure {
-                            width: 85%;
-                            
-                            img {
-                                width: 100%;
-                                border-radius: 10px;
-                                box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.10);
+            .playlist{
+                margin-left: 3%;
+                
+                .playlistCards{
+                    display: flex;
+                    margin: 65px 67px 41px 101px;
+    
+                    .playlistCard{
+                        width: 20%;
+                        margin-right: 54px;
+    
+                        a{
+    
+                            text-decoration: none;
+                            color: black;
+    
+                            figure {
+                                width: 85%;
+                                
+                                img {
+                                    width: 100%;
+                                    border-radius: 10px;
+                                    box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.10);
+                                }
                             }
                         }
+                            
                     }
-                        
                 }
             }
+
         }
 
         section.newRelease, .artistDetail{

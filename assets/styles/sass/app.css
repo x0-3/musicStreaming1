@@ -273,22 +273,25 @@
   -ms-border-radius: 100%;
   -o-border-radius: 100%;
 }
-* body section.home .playlistCards {
+* body section.home .playlist {
+  margin-left: 3%;
+}
+* body section.home .playlist .playlistCards {
   display: flex;
   margin: 65px 67px 41px 101px;
 }
-* body section.home .playlistCards .playlistCard {
+* body section.home .playlist .playlistCards .playlistCard {
   width: 20%;
   margin-right: 54px;
 }
-* body section.home .playlistCards .playlistCard a {
+* body section.home .playlist .playlistCards .playlistCard a {
   text-decoration: none;
   color: black;
 }
-* body section.home .playlistCards .playlistCard a figure {
+* body section.home .playlist .playlistCards .playlistCard a figure {
   width: 85%;
 }
-* body section.home .playlistCards .playlistCard a figure img {
+* body section.home .playlist .playlistCards .playlistCard a figure img {
   width: 100%;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);

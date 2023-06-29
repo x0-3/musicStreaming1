@@ -13,7 +13,6 @@ class GoogleController extends AbstractController
     #[Route('/connect/google', name: 'connect_google_start')]
     public function connectAction(ClientRegistry $clientRegistry)
     {
-        // on Symfony 3.3 or lower, $clientRegistry = $this->get('knpu.oauth2.registry');
 
         // will redirect to google!
         return $clientRegistry
