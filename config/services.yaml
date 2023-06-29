@@ -5,6 +5,10 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     file_directory: '%kernel.project_dir%/public/uploads'
+    twitter_api_key: 'k27Mjqjj0RSSsYhOspIPEtmBF'
+    twitter_api_secret: 'SxUzefzl9TSZ01QTtEsCDXjqHAEGQA6PxGLlO0Z2mGG2Nz6zW2'
+    twitter_access_token: '1667974965797216256-VgZyJD5wJM4WSiiRkfRjJQmUR6z2VM'
+    twitter_access_token_secret: 'xs8DSZvemJAwJsuByyNY1w4zQNNVFFgJmS0grtFp02USz'
 
 services:
     # default configuration for services in *this* file
@@ -28,3 +32,10 @@ services:
 
         arguments:
             $targetDirectory: '%file_directory%' # targetDirectory set in the fileUploader
+
+    App\Service\TwitterConnectionService:
+        arguments:
+            $apiKey: '%twitter_api_key%'
+            $apiSecret: '%twitter_api_secret%'
+            $accessToken: '%twitter_access_token%'
+            $accessTokenSecret: '%twitter_access_token_secret%'
