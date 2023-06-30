@@ -82,6 +82,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bio = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $twitterId = null;
+
 
     public function __construct()
     {
@@ -502,6 +505,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBio(?string $bio): self
     {
         $this->bio = $bio;
+
+        return $this;
+    }
+
+    public function getTwitterId(): ?string
+    {
+        return $this->twitterId;
+    }
+
+    public function setTwitterId(?string $twitterId): self
+    {
+        $this->twitterId = $twitterId;
 
         return $this;
     }
