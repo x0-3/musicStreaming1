@@ -40,3 +40,5 @@ tarteaucitron.init({
     "mandatory": true, /* Show a message about mandatory cookies */
     "mandatoryCta": true /* Show the disabled accept button when mandatory on */
 });
+
+(tarteaucitron.job = tarteaucitron.job || []).push('twittertimeline');
