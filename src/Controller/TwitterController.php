@@ -16,16 +16,18 @@ class TwitterController extends AbstractController
 
     #[Route("/twitter/auth", name: "twitter_auth")]
     public function auth(Request $request)
-    {
+    {        
         // Step 1: Initialize the TwitterOAuth library
         $twitterOAuth = new TwitterOAuth(
-            'k27Mjqjj0RSSsYhOspIPEtmBF',
-            'SxUzefzl9TSZ01QTtEsCDXjqHAEGQA6PxGLlO0Z2mGG2Nz6zW2'
+            $apiKey = $this->getParameter('twitter_api_key'), // get the API key from the .env variable
+            $apiSecret = $this->getParameter('twitter_api_secret'),
         );
+
+        $callbackUrl = $this->getParameter('CALLBACK_URL');
 
         // Step 2: Get the temporary request token
         $requestToken = $twitterOAuth->oauth('oauth/request_token', [
-            'oauth_callback' => 'https://f587-2a01-e0a-903-9dc0-f0c2-ead7-d653-68ba.ngrok-free.app/twitter/callback'
+            'oauth_callback' => $callbackUrl
         ]);
 
         // Step 3: Store the request token in the session
@@ -54,8 +56,8 @@ class TwitterController extends AbstractController
 
         // Step 6: Create a new TwitterOAuth instance with the stored tokens
         $twitterOAuth = new TwitterOAuth(
-            'k27Mjqjj0RSSsYhOspIPEtmBF',
-            'SxUzefzl9TSZ01QTtEsCDXjqHAEGQA6PxGLlO0Z2mGG2Nz6zW2',
+            $apiKey = $this->getParameter('twitter_api_key'),
+            $apiSecret = $this->getParameter('twitter_api_secret'),
             $oauthToken,
             $oauthTokenSecret
         );
@@ -69,17 +71,18 @@ class TwitterController extends AbstractController
         // Step 8: Store the user's screen_name in the database
         $twitterUsername = $accessToken['screen_name'];
 
-        
+        // get the user
         $user = $this->getUser();
+
 
         if ($user instanceof User) {
 
+            // add the twitter username to the database
             $user->setTwitterId($twitterUsername);
             $entityManager->persist($user);
             $entityManager->flush();
 
         }
-        // You can perform additional actions with the access token, such as retrieving user data or making API calls
 
 
         // Step 9: Redirect the user to a success page or perform any other necessary actions
