@@ -106,7 +106,8 @@
 
     {% endif %}
 
-    <div class="playlist">
+
+    <div class="song">
 
         <div class="title">
 
@@ -114,23 +115,43 @@
             <a href="{{path('app_mostLiked')}}">More</a>
         </div>
 
-        <div class="playlistCards">
-                        
-            {% for song in songs %}            
-                <div class="playlistCard">
-                    
-                    <a href="{{path('app_songPlayer', {'id': song.uuid})}}">
-                        
-                        <figure>
-                            <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
-                        </figure>
-                        
-                        <h3>{{song.nameSong}} </h3>
-                    </a>
-                    
-                </div>
-            {% endfor %}
+        <div class="songCards">
+            
+            <div class="side">
 
+                {% for song in songs|slice(0, 4) %}            
+                    <div class="songCard">
+                        
+                        <a href="{{path('app_songPlayer', {'id': song.uuid})}}">
+                            
+                            <figure>
+                                <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
+                            </figure>
+                            
+                            <h3>{{song.nameSong}} </h3>
+                        </a>
+                        
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="side">
+
+                {% for song in songs|slice(4, 8) %}            
+                    <div class="songCard">
+                        
+                        <a href="{{path('app_songPlayer', {'id': song.uuid})}}">
+                            
+                            <figure>
+                                <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
+                            </figure>
+                            
+                            <h3>{{song.nameSong}} </h3>
+                        </a>
+                        
+                    </div>
+                {% endfor %}
+            </div>
             
         </div>
 

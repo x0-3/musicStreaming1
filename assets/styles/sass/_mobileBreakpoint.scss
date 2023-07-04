@@ -94,6 +94,50 @@ $breakpointPhone: 767px;
             display: none;
         }
 
+
+        section.home{
+
+            .song{
+
+                .songCards{
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    margin: 0 0 66px 0;
+
+                    .side{
+                        margin-right: 24px;
+                    }
+
+                    .songCard{
+                        width: 82vw;
+                        margin: 0 15px 8px;
+                        position: relative;
+
+                        a{
+
+                            figure{
+
+                                width: 30%;
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            .hero{
+                height: auto;
+
+                figcaption{
+                    top: 19vh;
+                    left: 7%;
+                }
+            }
+        }
+
+        
+
         section.home, section.artistDetail, section.newRelease {
             .playlist, .album, .artist{
 

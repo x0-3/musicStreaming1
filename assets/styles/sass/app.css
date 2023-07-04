@@ -273,28 +273,60 @@
   -ms-border-radius: 100%;
   -o-border-radius: 100%;
 }
-* body section.home .playlist {
+* body section.home .playlist, * body section.home .song {
   margin-left: 3%;
 }
-* body section.home .playlist .playlistCards {
+* body section.home .playlist .playlistCards, * body section.home .playlist .songCards, * body section.home .song .playlistCards, * body section.home .song .songCards {
   display: flex;
   margin: 65px 67px 41px 101px;
 }
-* body section.home .playlist .playlistCards .playlistCard {
+* body section.home .playlist .playlistCards .playlistCard, * body section.home .playlist .songCards .playlistCard, * body section.home .song .playlistCards .playlistCard, * body section.home .song .songCards .playlistCard {
   width: 20%;
   margin-right: 54px;
 }
-* body section.home .playlist .playlistCards .playlistCard a {
+* body section.home .playlist .playlistCards .playlistCard a, * body section.home .playlist .songCards .playlistCard a, * body section.home .song .playlistCards .playlistCard a, * body section.home .song .songCards .playlistCard a {
   text-decoration: none;
   color: black;
 }
-* body section.home .playlist .playlistCards .playlistCard a figure {
+* body section.home .playlist .playlistCards .playlistCard a figure, * body section.home .playlist .songCards .playlistCard a figure, * body section.home .song .playlistCards .playlistCard a figure, * body section.home .song .songCards .playlistCard a figure {
   width: 85%;
 }
-* body section.home .playlist .playlistCards .playlistCard a figure img {
+* body section.home .playlist .playlistCards .playlistCard a figure img, * body section.home .playlist .songCards .playlistCard a figure img, * body section.home .song .playlistCards .playlistCard a figure img, * body section.home .song .songCards .playlistCard a figure img {
   width: 100%;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);
+}
+* body section.home .song .side {
+  width: 50%;
+}
+* body section.home .song .songCard {
+  background-color: #36454F;
+  width: 83%;
+  padding: 6px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  display: block;
+}
+* body section.home .song .songCard a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: medium;
+}
+* body section.home .song .songCard a figure {
+  width: 15%;
+  margin: 0;
+}
+* body section.home .song .songCard a figure img {
+  width: 100%;
+  border-radius: 20px;
+}
+* body section.home .song .songCard small {
+  color: white;
 }
 * body section.newRelease .album .cards, * body section.newRelease .artist .cards, * body .artistDetail .album .cards, * body .artistDetail .artist .cards {
   display: flex;
@@ -889,6 +921,23 @@
   body .subscriptions {
     display: none;
   }
+  body section.home .song .songCards {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 0 0 66px 0;
+  }
+  body section.home .song .songCards .side {
+    margin-right: 60px;
+  }
+  body section.home .song .songCards .songCard {
+    width: 55vw;
+    margin: 0 15px 8px;
+    position: relative;
+  }
+  body section.home .song .songCards .songCard a figure {
+    width: 30%;
+    margin-right: 10px;
+  }
   body section.home .playlist .playlistCards, body section.home .album .playlistCards, body section.home .artist .playlistCards, body section.artistDetail .playlist .playlistCards, body section.artistDetail .album .playlistCards, body section.artistDetail .artist .playlistCards, body section.newRelease .playlist .playlistCards, body section.newRelease .album .playlistCards, body section.newRelease .artist .playlistCards {
     margin: 0px 66px 41px 66px;
   }
@@ -1037,6 +1086,30 @@
   }
   body .subscriptions {
     display: none;
+  }
+  body section.home .song .songCards {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 0 0 66px 0;
+  }
+  body section.home .song .songCards .leftSide, body section.home .song .songCards .middle {
+    margin-right: 24px;
+  }
+  body section.home .song .songCards .songCard {
+    width: 82vw;
+    margin: 0 15px 8px;
+    position: relative;
+  }
+  body section.home .song .songCards .songCard a figure {
+    width: 30%;
+    margin-right: 10px;
+  }
+  body section.home .hero {
+    height: auto;
+  }
+  body section.home .hero figcaption {
+    top: 19vh;
+    left: 7%;
   }
   body section.home .playlist .playlistCards, body section.home .album .playlistCards, body section.home .artist .playlistCards, body section.artistDetail .playlist .playlistCards, body section.artistDetail .album .playlistCards, body section.artistDetail .artist .playlistCards, body section.newRelease .playlist .playlistCards, body section.newRelease .album .playlistCards, body section.newRelease .artist .playlistCards {
     margin: 0;

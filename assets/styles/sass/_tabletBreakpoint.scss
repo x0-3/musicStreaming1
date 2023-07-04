@@ -38,6 +38,38 @@ $breakpointTablet: 768px;
             display: none;
         }
 
+        section.home{
+
+            .song{
+
+                .songCards{
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    margin: 0 0 66px 0;
+
+                    .side{
+                        margin-right: 60px;
+                    }
+
+                    .songCard{
+                        width: 55vw;
+                        margin: 0 15px 8px;
+                        position: relative;
+
+                        a{
+
+                            figure{
+
+                                width: 30%;
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+
+                }
+            }
+
+        }
 
         section.home, section.artistDetail, section.newRelease {
             .playlist, .album, .artist{

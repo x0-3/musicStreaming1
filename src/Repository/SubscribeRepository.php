@@ -85,6 +85,37 @@ class SubscribeRepository extends ServiceEntityRepository
     }
 
 
+    // TODO:
+    // find music by there subscribe artist 
+    public function findBySubscriptionSong()
+    {
+        // SELECT *
+        // FROM subscribe s
+        // INNER JOIN user u
+        // ON u.id = s.user2_id
+        // inner JOIN album a
+        // ON a.user_id = u.id
+        // INNER JOIN song sg
+        // ON sg.album_id = a.id
+        // WHERE s.user1_id = 30
+        // ORDER BY "DESC"
+
+    }
+
+
+    // find album by there subscribe artist 
+    public function findBySubscriptionAlbum()
+    {
+        // SELECT *
+        // FROM subscribe s
+        // INNER JOIN user u
+        // ON u.id = s.user2_id
+        // inner JOIN album a
+        // ON a.user_id = u.id
+        // WHERE s.user1_id = 30
+        // ORDER BY "DESC"
+
+    }
 
 
 //    /**

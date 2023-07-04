@@ -26,7 +26,7 @@ class HomeController extends AbstractController
     {
 
         $playlists = $em->getRepository(Playlist::class)->findByMostFollow(5); //find by most followed playlists
-        $songs = $em->getRepository(Song::class)->findByMostLikes(5); //find the most like songs   
+        $songs = $em->getRepository(Song::class)->findByMostLikes(8); //find the most like songs   
     
 
         $token = $tokenStorage->getToken();   

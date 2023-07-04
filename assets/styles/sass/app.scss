@@ -355,10 +355,10 @@
 
             }
 
-            .playlist{
+            .playlist, .song{
                 margin-left: 3%;
                 
-                .playlistCards{
+                .playlistCards, .songCards{
                     display: flex;
                     margin: 65px 67px 41px 101px;
     
@@ -384,6 +384,53 @@
                             
                     }
                 }
+            }
+
+
+            .song{
+
+                .side{
+                    width: 50%;
+                }
+
+                .songCard{
+
+                    background-color: #36454F;
+                    width: 83%;
+                    padding: 6px;
+                    border-radius: 20px;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+                    display: block;
+
+                    a{
+                        
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        color: white;
+                        text-decoration: none;
+                        font-size: medium;
+                        
+                        figure{
+        
+                            width: 15%;
+                            margin: 0;
+
+                            img{
+                                width: 100%;
+                                border-radius: 20px;
+
+                            }
+                        }
+                    }
+
+                    small{
+                        color: white;
+                    }
+                }
+
             }
 
         }
