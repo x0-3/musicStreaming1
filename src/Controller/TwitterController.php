@@ -17,29 +17,29 @@ class TwitterController extends AbstractController
     #[Route("/twitter/auth", name: "twitter_auth")]
     public function auth(Request $request)
     {        
-        // Step 1: Initialize the TwitterOAuth library
+        // intitialize the authentication key and secret
         $twitterOAuth = new TwitterOAuth(
             $apiKey = $this->getParameter('twitter_api_key'), // get the API key from the .env variable
             $apiSecret = $this->getParameter('twitter_api_secret'),
+            $callbackUrl = $this->getParameter('CALLBACK_URL'),
         );
 
-        $callbackUrl = $this->getParameter('CALLBACK_URL');
-
-        // Step 2: Get the temporary request token
+        // Get the temporary request token
         $requestToken = $twitterOAuth->oauth('oauth/request_token', [
             'oauth_callback' => $callbackUrl
         ]);
 
-        // Step 3: Store the request token in the session
+        // Store the request token in the session
         $request->getSession()->set('oauth_token', $requestToken['oauth_token']);
         $request->getSession()->set('oauth_token_secret', $requestToken['oauth_token_secret']);
 
-        // Step 4: Generate the authorization URL and redirect the user
+        // Generate the authorization URL 
         $url = $twitterOAuth->url(
             'oauth/authorize',
             ['oauth_token' => $requestToken['oauth_token']]
         );
 
+        // redirect the user
         return new RedirectResponse($url);
     }
 
@@ -48,13 +48,13 @@ class TwitterController extends AbstractController
     #[Route("/twitter/callback", name: "twitter_callback")]
     public function callback(Request $request, EntityManagerInterface $entityManager)
     {
-        // Step 5: Retrieve the request token and verifier from the callback
+        // get the oauthToken and oauthTokenSecret from the session and get verifier from the callback URL
         $oauthToken = $request->getSession()->get('oauth_token');
         $oauthTokenSecret = $request->getSession()->get('oauth_token_secret');
         $verifier = $request->query->get('oauth_verifier');
 
 
-        // Step 6: Create a new TwitterOAuth instance with the stored tokens
+        // Create a new TwitterOAuth instance with the stored tokens
         $twitterOAuth = new TwitterOAuth(
             $apiKey = $this->getParameter('twitter_api_key'),
             $apiSecret = $this->getParameter('twitter_api_secret'),
@@ -62,18 +62,17 @@ class TwitterController extends AbstractController
             $oauthTokenSecret
         );
 
-        // Step 7: Get the access token using the verifier
+        //  Get the access token using the verifier
         $accessToken = $twitterOAuth->oauth(
             'oauth/access_token',
             array('oauth_verifier' => $verifier)
         );
 
-        // Step 8: Store the user's screen_name in the database
+        // Store the user's twitter username in the database
         $twitterUsername = $accessToken['screen_name'];
 
-        // get the user
+        // get the user that has connected with the Twitter account
         $user = $this->getUser();
-
 
         if ($user instanceof User) {
 
@@ -85,7 +84,7 @@ class TwitterController extends AbstractController
         }
 
 
-        // Step 9: Redirect the user to a success page or perform any other necessary actions
+        // Redirect the user to the home page
         return $this->redirectToRoute('app_home');
     }
 }

@@ -24,9 +24,6 @@ class GoogleController extends AbstractController
     #[Route('/connect/google/check', name: 'connect_google_check')]
     public function connectCheckAction(Request $request, ClientRegistry $clientRegistry)
     {
-        // ** if you want to *authenticate* the user, then
-        // leave this method blank and create a Guard authenticator
-        // (read below)
 
         $client = $clientRegistry->getClient('google');
 
@@ -39,7 +36,7 @@ class GoogleController extends AbstractController
 
 
             var_dump($user);
-            // ...
+
         } catch (IdentityProviderException $e) {
             // something went wrong!
             // probably you should return the reason to the user

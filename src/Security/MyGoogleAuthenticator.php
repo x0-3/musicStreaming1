@@ -38,8 +38,6 @@ class MyGoogleAuthenticator extends OAuth2Authenticator implements Authenticatio
     }
     
 
-
-
     public function authenticate(Request $request): Passport
     {
         $client = $this->clientRegistry->getClient('google');
@@ -52,18 +50,18 @@ class MyGoogleAuthenticator extends OAuth2Authenticator implements Authenticatio
 
                 $email = $googleUser->getEmail();
 
-                // 1) have they logged in with googlz before? Easy!
+                // check if the id is already in the database
                 $existingUser = $this->em->getRepository(User::class)->findOneBy(['googleId' => $googleUser->getId()]);
 
+                // if the user already logged in with google
                 if ($existingUser) {
                     return $existingUser;
                 }
 
-                // 2) do we have a matching user by email?
+                // check for a matching user by email
                 $user = $this->em->getRepository(User::class)->findOneBy(['email' => $email]);
 
-                // 3) Maybe you just want to "register" them by creating
-                // a User object
+                // if there is no user with this email then register the user 
                 if (!$user) {
                     $user = new User();
                     $user->setGoogleId($googleUser->getId());
@@ -73,7 +71,6 @@ class MyGoogleAuthenticator extends OAuth2Authenticator implements Authenticatio
                     $this->em->persist($user);
                     $this->em->flush();
                 }
-
                 return $user;
             })
         );
@@ -81,13 +78,11 @@ class MyGoogleAuthenticator extends OAuth2Authenticator implements Authenticatio
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // change "app_homepage" to some route in your app
         $targetUrl = $this->router->generate('app_home');
 
+        // return to the home page
         return new RedirectResponse($targetUrl);
     
-        // or, on success, let the request continue to be handled by the controller
-        //return null;
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
