@@ -40,6 +40,17 @@ $breakpointTablet: 768px;
 
         section.home{
 
+
+            .hero{
+                height: auto;
+
+                figcaption{
+                    top: 11vh;
+                    width: 83%;
+                }
+            }
+
+
             .song{
 
                 .songCards{

@@ -131,6 +131,22 @@ class SubscribeRepository extends ServiceEntityRepository
 
     }
 
+    // find the artist with the most subscribers
+    public function findOneByMostPopular()
+    {
+        $query = $this->createQueryBuilder('s')
+            ->select("u.id, u.username, u.poster, u.bio, COUNT(s.id) AS num_followers")
+            ->innerJoin('s.user2', 'u')
+            ->groupBy('u.id, u.username, u.avatar')
+            ->setMaxResults(1)
+            ->orderBy('num_followers', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $query[0];
+    }
+
 
 //    /**
 //     * @return Subscribe[] Returns an array of Subscribe objects
@@ -152,8 +168,8 @@ class SubscribeRepository extends ServiceEntityRepository
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
+        //    ->getQuery()
+        //    ->getOneOrNullResult()
 //        ;
 //    }
 }

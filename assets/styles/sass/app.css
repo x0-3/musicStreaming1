@@ -243,6 +243,38 @@
   font-weight: bold;
   cursor: pointer;
 }
+* body section.home .hero {
+  height: 85vh;
+  overflow: hidden;
+  position: relative;
+  border-radius: 35px;
+}
+* body section.home .hero h1 {
+  color: white;
+  font-size: xxx-large;
+}
+* body section.home .hero figure img {
+  width: 100%;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+* body section.home .hero figcaption {
+  position: absolute;
+  top: 34vh;
+  right: 8%;
+  color: white;
+  width: 42%;
+}
+* body section.home .hero figcaption a {
+  background-color: cornflowerblue;
+  color: white;
+  text-decoration: none;
+  border-radius: 13px;
+  padding: 11px;
+}
 * body section.home .subscriptions {
   box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
   background-color: #36454F;
@@ -929,6 +961,13 @@
   body .subscriptions {
     display: none;
   }
+  body section.home .hero {
+    height: auto;
+  }
+  body section.home .hero figcaption {
+    top: 11vh;
+    width: 83%;
+  }
   body section.home .song .songCards {
     overflow-x: auto;
     white-space: nowrap;
@@ -1093,6 +1132,9 @@
     padding: 65px 18px 41px 14px;
   }
   body .subscriptions {
+    display: none;
+  }
+  body section.home .hero {
     display: none;
   }
   body section.home .song .songCards {

@@ -30,6 +30,22 @@
 
 
 
+    <div class="hero">
+        <figure>
+            <img src="{{asset('uploads/' ~ artist.poster)}}" alt="{{artist.username}} introduction">
+        </figure>
+
+        <figcaption>
+            <h1>Discover {{artist.username}} the Hottest artist of the moment !</h1>
+
+            <p>{{ artist.bio|length > 242 ? artist.bio|slice(0, 242) ~ '...' : artist.bio  }} </p>
+
+            <a href="#">Listen Now !</a>
+        </figcaption>
+
+    </div>
+
+
     <div class="playlist">
 
         <div class="title">

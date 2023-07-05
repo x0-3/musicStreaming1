@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Song;
 use App\Entity\Playlist;
 use App\Entity\Subscribe;
+use App\Entity\User;
 use App\Model\SearchBar;
 use App\Form\SearchBarType;
 use App\Repository\SongRepository;
@@ -27,7 +28,7 @@ class HomeController extends AbstractController
 
         $playlists = $em->getRepository(Playlist::class)->findByMostFollow(5); //find by most followed playlists
         $songs = $em->getRepository(Song::class)->findByMostLikes(12); //find the most like songs   
-    
+        $artist = $em->getRepository(Subscribe::class)->findOneByMostPopular();
 
         $token = $tokenStorage->getToken();   
 
@@ -48,6 +49,7 @@ class HomeController extends AbstractController
                 'artists'=> $artists,
                 'subscriptionSongs'=> $subscriptionSongs,
                 'subscriptionAlbums'=> $subscriptionAlbums,
+                'artist'=> $artist,
             ]);
 
             // if the user isn't signed in, render the page without the favorites list 
@@ -56,7 +58,7 @@ class HomeController extends AbstractController
             return $this->render('home/index.html.twig', [
                 'playlists' => $playlists,
                 'songs' => $songs,
-
+                'artist'=> $artist,
             ]);
         }
     }
