@@ -117,7 +117,6 @@ if (copyBtn) {
 
   copyBtn.addEventListener('click', () => {
   
-    console.log(copyBtn);
     // Get the text field
     var copyLink = document.getElementById("copyLink");
   
@@ -131,30 +130,45 @@ if (copyBtn) {
   })
 }
 
+//*********************************************** parallax **********************************************************//
+
+const parallax = document.querySelector(".parallax");
+
+if(parallax){
+
+  document.addEventListener("scroll", function() {
+    let offset = window.pageYOffset;
+    parallax.style.transform = `translateY(-${offset * 0.8}px)`;
+  });
+}
 
 //*********************************************** dynamique user form **********************************************************//
 
-// Add an event listener to the roles field
-document.addEventListener('DOMContentLoaded', function() {
-  var rolesField = document.getElementById('edit_user_roles');
-  rolesField.addEventListener('change', toggleFields);
-});
+var rolesField = document.getElementById('edit_user_roles');
 
-// Function to toggle the 'poster' and 'bio' fields based on the selected role
-function toggleFields() {
-  var rolesField = document.getElementById('edit_user_roles');
-  var selectedRoles = Array.from(rolesField.selectedOptions).map(function(option) {
-      return option.value;
+if(rolesField){
+
+  // Add an event listener to the roles field
+  document.addEventListener('DOMContentLoaded', function() {
+    rolesField.addEventListener('change', toggleFields);
   });
-
-var artistFormElem = document.getElementById('artistForm');
-
-  if (selectedRoles.includes('ROLE_ARTIST')) {
-    artistFormElem.style.display = 'block';
-  } else {
-    artistFormElem.style.display = 'none';
+  
+  // Function to toggle the 'poster' and 'bio' fields based on the selected role
+  function toggleFields() {
+    var rolesField = document.getElementById('edit_user_roles');
+    var selectedRoles = Array.from(rolesField.selectedOptions).map(function(option) {
+        return option.value;
+    });
+  
+  var artistFormElem = document.getElementById('artistForm');
+  
+    if (selectedRoles.includes('ROLE_ARTIST')) {
+      artistFormElem.style.display = 'block';
+    } else {
+      artistFormElem.style.display = 'none';
+    }
   }
+  
+  // Call the toggleFields function initially to set the initial state
+  toggleFields();
 }
-
-// Call the toggleFields function initially to set the initial state
-toggleFields();

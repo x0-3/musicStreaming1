@@ -30,7 +30,6 @@ export default class Favorite {
 
         // axios to get the url of a controller route
         axios.get(url).then(response => {
-            console.log(response);
 
             // get the buttons
             const check = this.querySelector('.check');

@@ -30,7 +30,6 @@ export default class Like {
 
         // axios to get the url of a controller route
         axios.get(url).then(response => {
-            console.log(response);
 
             // get the buttons
             const heartFilled = this.querySelector('.filled');

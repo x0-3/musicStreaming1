@@ -51,7 +51,6 @@ function switchtrack(){
 // ************************************************ track source ************************************************//
 
 // const trackScr = "uploads/music/" + tracks[trackId];
-// // console.log(trackScr);
 
 // function loadTrack(){
 
@@ -114,132 +113,139 @@ function switchtrack(){
 // audio.addEventListener('ended', nextTrack);
 
 // ************************************************ music time ************************************************//
-audio.onloadedmetadata = function() {
-  
-  
-  function setTime(output, input){
-  
-    // calculate the minutes
-    const minutes = Math.floor(input / 60);
+
+if(audio){
+
+  audio.onloadedmetadata = function() {
     
-    // calculate the seconds
-    const seconds = Math.floor(input % 60);
-  
-    // if seconds is under 10
-    if (seconds < 10) {
+    
+    function setTime(output, input){
+    
+      // calculate the minutes
+      const minutes = Math.floor(input / 60);
       
-      // show a zero 
-      output.innerHTML = minutes + ":0" + seconds;
-  
-    }else{
-  
-      // show the :
-      output.innerHTML = minutes + ":" + seconds;
+      // calculate the seconds
+      const seconds = Math.floor(input % 60);
+    
+      // if seconds is under 10
+      if (seconds < 10) {
+        
+        // show a zero 
+        output.innerHTML = minutes + ":0" + seconds;
+    
+      }else{
+    
+        // show the :
+        output.innerHTML = minutes + ":" + seconds;
+      }
     }
-  }
+    
+    setTime(fulltime, audio.duration);
   
-  setTime(fulltime, audio.duration);
-
-  // current time on slider 
-  audio.addEventListener('timeupdate', () => {
-    
-    // get the current audio time
-    const currentAudioTime = Math.floor(audio.currentTime);
-
-
-    // get the percentage
-    const timePercentage = (currentAudioTime / audio.duration) * 100 + "%";
-
-    // set the current time of the song
-    setTime(time, currentAudioTime);
-
-    // set the slider to the time
-    progress.style.width = timePercentage;
-    thumb.style.left = timePercentage;
-
-  });
-
-
-  // ************************************************ music slider ************************************************//
-  function customSlider(){
-
-    // calculate the % 
-    const val = (audio.currentTime / audio.duration) * 100;
-
-    // set the progress of the song
-    progress.style.width = val + "%";
-    slider.style.left = val + "%";
-    
-    // show the current time of the song
-    setTime(time, slider.value);
-    
-    // set it to the slider 
-    audio.currentTime = slider.value;
-
-    // update the display of the time
-    setTime(time, audio.currentTime);
-  }
-
-  customSlider();
-
-
-  // ************************************************ move the slider with music ************************************************//
-
-  // set the initial value and max value of the range slider
-  slider.value = 0; //do not uncomment
-
-  slider.max = audio.duration;
-
-  // add an event listener to the audio element to update the range slider value as the song plays
-  audio.addEventListener('timeupdate', () => {
-    slider.value = audio.currentTime;
-  });
-
-  // add an event listener to the range slider input element to seek to a specific time in the song
-  slider.addEventListener('input', () => {
-    // audio.currentTime = rangeSlider.value;
-    audio.currentTime = slider.value;
-  });
-
-  // update the progress bar as the song plays
-  audio.addEventListener('timeupdate', () => {
-
-    const progressPercent = (audio.currentTime / audio.duration) * 100;
-    setTime(time, audio.currentTime);
-    progress.style.width = `${progressPercent}%`;
-    thumb.style.left = `${progressPercent}%`;
-  });
-
-};
+    // current time on slider 
+    audio.addEventListener('timeupdate', () => {
+      
+      // get the current audio time
+      const currentAudioTime = Math.floor(audio.currentTime);
+  
+  
+      // get the percentage
+      const timePercentage = (currentAudioTime / audio.duration) * 100 + "%";
+  
+      // set the current time of the song
+      setTime(time, currentAudioTime);
+  
+      // set the slider to the time
+      progress.style.width = timePercentage;
+      thumb.style.left = timePercentage;
+  
+    });
+  
+  
+    // ************************************************ music slider ************************************************//
+    function customSlider(){
+  
+      // calculate the % 
+      const val = (audio.currentTime / audio.duration) * 100;
+  
+      // set the progress of the song
+      progress.style.width = val + "%";
+      slider.style.left = val + "%";
+      
+      // show the current time of the song
+      setTime(time, slider.value);
+      
+      // set it to the slider 
+      audio.currentTime = slider.value;
+  
+      // update the display of the time
+      setTime(time, audio.currentTime);
+    }
+  
+    customSlider();
+  
+  
+    // ************************************************ move the slider with music ************************************************//
+  
+    // set the initial value and max value of the range slider
+    slider.value = 0; //do not uncomment
+  
+    slider.max = audio.duration;
+  
+    // add an event listener to the audio element to update the range slider value as the song plays
+    audio.addEventListener('timeupdate', () => {
+      slider.value = audio.currentTime;
+    });
+  
+    // add an event listener to the range slider input element to seek to a specific time in the song
+    slider.addEventListener('input', () => {
+      // audio.currentTime = rangeSlider.value;
+      audio.currentTime = slider.value;
+    });
+  
+    // update the progress bar as the song plays
+    audio.addEventListener('timeupdate', () => {
+  
+      const progressPercent = (audio.currentTime / audio.duration) * 100;
+      setTime(time, audio.currentTime);
+      progress.style.width = `${progressPercent}%`;
+      thumb.style.left = `${progressPercent}%`;
+    });
+  
+  };
+}
 
 
 // ************************************************ volume control ************************************************//
 let volume = document.getElementById('volume-slider');
 
-audio.volume = 0.3; // set the initial volume to 50%
+if(audio){
 
-volume.addEventListener("change", function(e) {
-  audio.volume = e.currentTarget.value / 100;
-
-
-  // if the volume is high
-  if (audio.volume > 0.5) {
+  audio.volume = 0.3; // set the initial volume to 50%
   
-    // change the icon 
-    volumeIcon.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
-
-  } else if (audio.volume === 0){
-
-    // mute icon
-    volumeIcon.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
-
-  } else{
-
-    // volume low
-    volumeIcon.innerHTML = `<i class="fa-solid fa-volume-low"></i>`;
-
-  }
-});
+  volume.addEventListener("change", function(e) {
+    audio.volume = e.currentTarget.value / 100;
+  
+  
+    // if the volume is high
+    if (audio.volume > 0.5) {
+    
+      // change the icon 
+      volumeIcon.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
+  
+    } else if (audio.volume === 0){
+  
+      // mute icon
+      volumeIcon.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+  
+    } else{
+  
+      // volume low
+      volumeIcon.innerHTML = `<i class="fa-solid fa-volume-low"></i>`;
+  
+    }
+  });
+}
 
 
 function toggleMute(){
@@ -268,27 +274,30 @@ function toggleMute(){
 const formComment = document.querySelector('#commentForm'); 
 const commentList = document.querySelector('.comments');
 
-// listen for comment form submission
-formComment.addEventListener('submit', function(e){
+if(formComment){
 
-  e.preventDefault(); // doesn't send form to server
-
-  // fetch the comment from server
-  fetch(this.action, {
-    body: new FormData(e.target), // get form data
-    method: 'POST', // get method 
-
-  })
-  // the response is returned as a JSON object
-  .then(response => response.json())
+  // listen for comment form submission
+  formComment.addEventListener('submit', function(e){
   
-  // then the json is redirected to the the handleResponse function
-  .then(json => {
-
-    handleResponse(json);
+    e.preventDefault(); // doesn't send form to server
+  
+    // fetch the comment from server
+    fetch(this.action, {
+      body: new FormData(e.target), // get form data
+      method: 'POST', // get method 
+  
+    })
+    // the response is returned as a JSON object
+    .then(response => response.json())
+    
+    // then the json is redirected to the the handleResponse function
+    .then(json => {
+  
+      handleResponse(json);
+    })
+  
   })
-
-})
+}
 
 
 const handleResponse = function(response) {
