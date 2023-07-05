@@ -87,22 +87,52 @@ var btn = document.getElementById("myBtn");
 // Get the element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+if (modal) {
 
-// When the user clicks on close btn, close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  
+  // When the user clicks on close btn, close the modal
+  span.onclick = function() {
     modal.style.display = "none";
   }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 }
+
+
+
+
+//*********************************************** copy link to clipboard ******************************************************//
+let copyBtn = document.getElementById("copyBtn");
+
+if (copyBtn) {
+
+  copyBtn.addEventListener('click', () => {
+  
+    console.log(copyBtn);
+    // Get the text field
+    var copyLink = document.getElementById("copyLink");
+  
+    // Select the text field
+    copyLink.select();
+    copyLink.setSelectionRange(0, 99999); // For mobile devices
+  
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyLink.value);
+  
+  })
+}
+
+
+//*********************************************** dynamique user form **********************************************************//
 
 // Add an event listener to the roles field
 document.addEventListener('DOMContentLoaded', function() {
@@ -128,22 +158,3 @@ var artistFormElem = document.getElementById('artistForm');
 
 // Call the toggleFields function initially to set the initial state
 toggleFields();
-
-
-// // copy link to clipboard
-// let copyBtn = document.getElementById("copyBtn");
-
-// copyBtn.addEventListener('click', () => {
-
-//   console.log(copyBtn);
-//   // Get the text field
-//   var copyLink = document.getElementById("copyLink");
-
-//   // Select the text field
-//   copyLink.select();
-//   copyLink.setSelectionRange(0, 99999); // For mobile devices
-
-//   // Copy the text inside the text field
-//   navigator.clipboard.writeText(copyLink.value);
-
-// })

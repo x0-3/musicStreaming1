@@ -362,28 +362,29 @@ $(document).ready(function () {
 });
 
 // ************************************************ keybinds ************************************************//
-// TODO: fix keybinds 
-// const btnNext = document.getElementById("btnNext");
-// const btnPrev = document.querySelector("#btnPrev");
+const btnNext = document.getElementById("btnNext");
+const btnPrev = document.querySelector("#btnPrev");
 
+if (btnNext == true && btnPrev == true) {
 
-// document.addEventListener("keydown", e => {
-
-//   e.preventDefault();
-
-//   if (e.key.toLowerCase() === "k" && e.shiftKey) {
-//     togglePlay();
-//   }
+  document.addEventListener("keydown", e => {
   
-//   if (e.key.toLowerCase() === "m" && e.shiftKey) {
-//     toggleMute();
-//   }
-
-//   if (e.key.toLowerCase() === "n" && e.shiftKey) {
-//     btnNext.click();
-//   }
+    e.preventDefault();
   
-//   if (e.key.toLowerCase() === "p" && e.shiftKey) {
-//     btnPrev.click();
-//   }
-// });
+    if (e.key.toLowerCase() === "k" && e.shiftKey) {
+      togglePlay();
+    }
+    
+    if (e.key.toLowerCase() === "m" && e.shiftKey) {
+      toggleMute();
+    }
+
+    if (e.key.toLowerCase() === "n" && e.shiftKey) {
+      btnNext.click();
+    }
+    
+    if (e.key.toLowerCase() === "p" && e.shiftKey) {
+      btnPrev.click();
+    }
+  });
+}
