@@ -85,35 +85,49 @@ class SubscribeRepository extends ServiceEntityRepository
     }
 
 
-    // TODO:
     // find music by there subscribe artist 
-    public function findBySubscriptionSong()
+    /**
+    * @return Subscribe[] Returns an array of Subscribe objects
+    */
+    public function findBySubscriptionSong($user, $limit = null)
     {
-        // SELECT *
-        // FROM subscribe s
-        // INNER JOIN user u
-        // ON u.id = s.user2_id
-        // inner JOIN album a
-        // ON a.user_id = u.id
-        // INNER JOIN song sg
-        // ON sg.album_id = a.id
-        // WHERE s.user1_id = 30
-        // ORDER BY "DESC"
+
+        return $this->createQueryBuilder('s')
+            ->select('s.id, u.email, us.id, us.username, us.avatar, a.uuid, a.cover, sg.nameSong, sg.uuid')
+            ->innerJoin('s.user1', 'u')
+            ->innerJoin('s.user2', 'us')
+            ->innerJoin('us.albums', 'a')
+            ->innerJoin('a.songs', 'sg')
+            ->andWhere('u.email = :email')
+            ->setParameter('email', $user)
+            ->setMaxResults($limit)
+            ->orderBy('a.releaseDate', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
 
     }
 
 
     // find album by there subscribe artist 
-    public function findBySubscriptionAlbum()
+    /**
+    * @return Subscribe[] Returns an array of Subscribe objects
+    */
+    public function findBySubscriptionAlbum($user, $limit = null)
     {
-        // SELECT *
-        // FROM subscribe s
-        // INNER JOIN user u
-        // ON u.id = s.user2_id
-        // inner JOIN album a
-        // ON a.user_id = u.id
-        // WHERE s.user1_id = 30
-        // ORDER BY "DESC"
+
+        return $this->createQueryBuilder('s')
+            ->select('s.id, u.email, us.id, us.username, us.avatar, a.uuid, a.cover, a.nameAlbum')
+            ->innerJoin('s.user1', 'u')
+            ->innerJoin('s.user2', 'us')
+            ->innerJoin('us.albums', 'a')
+            ->andWhere('u.email = :email')
+            ->setParameter('email', $user)
+            ->setMaxResults($limit)
+            ->orderBy('a.releaseDate', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
 
     }
 

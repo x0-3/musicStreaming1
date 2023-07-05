@@ -116,46 +116,136 @@
         </div>
 
         <div class="songCards">
+
+            {% if songs|length %}
+            {% set songsCol = (songs|length / 3)|round(0, 'floor') %}
+
+            {% for song in songs %}     
             
-            <div class="side">
+                {% if songsCol == 1 or loop.index % songsCol == 1 %}
+                    <div class="side">
 
-                {% for song in songs|slice(0, 4) %}            
+                {% endif %}
+
                     <div class="songCard">
                         
-                        <a href="{{path('app_songPlayer', {'id': song.uuid})}}">
+                        <a href="{{path('app_songPlayer', {'id': song.uuid})}}"  class="musicLink">
                             
                             <figure>
                                 <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
                             </figure>
                             
                             <h3>{{song.nameSong}} </h3>
+
+                            
                         </a>
+
+                        <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
                         
                     </div>
-                {% endfor %}
-            </div>
 
-            <div class="side">
-
-                {% for song in songs|slice(4, 8) %}            
-                    <div class="songCard">
-                        
-                        <a href="{{path('app_songPlayer', {'id': song.uuid})}}">
-                            
-                            <figure>
-                                <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
-                            </figure>
-                            
-                            <h3>{{song.nameSong}} </h3>
-                        </a>
-                        
+                {% if loop.last or loop.index % songsCol == 0 %}
                     </div>
-                {% endfor %}
-            </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}             
             
         </div>
-
     </div>
+
+
+    {% if app.user %}
+        
+        <div class="playlist">
+
+            <div class="title">
+
+                <h1>Albums based on your subscriptions </h1>
+                <a href="{{path('app_favorites')}}">More</a>
+            </div>
+
+            <div class="playlistCards">
+                
+
+                {% for album in subscriptionAlbums %}
+                    
+                    <div class="playlistCard">
+
+                        <a href="{{path('app_albumDetail', {'id' : album.uuid})}}">
+                            <figure>
+
+                                {% if album.cover != null %}
+                                    
+                                    <img src="{{asset('uploads/' ~ album.cover)}}" alt="playlist image">
+
+                                {% else %}
+
+                                    <img src="{{asset('img/dee-XhvEvfXQoSY-unsplash.jpg')}}" alt="playlist image">
+                                {% endif %}
+                                
+                            </figure>
+
+                            <h3>{{album.nameAlbum}}</h3>
+
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="song">
+
+            <div class="title">
+
+                <h1>Just for You !</h1>
+                <a href="{{path('app_mostLiked')}}">More</a>
+            </div>
+
+            <div class="songCards">
+
+                {% if subscriptionSongs|length %}
+                    {% set songsCol = (subscriptionSongs|length / 3)|round(0, 'floor') %}
+
+                    {% for song in subscriptionSongs %}     
+                    
+                        {% if songsCol == 1 or loop.index % songsCol == 1 %}
+                            <div class="side">
+
+                        {% endif %}
+
+                            <div class="songCard">
+                                
+
+                                <a href="{{path('app_songPlayer', {'id': song.uuid})}}" class="musicLink">
+                                    
+                                    <figure>
+                                        <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
+                                    </figure>
+                                    
+                                    <h3>{{song.nameSong}} </h3>
+
+                                </a>
+
+                                <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
+                            
+                                
+                            </div>
+
+                        {% if loop.last or loop.index % songsCol == 0 %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}                 
+                
+                
+            </div>
+
+        </div>
+    {% endif %}
+
 
 </section>
 {% endblock %}

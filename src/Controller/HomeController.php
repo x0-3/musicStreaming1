@@ -26,7 +26,7 @@ class HomeController extends AbstractController
     {
 
         $playlists = $em->getRepository(Playlist::class)->findByMostFollow(5); //find by most followed playlists
-        $songs = $em->getRepository(Song::class)->findByMostLikes(8); //find the most like songs   
+        $songs = $em->getRepository(Song::class)->findByMostLikes(12); //find the most like songs   
     
 
         $token = $tokenStorage->getToken();   
@@ -37,6 +37,8 @@ class HomeController extends AbstractController
             
             $favoritePlaylists = $em->getRepository(Playlist::class)->findFavoritePlaylists($user, 5); //find the user's favorite playlists
             $artists = $em->getRepository(Subscribe::class)->findUserSubscriber($user, 10);
+            $subscriptionSongs = $em->getRepository(Subscribe::class)->findBySubscriptionSong($user, 12);
+            $subscriptionAlbums = $em->getRepository(Subscribe::class)->findBySubscriptionAlbum($user, 5);
 
 
             return $this->render('home/index.html.twig', [
@@ -44,6 +46,8 @@ class HomeController extends AbstractController
                 'songs' => $songs,
                 'favoritePlaylists' => $favoritePlaylists,
                 'artists'=> $artists,
+                'subscriptionSongs'=> $subscriptionSongs,
+                'subscriptionAlbums'=> $subscriptionAlbums,
             ]);
 
             // if the user isn't signed in, render the page without the favorites list 
