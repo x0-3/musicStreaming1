@@ -403,8 +403,9 @@
                     align-items: center;
                     margin-bottom: 10px;
                     display: block;
+                    position: relative;
 
-                    a{
+                    a.musicLink{
                         
                         display: flex;
                         justify-content: flex-start;
@@ -416,7 +417,7 @@
                         figure{
         
                             width: 15%;
-                            margin: 0;
+                            margin: 0 15px 0 0;
 
                             img{
                                 width: 100%;
@@ -424,6 +425,14 @@
 
                             }
                         }
+                    }
+
+                    a.fa-solid.fa-ellipsis{
+                        position: absolute;
+                        right: 7%;
+                        top: 41%;
+                        color: white;
+                        text-decoration: none;
                     }
 
                     small{

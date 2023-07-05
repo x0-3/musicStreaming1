@@ -308,8 +308,9 @@
   align-items: center;
   margin-bottom: 10px;
   display: block;
+  position: relative;
 }
-* body section.home .song .songCard a {
+* body section.home .song .songCard a.musicLink {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -317,13 +318,20 @@
   text-decoration: none;
   font-size: medium;
 }
-* body section.home .song .songCard a figure {
+* body section.home .song .songCard a.musicLink figure {
   width: 15%;
-  margin: 0;
+  margin: 0 15px 0 0;
 }
-* body section.home .song .songCard a figure img {
+* body section.home .song .songCard a.musicLink figure img {
   width: 100%;
   border-radius: 20px;
+}
+* body section.home .song .songCard a.fa-solid.fa-ellipsis {
+  position: absolute;
+  right: 7%;
+  top: 41%;
+  color: white;
+  text-decoration: none;
 }
 * body section.home .song .songCard small {
   color: white;
@@ -1092,8 +1100,8 @@
     white-space: nowrap;
     margin: 0 0 66px 0;
   }
-  body section.home .song .songCards .leftSide, body section.home .song .songCards .middle {
-    margin-right: 24px;
+  body section.home .song .songCards .side {
+    margin-right: 41vw;
   }
   body section.home .song .songCards .songCard {
     width: 82vw;
@@ -1101,7 +1109,7 @@
     position: relative;
   }
   body section.home .song .songCards .songCard a figure {
-    width: 30%;
+    min-width: 30%;
     margin-right: 10px;
   }
   body section.home .hero {
