@@ -317,16 +317,17 @@
 
 
         section.home{
-            // display: flex;
-            // flex-direction: row;
-
 
             .hero{
                 height: 85vh;
                 overflow: hidden;
                 position: relative;
-                border-radius: 35px;
-
+                border-radius: 0 0 35px 35px;
+                -webkit-border-radius: 0 0 35px 35px;
+                -moz-border-radius: 0 0 35px 35px;
+                -ms-border-radius: 0 0 35px 35px;
+                -o-border-radius: 0 0 35px 35px;
+                
                 h1{
                     color: white;
                     font-size: xxx-large;
@@ -336,11 +337,6 @@
 
                     img{
                         width: 100%;
-                        border-radius: 20px;
-                        -webkit-border-radius: 20px;
-                        -moz-border-radius: 20px;
-                        -ms-border-radius: 20px;
-                        -o-border-radius: 20px;
                     }
                 }
 
@@ -373,6 +369,7 @@
                 -o-border-radius: 0 25px 25px 0;
                 position: fixed;
                 height: 100vh;
+                z-index: 1;
                 
                 .avatar{
                     display: flex;
