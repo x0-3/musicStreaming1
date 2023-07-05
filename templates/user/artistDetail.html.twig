@@ -12,50 +12,60 @@
     <section class="artistDetail">
 
         <div class="hero">
-            <figure>
-                
-                {% if artist.poster == null %}
-                
-                    <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
-                {% else %}
-                
-                    <img src="{{asset('uploads/' ~ artist.poster)}}" alt="profile picture"> 
-                {% endif %}
-                
 
-                <figcaption class="flex-column">
+            <div class="parallax">
 
-                    <div class="d-flex flex-row">
-
-                        <h1>{{artist.username}}</h1>
-
-                        {# toggle between two btn if the user is sub or not to the artist #}
-                        {% if userSub %}
-
-                            <form action="{{path('app_subscribeTo', {'id': artist.username})}}" method="post" class="mb-3">
-                                <button class="btn-primary btn" type="submit">Subscribed</button>
-                            </form>
-                        
-                        {% else %}
-
-                            {% include "subscribe/_addSub.html.twig" %}
-
-                        {% endif %}
-                    </div>
-
-                    {# count the nb if subscriber of an artist #}
-                    {% if artist.subUser2|length <= 1 %}
-                        <h3 class="text-light">{{artist.subUser2|length}} subcriber</h3>
-                        
+                <figure>
+                    
+                    {% if artist.poster == null %}
+                    
+                        <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
                     {% else %}
-                        <h3 class="text-light">{{artist.subUser2|length}} subcribers</h3>
-
+                    
+                        <img src="{{asset('uploads/' ~ artist.poster)}}" alt="profile picture"> 
                     {% endif %}
-
-
-                </figcaption>
-            </figure>
+                    
+    
+                    <figcaption class="flex-column">
+    
+                        <div class="d-flex flex-row">
+    
+                            <h1>{{artist.username}}</h1>
+    
+                            {# toggle between two btn if the user is sub or not to the artist #}
+                            {% if userSub %}
+    
+                                <form action="{{path('app_subscribeTo', {'id': artist.username})}}" method="post" class="mb-3">
+                                    <button class="btn-primary btn" type="submit">Subscribed</button>
+                                </form>
+                            
+                            {% else %}
+    
+                                {% include "subscribe/_addSub.html.twig" %}
+    
+                            {% endif %}
+                        </div>
+    
+                        {# count the nb if subscriber of an artist #}
+                        {% if artist.subUser2|length <= 1 %}
+                            <h3 class="text-light">{{artist.subUser2|length}} subcriber</h3>
+                            
+                        {% else %}
+                            <h3 class="text-light">{{artist.subUser2|length}} subcribers</h3>
+    
+                        {% endif %}
+    
+    
+                    </figcaption>
+                </figure>
+            </div>
         </div>
+
+
+        <span class="tacTwitterTimelines">
+        </span>
+        <a class="twitter-timeline" href="https://twitter.com/{{artist.twitterId}}" data-tweet-limit="5" data-dnt="dnt (true | false)" data-width="width" data-height="height" data-theme="theme (dark | light)" data-link-color="hex link-color"></a>
+        
 
         <div class="title">
             <h2>Most Liked</h2>

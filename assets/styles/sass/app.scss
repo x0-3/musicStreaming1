@@ -315,7 +315,6 @@
             }
         }
 
-
         section.home{
 
             .hero{
@@ -323,39 +322,44 @@
                 overflow: hidden;
                 position: relative;
                 border-radius: 0 0 35px 35px;
-                -webkit-border-radius: 0 0 35px 35px;
-                -moz-border-radius: 0 0 35px 35px;
-                -ms-border-radius: 0 0 35px 35px;
-                -o-border-radius: 0 0 35px 35px;
                 
-                h1{
-                    color: white;
-                    font-size: xxx-large;
-                }
+                .parallax {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
 
-                figure{
-
-                    img{
-                        width: 100%;
-                    }
-                }
-
-                figcaption{
-
-                    position: absolute;
-                    top: 34vh;
-                    right: 8%;
-                    color: white;
-                    width: 42%;
-
-                    a{
-                        background-color: cornflowerblue;
+                    h1{
                         color: white;
-                        text-decoration: none;
-                        border-radius: 13px;
-                        padding: 11px;
+                        font-size: xxx-large;
+                    }
+    
+                    figure{
+    
+                        img{
+                            width: 100%;
+                        }
+                    }
+    
+                    figcaption{
+    
+                        position: absolute;
+                        top: 34vh;
+                        right: 8%;
+                        color: white;
+                        width: 42%;
+    
+                        a{
+                            background-color: cornflowerblue;
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 13px;
+                            padding: 11px;
+                        }
                     }
                 }
+                
             }
 
             .subscriptions{
