@@ -14,7 +14,7 @@
         </figure>
 
         <h3 class="trackTitle">{{song.nameSong}}</h3>
-        <h4 class="ArtistName">{{song.user.username}}</h4>
+        <a href="{{path('app_artistDetail', {'id': song.user.username})}}" class="ArtistName">{{song.user.username}}</a>
 
         
         <div class="controls">

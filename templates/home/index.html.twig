@@ -43,8 +43,13 @@
                 <p>{{ artist.bio|length > 242 ? artist.bio|slice(0, 242) ~ '...' : artist.bio  }} </p>
     
                 <a href="{{path('app_artistDetail', {'id': artist.username})}}">Discover Now !</a>
+
             </figcaption>
+
+            <h2>Discover the sounds of independent artists and immerse yourself in a world of unique melodies with StreamVibe, the ultimate music streaming website.</h2>
+            
         </div>
+
 
     </div>
 
@@ -53,7 +58,7 @@
 
         <div class="title">
 
-            <h1>Recommended</h1>
+            <h2>Recommended</h2>
             <a href="{{path('more_recommended')}}">More</a>
         </div>
 
@@ -88,7 +93,7 @@
 
             <div class="title">
 
-                <h1>Your Favorite Playlists</h1>
+                <h2>Your Favorite Playlists</h2>
                 <a href="{{path('app_favorites')}}">More</a>
             </div>
 
@@ -130,44 +135,47 @@
 
         <div class="title">
 
-            <h1>Most liked songs</h1>
+            <h2>Most liked songs</h2>
             <a href="{{path('app_mostLiked')}}">More</a>
         </div>
 
         <div class="songCards">
 
             {% if songs|length %}
-            {% set songsCol = (songs|length / 3)|round(0, 'floor') %}
+                {% set songsCol = (songs|length / 3)|round(0, 'floor') %}
 
-            {% for song in songs %}     
-            
-                {% if songsCol == 1 or loop.index % songsCol == 1 %}
-                    <div class="side">
+                {% for song in songs %}     
+                
+                    {% if songsCol == 1 or loop.index % songsCol == 1 %}
+                        <div class="side">
 
-                {% endif %}
+                    {% endif %}
 
-                    <div class="songCard">
-                        
-                        <a href="{{path('app_songPlayer', {'id': song.uuid})}}"  class="musicLink">
+                        <div class="songCard">
                             
-                            <figure>
-                                <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
-                            </figure>
+                            <a href="{{path('app_songPlayer', {'id': song.uuid})}}"  class="musicLink">
+                                
+                                <figure>
+                                    <img src="{{asset('uploads/' ~ song.cover)}}" alt="playlist image">
+                                </figure>
+                                
+                                <h3>{{song.nameSong}} </h3>
+
+                                
+                            </a>
+
+                            {% if app.user %}
+                                
+                                <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
+                            {% endif %}
                             
-                            <h3>{{song.nameSong}} </h3>
+                        </div>
 
-                            
-                        </a>
-
-                        <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
-                        
-                    </div>
-
-                {% if loop.last or loop.index % songsCol == 0 %}
-                    </div>
-                {% endif %}
-            {% endfor %}
-        {% endif %}             
+                    {% if loop.last or loop.index % songsCol == 0 %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}             
             
         </div>
     </div>
@@ -179,7 +187,7 @@
 
             <div class="title">
 
-                <h1>Albums based on your subscriptions </h1>
+                <h2>Albums based on your subscriptions </h2>
                 <a href="{{path('app_favorites')}}">More</a>
             </div>
 
@@ -219,7 +227,7 @@
 
             <div class="title">
 
-                <h1>Just for You !</h1>
+                <h2>Just for You !</h2>
                 <a href="{{path('app_mostLiked')}}">More</a>
             </div>
 
@@ -248,7 +256,10 @@
 
                                 </a>
 
-                                <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
+                                {% if app.user %}
+                                    
+                                    <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
+                                {% endif %}
                             
                                 
                             </div>
