@@ -6,10 +6,13 @@ $breakpointPhone: 767px;
 
         header{
             justify-content: space-between;
+            background-color: white;
+            box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
 
             figure{
-                width: 13%;
-                margin-left: 8px;
+                width: 18%;
+                margin-left: 40vw;
+                margin-top: 5px;
 
             }
 
@@ -78,7 +81,6 @@ $breakpointPhone: 767px;
                 font-size: 20px;
                 cursor: pointer;
                 background: none;
-                color: white;
                 padding: 10px 15px;
                 border: none;
             }

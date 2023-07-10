@@ -89,6 +89,9 @@ body.dark section.genreSongs h2 {
 body.dark section.login label, body.dark section.login a {
   color: white !important;
 }
+body.dark footer {
+  background-color: #36454F;
+}
 body.dark footer ul li a, body.dark footer small {
   color: white;
 }/*# sourceMappingURL=darkMode.css.map */
