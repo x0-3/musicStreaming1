@@ -1,3 +1,7 @@
+$dark-blue: #36454F;
+$neon-blue: #7DF9FF;
+
+
 * {
     padding: 0;
     margin: 0;
@@ -19,14 +23,14 @@
         font-size: medium;
 
         &:hover{
-            color: #36454F;
+            color: $dark-blue;
 
         }
     }
 
     h1, h2{
         font-size: larger;
-        color: #36454F;
+        color: $dark-blue;
     }
 
     p{
@@ -42,11 +46,11 @@
         }
 
         .card{
-            background-color: #36454F!important;
+            background-color: $dark-blue!important;
         }
 
         header {
-            background-color: #36454F;
+            background-color: $dark-blue;
             display: flex;
             align-items: center;
             justify-content: space-around;
@@ -100,7 +104,7 @@
                                 font-family: 'Playfair Display', serif;
     
                                 &:hover{
-                                    color: #7DF9FF;
+                                    color: $neon-blue;
                                 }
                             }
                         }
@@ -151,7 +155,7 @@
                             button{
                                 border: none;
                                 border-radius: 15px;
-                                background-color: #36454F;
+                                background-color: $dark-blue;
                                 padding: 10px;
                                 cursor: pointer;
                                 color: white;
@@ -204,10 +208,11 @@
                 padding: 7px 22px;
                 border-radius: 10px;
                 color: white;
-                background-color: #36454F;
+                background-color: $dark-blue;
 
                 &:hover{
-                    background-color: #183153;
+                    background-color: $neon-blue;
+                    color: $dark-blue;
                 }
             }
         }
@@ -223,7 +228,7 @@
                 color: black;
 
                 &:hover{
-                    color: #36454F;
+                    color: $dark-blue;
                 }
                 figure{
                     
@@ -249,7 +254,7 @@
                 padding: 10px 22px;
                 font-size: 15px;
                 border: none;
-                background-color: #36454f;
+                background-color: $dark-blue;
                 color: white;
                 border-radius: 0 0 10px 0;
                 -webkit-border-radius: 0 0 10px 0;
@@ -271,7 +276,7 @@
                 a{
                     display: block;
                     font-size: 15px;
-                    background-color: #36454F;
+                    background-color: $dark-blue;
                     color: white;
                     text-decoration: none;
                     padding: 10px;
@@ -357,6 +362,12 @@
                             border-radius: 13px;
                             padding: 11px;
                         }
+
+                    }
+                    h2{
+                        font-size: x-large;
+                        margin: 0 8%;
+                        text-align: center;                        
                     }
                 }
                 
@@ -364,7 +375,7 @@
 
             .subscriptions{
                 box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
-                background-color: #36454F;
+                background-color: $dark-blue;
                 width: 5%;
                 border-radius: 0 25px 25px 0;
                 -webkit-border-radius: 0 25px 25px 0;
@@ -442,7 +453,7 @@
 
                 .songCard{
 
-                    background-color: #36454F;
+                    background-color: $dark-blue;
                     width: 83%;
                     padding: 6px;
                     border-radius: 20px;
@@ -567,7 +578,7 @@
 
                     a{
 
-                        color: #36454F;
+                        color: $dark-blue;
 
                         figure{
                             height: 38vh;
@@ -642,7 +653,7 @@
                 margin: 60px;
 
                 h3 {
-                    color: #36454F;
+                    color: $dark-blue;
                     margin-bottom: 14px;
                 }            
 
@@ -886,7 +897,7 @@
             }
 
             form {
-                margin: 13px;
+                margin: 60px 13px 0;
 
                 input[type="text"] {
                     border-radius: 10px;
@@ -910,7 +921,7 @@
             .comments{
 
                 article {
-                    background-color: #36454F;
+                    background-color: $dark-blue;
                     border-radius: 10px;
                     padding: 13px;
                     margin-bottom: 26px;
@@ -971,6 +982,14 @@
                     }
                 }
 
+                a.ArtistName {
+                    text-decoration: none;
+                    color: $dark-blue;
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: bold;
+                    font-size: larger;
+                }
+
                 .timeline{
                     width: 100%;
                     position: relative;
@@ -991,7 +1010,7 @@
                             appearance: none;
                             width: 1px;
                             height: 20px;
-                            box-shadow: -400px 0 0 400px #36454f;
+                            box-shadow: -400px 0 0 400px $dark-blue;
                         }
                     }
 
@@ -1024,7 +1043,7 @@
                         color: black;
 
                         &:hover{
-                            color: #36454F;
+                            color: $dark-blue;
 
                         }
                     }   
@@ -1052,7 +1071,7 @@
                                     appearance: none;
                                     width: 1px;
                                     height: 20px;
-                                    box-shadow: -400px 0 0 400px #36454f;
+                                    box-shadow: -400px 0 0 400px $dark-blue;
                                 }
     
                             }
@@ -1241,7 +1260,7 @@
 
             button.fa-solid.fa-magnifying-glass {
                 border: none;
-                background-color: #36454F;
+                background-color: $dark-blue;
                 color: white;
                 border-radius: 0 10px 10px 0;
                 padding: 20px;

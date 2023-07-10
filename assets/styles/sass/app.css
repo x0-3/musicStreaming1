@@ -160,7 +160,8 @@
   background-color: #36454F;
 }
 * body .title a:hover {
-  background-color: #183153;
+  background-color: #7DF9FF;
+  color: #36454F;
 }
 * body .mcard {
   width: 14%;
@@ -189,7 +190,7 @@
   padding: 10px 22px;
   font-size: 15px;
   border: none;
-  background-color: #36454f;
+  background-color: #36454F;
   color: white;
   border-radius: 0 0 10px 0;
   -webkit-border-radius: 0 0 10px 0;
@@ -276,6 +277,11 @@
   text-decoration: none;
   border-radius: 13px;
   padding: 11px;
+}
+* body section.home .hero .parallax h2 {
+  font-size: x-large;
+  margin: 0 8%;
+  text-align: center;
 }
 * body section.home .subscriptions {
   box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
@@ -648,7 +654,7 @@
   width: 60%;
 }
 * body section.musicPlayer form {
-  margin: 13px;
+  margin: 60px 13px 0;
 }
 * body section.musicPlayer form input[type=text] {
   border-radius: 10px;
@@ -714,6 +720,13 @@
 * body section.musicPlayer .player figure img {
   width: 100%;
 }
+* body section.musicPlayer .player a.ArtistName {
+  text-decoration: none;
+  color: #36454F;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: larger;
+}
 * body section.musicPlayer .player .timeline {
   width: 100%;
   position: relative;
@@ -737,7 +750,7 @@
           appearance: none;
   width: 1px;
   height: 20px;
-  box-shadow: -400px 0 0 400px #36454f;
+  box-shadow: -400px 0 0 400px #36454F;
 }
 * body section.musicPlayer .player .timeline .range-slider {
   width: 100%;
@@ -789,7 +802,7 @@
           appearance: none;
   width: 1px;
   height: 20px;
-  box-shadow: -400px 0 0 400px #36454f;
+  box-shadow: -400px 0 0 400px #36454F;
 }
 * body section.musicPlayer .player .controls .hover:hover {
   display: flex;

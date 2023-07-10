@@ -16,6 +16,9 @@ class CommentType extends AbstractType
         $builder
             ->add('text', TextType::class,[
                 'label'=> false,
+                'attr'=> [
+                    'placeholder'=> 'Write a comment'
+                ],
             ])
             // ->add('dateMess')
             // ->add('user')
