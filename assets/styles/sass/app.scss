@@ -424,6 +424,10 @@
                                 }
                             }
                         }
+
+                        &:hover{
+                            width: 22%;
+                        }
                             
                     }
                 }
@@ -478,8 +482,16 @@
                         text-decoration: none;
                     }
 
+                    h3:hover{
+                        color: white;
+                    }
+
                     small{
                         color: white;
+                    }
+
+                    &:hover{
+                        width: 90%;
                     }
                 }
 

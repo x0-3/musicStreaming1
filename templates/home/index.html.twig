@@ -42,7 +42,7 @@
     
                 <p>{{ artist.bio|length > 242 ? artist.bio|slice(0, 242) ~ '...' : artist.bio  }} </p>
     
-                <a href="{{path('app_artistDetail', {'id': artist.username})}}">Listen Now !</a>
+                <a href="{{path('app_artistDetail', {'id': artist.username})}}">Discover Now !</a>
             </figcaption>
         </div>
 

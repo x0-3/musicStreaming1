@@ -331,6 +331,9 @@
   border-radius: 10px;
   box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);
 }
+* body section.home .playlist .playlistCards .playlistCard:hover, * body section.home .playlist .songCards .playlistCard:hover, * body section.home .song .playlistCards .playlistCard:hover, * body section.home .song .songCards .playlistCard:hover {
+  width: 22%;
+}
 * body section.home .song .side {
   width: 50%;
 }
@@ -368,8 +371,14 @@
   color: white;
   text-decoration: none;
 }
+* body section.home .song .songCard h3:hover {
+  color: white;
+}
 * body section.home .song .songCard small {
   color: white;
+}
+* body section.home .song .songCard:hover {
+  width: 90%;
 }
 * body section.newRelease .album .cards, * body section.newRelease .artist .cards, * body .artistDetail .album .cards, * body .artistDetail .artist .cards {
   display: flex;
