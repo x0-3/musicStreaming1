@@ -185,16 +185,18 @@
                     <h2>About</h2>
                 </div>
 
-                <div class="card m-5 d-flex flex-column p-3" id="myBtn">
+                <div class="card m-5 d-flex flex-row p-3 w-75 justify-content-between" id="myBtn">
 
                     {% if artist.poster != null %}
-                        <figure>
+                        <figure class="w-20">
                             <img class="rounded-circle" src="{{asset('uploads/' ~ artist.avatar)}}" alt="{{artist.username}} image">
                             
                         </figure>
                     {% endif %}
                     
-                    <figcaption class="d-flex flex-column p-5">
+                    <div class="border border-secondary"></div>
+
+                    <figcaption class="d-flex flex-column p-5 w-50">
 
                         {% if artist.subUser2|length <= 1 %}
                             <h3 class="text-light">{{artist.subUser2|length}} subcriber</h3>
@@ -214,47 +216,50 @@
                 </div>
             </div>
 
-            <div id="myModal" class="modal">
-    
-                <div class="modal-content w-50 h-100 overflow-auto p-0 rounded-5 m-auto">
-    
-                    <span class="close position-absolute m-2 text-danger">&times;</span>
-    
-                    {% if artist.poster != null %}
-                    
-                        <figure>
-                            <img class="w-100 rounded-5" src="{{asset('uploads/' ~ artist.poster)}}" alt="{{artist.username}} image">
-    
-                        </figure>  
-                    {% endif %}
+            {% if artist.bio|length > 242 %}
+                
+                <div id="myModal" class="modal">
+        
+                    <div class="modal-content w-50 h-100 overflow-auto p-0 rounded-5 m-auto">
+        
+                        <span class="close position-absolute m-2 text-danger">&times;</span>
+        
+                        {% if artist.poster != null %}
+                        
+                            <figure>
+                                <img class="w-100 rounded-5" src="{{asset('uploads/' ~ artist.poster)}}" alt="{{artist.username}} image">
+        
+                            </figure>  
+                        {% endif %}
 
-                    
-                    <div class="d-flex">
+                        
+                        <div class="d-flex">
 
-                        <div class="w-25 p-2">
+                            <div class="w-25 p-2">
 
-                            {% if artist.subUser2|length <= 1 %}
-                                <h3 class="fw-bold">{{artist.subUser2|length}} subcriber</h3>
-                            
-                            {% else %}
-                                <h3 class="fw-bold">{{artist.subUser2|length}} subcribers</h3>
-            
-                            {% endif %}
+                                {% if artist.subUser2|length <= 1 %}
+                                    <h3 class="fw-bold">{{artist.subUser2|length}} subcriber</h3>
+                                
+                                {% else %}
+                                    <h3 class="fw-bold">{{artist.subUser2|length}} subcribers</h3>
+                
+                                {% endif %}
+                            </div>
+
+
+                            <article class="d-flex flex-column w-75">
+
+                                <h2><b>{{artist.username}}</b>  </h2>
+                                
+                                <p>{{artist.bio}}</p>
+                            </article>
+
                         </div>
-
-
-                        <article class="d-flex flex-column w-75">
-
-                            <h2><b>{{artist.username}}</b>  </h2>
-                            
-                            <p>{{artist.bio}}</p>
-                        </article>
-
+        
                     </div>
-    
+        
                 </div>
-    
-            </div>
+            {% endif %}
         {% endif %}
 
 
