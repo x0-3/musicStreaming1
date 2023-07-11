@@ -46,7 +46,7 @@
 
             </figcaption>
 
-            <h2>Discover the sounds of independent artists and immerse yourself in a world of unique melodies with StreamVibe, the ultimate music streaming website.</h2>
+            <h2>Discover the sounds of <b>independent artists</b> and immerse yourself in a world of <b>unique</b> melodies with <b>StreamVibe</b>, the ultimate <b>music streaming website</b>.</h2>
             
         </div>
 
@@ -166,7 +166,11 @@
 
                             {% if app.user %}
                                 
-                                <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
+                                <div class="info">
+                                    <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
+
+                                    <span class="tooltiptext">add to playlist</span>
+                                </div>
                             {% endif %}
                             
                         </div>
@@ -258,7 +262,12 @@
 
                                 {% if app.user %}
                                     
-                                    <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
+                                    <div class="info">
+                                        
+                                        <a href="{{path('form_toSongsPlaylist', {'id': song.id})}} " class="fa-solid fa-ellipsis" target="_blank"></a>
+    
+                                        <span class="tooltiptext">add to playlist</span>
+                                    </div>
                                 {% endif %}
                             
                                 

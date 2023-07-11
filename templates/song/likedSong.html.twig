@@ -16,13 +16,23 @@
         {% if like|length != 0 %}
                   
             <div class="playerBtns">
-                <a href="{{path('like_Player', {'id': like[0].id})}}">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
+                
+                <div class="info">
+                    
+                    <a href="{{path('like_Player', {'id': like[0].id})}}">
+                        <i class="fa-regular fa-circle-play"></i>
+                    </a>
+                    <span class="tooltiptext">Play</span>
+                </div>
 
-                <a href="{{path('shuffle_like')}}">
-                    <i class="fa-solid fa-shuffle"></i>
-                </a>
+
+                <div class="info">
+                    
+                    <a href="{{path('shuffle_like')}}">
+                        <i class="fa-solid fa-shuffle"></i>
+                    </a>
+                    <span class="tooltiptext">Share</span>
+                </div>
             </div>
 
         {% endif %}

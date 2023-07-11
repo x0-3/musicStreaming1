@@ -7,18 +7,16 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <section class="login">
+    <section class="register">
 
-        <figure>
-            <img src="{{asset('/img/login.jpg')}}" alt="music image">
-        </figure>
-
-
-        <div class="loginForm">
+        <div class="registerForm">
         
-            <h1>Register</h1>
+            <h1 class="fs-1">Register</h1>
+
+            <h2>Please provide the following details to complete your registration</h2>
+            <small class="text-danger">Please note that selecting either the "User" or "Artist" role will significantly alter your experience.</small>
             
-            {{ form_start(registrationForm) }}
+            {{ form_start(registrationForm, {'attr': {'class': 'flex-column w-75 m-auto'}}) }}
             {{ form_row(registrationForm.email) }}
             {{ form_row(registrationForm.username) }}
             {{ form_row(registrationForm.roles) }}

@@ -99,23 +99,41 @@
         
             <div class="playerBtns">
 
-                <a href="{{path('playlist_player', {'id': playlist.id, 'songId':songs[0].id })}}">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
+                <div class="info">
+                                        
+                    <a href="{{path('playlist_player', {'id': playlist.id, 'songId':songs[0].id })}}">
+                        <i class="fa-regular fa-circle-play"></i>
+                    </a>
 
-                <a href="{{path('shuffle_playlist', {'id': playlist.id})}}">
-                    <i class="fa-solid fa-shuffle"></i>
-                </a>
+                    <span class="tooltiptext">Play</span>
+                </div>
+
+                
+                <div class="info">
+                    
+                    <a href="{{path('shuffle_playlist', {'id': playlist.id})}}">
+                        <i class="fa-solid fa-shuffle"></i>
+                    </a>
+
+                    <span class="tooltiptext">Shuffle</span>
+                </div>
 
                 {% if app.user %}
-                    <a href="{{path('favorite_playlist', {'id': playlist.id})}}" data-action="favorite">
+                
+                    <div class="info">
+                    
+                        <a href="{{path('favorite_playlist', {'id': playlist.id})}}" data-action="favorite">
+                    
                 {% endif %}
 
-                    <i class="fa-solid fa-check uncheck {{ app.user in playlist.userFavorites ? 'd-none' : '' }}"></i>
-                    <i class="fa-solid fa-check check {{ app.user in playlist.userFavorites ? '' : 'd-none' }}" style="color: #22b71f;"></i>
+                        <i class="fa-solid fa-check uncheck {{ app.user in playlist.userFavorites ? 'd-none' : '' }}"></i>
+                        <i class="fa-solid fa-check check {{ app.user in playlist.userFavorites ? '' : 'd-none' }}" style="color: #22b71f;"></i>
                 
                 {% if app.user %}
-                    </a>
+                        </a>
+
+                        <span class="tooltiptext">add to Favorite</span>
+                    </div>
                 {% endif %}
                     
             </div>
