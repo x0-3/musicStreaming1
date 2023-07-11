@@ -49,6 +49,30 @@ $neon-blue: #7DF9FF;
             background-color: $dark-blue!important;
         }
 
+        .info {
+
+            .tooltiptext {
+                visibility: hidden;
+                width: 120px;
+                background-color: $neon-blue;
+                color: $dark-blue;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                
+                position: absolute;
+                z-index: 1;
+            
+            }
+
+            &:hover .tooltiptext{
+                visibility: visible;
+
+            }
+
+        }
+
+
         header {
             background-color: $dark-blue;
             display: flex;
@@ -501,6 +525,14 @@ $neon-blue: #7DF9FF;
                         color: white;
                     }
 
+                    .info {
+
+                        .tooltiptext {
+                            bottom: 57%;
+                            left: 78%;
+                        }
+                    }
+
                     &:hover{
                         width: 90%;
                     }
@@ -710,6 +742,15 @@ $neon-blue: #7DF9FF;
 
                 .playerBtns{
 
+                    .info {
+                        position: relative;
+                        display: inline-block;
+
+                        .tooltiptext {
+                            bottom: 74%;
+                            left: 0%;
+                        }
+                    }
                     a {
                         text-decoration: none;
                         color: black;
@@ -1272,6 +1313,45 @@ $neon-blue: #7DF9FF;
             }
         }
 
+        section.register{
+            background-image: url('C:/Users/Lea/Documents/musicStreaming1/public/img/concert.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 86vh;
+
+            h1,h2{
+                color: white;
+            }
+
+            .registerForm {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                margin: auto;
+
+                background: rgba( 255, 255, 255, 0.25 );
+                box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+                backdrop-filter: blur( 4px );
+                -webkit-backdrop-filter: blur( 4px );
+                border-radius: 10px;
+                border: 1px solid rgba( 255, 255, 255, 0.18 );
+                padding: 20px;
+                color: white;
+
+                button.btn {
+                    background-color: $dark-blue;
+                    color: white;
+
+                    &:hover{
+                        background-color: $neon-blue;
+                        color: $dark-blue;
+
+                    }
+                }
+            }
+        }
 
         footer{
 

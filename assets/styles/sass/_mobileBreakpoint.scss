@@ -315,6 +315,15 @@ $breakpointPhone: 767px;
             width: 24%;
         }
 
+        section.register{
+            width: 100%;
+            height: auto;
+
+            .registerForm{
+                width: 100%;
+            }
+        }
+
         footer {
             display: flex;
             flex-direction: column;

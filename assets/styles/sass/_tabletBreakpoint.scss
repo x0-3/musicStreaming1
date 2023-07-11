@@ -202,6 +202,13 @@ $breakpointTablet: 768px;
             }
         }
   
+        section.register{
+            width: 100%;
+
+            .registerForm{
+                width: 83%;
+            }
+        }
 
         section.login{
             width: 66%;

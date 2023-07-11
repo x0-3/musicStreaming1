@@ -32,6 +32,20 @@
 * body .card {
   background-color: #36454F !important;
 }
+* body .info .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #7DF9FF;
+  color: #36454F;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+* body .info:hover .tooltiptext {
+  visibility: visible;
+}
 * body header {
   background-color: #36454F;
   display: flex;
@@ -383,6 +397,10 @@
 * body section.home .song .songCard small {
   color: white;
 }
+* body section.home .song .songCard .info .tooltiptext {
+  bottom: 57%;
+  left: 78%;
+}
 * body section.home .song .songCard:hover {
   width: 90%;
 }
@@ -528,6 +546,14 @@
 * body section.playlistDetail .playlistHeader .playlistName .dropdown:hover .dropdown-content, * body section.artistDetail .playlistHeader .playlistName .dropdown:hover .dropdown-content, * body section.musicPlayer .playlistHeader .playlistName .dropdown:hover .dropdown-content, * body section.search .playlistHeader .playlistName .dropdown:hover .dropdown-content {
   display: block;
   border-radius: 10px;
+}
+* body section.playlistDetail .playlistHeader .playerBtns .info, * body section.artistDetail .playlistHeader .playerBtns .info, * body section.musicPlayer .playlistHeader .playerBtns .info, * body section.search .playlistHeader .playerBtns .info {
+  position: relative;
+  display: inline-block;
+}
+* body section.playlistDetail .playlistHeader .playerBtns .info .tooltiptext, * body section.artistDetail .playlistHeader .playerBtns .info .tooltiptext, * body section.musicPlayer .playlistHeader .playerBtns .info .tooltiptext, * body section.search .playlistHeader .playerBtns .info .tooltiptext {
+  bottom: 74%;
+  left: 0%;
 }
 * body section.playlistDetail .playlistHeader .playerBtns a, * body section.artistDetail .playlistHeader .playerBtns a, * body section.musicPlayer .playlistHeader .playerBtns a, * body section.search .playlistHeader .playerBtns a {
   text-decoration: none;
@@ -947,6 +973,39 @@
   display: flex;
   align-items: center;
 }
+* body section.register {
+  background-image: url("C:/Users/Lea/Documents/musicStreaming1/public/img/concert.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 86vh;
+}
+* body section.register h1, * body section.register h2 {
+  color: white;
+}
+* body section.register .registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 20px;
+  color: white;
+}
+* body section.register .registerForm button.btn {
+  background-color: #36454F;
+  color: white;
+}
+* body section.register .registerForm button.btn:hover {
+  background-color: #7DF9FF;
+  color: #36454F;
+}
 * body footer {
   margin-top: 50px;
   z-index: 2;
@@ -1075,6 +1134,12 @@
   }
   body section.artistDetail .hero figure figcaption {
     top: 18vh;
+  }
+  body section.register {
+    width: 100%;
+  }
+  body section.register .registerForm {
+    width: 83%;
   }
   body section.login {
     width: 66%;
@@ -1290,6 +1355,13 @@
   }
   body section.genreSongs .songCard a {
     width: 24%;
+  }
+  body section.register {
+    width: 100%;
+    height: auto;
+  }
+  body section.register .registerForm {
+    width: 100%;
   }
   body footer {
     display: flex;
