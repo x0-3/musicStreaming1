@@ -8,22 +8,26 @@
 
     <div class="hero">
 
-        <figure>
+        <div class="parallax">
 
-            {% if app.user.poster == null %}
-              
-                <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
-            {% else %}
-            
-                <img src="{{asset('uploads/' ~ app.user.poster)}}" alt="profile picture"> 
-            {% endif %}
-            
+            <figure>
+    
+                {% if app.user.poster == null %}
+                  
+                    <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
+                {% else %}
+                
+                    <img src="{{asset('uploads/' ~ app.user.poster)}}" alt="profile picture"> 
+                {% endif %}
+                
+    
+                <figcaption>
+                    <h1>{{app.user.username}}</h1>
+                    <a class="btn btn-dark" href="{{path('edit_profile')}}">Edit profil</a>
+                </figcaption>
+            </figure>
+        </div>
 
-            <figcaption>
-                <h1>{{app.user.username}}</h1>
-                <a class="btn btn-dark" href="{{path('edit_profile')}}">Edit profil</a>
-            </figcaption>
-        </figure>
     </div>
 
     {% if app.user.twitterId == null %}
@@ -71,8 +75,8 @@
                             <button><i class="fa-solid fa-plus"></i></button>
                             
                             <div id="list-items">
-                               <a href="{{path('edit_song', {'id': song.id})}}">edit</a>
-                               <a href="{{path('delete_song', {'id': song.id})}}">delete</a>
+                            <a href="{{path('edit_song', {'id': song.id})}}">edit</a>
+                            <a href="{{path('delete_song', {'id': song.id})}}">delete</a>
                             </div>
                         </div>
                         
@@ -83,6 +87,7 @@
             {% endfor %}
         </tbody>
     </table>
+
 
     <div class="album">
 
@@ -97,126 +102,136 @@
             </div>
         </div>
         
-        <div class="cards">
+        {% if albums != null %}
             
-            {% for album in albums %}
+            <div class="cards">
+                
+                {% for album in albums %}
 
-                <div class="mcard">
+                    <div class="mcard">
 
-                    <div class="dropdown">
-                        <button class="fa-solid fa-ellipsis-vertical"></button>
-                  
-                        <div id="list-items">
-                           <a href="{{path('edit_album', {'id': album.id})}}">edit</a>
-                           <a href="{{path('delete_album', {'id': album.id})}}">delete</a>
+                        <div class="dropdown">
+                            <button class="fa-solid fa-ellipsis-vertical"></button>
+                    
+                            <div id="list-items">
+                            <a href="{{path('edit_album', {'id': album.id})}}">edit</a>
+                            <a href="{{path('delete_album', {'id': album.id})}}">delete</a>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
-
-                        <figure>
-                            <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">          
-                        </figure>
                         
-                        <h3>{{album.nameAlbum}} </h3>
+                        <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
 
-                    </a>
-                
-                    
-                </div>
-            {% endfor %}
-                
-        </div>
-
-        {% if app.user.bio != null %}
-            
-            <div class="about">
-
-                <div class="title">
-                    <h2>About</h2>
-                </div>
-
-                <div class="card m-5 d-flex flex-row p-3"  id="myBtn">
-
-                    {% if app.user.avatar != null %}
-
-                        <figure>
-                            <img class="rounded-circle" src="{{asset('uploads/' ~ app.user.avatar)}}" alt="{{app.user.username}} image">
-
-                        </figure>  
-                    {% endif %}
-                    
-                    
-                    <figcaption class="d-flex flex-column p-5">
-
-                        {% if app.user.subUser2|length <= 1 %}
-                            <h3 class="text-light">{{app.user.subUser2|length}} subcriber</h3>
-                        
-                        {% else %}
-                            <h3 class="text-light">{{app.user.subUser2|length}} subcribers</h3>
-
-                        {% endif %}
-  
-                        <p class="text-light">
+                            <figure>
+                                <img src="{{asset('uploads/' ~ album.cover)}}" alt="album cover">          
+                            </figure>
                             
-                            {# if the lenght of the bio is sup to 234 then cut the array and add ...  #}
-                            {{ app.user.bio|length > 242 ? app.user.bio|slice(0, 242) ~ '...' : app.user.bio  }}
-                        </p>
-                    </figcaption>
+                            <h3>{{album.nameAlbum}} </h3>
 
-                </div>
+                        </a>
+                    
+                        
+                    </div>
+                {% endfor %}
+                    
+            </div>
+        
+        {% else %}
+            <h2 class="text-center fs-4">You do not have any !</h2>
+        {% endif %}
+
+    </div>
+    
+
+
+    {% if app.user.bio != null %}
+        
+        <div class="about">
+
+            <div class="title">
+                <h2>About</h2>
             </div>
 
-            {% if app.user.bio|length > 242 %}
+            <div class="card m-5 d-flex flex-row p-3 w-75 justify-content-between"  id="myBtn">
+
+                {% if app.user.avatar != null %}
+
+                    <figure>
+                        <img class="rounded-circle" src="{{asset('uploads/' ~ app.user.avatar)}}" alt="{{app.user.username}} image">
+
+                    </figure>  
+                {% endif %}
                 
-                <div id="myModal" class="modal">
-        
-                    <div class="modal-content w-50 h-100 overflow-auto p-0 rounded-5 m-auto">
-        
-                        <span class="close position-absolute m-2 text-danger">&times;</span>
-        
-                        {% if app.user.poster != null %}
-                        
-                            <figure>
-                                <img class="w-100 rounded-5" src="{{asset('uploads/' ~ app.user.poster)}}" alt="{{app.user.username}} image">
-        
-                            </figure>  
-                        {% endif %}
-
-                        
-                        <div class="d-flex">
-
-                            <div class="w-25 p-2">
-
-                                {% if app.user.subUser2|length <= 1 %}
-                                    <h3 class="fw-bold">{{app.user.subUser2|length}} subcriber</h3>
-                                
-                                {% else %}
-                                    <h3 class="fw-bold">{{app.user.subUser2|length}} subcribers</h3>
+                <div class="border border-secondary"></div>
                 
-                                {% endif %}
-                            </div>
+                <figcaption class="d-flex flex-column p-5 w-50">
 
+                    {% if app.user.subUser2|length <= 1 %}
+                        <h3 class="text-light">{{app.user.subUser2|length}} subcriber</h3>
+                    
+                    {% else %}
+                        <h3 class="text-light">{{app.user.subUser2|length}} subcribers</h3>
 
-                            <article class="d-flex flex-column w-75">
+                    {% endif %}
 
-                                <h2><b>{{app.user.username}}</b>  </h2>
-                                
-                                <p>{{app.user.bio}}</p>
-                            </article>
+                    <p class="text-light">
+                        
+                        {# if the lenght of the bio is sup to 234 then cut the array and add ...  #}
+                        {{ app.user.bio|length > 242 ? app.user.bio|slice(0, 242) ~ '...' : app.user.bio  }}
+                    </p>
+                </figcaption>
 
+            </div>
+        </div>
+
+        {% if app.user.bio|length > 242 %}
+            
+            <div id="myModal" class="modal">
+    
+                <div class="modal-content w-50 h-100 overflow-auto p-0 rounded-5 m-auto">
+    
+                    <span class="close position-absolute m-2 text-danger">&times;</span>
+    
+                    {% if app.user.poster != null %}
+                    
+                        <figure>
+                            <img class="w-100 rounded-5" src="{{asset('uploads/' ~ app.user.poster)}}" alt="{{app.user.username}} image">
+    
+                        </figure>  
+                    {% endif %}
+
+                    
+                    <div class="d-flex">
+
+                        <div class="w-25 p-2">
+
+                            {% if app.user.subUser2|length <= 1 %}
+                                <h3 class="fw-bold">{{app.user.subUser2|length}} subcriber</h3>
+                            
+                            {% else %}
+                                <h3 class="fw-bold">{{app.user.subUser2|length}} subcribers</h3>
+            
+                            {% endif %}
                         </div>
-        
+
+
+                        <article class="d-flex flex-column w-75">
+
+                            <h2><b>{{app.user.username}}</b>  </h2>
+                            
+                            <p>{{app.user.bio}}</p>
+                        </article>
+
                     </div>
-        
+    
                 </div>
-            {% endif %}
-
-        {% else %}
-
-            <a class="btn btn-dark" href="{{path('edit_profile')}}">add a bio</a>
+    
+            </div>
         {% endif %}
-    </div>
+
+    {% else %}
+
+        <a class="btn btn-dark" href="{{path('edit_profile')}}">add a bio</a>
+    {% endif %}
 
 </section>
 {% endblock %}
