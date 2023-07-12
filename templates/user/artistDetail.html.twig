@@ -211,6 +211,12 @@
                             {# if the lenght of the bio is sup to 234 then cut the array and add ...  #}
                             {{ artist.bio|length > 242 ? artist.bio|slice(0, 242) ~ '...' : artist.bio  }}
                         </p>
+
+                        {% if artist.bio|length > 242 %}
+                            
+                            <small class="text-light">Click to read more.</small>
+                        {% endif %}
+
                     </figcaption>
 
                 </div>

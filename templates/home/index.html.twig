@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{% if app.user %}
+{% if app.user and artists != null %}
     
     <div class="subscriptions" id="subscriptions">
 
@@ -43,9 +43,15 @@
     </div>
 {% endif %}
 
+
+{% if app.user and artists != null %}
+
 <section class="home">
 
+    {% else %}
+    <section class="home w-100 position-static">
 
+    {% endif %}
 
     <div class="hero">
 
