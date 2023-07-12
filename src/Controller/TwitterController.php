@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 class TwitterController extends AbstractController
 {
@@ -86,5 +87,24 @@ class TwitterController extends AbstractController
 
         // Redirect the user to the home page
         return $this->redirectToRoute('app_home');
+    }
+
+
+    // disconnect from twitter
+    #[Route("/twitter/disconnect", name: "twitter_disconnect")]
+    public function disconnect(EntityManagerInterface $em): Response
+    {
+
+        $user = $this->getUser();
+
+        if($user instanceof User){
+
+            // set the twitter id to null
+            $user->setTwitterId('');
+            $em->flush();
+
+        }
+
+        return $this->redirectToRoute('app_profile');
     }
 }

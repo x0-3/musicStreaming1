@@ -32,7 +32,11 @@
 
     {% if app.user.twitterId == null %}
         
-        <a href="{{ path('twitter_auth') }}">Connect with Twitter</a>
+        <a href="{{ path('twitter_auth') }}" class="btn btn-info">Connect to Twitter</a>
+
+    {% else %}
+    
+        <a href="{{path('twitter_disconnect')}}">Disconnect from Twitter</a>
     {% endif %}
 
     <span class="tacTwitterTimelines">
@@ -178,6 +182,12 @@
                         {# if the lenght of the bio is sup to 234 then cut the array and add ...  #}
                         {{ app.user.bio|length > 242 ? app.user.bio|slice(0, 242) ~ '...' : app.user.bio  }}
                     </p>
+
+                    {% if app.user.bio|length > 242 %}
+                        
+                        <small class="text-light">Click to read more.</small>
+                    {% endif %}
+
                 </figcaption>
 
             </div>
