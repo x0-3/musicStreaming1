@@ -172,3 +172,23 @@ if(rolesField){
   // Call the toggleFields function initially to set the initial state
   toggleFields();
 }
+
+//*********************************************** subscription sideNav **********************************************************//
+
+let openSidebar = document.getElementById('btn');
+let closeSidebar = document.getElementById('close');
+let sidebar = document.getElementById('subscriptions');
+
+if(openSidebar){
+
+  openSidebar.onclick = function() {
+  sidebar.classList.toggle('active');
+  }
+}
+
+if(closeSidebar){
+
+  closeSidebar.onclick = function() {
+    sidebar.classList.toggle('active');
+  }
+}
