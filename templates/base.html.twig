@@ -134,10 +134,10 @@
         
             <div class="legal">
                 <ul>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Cookie</a></li>
-                    <li><a href="#">Copyright</a></li>
+                    <li><a href="#"><small>Terms of Service</small></a></li>
+                    <li><a href="#"><small>Privacy</small></a></li>
+                    <li><a href="#"><small>Cookie</small></a></li>
+                    <li><a href="#"><small>Copyright</small></a></li>
                 </ul>
             </div>
     
@@ -152,6 +152,22 @@
             {{ encore_entry_script_tags('app')}}
             {{ encore_entry_script_tags('audioPlayer')}}
             {{ encore_entry_script_tags('tarteaucitron')}}
+
+            <script>
+                let open = document.getElementById('btn');
+                let close = document.getElementById('close');
+                let sidebar = document.getElementById('subscriptions');
+
+                open.onclick = function() {
+                    sidebar.classList.toggle('active');
+                }
+                close.onclick = function() {
+                    sidebar.classList.toggle('active');
+                }
+
+
+
+            </script>
         {% endblock %}
     </body>
 </html>

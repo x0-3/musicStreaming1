@@ -99,6 +99,12 @@ $breakpointPhone: 767px;
 
         section.home{
 
+            position: initial;
+            width: 100%;
+            box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0);
+            border-radius: 0;
+            padding: 0;
+
             .hero{
                 display: none;
             }
@@ -250,7 +256,6 @@ $breakpointPhone: 767px;
         }
 
         section.artistDetail .hero figure {
-            // width: 26%;
             height: auto;
 
             img {

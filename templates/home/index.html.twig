@@ -4,29 +4,47 @@
 
 {% block body %}
 
-<section class="home">
+{% if app.user %}
+    
+    <div class="subscriptions" id="subscriptions">
 
-    {% if app.user %}
+        <div class="info">
+            <i class="fa-solid fa-arrow-right" id="btn"></i>
+
+            <span class="tooltiptext">open sideBar</span>
+        </div>
+
+        <div class="info">
+            <i class="fa-solid fa-arrow-left" id="close"></i>
+
+            <span class="tooltiptext">close sideBar</span>
+        </div>
+
+        <h2 class="sideInfos">Your six most recent subscriptions</h2>
         
-        <div class="subscriptions">
+        <div class="avatar">
 
-            <div class="avatar">
 
-                {% for artist in artists %}
-                
-                    <figure>
-        
-                        <a href="{{path('app_artistDetail', {'id': artist.username})}}">
-                        
-                            <img class=" rounded-circle w-100" src="{{asset('/uploads/' ~ artist.avatar)}}" alt="{{artist.username}} profile picture">
-                        </a>
-                    </figure>
-                {% endfor %}
+            {% for artist in artists %}
+            
+                <figure>
+    
+                    <a href="{{path('app_artistDetail', {'id': artist.username})}}" class="d-flex flex-row">
+                    
+                        <img class=" rounded-circle w-100" src="{{asset('/uploads/' ~ artist.avatar)}}" alt="{{artist.username}} profile picture">
 
-            </div>
+                        <h2 class="sideInfos">{{artist.username}} </h2>
+                    </a>
+                </figure>
+            {% endfor %}
 
         </div>
-    {% endif %}
+
+    </div>
+{% endif %}
+
+<section class="home">
+
 
 
     <div class="hero">
@@ -46,7 +64,7 @@
 
             </figcaption>
 
-            <h2>Discover the sounds of <b>independent artists</b> and immerse yourself in a world of <b>unique</b> melodies with <b>StreamVibe</b>, the ultimate <b>music streaming website</b>.</h2>
+            <h2>Discover the sounds of <strong>independent artists</strong> and immerse yourself in a world of <strong>unique</strong> melodies with <strong>StreamVibe</strong>, the ultimate <strong>music streaming website</strong>.</h2>
             
         </div>
 
