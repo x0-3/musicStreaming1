@@ -67,6 +67,10 @@ $breakpointTablet: 768px;
                         margin-right: 60px;
                     }
 
+                    &::-webkit-scrollbar{
+                        height: 4px;
+                    }
+
                     .songCard{
                         width: 55vw;
                         margin: 0 15px 8px;
@@ -100,14 +104,18 @@ $breakpointTablet: 768px;
                     white-space: nowrap;
 
                     &::-webkit-scrollbar{
-                        display: none;
+                        height: 4px;
                     }
 
                     .playlistCard, .mcard{
-                        width: 190px;
+                        width: 46%;
                         margin: 0 15px;
                         display: inline-block;
                         position: relative;
+
+                        &:hover{
+                            width: 46%;
+                        }
                     }
                 }
             }

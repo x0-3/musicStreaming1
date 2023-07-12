@@ -116,6 +116,10 @@ $breakpointPhone: 767px;
                     white-space: nowrap;
                     margin: 0 0 66px 0;
 
+                    &::-webkit-scrollbar{
+                        height: 4px;
+                    }
+
                     .side{
                         margin-right: 41vw;
                     }
@@ -163,14 +167,18 @@ $breakpointPhone: 767px;
                     white-space: nowrap;
 
                     &::-webkit-scrollbar{
-                        display: none;
+                        height: 4px;
                     }
 
                     .playlistCard, .mcard{
-                        width: 190px;
+                        width: 46%;
                         margin: 0 15px;
                         display: inline-block;
                         position: relative;
+
+                        &:hover{
+                            width: 46%;
+                        }
                     }
                 }
             }
