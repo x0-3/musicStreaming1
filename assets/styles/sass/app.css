@@ -1039,7 +1039,7 @@
   align-items: center;
 }
 * body section.register {
-  background-image: url("C:/Users/Lea/Documents/musicStreaming1/public/img/concert.jpg");
+  background-image: url("/public/img/concert.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
