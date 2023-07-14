@@ -58,15 +58,15 @@
         <div class="parallax">
 
             <figure>
-                <img src="{{asset('uploads/' ~ artist.poster)}}" alt="{{artist.username}} introduction">
+                <img src="{{asset('uploads/' ~ artist[0].poster)}}" alt="{{artist[0].username}} introduction">
             </figure>
     
             <figcaption>
-                <h1>Discover {{artist.username}} the Hottest artist of the moment !</h1>
+                <h1>Discover {{artist[0].username}} the Hottest artist of the moment !</h1>
     
-                <p>{{ artist.bio|length > 242 ? artist.bio|slice(0, 242) ~ '...' : artist.bio  }} </p>
+                <p>{{ artist[0].bio|length > 242 ? artist[0].bio|slice(0, 242) ~ '...' : artist[0].bio  }} </p>
     
-                <a href="{{path('app_artistDetail', {'id': artist.username})}}">Discover Now !</a>
+                <a href="{{path('app_artistDetail', {'id': artist[0].username})}}">Discover Now !</a>
 
             </figcaption>
 

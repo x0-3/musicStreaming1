@@ -28,7 +28,9 @@ class HomeController extends AbstractController
 
         $playlists = $em->getRepository(Playlist::class)->findByMostFollow(5); //find by most followed playlists
         $songs = $em->getRepository(Song::class)->findByMostLikes(12); //find the most like songs   
-        $artist = $em->getRepository(Subscribe::class)->findOneByMostPopular();
+        $artist = $em->getRepository(User::class)->findByRoles('["ROLE_ARTIST"]');
+
+        shuffle($artist);// shuffle the array of artists
 
         $token = $tokenStorage->getToken();   
 

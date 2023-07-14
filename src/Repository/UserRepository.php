@@ -60,6 +60,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
    /**
     * @return User[] Returns an array of User objects
     */
+    public function findByRoles($roles): array
+    {
+
+        // SELECT u.username, u.poster, u.bio, u.id 
+        // FROM user u
+        // WHERE u.roles LIKE '["ROLE_ARTIST"]'
+        
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles LIKE :roles')
+            ->setParameter('roles', $roles)
+            ->getQuery()
+            ->getResult()
+        ;
+
+    }
+
+
+   /**
+    * @return User[] Returns an array of User objects
+    */
     public function findBySearch(SearchBar $searchBar): array
     {
 
