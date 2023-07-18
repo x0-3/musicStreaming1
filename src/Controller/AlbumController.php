@@ -155,10 +155,12 @@ class AlbumController extends AbstractController
         $user =  $security->getUser(); // get the user in session        
         $albumOwner = $album->getUser(); // get the owner of the album
 
-        // if the owner of the album is strictly equal to the user in session then proceed with the edit
+        // if the owner of the album is strictly equal to the user in session then proceed delete the album
         if ($albumOwner === $user) {  
 
+            // delete the album
             $em->remove($album);
+            // push to the db
             $em->flush();
 
         }

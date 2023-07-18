@@ -1,6 +1,7 @@
-$breakpointDesktop: 1024px;
-$breakpointTablet: 768px;
+$breakpointDesktop: 1024px; // desktop breakpoint
+$breakpointTablet: 768px; // tablet breakpoint
 
+// media query for tablet with a minimum width of 768px and a max width of 1024px
 @media only screen and (min-width: $breakpointTablet) and (max-width: $breakpointDesktop) {
     
     body{
