@@ -45,6 +45,7 @@ class PlaylistController extends AbstractController
             return $this->render('playlist/myPlaylist.html.twig', [
                 'playlists'=> $playlists,
                 'like'=> $like,
+                'description' => 'my playlist page',
             ]);
         
             // if the user isn't logged in then redirect to login page
@@ -126,6 +127,7 @@ class PlaylistController extends AbstractController
             'songs' => $songs,
             'song' => $song,
             'isShuffled' => $isShuffled,
+            'description' => 'music player page for one playlist', 
         ]);
 
     }
@@ -302,6 +304,7 @@ class PlaylistController extends AbstractController
             return $this->render('playlist/newPlaylist.html.twig', [
 
                 'formAddPlaylist'=> $form->createView(),   
+                'description' => ''
             ]);
 
         }
@@ -354,6 +357,7 @@ class PlaylistController extends AbstractController
 
                 'formAddPlaylist'=> $form->createView(),   
                 'edit'=> $playlist->getId(), 
+                'description' => ''
             ]);
 
         } else {
@@ -441,7 +445,8 @@ class PlaylistController extends AbstractController
 
         return $this->render('playlist/_addSongPlaylist.html.twig', [
             'form' => $form,
-            'playlist' => $playlist
+            'playlist' => $playlist,
+            'description' => ''
         ]);
     }
 
@@ -457,6 +462,7 @@ class PlaylistController extends AbstractController
         return $this->render('playlist/playlistDetail.html.twig', [
             'playlist' => $playlist,
             'songs' => $songs,
+            'description' => 'detailed page for one playlist'
         ]);
     }
 

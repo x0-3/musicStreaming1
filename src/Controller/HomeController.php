@@ -52,6 +52,7 @@ class HomeController extends AbstractController
                 'subscriptionSongs'=> $subscriptionSongs,
                 'subscriptionAlbums'=> $subscriptionAlbums,
                 'artist'=> $artist,
+                'description' => 'home page'
             ]);
 
             // if the user isn't signed in, render the page without the favorites list 
@@ -61,6 +62,7 @@ class HomeController extends AbstractController
                 'playlists' => $playlists,
                 'songs' => $songs,
                 'artist'=> $artist,
+                'description' => 'home page'
             ]);
         }
     }
@@ -92,6 +94,7 @@ class HomeController extends AbstractController
                 'artists' => $artists,
                 'albums' => $albums,
                 'playlists' => $playlists,
+                'description' => 'searchBar Page'
             ]);
         }
 
@@ -101,6 +104,7 @@ class HomeController extends AbstractController
             'artists' => $userRepository,
             'albums' => $albumRepository,
             'playlists' => $playlistRepository,
+            'description' => 'searchBar Page'
         ]);
 
  
@@ -116,6 +120,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/recommended.html.twig', [
             'playlists' => $playlists,
+            'description' => 'top ten most followed playlists'
         ]);
     }
 
@@ -133,7 +138,7 @@ class HomeController extends AbstractController
 
             return $this->render('home/favoritePlaylists.html.twig', [
                 'favoritePlaylists' => $favoritePlaylists,
-
+                'description' => 'page for all of the current user favorite playlists'
             ]);
         }
     }

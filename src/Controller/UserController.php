@@ -23,6 +23,7 @@ class UserController extends AbstractController
     {
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
+            'description' => ''
         ]);
     }
 
@@ -86,6 +87,7 @@ class UserController extends AbstractController
             'albums' => $albums,
             'artistMostSub' => $artistMostSub,
             'userSub'=> $userSub,
+            'description' => 'page for the detail of another artist'
         ]);
     }
 
@@ -100,6 +102,7 @@ class UserController extends AbstractController
         return $this->render('user/moreArtistAlbum.html.twig', [
             'albums' => $albums,
             'artist' => $artist,
+            'description' => 'all of the artist albums ordered by most recent'
         ]);
     }
 
@@ -118,6 +121,7 @@ class UserController extends AbstractController
             return $this->render('user/profile.html.twig', [
                 'user' => $user,
                 'albums' => $albums,
+                'description' => ''
             ]);
 
         } else {
@@ -169,6 +173,7 @@ class UserController extends AbstractController
 
             return $this->render('user/editUser.html.twig', [
                 'editUserForm' => $editUserForm,
+                'description' => ''
             ]);
         }
 

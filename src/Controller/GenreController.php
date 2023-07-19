@@ -20,6 +20,7 @@ class GenreController extends AbstractController
 
         return $this->render('genre/index.html.twig', [
             'genre' => $genre,
+            'description' => 'detail page for one genre '
         ]);
     }
 }

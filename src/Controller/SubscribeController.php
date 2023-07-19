@@ -27,6 +27,7 @@ class SubscribeController extends AbstractController
 
             return $this->render('subscribe/ArtistSubscribe.html.twig', [
                 'subs' => $subs,
+                'description' => 'list of artist that the user is subscribed to'
             ]);
 
         }
@@ -42,7 +43,7 @@ class SubscribeController extends AbstractController
 
         return $this->render('subscribe/mostSubscribers.html.twig', [
             'artistMostSub' => $artistMostSub,
-            
+            'description' => 'all of the artist that has the most subscriptions'
         ]);
     }
 
@@ -77,6 +78,7 @@ class SubscribeController extends AbstractController
             return $this->render('subscribe/_addSub.html.twig', [
                 'artist' => $artist,
                 'userSub' => $userSub,
+                'description' => ''
             ]);
 
         }

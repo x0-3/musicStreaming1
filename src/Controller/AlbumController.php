@@ -35,6 +35,7 @@ class AlbumController extends AbstractController
         return $this->render('album/newRelease.html.twig', [
             'albums' => $albums,
             'genres' => $genres,
+            'description' => 'New released albums',
         ]);
     }
 
@@ -48,6 +49,7 @@ class AlbumController extends AbstractController
 
         return $this->render('album/mostRecent.html.twig', [
             'albums' => $albums,
+            'description' => 'new release page for 20 albums',
         ]);
     }
 
@@ -88,6 +90,7 @@ class AlbumController extends AbstractController
 
             return $this->render('album/newAlbum.html.twig', [
                 'formAddAlbum' => $form,
+                'description' => ''
             ]);
 
         } else {
@@ -97,7 +100,7 @@ class AlbumController extends AbstractController
     }
 
 
-    // add a new Album
+    // edit Album
     #[Route('/album/edit/{id}', name: 'edit_album')]
     public function edit(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, Album $album, Security $security): Response
     {
@@ -133,6 +136,7 @@ class AlbumController extends AbstractController
 
             return $this->render('album/newAlbum.html.twig', [
                 'formAddAlbum' => $form,
+                'description' => ''
             ]);
 
         }else {
@@ -181,6 +185,7 @@ class AlbumController extends AbstractController
         return $this->render('album/albumDetail.html.twig', [
             'album'=> $album,
             'songs'=> $songs,
+            'description' => 'detail page of one album',
         ]);
     }
 
@@ -255,6 +260,7 @@ class AlbumController extends AbstractController
             'songs' => $songs,
             'song' => $song,
             'isShuffled' => $isShuffled,
+            'description' => 'music player page for an album',
         ]);
     }
 

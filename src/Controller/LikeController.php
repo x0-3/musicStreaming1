@@ -119,6 +119,7 @@ class LikeController extends AbstractController
                 'songs'=> $songs,
                 'song'=> $song,
                 'isShuffled' => $isShuffled,
+                'description' => 'music player like song'
 
             ]);
 

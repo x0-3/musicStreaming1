@@ -32,6 +32,7 @@ class SongController extends AbstractController
 
         return $this->render('song/mostLiked.html.twig', [
             'songs'=> $songs,
+            'description' => 'Top 10 most liked songs (most popular)'
         ]);
     }
 
@@ -79,6 +80,7 @@ class SongController extends AbstractController
 
                 'formAddSong'=> $form->createView(),   
                 'album'=> $album,
+                'description' => ''
             ]);
 
         } else {
@@ -127,7 +129,8 @@ class SongController extends AbstractController
             // vue to show form
             return $this->render('song/newSong.html.twig', [
 
-                'formAddSong'=> $form->createView(),   
+                'formAddSong'=> $form->createView(),  
+                'description' => '' 
             ]);
 
         } else  {
@@ -172,6 +175,7 @@ class SongController extends AbstractController
 
             return $this->render('song/likedSong.html.twig', [
                 'like'=> $like,
+                'description' => 'Your liked songs'
             ]);
         
         }else{
@@ -192,6 +196,7 @@ class SongController extends AbstractController
         return $this->render('song/addSongsToPlaylist.html.twig',[
             'playlists'=> $playlists,
             'song'=> $song,
+            'description' => ''
         ]);
 
 
@@ -274,6 +279,7 @@ class SongController extends AbstractController
         return $this->render('song/songMusicPlayer.html.twig', [
             'formAddComment' => $form->createView(),
             'song' => $song,
+            'description' => 'song player for one song'
         ]);
 
     }
