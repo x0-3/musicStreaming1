@@ -3,16 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Song;
-use App\Entity\Playlist;
-use App\Entity\Subscribe;
 use App\Entity\User;
+use App\Entity\Playlist;
 use App\Model\SearchBar;
+use App\Entity\Subscribe;
 use App\Form\SearchBarType;
 use App\Repository\SongRepository;
 use App\Repository\UserRepository;
 use App\Repository\AlbumRepository;
 use App\Repository\PlaylistRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -113,13 +115,17 @@ class HomeController extends AbstractController
 
     // top ten most followed playlists
     #[Route('home/recommended', name: 'more_recommended')]
-    public function TopFollowedPlaylists(EntityManagerInterface $em): Response
+    public function TopFollowedPlaylists(EntityManagerInterface $em, Request $request, PaginatorInterface $paginator): Response
     {
 
-        $playlists = $em->getRepository(Playlist::class)->findByMostFollow(20); //find followed playlists ordered by most followed
+        $pagination = $paginator->paginate(
+            $em->getRepository(Playlist::class)->findByMostFollow(), //find followed playlists ordered by most followed,
+            $request->query->get('page', 1),
+            10
+        );
 
         return $this->render('home/recommended.html.twig', [
-            'playlists' => $playlists,
+            'pagination' => $pagination,
             'description' => "Discover the ultimate playlist collection with our Top Ten Most Followed Playlists Page! Immerse yourself in a world of music, curated by millions of passionate users. From chart-topping hits to timeless classics, our top ten playlists are meticulously crafted to cater to every mood and taste. Start streaming now and let the melodies take you on a journey like never before. 🎶🔥 #Playlists #MusicHeaven #TopTenPlaylists"
         ]);
     }
@@ -127,17 +133,22 @@ class HomeController extends AbstractController
     
     // page for all of the current user favorite playlists
     #[Route('/home/favorites', name: 'app_favorites')]
-    public function favoritePlaylists(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
+    public function favoritePlaylists(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, Request $request, PaginatorInterface $paginator): Response
     {   
         $token = $tokenStorage->getToken();
         
         if ($token) {  
             $user = $tokenStorage->getToken()->getUserIdentifier(); //get the user identifier (email)
 
-            $favoritePlaylists = $em->getRepository(Playlist::class)->findFavoritePlaylists($user); //find the user's favorite playlists
+            
+            $pagination = $paginator->paginate(
+                $em->getRepository(Playlist::class)->findFavoritePlaylists($user),
+                $request->query->get('page', 1),
+                10
+            );
 
             return $this->render('home/favoritePlaylists.html.twig', [
-                'favoritePlaylists' => $favoritePlaylists,
+                'pagination' => $pagination,
                 'description' => "Discover and explore all of your favorite playlists in one place! Our user-friendly page brings you a curated collection of top-rated playlists, tailored to your unique tastes. From the latest chart-toppers to timeless classics, find the perfect soundtrack for any mood or occasion. Start enjoying your favorite tunes now!"
             ]);
         }

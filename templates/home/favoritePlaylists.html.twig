@@ -8,7 +8,7 @@
 
         <div class="listItems">
 
-            {% for playlist in favoritePlaylists %}
+            {% for playlist in pagination %}
 
                 <div class="mcard">
 
@@ -26,5 +26,12 @@
             {% endfor %}
             
         </div>
+
+        <div class="d-flex justify-content-center">
+            
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        
     </section>
 {% endblock %}

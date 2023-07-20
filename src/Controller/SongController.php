@@ -12,6 +12,7 @@ use App\Service\FileUploader;
 use App\Service\CommentService;
 use App\Repository\PlaylistRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,13 +26,18 @@ class SongController extends AbstractController
 
     // find the top ten like song (most popular)
     #[Route('/topLiked', name: 'app_mostLiked')]
-    public function index(EntityManagerInterface $em): Response
+    public function index(EntityManagerInterface $em, Request $request, PaginatorInterface $paginator): Response
     {
 
-        $songs = $em->getRepository(Song::class)->findByMostLikes(20); // find the top ten like song
+
+        $pagination = $paginator->paginate(
+            $em->getRepository(Song::class)->findByMostLikes(),
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('song/mostLiked.html.twig', [
-            'songs'=> $songs,
+            'pagination'=> $pagination,
             'description' => "Discover the ultimate collection of music excellence with our Top 10 most liked songs (most popular) Page. Delight in the hottest chart-toppers and timeless classics that have won the hearts of millions worldwide. From unforgettable anthems to soul-stirring melodies, this handpicked selection promises to be a captivating journey through the world's favorite tunes. Tune in and let the rhythm of these beloved tracks sweep you off your feet. Explore the power of music and indulge in the best-loved hits that continue to stand the test of time."
         ]);
     }
@@ -162,7 +168,7 @@ class SongController extends AbstractController
 
     // list of the user like songs
     #[Route('/song', name: 'app_like')]
-    public function myPlaylist(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
+    public function myPlaylist(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, Request $request, PaginatorInterface $paginator ): Response
     {
         $token = $tokenStorage->getToken();
 
@@ -171,7 +177,13 @@ class SongController extends AbstractController
 
             $repo = $em->getRepository(Song::class);
     
-            $like =  $repo->findlikedSongs($userEmail); // find like song for the user
+            // $like =  $repo->findlikedSongs($userEmail); // find like song for the user
+
+            $like = $paginator->paginate(
+                $repo->findlikedSongs($userEmail),
+                $request->query->getInt('page', 1),
+                10
+            );
 
             return $this->render('song/likedSong.html.twig', [
                 'like'=> $like,

@@ -6,7 +6,7 @@
 
     <section class="genreSongs">
 
-        {% for song in genre.songs %}
+        {% for song in songs %}
     
             <div class="songCard">
 
@@ -29,6 +29,12 @@
             </div>
         {% endfor %}
         
+
+        <div class="d-flex justify-content-center">
+            
+            {{ knp_pagination_render(songs) }}
+        </div>
+
     </section>
 
 {% endblock %}

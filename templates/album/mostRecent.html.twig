@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Your favorites{% endblock %}
+{% block title %}New releases{% endblock %}
 
 {% block body %}
 
@@ -25,6 +25,12 @@
 
             {% endfor %}
             
+        </div>
+
+
+        <div class="d-flex justify-content-center">
+            
+            {{ knp_pagination_render(albums) }}
         </div>
     </section>
 {% endblock %}

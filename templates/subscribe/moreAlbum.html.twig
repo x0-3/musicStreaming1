@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Most Liked{% endblock %}
+
+{% block body %}
+
+<section class="more">
+
+    <div class="listItems">
+
+        {% for album in pagination %}
+
+            <div class="mcard">
+
+                <a href="{{path('app_albumDetail', {'id': album.uuid})}}">
+
+                    <figure>
+                        <img src="{{asset('uploads/' ~ album.cover)}}" alt="playlist image">
+                    </figure>
+
+                    <h3>{{album.nameAlbum}}</h3>
+
+                </a>
+            </div>
+
+        {% endfor %}
+        
+    </div>
+
+    <div class="d-flex justify-content-center">
+        
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+</section>
+{% endblock %}

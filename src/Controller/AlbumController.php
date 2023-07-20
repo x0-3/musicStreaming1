@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,10 +43,16 @@ class AlbumController extends AbstractController
 
     // new release page for 20 albums
     #[Route('/album/newRelease', name: 'app_albums')]
-    public function newReleasedAlbum(EntityManagerInterface $em): Response
+    public function newReleasedAlbum(EntityManagerInterface $em, Request $request, PaginatorInterface $paginator): Response
     {
 
         $albums= $em->getRepository(Album::class)->findBy([],['releaseDate'=>'DESC'],20); // get the new released albums
+
+        $albums = $paginator->paginate(
+            $em->getRepository(Album::class)->findBy([],['releaseDate'=>'DESC']),
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('album/mostRecent.html.twig', [
             'albums' => $albums,

@@ -10,6 +10,7 @@ use App\Form\EditUserType;
 use App\Form\SubscribeType;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -94,10 +95,14 @@ class UserController extends AbstractController
 
     // find all of the artist albums ordered by most recent 
     #[Route('/artist/{id}/album', name: 'app_artistAlbum')]
-    public function artistAlbum(User $artist, EntityManagerInterface $em ): Response
+    public function artistAlbum(User $artist, EntityManagerInterface $em, Request $request, PaginatorInterface $paginator): Response
     {
 
-        $albums = $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist); //find the artist's most recent albums
+        $albums = $paginator->paginate(
+            $em->getRepository(Album::class)->findByMostRecentAlbumArtist($artist), //find the artist's most recent albums
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('user/moreArtistAlbum.html.twig', [
             'albums' => $albums,

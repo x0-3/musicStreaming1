@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,7 @@ class PlaylistController extends AbstractController
 
     // my playlist page
     #[Route('/playlist', name: 'app_myPlaylist')]
-    public function index(EntityManagerInterface $em, TokenStorageInterface $tokenStorage): Response
+    public function index(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, Request $request, PaginatorInterface $paginator): Response
     {
         $token = $tokenStorage->getToken();
 
@@ -41,6 +42,11 @@ class PlaylistController extends AbstractController
             $playlists = $repo->findPlaylistUser($userEmail); // get the playlist created by the user
             
             $like = $em->getRepository(Song::class)->findlikedSongs($userEmail);
+
+            $playlists = $paginator->paginate(
+                $playlists, $request->query->getInt('page', 1),
+                6
+            );
 
             return $this->render('playlist/myPlaylist.html.twig', [
                 'playlists'=> $playlists,
