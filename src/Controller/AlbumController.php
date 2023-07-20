@@ -35,7 +35,7 @@ class AlbumController extends AbstractController
         return $this->render('album/newRelease.html.twig', [
             'albums' => $albums,
             'genres' => $genres,
-            'description' => 'New released albums',
+            'description' => "Discover the freshest sounds and hottest tunes with our New Released Albums page! Stay up-to-date on the latest music releases from top artists across all genres. Whether you're a pop enthusiast, a hip-hop aficionado, or a rock devotee, our curated collection has something for everyone. Don't miss out on the latest hits - immerse yourself in the best of today's music scene on our New Released Albums page. Tune in now and let the melodies take you on an unforgettable journey!",
         ]);
     }
 
@@ -49,7 +49,7 @@ class AlbumController extends AbstractController
 
         return $this->render('album/mostRecent.html.twig', [
             'albums' => $albums,
-            'description' => 'new release page for 20 albums',
+            'description' => "Discover the latest and greatest in music with our '20 Albums Page'! Explore the hottest new releases from diverse genres, curated to satisfy all musical tastes. Stay ahead of the curve and immerse yourself in the freshest sounds of 2023. From chart-topping hits to hidden gems, this is your ultimate destination for staying up-to-date with the music scene. Don't miss out on the buzz – start exploring the 20 must-listen albums today!",
         ]);
     }
 
@@ -185,7 +185,7 @@ class AlbumController extends AbstractController
         return $this->render('album/albumDetail.html.twig', [
             'album'=> $album,
             'songs'=> $songs,
-            'description' => 'detail page of one album',
+            'description' => "Explore the mesmerizing world of ". $album->getNameAlbum() ." on our detail page. Immerse yourself in the captivating melodies and lyrical artistry of this critically acclaimed album. Discover insightful reviews, tracklist, and behind-the-scenes stories that shed light on the creative journey. Uncover the essence of ". $album->getNameAlbum() ." and experience music like never before. Join us now and be swept away by its enchanting harmonies!",
         ]);
     }
 
@@ -260,7 +260,7 @@ class AlbumController extends AbstractController
             'songs' => $songs,
             'song' => $song,
             'isShuffled' => $isShuffled,
-            'description' => 'music player page for an album',
+            'description' => "Discover the mesmerizing sounds of ". $album->getNameAlbum() ." with our cutting-edge music player. Immerse yourself in a seamless audio experience, streaming ". $album->getUser()->getUsername() ."'s latest album effortlessly. Explore tracks, lyrics, and album artwork while enjoying crystal-clear sound quality. Unleash your musical passion on our dynamic album page today!",
         ]);
     }
 

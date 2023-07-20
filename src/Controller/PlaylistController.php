@@ -45,7 +45,7 @@ class PlaylistController extends AbstractController
             return $this->render('playlist/myPlaylist.html.twig', [
                 'playlists'=> $playlists,
                 'like'=> $like,
-                'description' => 'my playlist page',
+                'description' => "Discover the ultimate playlist collection at Page! Our hand-curated selection of music playlists spans various genres and moods, designed to captivate your senses and elevate your musical journey. Whether you're seeking energizing beats for workouts or soulful melodies to unwind, Page's playlist page has something for every music enthusiast. Explore now and let the rhythm of our expertly crafted playlists transport you to a world of musical bliss. Start listening today!",
             ]);
         
             // if the user isn't logged in then redirect to login page
@@ -127,7 +127,7 @@ class PlaylistController extends AbstractController
             'songs' => $songs,
             'song' => $song,
             'isShuffled' => $isShuffled,
-            'description' => 'music player page for one playlist', 
+            'description' => "Immerse yourself in a captivating musical journey with our cutting-edge music player for the ultimate playlist experience. Discover a curated selection of songs meticulously arranged to match your mood and taste. With seamless navigation and stunning visuals, our music player page brings harmony and rhythm to your ears. Explore, play, and indulge in the melodic bliss today!", 
         ]);
 
     }
@@ -462,7 +462,7 @@ class PlaylistController extends AbstractController
         return $this->render('playlist/playlistDetail.html.twig', [
             'playlist' => $playlist,
             'songs' => $songs,
-            'description' => 'detailed page for one playlist'
+            'description' => "Discover the ultimate playlist page filled with an expertly curated selection of music and audio delights. Unleash your senses with a diverse array of genres, artists, and moods, meticulously arranged for your listening pleasure. Whether you're seeking heart-pounding beats or soothing melodies, this detailed playlist page has it all. Elevate your music experience and embark on a sonic journey like never before. Tune in now and immerse yourself in the harmonious world of extraordinary playlists."
         ]);
     }
 

@@ -27,7 +27,7 @@ class SubscribeController extends AbstractController
 
             return $this->render('subscribe/ArtistSubscribe.html.twig', [
                 'subs' => $subs,
-                'description' => 'list of artist that the user is subscribed to'
+                'description' => "Discover your favorite artists! Our personalized list of subscribed artists keeps you updated on the latest music, events, and news from the musicians you love. Stay in the loop and never miss a beat with our user-friendly platform. Subscribe now and immerse yourself in a world of musical bliss. Your go-to destination for curated artist content awaits!"
             ]);
 
         }
@@ -43,7 +43,7 @@ class SubscribeController extends AbstractController
 
         return $this->render('subscribe/mostSubscribers.html.twig', [
             'artistMostSub' => $artistMostSub,
-            'description' => 'all of the artist that has the most subscriptions'
+            'description' => "Discover the most subscribed artists of all time on our page! Explore a diverse collection of top-tier talents with a massive following. From mesmerizing musicians and captivating painters to visionary photographers and ingenious sculptors, our platform showcases the cream of the crop. Uncover the art world's finest, all in one place. Subscribe now to stay up-to-date with the creative geniuses shaping the cultural landscape today."
         ]);
     }
 

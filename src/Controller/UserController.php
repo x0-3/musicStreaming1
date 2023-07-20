@@ -87,7 +87,7 @@ class UserController extends AbstractController
             'albums' => $albums,
             'artistMostSub' => $artistMostSub,
             'userSub'=> $userSub,
-            'description' => 'page for the detail of another artist'
+            'description' => "Discover the captivating world of ". $artist->getUsername() ." on our detail-rich page! Immerse yourself in the artistic journey of this extraordinary talent as we showcase their breathtaking masterpieces, artistic inspirations, and life's narrative. Unveil the essence of ". $artist->getUsername() ."'s creations and gain unique insights into their creative process. Explore an artistry like no other and find inspiration in every stroke. Delve into the extraordinary ". $artist->getUsername() ." and their transformative works today!"
         ]);
     }
 
@@ -102,7 +102,7 @@ class UserController extends AbstractController
         return $this->render('user/moreArtistAlbum.html.twig', [
             'albums' => $albums,
             'artist' => $artist,
-            'description' => 'all of the artist albums ordered by most recent'
+            'description' => "Discover the impressive discography of renowned ". $artist->getUsername() .", featuring a collection of their most recent albums. Immerse yourself in a world of captivating melodies and lyrical brilliance as you explore Page's latest musical creations. From soulful ballads to electrifying anthems, each album showcases the artist's evolution and artistic prowess. Dive into a musical journey like no other with Page's most recent albums, available now for your listening pleasure."
         ]);
     }
 

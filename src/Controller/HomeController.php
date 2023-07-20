@@ -52,7 +52,7 @@ class HomeController extends AbstractController
                 'subscriptionSongs'=> $subscriptionSongs,
                 'subscriptionAlbums'=> $subscriptionAlbums,
                 'artist'=> $artist,
-                'description' => 'home page'
+                'description' => "Welcome to StreamVibe - Your Gateway to Exceptional Music Experience! Discover a world of innovation, top-notch services, and unbeatable solutions tailored to meet your unique needs. Explore our diverse range of musics/genres and immerse yourself in unrivaled excellence. Join thousands of satisfied customers who have made us their go-to destination for Music. Explore, Engage, and Elevate with us today!"
             ]);
 
             // if the user isn't signed in, render the page without the favorites list 
@@ -62,7 +62,7 @@ class HomeController extends AbstractController
                 'playlists' => $playlists,
                 'songs' => $songs,
                 'artist'=> $artist,
-                'description' => 'home page'
+                'description' => "Welcome to StreamVibe - Your Gateway to Exceptional Music Experience! Discover a world of innovation, top-notch services, and unbeatable solutions tailored to meet your unique needs. Explore our diverse range of musics/genres and immerse yourself in unrivaled excellence. Join thousands of satisfied customers who have made us their go-to destination for Music. Explore, Engage, and Elevate with us today!"
             ]);
         }
     }
@@ -94,7 +94,7 @@ class HomeController extends AbstractController
                 'artists' => $artists,
                 'albums' => $albums,
                 'playlists' => $playlists,
-                'description' => 'searchBar Page'
+                'description' => "Discover the Power of Our Search Bar - Find what you're looking for instantly! Our user-friendly Search Bar page offers efficient and accurate results, streamlining your browsing experience. Unlock a vast database of information with ease. Try our cutting-edge Search Bar today and simplify your online journey."
             ]);
         }
 
@@ -104,7 +104,7 @@ class HomeController extends AbstractController
             'artists' => $userRepository,
             'albums' => $albumRepository,
             'playlists' => $playlistRepository,
-            'description' => 'searchBar Page'
+            'description' => "Discover the Power of Our Search Bar - Find what you're looking for instantly! Our user-friendly Search Bar page offers efficient and accurate results, streamlining your browsing experience. Unlock a vast database of information with ease. Try our cutting-edge Search Bar today and simplify your online journey."
         ]);
 
  
@@ -120,7 +120,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/recommended.html.twig', [
             'playlists' => $playlists,
-            'description' => 'top ten most followed playlists'
+            'description' => "Discover the ultimate playlist collection with our Top Ten Most Followed Playlists Page! Immerse yourself in a world of music, curated by millions of passionate users. From chart-topping hits to timeless classics, our top ten playlists are meticulously crafted to cater to every mood and taste. Start streaming now and let the melodies take you on a journey like never before. 🎶🔥 #Playlists #MusicHeaven #TopTenPlaylists"
         ]);
     }
 
@@ -138,7 +138,7 @@ class HomeController extends AbstractController
 
             return $this->render('home/favoritePlaylists.html.twig', [
                 'favoritePlaylists' => $favoritePlaylists,
-                'description' => 'page for all of the current user favorite playlists'
+                'description' => "Discover and explore all of your favorite playlists in one place! Our user-friendly page brings you a curated collection of top-rated playlists, tailored to your unique tastes. From the latest chart-toppers to timeless classics, find the perfect soundtrack for any mood or occasion. Start enjoying your favorite tunes now!"
             ]);
         }
     }

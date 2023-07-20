@@ -119,7 +119,7 @@ class LikeController extends AbstractController
                 'songs'=> $songs,
                 'song'=> $song,
                 'isShuffled' => $isShuffled,
-                'description' => 'music player like song'
+                'description' => "Discover the ultimate music player experience on our Song Page! Dive into a world of seamless melodies and crystal-clear sound. Enjoy personalized playlists, easy navigation, and an extensive library of your favorite tunes. Embrace the rhythm and explore our innovative music player today."
 
             ]);
 

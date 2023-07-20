@@ -20,7 +20,7 @@ class GenreController extends AbstractController
 
         return $this->render('genre/index.html.twig', [
             'genre' => $genre,
-            'description' => 'detail page for one genre '
+            'description' => "Discover the Ultimate ". $genre->getGenreName() ." Experience | Explore our ". $genre->getGenreName() ." Detail Page: Uncover a captivating collection of ". $genre->getGenreName() ."-themed content, carefully curated to indulge your passions. Immerse yourself in a world of ". $genre->getGenreName() ." with expertly crafted articles, in-depth analysis, exclusive interviews, and much more. Unlock the magic of ". $genre->getGenreName() ." and dive into a treasure trove of knowledge and entertainment. Let your journey begin!"
         ]);
     }
 }

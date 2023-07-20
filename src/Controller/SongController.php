@@ -32,7 +32,7 @@ class SongController extends AbstractController
 
         return $this->render('song/mostLiked.html.twig', [
             'songs'=> $songs,
-            'description' => 'Top 10 most liked songs (most popular)'
+            'description' => "Discover the ultimate collection of music excellence with our Top 10 most liked songs (most popular) Page. Delight in the hottest chart-toppers and timeless classics that have won the hearts of millions worldwide. From unforgettable anthems to soul-stirring melodies, this handpicked selection promises to be a captivating journey through the world's favorite tunes. Tune in and let the rhythm of these beloved tracks sweep you off your feet. Explore the power of music and indulge in the best-loved hits that continue to stand the test of time."
         ]);
     }
 
@@ -175,7 +175,7 @@ class SongController extends AbstractController
 
             return $this->render('song/likedSong.html.twig', [
                 'like'=> $like,
-                'description' => 'Your liked songs'
+                'description' => "Discover the ultimate playlist of user-favorite songs! Our carefully curated list features the most beloved tunes, catering to diverse tastes and genres. Explore a musical journey filled with nostalgia, new hits, and hidden gems. Let the melodies transport you to a world of harmonious bliss. Check out our user-like songs page now!"
             ]);
         
         }else{
@@ -279,7 +279,7 @@ class SongController extends AbstractController
         return $this->render('song/songMusicPlayer.html.twig', [
             'formAddComment' => $form->createView(),
             'song' => $song,
-            'description' => 'song player for one song'
+            'description' => "Discover the ultimate song player for an unforgettable musical experience! Immerse yourself in the soulful melodies of ". $song->getNameSong() ." with our state-of-the-art song player. Enjoy high-quality audio, easy navigation, and personalized playlists, all on one dedicated page. Listen, loop, and lose yourself in the magic of ". $song->getNameSong() ." - your go-to destination for musical bliss. Try it now and elevate your auditory senses!"
         ]);
 
     }
