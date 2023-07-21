@@ -13,7 +13,6 @@ use App\Repository\UserRepository;
 use App\Repository\AlbumRepository;
 use App\Repository\PlaylistRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
