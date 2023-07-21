@@ -1,6 +1,8 @@
 $dark-blue: #36454F;
 $neon-blue: #7DF9FF;
 
+$Playfair: 'Playfair Display', serif;
+$Montserrat: 'Montserrat', sans-serif;
 
 * {
     padding: 0;
@@ -16,7 +18,7 @@ $neon-blue: #7DF9FF;
     }
 
     h1, h2,h3{
-        font-family: 'Montserrat', sans-serif;
+        font-family: $Montserrat;
     }
 
     h3{
@@ -125,7 +127,7 @@ $neon-blue: #7DF9FF;
                             a {
                                 text-decoration: none;
                                 margin: 40px;
-                                font-family: 'Playfair Display', serif;
+                                font-family: $Playfair;
     
                                 &:hover{
                                     color: $neon-blue;
@@ -745,7 +747,7 @@ $neon-blue: #7DF9FF;
                 a{
                     text-decoration: none;
                     color: #030303;
-                    font-family: 'Montserrat', sans-serif;
+                    font-family: $Montserrat;
 
                 }
             }
@@ -850,7 +852,7 @@ $neon-blue: #7DF9FF;
                 width: 100%;
                 margin: auto;
                 border-collapse: collapse;
-                font-family: 'Montserrat', sans-serif;
+                font-family: $Montserrat;
 
                 tr {
                     border-bottom: 1pt solid #C1C1C1;
@@ -1067,7 +1069,7 @@ $neon-blue: #7DF9FF;
                             a{
                                 text-decoration: none;
                                 color: white;
-                                font-family: 'Playfair Display', serif;
+                                font-family: $Playfair;
                                 font-size: larger;
                                 font-weight: bold;
                                 margin-left: 5px;
@@ -1108,7 +1110,7 @@ $neon-blue: #7DF9FF;
                 a.ArtistName {
                     text-decoration: none;
                     color: $dark-blue;
-                    font-family: 'Montserrat', sans-serif;
+                    font-family: $Montserrat;
                     font-weight: bold;
                     font-size: larger;
                 }
@@ -1455,7 +1457,7 @@ $neon-blue: #7DF9FF;
                         a {
                             text-decoration: none;
                             color: black;
-                            font-family: 'Playfair Display', serif;
+                            font-family: $Playfair;
                         }
                     }
                 }
@@ -1463,7 +1465,7 @@ $neon-blue: #7DF9FF;
 
             small{
                 margin: 30px;
-                font-family: 'Playfair Display', serif;  
+                font-family: $Playfair;  
             }
         }
     }
