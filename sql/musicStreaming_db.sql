@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dumping database structure for musicStream2
-CREATE DATABASE IF NOT EXISTS `musicStream2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `musicStream2`;
+-- Dumping database structure for musicstream2
+CREATE DATABASE IF NOT EXISTS `musicstream2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `musicstream2`;
 
--- Dumping structure for table musicStream2.album
+-- Dumping structure for table musicstream2.album
 CREATE TABLE IF NOT EXISTS `album` (
   `id` int NOT NULL AUTO_INCREMENT,
   `cover` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -33,14 +33,14 @@ CREATE TABLE IF NOT EXISTS `album` (
   CONSTRAINT `FK_39986E43A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.album: ~4 rows (approximately)
+-- Dumping data for table musicstream2.album: ~4 rows (approximately)
 INSERT INTO `album` (`id`, `cover`, `name_album`, `release_date`, `user_id`, `uuid`) VALUES
 	(1, 'I-used-to-know-her.jpg', 'I Used to Know HER', '2019-05-02 14:07:22', 2, '0a074143-0694-11ee-af90-80e82c978fe5'),
 	(2, 'H.E.R.png', 'H.E.R', '2017-05-02 14:10:57', 2, '0a0810e9-0694-11ee-af90-80e82c978fe5'),
 	(3, 'KissLand.png', 'Kiss Land', '2013-05-02 14:12:56', 3, '0a081629-0694-11ee-af90-80e82c978fe5'),
 	(4, 'Screenshot-2023-05-10-211902-645bff2233837.png', 'Back of My Mind', '2023-05-10 20:31:29', 2, '0a08187a-0694-11ee-af90-80e82c978fe5');
 
--- Dumping structure for table musicStream2.comment
+-- Dumping structure for table musicstream2.comment
 CREATE TABLE IF NOT EXISTS `comment` (
   `id` int NOT NULL AUTO_INCREMENT,
   `text` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   CONSTRAINT `FK_9474526CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=331 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.comment: ~9 rows (approximately)
+-- Dumping data for table musicstream2.comment: ~9 rows (approximately)
 INSERT INTO `comment` (`id`, `text`, `date_mess`, `song_id`, `user_id`, `uuid`) VALUES
 	(319, 'hello', '2023-05-29 00:27:51', 13, NULL, '0a214fda-0694-11ee-af90-80e82c978fe5'),
 	(323, 'fghjk', '2023-06-01 07:21:52', 13, 30, '0a2161e5-0694-11ee-af90-80e82c978fe5'),
@@ -68,7 +68,7 @@ INSERT INTO `comment` (`id`, `text`, `date_mess`, `song_id`, `user_id`, `uuid`) 
 	(329, 'test', '2023-06-09 07:23:17', 2, 30, '962e1614-b6b3-4f15-a02a-6733dd722c91'),
 	(330, 'test comment', '2023-06-15 09:20:40', 9, 30, '1cdb1daf-d8a6-4d62-875e-69aea5504244');
 
--- Dumping structure for table musicStream2.doctrine_migration_versions
+-- Dumping structure for table musicstream2.doctrine_migration_versions
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Dumping data for table musicStream2.doctrine_migration_versions: ~9 rows (approximately)
+-- Dumping data for table musicstream2.doctrine_migration_versions: ~9 rows (approximately)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20230502082355', '2023-05-02 08:24:26', 338),
 	('DoctrineMigrations\\Version20230502093825', '2023-05-02 09:38:44', 298),
@@ -88,7 +88,7 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 	('DoctrineMigrations\\Version20230629200646', '2023-06-30 06:47:05', 32),
 	('DoctrineMigrations\\Version20230630064753', '2023-06-30 06:47:59', 21);
 
--- Dumping structure for table musicStream2.genre
+-- Dumping structure for table musicstream2.genre
 CREATE TABLE IF NOT EXISTS `genre` (
   `id` int NOT NULL AUTO_INCREMENT,
   `genre_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `genre` (
   UNIQUE KEY `UNIQ_835033F8D17F50A6` (`uuid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.genre: ~14 rows (approximately)
+-- Dumping data for table musicstream2.genre: ~14 rows (approximately)
 INSERT INTO `genre` (`id`, `genre_name`, `uuid`) VALUES
 	(1, 'Popular music', '0a2e9c26-0694-11ee-af90-80e82c978fe5'),
 	(2, 'Electronic music', '0a2ecdee-0694-11ee-af90-80e82c978fe5'),
@@ -114,7 +114,7 @@ INSERT INTO `genre` (`id`, `genre_name`, `uuid`) VALUES
 	(13, 'Rock and roll', '0a2ee414-0694-11ee-af90-80e82c978fe5'),
 	(14, 'Latin music', '0a2ee65d-0694-11ee-af90-80e82c978fe5');
 
--- Dumping structure for table musicStream2.messenger_messages
+-- Dumping structure for table musicstream2.messenger_messages
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `body` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -129,13 +129,13 @@ CREATE TABLE IF NOT EXISTS `messenger_messages` (
   KEY `IDX_75EA56E016BA31DB` (`delivered_at`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.messenger_messages: ~3 rows (approximately)
+-- Dumping data for table musicstream2.messenger_messages: ~3 rows (approximately)
 INSERT INTO `messenger_messages` (`id`, `body`, `headers`, `queue_name`, `created_at`, `available_at`, `delivered_at`) VALUES
 	(1, 'O:36:\\"Symfony\\\\Component\\\\Messenger\\\\Envelope\\":2:{s:44:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0stamps\\";a:1:{s:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\";a:1:{i:0;O:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\":1:{s:55:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\0busName\\";s:21:\\"messenger.bus.default\\";}}}s:45:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0message\\";O:51:\\"Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\":2:{s:60:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0message\\";O:39:\\"Symfony\\\\Bridge\\\\Twig\\\\Mime\\\\TemplatedEmail\\":4:{i:0;s:41:\\"registration/confirmation_email.html.twig\\";i:1;N;i:2;a:3:{s:9:\\"signedUrl\\";s:165:\\"http://127.0.0.1:8000/verify/email?expires=1683040575&signature=KmuPSNHs8QqBBNcsjbUVLxYloTZSYcR5nJgpQULSkAs%3D&token=C4oo7MH75Y0DLR3pKDg0ECH4AgaKKrJSKjQ1pmXR%2Bn0%3D\\";s:19:\\"expiresAtMessageKey\\";s:26:\\"%count% hour|%count% hours\\";s:20:\\"expiresAtMessageData\\";a:1:{s:7:\\"%count%\\";i:1;}}i:3;a:6:{i:0;N;i:1;N;i:2;N;i:3;N;i:4;a:0:{}i:5;a:2:{i:0;O:37:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\":2:{s:46:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0headers\\";a:3:{s:4:\\"from\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:4:\\"From\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:19:\\"steph6362@gmail.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:4:\\"x0-3\\";}}}}s:2:\\"to\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:2:\\"To\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:21:\\"bedoti4679@saeoil.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:0:\\"\\";}}}}s:7:\\"subject\\";a:1:{i:0;O:48:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:7:\\"Subject\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:55:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\0value\\";s:25:\\"Please Confirm your Email\\";}}}s:49:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0lineLength\\";i:76;}i:1;N;}}}s:61:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0envelope\\";N;}}', '[]', 'default', '2023-05-02 14:16:16', '2023-05-02 14:16:16', NULL),
 	(2, 'O:36:\\"Symfony\\\\Component\\\\Messenger\\\\Envelope\\":2:{s:44:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0stamps\\";a:1:{s:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\";a:1:{i:0;O:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\":1:{s:55:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\0busName\\";s:21:\\"messenger.bus.default\\";}}}s:45:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0message\\";O:51:\\"Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\":2:{s:60:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0message\\";O:39:\\"Symfony\\\\Bridge\\\\Twig\\\\Mime\\\\TemplatedEmail\\":4:{i:0;s:41:\\"registration/confirmation_email.html.twig\\";i:1;N;i:2;a:3:{s:9:\\"signedUrl\\";s:175:\\"http://127.0.0.1:8000/verify/email?expires=1683054377&signature=hT5%2Ft0YK3kZWdoAwW41%2Ba2N41Ls1vlojWP%2FZ177iQeQ%3D&token=AGJDjQ453vqtLVJd2U4XOzgWRn%2FXMxfOhC%2B%2FnEjXcWk%3D\\";s:19:\\"expiresAtMessageKey\\";s:26:\\"%count% hour|%count% hours\\";s:20:\\"expiresAtMessageData\\";a:1:{s:7:\\"%count%\\";i:1;}}i:3;a:6:{i:0;N;i:1;N;i:2;N;i:3;N;i:4;a:0:{}i:5;a:2:{i:0;O:37:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\":2:{s:46:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0headers\\";a:3:{s:4:\\"from\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:4:\\"From\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:19:\\"steph6362@gmail.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:4:\\"x0-3\\";}}}}s:2:\\"to\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:2:\\"To\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:23:\\"ditipen509@in2reach.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:0:\\"\\";}}}}s:7:\\"subject\\";a:1:{i:0;O:48:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:7:\\"Subject\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:55:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\0value\\";s:25:\\"Please Confirm your Email\\";}}}s:49:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0lineLength\\";i:76;}i:1;N;}}}s:61:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0envelope\\";N;}}', '[]', 'default', '2023-05-02 18:06:18', '2023-05-02 18:06:18', NULL),
 	(3, 'O:36:\\"Symfony\\\\Component\\\\Messenger\\\\Envelope\\":2:{s:44:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0stamps\\";a:1:{s:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\";a:1:{i:0;O:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\":1:{s:55:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\0busName\\";s:21:\\"messenger.bus.default\\";}}}s:45:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0message\\";O:51:\\"Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\":2:{s:60:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0message\\";O:39:\\"Symfony\\\\Bridge\\\\Twig\\\\Mime\\\\TemplatedEmail\\":4:{i:0;s:41:\\"registration/confirmation_email.html.twig\\";i:1;N;i:2;a:3:{s:9:\\"signedUrl\\";s:165:\\"http://127.0.0.1:8000/verify/email?expires=1683054600&signature=qNeRv5siVKHbAPElRyrAJHEGLYgS990QoWRGPtBRCtc%3D&token=UuvJinsqXVfm%2FBBBUfGuqurbldo6g3b7qyKaKp5KHpw%3D\\";s:19:\\"expiresAtMessageKey\\";s:26:\\"%count% hour|%count% hours\\";s:20:\\"expiresAtMessageData\\";a:1:{s:7:\\"%count%\\";i:1;}}i:3;a:6:{i:0;N;i:1;N;i:2;N;i:3;N;i:4;a:0:{}i:5;a:2:{i:0;O:37:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\":2:{s:46:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0headers\\";a:3:{s:4:\\"from\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:4:\\"From\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:19:\\"steph6362@gmail.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:4:\\"x0-3\\";}}}}s:2:\\"to\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:2:\\"To\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:22:\\"paxefem331@larland.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:0:\\"\\";}}}}s:7:\\"subject\\";a:1:{i:0;O:48:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:7:\\"Subject\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:55:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\0value\\";s:25:\\"Please Confirm your Email\\";}}}s:49:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0lineLength\\";i:76;}i:1;N;}}}s:61:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0envelope\\";N;}}', '[]', 'default', '2023-05-02 18:10:00', '2023-05-02 18:10:00', NULL);
 
--- Dumping structure for table musicStream2.playlist
+-- Dumping structure for table musicstream2.playlist
 CREATE TABLE IF NOT EXISTS `playlist` (
   `id` int NOT NULL AUTO_INCREMENT,
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -148,9 +148,9 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   UNIQUE KEY `UNIQ_D782112DD17F50A6` (`uuid`),
   KEY `IDX_D782112DA76ED395` (`user_id`),
   CONSTRAINT `FK_D782112DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.playlist: ~5 rows (approximately)
+-- Dumping data for table musicstream2.playlist: ~5 rows (approximately)
 INSERT INTO `playlist` (`id`, `image`, `playlist_name`, `date_created`, `user_id`, `uuid`, `description`) VALUES
 	(1, 'playlist1.jpg', 'playlist #1', '2023-05-02 17:10:11', 1, '0a44a7bb-0694-11ee-af90-80e82c978fe5', NULL),
 	(2, 'playlist2.jpg', 'playlist#2', '2023-05-10 14:19:45', 1, '0a44bc1b-0694-11ee-af90-80e82c978fe5', NULL),
@@ -158,7 +158,7 @@ INSERT INTO `playlist` (`id`, `image`, `playlist_name`, `date_created`, `user_id
 	(14, 'market-place-647850b2dee9d.png', 'date test', '2023-06-01 08:02:57', 30, '0a44c021-0694-11ee-af90-80e82c978fe5', NULL),
 	(17, NULL, 'test1', '2023-06-15 14:00:02', 30, '1ffc08ca-40ed-42ff-8cf4-ca605dd90813', 'Lorem ipsum');
 
--- Dumping structure for table musicStream2.playlist_song
+-- Dumping structure for table musicstream2.playlist_song
 CREATE TABLE IF NOT EXISTS `playlist_song` (
   `playlist_id` int NOT NULL,
   `song_id` int NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `playlist_song` (
   CONSTRAINT `FK_93F4D9C3A0BDB2F3` FOREIGN KEY (`song_id`) REFERENCES `song` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.playlist_song: ~9 rows (approximately)
+-- Dumping data for table musicstream2.playlist_song: ~9 rows (approximately)
 INSERT INTO `playlist_song` (`playlist_id`, `song_id`) VALUES
 	(1, 2),
 	(1, 7),
@@ -181,7 +181,7 @@ INSERT INTO `playlist_song` (`playlist_id`, `song_id`) VALUES
 	(14, 17),
 	(17, 6);
 
--- Dumping structure for table musicStream2.playlist_user
+-- Dumping structure for table musicstream2.playlist_user
 CREATE TABLE IF NOT EXISTS `playlist_user` (
   `playlist_id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `playlist_user` (
   CONSTRAINT `FK_2D8AE12BA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.playlist_user: ~6 rows (approximately)
+-- Dumping data for table musicstream2.playlist_user: ~6 rows (approximately)
 INSERT INTO `playlist_user` (`playlist_id`, `user_id`) VALUES
 	(1, 30),
 	(2, 2),
@@ -201,7 +201,7 @@ INSERT INTO `playlist_user` (`playlist_id`, `user_id`) VALUES
 	(2, 30),
 	(17, 30);
 
--- Dumping structure for table musicStream2.reset_password_request
+-- Dumping structure for table musicstream2.reset_password_request
 CREATE TABLE IF NOT EXISTS `reset_password_request` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
@@ -214,9 +214,9 @@ CREATE TABLE IF NOT EXISTS `reset_password_request` (
   CONSTRAINT `FK_7CE748AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.reset_password_request: ~0 rows (approximately)
+-- Dumping data for table musicstream2.reset_password_request: ~0 rows (approximately)
 
--- Dumping structure for table musicStream2.song
+-- Dumping structure for table musicstream2.song
 CREATE TABLE IF NOT EXISTS `song` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name_song` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `song` (
   CONSTRAINT `FK_33EDEEA1A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.song: ~17 rows (approximately)
+-- Dumping data for table musicstream2.song: ~17 rows (approximately)
 INSERT INTO `song` (`id`, `name_song`, `link`, `user_id`, `album_id`, `genre_id`, `uuid`) VALUES
 	(1, 'As I Am', 'H.E.R. - As I Am.mp3', 2, 1, 3, '0a585480-0694-11ee-af90-80e82c978fe5'),
 	(2, 'Carried Away', 'H.E.R. - Carried Away.mp3', 2, 1, 10, '0a586497-0694-11ee-af90-80e82c978fe5'),
@@ -255,7 +255,7 @@ INSERT INTO `song` (`id`, `name_song`, `link`, `user_id`, `album_id`, `genre_id`
 	(17, 'Bloody Water', 'H-E-R-Bloody-Waters-Audio-ft-Thundercat-645cacc6a818b.mp3', 2, 4, 3, '0a58857d-0694-11ee-af90-80e82c978fe5'),
 	(19, 'test', 'The Weeknd ft. Future - Double Fantasy.mp3', 3, 3, 5, '0a5887fb-0694-11ee-af90-80e82c978fe5');
 
--- Dumping structure for table musicStream2.subscribe
+-- Dumping structure for table musicstream2.subscribe
 CREATE TABLE IF NOT EXISTS `subscribe` (
   `id` int NOT NULL AUTO_INCREMENT,
   `date_follow` datetime NOT NULL,
@@ -268,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `subscribe` (
   CONSTRAINT `FK_68B95F3E56AE248B` FOREIGN KEY (`user1_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.subscribe: ~5 rows (approximately)
+-- Dumping data for table musicstream2.subscribe: ~5 rows (approximately)
 INSERT INTO `subscribe` (`id`, `date_follow`, `user1_id`, `user2_id`) VALUES
 	(127, '2023-05-20 14:20:16', 1, 3),
 	(132, '2023-05-20 14:25:53', 1, 2),
@@ -276,7 +276,7 @@ INSERT INTO `subscribe` (`id`, `date_follow`, `user1_id`, `user2_id`) VALUES
 	(139, '2023-06-15 12:15:44', 30, 2),
 	(140, '2023-06-17 20:55:05', 2, 3);
 
--- Dumping structure for table musicStream2.user
+-- Dumping structure for table musicstream2.user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -297,16 +297,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `UNIQ_8D93D649D17F50A6` (`uuid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.user: ~6 rows (approximately)
+-- Dumping data for table musicstream2.user: ~6 rows (approximately)
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `avatar`, `username`, `is_verified`, `is_banned`, `google_id`, `uuid`, `poster`, `bio`, `twitter_id`) VALUES
 	(1, 'bedoti4679@saeoil.com', '["ROLE_ADMIN"]', '$2y$13$Z2MkJWmewEX5gBzaN3R7VeJ2oAVLhWVbfcFp2UvjgcwNE3nEOZx.S', NULL, 'me', 1, 0, NULL, '0a779431-0694-11ee-af90-80e82c978fe5', NULL, NULL, NULL),
-	(2, 'ditipen509@in2reach.com', '{"2": "ROLE_ARTIST"}', '$2y$13$JKJXoW24rQdZJ2dPi4O4ReeSiUFlgCG6rz7.E7SpoQ/.y2KXEwJUa', 'her.jpg', 'H.E.R', 1, 0, NULL, '0a783d57-0694-11ee-af90-80e82c978fe5', 'download-648e194e6481c.jpg', 'Global pop superstar Dua Lipa released Future Nostalgia, her #1 UK sophomore album, this year to worldwide acclaim. It is one of the best reviewed albums of 2020 and debuted in the top 5 of the Billboard 200 Album Chart. Upon release, Future Nostalgia was the most streamed album in a day by a British female artist globally in Spotify history and has over 4.5 billion streams to date. Dua is the biggest female artist in the world on Spotify and is currently the third biggest artist overall with nearly 60 million monthly listeners. The album’s certified platinum lead single “Don’t Start Now” is a worldwide hit with one billion streams on Spotify alone, and a #2 spot on the Billboard Hot 100, a career high for the pop star. The track also broke her personal best record of weeks at #1 at US Top 40 radio. Dua followed the success of “Don’t Start Now” by releasing smash UK single “Physical,” and her US Top 40 #1 “Break My Heart.” Most recently, Future Nostalgia was shortlisted for UK’s prestigious Mercury Prize. Future Nostalgia is the follow up to Dua’s eponymous 2017 debut, which is certified platinum and spawned 6 platinum tracks. She made BRIT Award history in 2018 by becoming the first female artist to pick up five nominations, with two wins for British Breakthrough Act and British Female Solo Artist, and received two Grammy awards for Best ', NULL),
+	(2, 'ditipen509@in2reach.com', '["ROLE_ARTIST"]', '$2y$13$JKJXoW24rQdZJ2dPi4O4ReeSiUFlgCG6rz7.E7SpoQ/.y2KXEwJUa', 'her.jpg', 'H.E.R', 1, 0, NULL, '0a783d57-0694-11ee-af90-80e82c978fe5', 'download-648e194e6481c.jpg', 'Global pop superstar Dua Lipa released Future Nostalgia, her #1 UK sophomore album, this year to worldwide acclaim. It is one of the best reviewed albums of 2020 and debuted in the top 5 of the Billboard 200 Album Chart. Upon release, Future Nostalgia was the most streamed album in a day by a British female artist globally in Spotify history and has over 4.5 billion streams to date. Dua is the biggest female artist in the world on Spotify and is currently the third biggest artist overall with nearly 60 million monthly listeners. The album’s certified platinum lead single “Don’t Start Now” is a worldwide hit with one billion streams on Spotify alone, and a #2 spot on the Billboard Hot 100, a career high for the pop star. The track also broke her personal best record of weeks at #1 at US Top 40 radio. Dua followed the success of “Don’t Start Now” by releasing smash UK single “Physical,” and her US Top 40 #1 “Break My Heart.” Most recently, Future Nostalgia was shortlisted for UK’s prestigious Mercury Prize. Future Nostalgia is the follow up to Dua’s eponymous 2017 debut, which is certified platinum and spawned 6 platinum tracks. She made BRIT Award history in 2018 by becoming the first female artist to pick up five nominations, with two wins for British Breakthrough Act and British Female Solo Artist, and received two Grammy awards for Best ', NULL),
 	(3, 'paxefem331@larland.com', '["ROLE_ARTIST"]', '$2y$13$S2b11CeUO1ftho4QRDkEE.AV6YIUVJS/bTJOMO95Q5RkVtHmi3poG', 'th-648e108e1ef73.jpg', 'TW', 1, 0, NULL, '0a78439a-0694-11ee-af90-80e82c978fe5', 'images-648e12646ac97.jpg', 'Lorem Ipsum', NULL),
 	(16, 'bannedUser@test.fr', '[]', '$2y$13$4ntQERaKzuKPOqzswrSxHOpZ82fP7JuLHtQmlZXyE5VI8EBSHRLdG', NULL, 'bannedUser', 1, 0, NULL, '0a784798-0694-11ee-af90-80e82c978fe5', NULL, NULL, NULL),
 	(30, 'admin@admin.com', '["ROLE_ADMIN"]', '$2y$13$kCGYQs5RZe1fPY3BjwtPUuHHMd.llmJfzcc/wsFzH8rtTyuavZ9F.', '', 'admin', 1, 0, NULL, '0a784f6f-0694-11ee-af90-80e82c978fe5', '', 'vffdcvdcvgf', 'x03826155085695'),
 	(36, 'steph6362@gmail.com', '[]', NULL, 'https://lh3.googleusercontent.com/a/AAcHTtcJZ1bqUFRAm1ZzIoUhS-q13tT-sv92WtMgTVBv=s96-c', 'X0 -3', 0, 0, '111905502707698564668', 'a1120be2-e9e2-472e-b075-788ac42ec54c', NULL, NULL, NULL);
 
--- Dumping structure for table musicStream2.user_song
+-- Dumping structure for table musicstream2.user_song
 CREATE TABLE IF NOT EXISTS `user_song` (
   `user_id` int NOT NULL,
   `song_id` int NOT NULL,
@@ -317,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `user_song` (
   CONSTRAINT `FK_496CA268A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicStream2.user_song: ~18 rows (approximately)
+-- Dumping data for table musicstream2.user_song: ~18 rows (approximately)
 INSERT INTO `user_song` (`user_id`, `song_id`) VALUES
 	(1, 6),
 	(1, 7),
