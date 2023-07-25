@@ -35,30 +35,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ******************************************* Toggle light and dark mode ********************************************************************* //
-(function() {
-  let onpageLoad = localStorage.getItem("theme") || "light";
-  let element = document.body;
-  element.classList.add(onpageLoad);
-  document.getElementById("theme").textContent =
-    localStorage.getItem("theme") || "light";
-})()
+// (function() {
+//   let onpageLoad = localStorage.getItem("theme") || "light";
+//   let element = document.body;
+//   element.classList.add(onpageLoad);
+//   document.getElementById("theme").textContent =
+//     localStorage.getItem("theme") || "light";
+// })()
 
 
-// we user window. because the onClick attribute it's defined in the global scope 
-// we need it to be defined in the global scope in order for the function to be found and called
-window.toggleTheme = function() {
-  let element = document.body;
-  element.classList.toggle("dark");
+// // we user window. because the onClick attribute it's defined in the global scope 
+// // we need it to be defined in the global scope in order for the function to be found and called
+// window.toggleTheme = function() {
+//   let element = document.body;
+//   element.classList.toggle("dark");
 
-  let theme = localStorage.getItem("theme");
-  if (theme && theme === "dark") {
-    localStorage.setItem("theme", "light");
-  } else {
-    localStorage.setItem("theme", "dark");
-  }
+//   let theme = localStorage.getItem("theme");
+//   if (theme && theme === "dark") {
+//     localStorage.setItem("theme", "light");
+//   } else {
+//     localStorage.setItem("theme", "dark");
+//   }
 
-  document.getElementById("theme").textContent = localStorage.getItem("theme");
-}
+//   document.getElementById("theme").textContent = localStorage.getItem("theme");
+// }
 
 
 // ********************************************** Hamburger menu ****************************************************************** * // 
