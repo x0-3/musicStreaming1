@@ -1,4 +1,5 @@
-$dark-blue: #36454F;
+$dark-blue: white;
+$dark: #0f2537;
 $neon-blue: #7DF9FF;
 
 $Playfair: 'Playfair Display', serif;
@@ -19,13 +20,14 @@ $Montserrat: 'Montserrat', sans-serif;
 
     h1, h2,h3{
         font-family: $Montserrat;
+        color: $dark-blue;
     }
 
     h3{
         font-size: medium;
 
         &:hover{
-            color: $dark-blue;
+            color: $neon-blue;
 
         }
     }
@@ -41,14 +43,17 @@ $Montserrat: 'Montserrat', sans-serif;
 
     body {
 
+        background-color: $dark;
+
+
         main{
 
-            min-height: 67vh;  
+            min-height: 74vh;  
         
         }
 
         .card{
-            background-color: $dark-blue!important;
+            background-color: #36454F!important;
         }
 
         .info {
@@ -76,7 +81,7 @@ $Montserrat: 'Montserrat', sans-serif;
 
 
         header {
-            background-color: $dark-blue;
+            background-color: #121e29;
             display: flex;
             align-items: center;
             justify-content: space-around;
@@ -223,6 +228,10 @@ $Montserrat: 'Montserrat', sans-serif;
             }
         }
 
+        i.fa-solid.fa-heart.filled {
+            color: darkred;
+        }
+
         .title{
             display: flex;
             align-items: center;
@@ -234,11 +243,11 @@ $Montserrat: 'Montserrat', sans-serif;
                 padding: 7px 22px;
                 border-radius: 10px;
                 color: white;
-                background-color: $dark-blue;
+                background-color: #36454F;
 
                 &:hover{
                     background-color: $neon-blue;
-                    color: $dark-blue;
+                    color: #36454F;
                 }
             }
         }
@@ -280,7 +289,7 @@ $Montserrat: 'Montserrat', sans-serif;
                 padding: 10px 22px;
                 font-size: 15px;
                 border: none;
-                background-color: $dark-blue;
+                background-color: #36454F;
                 color: white;
                 border-radius: 0 0 10px 0;
                 -webkit-border-radius: 0 0 10px 0;
@@ -302,7 +311,7 @@ $Montserrat: 'Montserrat', sans-serif;
                 a{
                     display: block;
                     font-size: 15px;
-                    background-color: $dark-blue;
+                    background-color: #36454F;
                     color: white;
                     text-decoration: none;
                     padding: 10px;
@@ -349,7 +358,7 @@ $Montserrat: 'Montserrat', sans-serif;
         // home side nav
         .subscriptions{
             box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
-            background-color: $dark-blue;
+            background-color: $dark;
             width: 5%;
             border-radius: 0 25px 25px 0;
             -webkit-border-radius: 0 25px 25px 0;
@@ -562,7 +571,7 @@ $Montserrat: 'Montserrat', sans-serif;
 
                 .songCard{
 
-                    background-color: $dark-blue;
+                    background-color: #636363;
                     width: 83%;
                     padding: 6px;
                     border-radius: 20px;
@@ -670,7 +679,7 @@ $Montserrat: 'Montserrat', sans-serif;
                     width: 17%;
 
                     .artistLink{
-                        color: black;
+                        color: $neon-blue;
                         background: none;
                         padding: 0;
                     }
@@ -747,7 +756,7 @@ $Montserrat: 'Montserrat', sans-serif;
 
                 a{
                     text-decoration: none;
-                    color: #030303;
+                    color: $neon-blue;
                     font-family: $Montserrat;
 
                 }
@@ -792,7 +801,7 @@ $Montserrat: 'Montserrat', sans-serif;
                         display: inline-block;
 
                         i {
-                            color: black;
+                            color: $dark-blue;
                             font-size: 19px;
                             border: none;
                             margin: 0px 0 0 7px;
@@ -838,7 +847,7 @@ $Montserrat: 'Montserrat', sans-serif;
                     }
                     a {
                         text-decoration: none;
-                        color: black;
+                        color: $dark-blue;
                         font-size: larger;
                     }
 
@@ -854,6 +863,7 @@ $Montserrat: 'Montserrat', sans-serif;
                 margin: auto;
                 border-collapse: collapse;
                 font-family: $Montserrat;
+                color: $dark-blue;
 
                 tr {
                     border-bottom: 1pt solid #C1C1C1;
@@ -884,14 +894,14 @@ $Montserrat: 'Montserrat', sans-serif;
 
                             a{
                                 text-decoration: none;
-                                color: black;
+                                color: $dark-blue;
                             }
 
                             button {
                                 border: none;
                                 background-color: transparent;
                                 cursor: pointer;
-                                color: black;
+                                color: $dark-blue;
                                 
                                 a, i{
                                     font-size: x-large;
@@ -1047,7 +1057,7 @@ $Montserrat: 'Montserrat', sans-serif;
             .comments{
 
                 article {
-                    background-color: $dark-blue;
+                    background-color: #36454F;
                     border-radius: 10px;
                     padding: 13px;
                     margin-bottom: 26px;
@@ -1122,6 +1132,7 @@ $Montserrat: 'Montserrat', sans-serif;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    color: $neon-blue;
 
                     .slider{
                         appearance: none;
@@ -1136,7 +1147,7 @@ $Montserrat: 'Montserrat', sans-serif;
                             appearance: none;
                             width: 1px;
                             height: 20px;
-                            box-shadow: -400px 0 0 400px $dark-blue;
+                            box-shadow: -400px 0 0 400px #36454F;
                         }
                     }
 
@@ -1166,13 +1177,17 @@ $Montserrat: 'Montserrat', sans-serif;
                         cursor: pointer;
                         margin-right: 11px;
                         text-decoration: none;
-                        color: black;
+                        color: $dark-blue;
 
                         &:hover{
                             color: $dark-blue;
 
                         }
                     }   
+
+                    span.fa-solid.fa-volume-high {
+                        color: $dark-blue;
+                    }
                     
 
                     .hover{
@@ -1197,7 +1212,7 @@ $Montserrat: 'Montserrat', sans-serif;
                                     appearance: none;
                                     width: 1px;
                                     height: 20px;
-                                    box-shadow: -400px 0 0 400px $dark-blue;
+                                    box-shadow: -400px 0 0 400px #36454F;
                                 }
     
                             }
@@ -1233,7 +1248,7 @@ $Montserrat: 'Montserrat', sans-serif;
 
             a{
                 text-decoration: none;
-                color: #030303;
+                color: $neon-blue;
             }
 
             .songCard, img{
@@ -1440,10 +1455,10 @@ $Montserrat: 'Montserrat', sans-serif;
 
         footer{
 
-            margin-top: 50px;
+            padding-top: 50px;
             z-index: 2;
             position: sticky;
-            background-color: white;
+            background-color: #121e29;
 
             .legal{
 
@@ -1457,7 +1472,7 @@ $Montserrat: 'Montserrat', sans-serif;
 
                         a {
                             text-decoration: none;
-                            color: black;
+                            color: white;
                             font-family: $Playfair;
                         }
                     }
@@ -1475,4 +1490,4 @@ $Montserrat: 'Montserrat', sans-serif;
 
 @import './_tabletBreakpoint.scss';
 @import './_mobileBreakpoint.scss';
-@import './darkMode.scss';
+@import './bootstrap.min.css';

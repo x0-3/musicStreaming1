@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<form action="{{path('add_toSongsPlaylist', {'id': song.id})}}" method="post" class="d-flex flex-column w-50 m-auto">
+<form action="{{path('add_toSongsPlaylist', {'id': song.id})}}" method="post" class="d-flex flex-column w-50 m-auto text-light">
 
     {% for playlist in playlists %}
     
@@ -16,7 +16,7 @@
 
     {% endfor %}
 
-    <input type="submit" value="add" class="btn btn-dark"/>
+    <input type="submit" value="add" class="btn btn-info"/>
         
 </form>
 

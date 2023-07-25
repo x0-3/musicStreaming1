@@ -1,3 +1,4 @@
+@import './bootstrap.min.css';
 * {
   padding: 0;
   margin: 0;
@@ -12,22 +13,26 @@
 }
 * h1, * h2, * h3 {
   font-family: "Montserrat", sans-serif;
+  color: white;
 }
 * h3 {
   font-size: medium;
 }
 * h3:hover {
-  color: #36454F;
+  color: #7DF9FF;
 }
 * h1, * h2 {
   font-size: larger;
-  color: #36454F;
+  color: white;
 }
 * p {
   font-family: "Lato", sans-serif;
 }
+* body {
+  background-color: #0f2537;
+}
 * body main {
-  min-height: 67vh;
+  min-height: 74vh;
 }
 * body .card {
   background-color: #36454F !important;
@@ -47,7 +52,7 @@
   visibility: visible;
 }
 * body header {
-  background-color: #36454F;
+  background-color: #121e29;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -134,7 +139,7 @@
 * body header .mySidepanel .avatar:hover .dropdown-content button {
   border: none;
   border-radius: 15px;
-  background-color: #36454F;
+  background-color: white;
   padding: 10px;
   cursor: pointer;
   color: white;
@@ -159,6 +164,9 @@
 * body header .mySidepanel .avatar:hover .dropdown-content .recentSub a small {
   font-size: medium;
   margin-left: 7px;
+}
+* body i.fa-solid.fa-heart.filled {
+  color: darkred;
 }
 * body .title {
   display: flex;
@@ -187,7 +195,7 @@
   color: black;
 }
 * body .mcard a:hover {
-  color: #36454F;
+  color: white;
 }
 * body .mcard a figure img {
   width: 100%;
@@ -260,7 +268,7 @@
 }
 * body .subscriptions {
   box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
-  background-color: #36454F;
+  background-color: #0f2537;
   width: 5%;
   border-radius: 0 25px 25px 0;
   -webkit-border-radius: 0 25px 25px 0;
@@ -373,6 +381,7 @@
 }
 * body section.home .hero .parallax figure img {
   width: 100%;
+  filter: brightness(85%);
 }
 * body section.home .hero .parallax figcaption {
   position: absolute;
@@ -423,7 +432,7 @@
   width: 50%;
 }
 * body section.home .song .songCard {
-  background-color: #36454F;
+  background-color: #636363;
   width: 83%;
   padding: 6px;
   border-radius: 20px;
@@ -495,7 +504,7 @@
   width: 17%;
 }
 * body section.playlistList .title .nav .artistLink {
-  color: black;
+  color: #7DF9FF;
   background: none;
   padding: 0;
 }
@@ -516,7 +525,7 @@
   margin: 0 60px 40px 0;
 }
 * body section.playlistList .myPlaylist .mainCard a {
-  color: #36454F;
+  color: white;
 }
 * body section.playlistList .myPlaylist .mainCard a figure {
   height: 38vh;
@@ -556,7 +565,7 @@
 }
 * body section.listArtist .artistCard a {
   text-decoration: none;
-  color: #030303;
+  color: #7DF9FF;
   font-family: "Montserrat", sans-serif;
 }
 * body section.playlistDetail img, * body section.playlistDetail table, * body section.playlistDetail .table, * body section.artistDetail img, * body section.artistDetail table, * body section.artistDetail .table, * body section.musicPlayer img, * body section.musicPlayer table, * body section.musicPlayer .table, * body section.search img, * body section.search table, * body section.search .table {
@@ -570,7 +579,7 @@
   margin: 60px;
 }
 * body section.playlistDetail .playlistHeader h3, * body section.artistDetail .playlistHeader h3, * body section.musicPlayer .playlistHeader h3, * body section.search .playlistHeader h3 {
-  color: #36454F;
+  color: white;
   margin-bottom: 14px;
 }
 * body section.playlistDetail .playlistHeader figure, * body section.artistDetail .playlistHeader figure, * body section.musicPlayer .playlistHeader figure, * body section.search .playlistHeader figure {
@@ -587,7 +596,7 @@
   display: inline-block;
 }
 * body section.playlistDetail .playlistHeader .playlistName .dropdown i, * body section.artistDetail .playlistHeader .playlistName .dropdown i, * body section.musicPlayer .playlistHeader .playlistName .dropdown i, * body section.search .playlistHeader .playlistName .dropdown i {
-  color: black;
+  color: white;
   font-size: 19px;
   border: none;
   margin: 0px 0 0 7px;
@@ -622,7 +631,7 @@
 }
 * body section.playlistDetail .playlistHeader .playerBtns a, * body section.artistDetail .playlistHeader .playerBtns a, * body section.musicPlayer .playlistHeader .playerBtns a, * body section.search .playlistHeader .playerBtns a {
   text-decoration: none;
-  color: black;
+  color: white;
   font-size: larger;
 }
 * body section.playlistDetail .playlistHeader .playerBtns i.fa-regular, * body section.artistDetail .playlistHeader .playerBtns i.fa-regular, * body section.musicPlayer .playlistHeader .playerBtns i.fa-regular, * body section.search .playlistHeader .playerBtns i.fa-regular {
@@ -633,6 +642,7 @@
   margin: auto;
   border-collapse: collapse;
   font-family: "Montserrat", sans-serif;
+  color: white;
 }
 * body section.playlistDetail table tr, * body section.artistDetail table tr, * body section.musicPlayer table tr, * body section.search table tr {
   border-bottom: 1pt solid #C1C1C1;
@@ -656,13 +666,13 @@
 }
 * body section.playlistDetail table tbody tr td a, * body section.artistDetail table tbody tr td a, * body section.musicPlayer table tbody tr td a, * body section.search table tbody tr td a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 * body section.playlistDetail table tbody tr td button, * body section.artistDetail table tbody tr td button, * body section.musicPlayer table tbody tr td button, * body section.search table tbody tr td button {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  color: black;
+  color: white;
 }
 * body section.playlistDetail table tbody tr td button a, * body section.playlistDetail table tbody tr td button i, * body section.artistDetail table tbody tr td button a, * body section.artistDetail table tbody tr td button i, * body section.musicPlayer table tbody tr td button a, * body section.musicPlayer table tbody tr td button i, * body section.search table tbody tr td button a, * body section.search table tbody tr td button i {
   font-size: x-large;
@@ -813,7 +823,7 @@
 }
 * body section.musicPlayer .player a.ArtistName {
   text-decoration: none;
-  color: #36454F;
+  color: white;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   font-size: larger;
@@ -824,6 +834,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #7DF9FF;
 }
 * body section.musicPlayer .player .timeline .slider {
   -webkit-appearance: none;
@@ -863,10 +874,13 @@
   cursor: pointer;
   margin-right: 11px;
   text-decoration: none;
-  color: black;
+  color: white;
 }
 * body section.musicPlayer .player .controls button:hover, * body section.musicPlayer .player .controls a:hover {
-  color: #36454F;
+  color: white;
+}
+* body section.musicPlayer .player .controls span.fa-solid.fa-volume-high {
+  color: white;
 }
 * body section.musicPlayer .player .controls .hover .audio {
   display: none;
@@ -908,7 +922,7 @@
 }
 * body section.genreSongs a {
   text-decoration: none;
-  color: #030303;
+  color: #7DF9FF;
 }
 * body section.genreSongs .songCard, * body section.genreSongs img {
   box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);
@@ -1029,7 +1043,7 @@
 }
 * body form button.fa-solid.fa-magnifying-glass {
   border: none;
-  background-color: #36454F;
+  background-color: white;
   color: white;
   border-radius: 0 10px 10px 0;
   padding: 20px;
@@ -1064,18 +1078,18 @@
   color: white;
 }
 * body section.register .registerForm button.btn {
-  background-color: #36454F;
+  background-color: white;
   color: white;
 }
 * body section.register .registerForm button.btn:hover {
   background-color: #7DF9FF;
-  color: #36454F;
+  color: white;
 }
 * body footer {
-  margin-top: 50px;
+  padding-top: 50px;
   z-index: 2;
   position: sticky;
-  background-color: white;
+  background-color: #121e29;
 }
 * body footer .legal ul {
   display: flex;
@@ -1085,7 +1099,7 @@
 }
 * body footer .legal ul li a {
   text-decoration: none;
-  color: black;
+  color: white;
   font-family: "Playfair Display", serif;
 }
 * body footer small {
@@ -1461,101 +1475,4 @@
   body footer small {
     margin: 15px auto;
   }
-}
-body.dark {
-  background-color: #36454F;
-}
-body.dark h1 {
-  color: #7DF9FF;
-}
-body.dark h3 {
-  color: white;
-}
-body.dark h3:hover {
-  color: #7DF9FF;
-}
-body.dark h4 {
-  color: #7DF9FF;
-}
-body.dark .title a {
-  background-color: #7DF9FF;
-  color: #36454F;
-}
-body.dark .dropdown button {
-  background-color: white;
-  color: #36454F;
-}
-body.dark i.fa-solid.fa-plus {
-  color: white !important;
-}
-body.dark label.form-label {
-  color: white;
-}
-body.dark section.playlistList .title .nav .artistLink {
-  color: #7DF9FF;
-}
-body.dark section.playlistList .myPlaylist .mainCard a, body.dark section.playlistList .myPlaylist .mainCard h3 {
-  color: #36454F;
-}
-body.dark section.listArtist .artistCard a {
-  color: white;
-}
-body.dark section.playlistDetail .playlistHeader h3, body.dark section.artistDetail .playlistHeader h3, body.dark section.musicPlayer .playlistHeader h3, body.dark section.search .playlistHeader h3 {
-  color: #7DF9FF;
-}
-body.dark section.playlistDetail .playlistHeader .playerBtns a, body.dark section.artistDetail .playlistHeader .playerBtns a, body.dark section.musicPlayer .playlistHeader .playerBtns a, body.dark section.search .playlistHeader .playerBtns a {
-  color: white;
-}
-body.dark section.playlistDetail .uncheck, body.dark section.playlistDetail .check, body.dark section.artistDetail .uncheck, body.dark section.artistDetail .check, body.dark section.musicPlayer .uncheck, body.dark section.musicPlayer .check, body.dark section.search .uncheck, body.dark section.search .check {
-  margin-left: 8px;
-  font-size: larger;
-}
-body.dark section.playlistDetail th, body.dark section.playlistDetail tr, body.dark section.playlistDetail i, body.dark section.playlistDetail td a, body.dark section.artistDetail th, body.dark section.artistDetail tr, body.dark section.artistDetail i, body.dark section.artistDetail td a, body.dark section.musicPlayer th, body.dark section.musicPlayer tr, body.dark section.musicPlayer i, body.dark section.musicPlayer td a, body.dark section.search th, body.dark section.search tr, body.dark section.search i, body.dark section.search td a {
-  color: white;
-}
-body.dark section.playlistDetail .controls button, body.dark section.artistDetail .controls button, body.dark section.musicPlayer .controls button, body.dark section.search .controls button {
-  color: white;
-}
-body.dark section.playlistDetail .controls button:hover, body.dark section.artistDetail .controls button:hover, body.dark section.musicPlayer .controls button:hover, body.dark section.search .controls button:hover {
-  color: #7DF9FF;
-}
-body.dark section.playlistDetail .player .controls a, body.dark section.playlistDetail .player .controls span.fa-solid.fa-pause, body.dark section.artistDetail .player .controls a, body.dark section.artistDetail .player .controls span.fa-solid.fa-pause, body.dark section.musicPlayer .player .controls a, body.dark section.musicPlayer .player .controls span.fa-solid.fa-pause, body.dark section.search .player .controls a, body.dark section.search .player .controls span.fa-solid.fa-pause {
-  color: white;
-}
-body.dark section.playlistDetail .player .controls a:hover, body.dark section.playlistDetail .player .controls span.fa-solid.fa-pause:hover, body.dark section.artistDetail .player .controls a:hover, body.dark section.artistDetail .player .controls span.fa-solid.fa-pause:hover, body.dark section.musicPlayer .player .controls a:hover, body.dark section.musicPlayer .player .controls span.fa-solid.fa-pause:hover, body.dark section.search .player .controls a:hover, body.dark section.search .player .controls span.fa-solid.fa-pause:hover {
-  color: #7DF9FF;
-}
-body.dark section.playlistDetail .player .controls .hover .audio #volume-slider, body.dark section.artistDetail .player .controls .hover .audio #volume-slider, body.dark section.musicPlayer .player .controls .hover .audio #volume-slider, body.dark section.search .player .controls .hover .audio #volume-slider {
-  background: white;
-}
-body.dark section.playlistDetail .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.artistDetail .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.musicPlayer .player .controls .hover .audio #volume-slider::-webkit-slider-thumb, body.dark section.search .player .controls .hover .audio #volume-slider::-webkit-slider-thumb {
-  box-shadow: -400px 0 0 400px #7DF9FF;
-}
-body.dark section.playlistDetail .player .timeline .slider, body.dark section.artistDetail .player .timeline .slider, body.dark section.musicPlayer .player .timeline .slider, body.dark section.search .player .timeline .slider {
-  background: white;
-}
-body.dark section.playlistDetail .player .timeline .slider::-webkit-slider-thumb, body.dark section.artistDetail .player .timeline .slider::-webkit-slider-thumb, body.dark section.musicPlayer .player .timeline .slider::-webkit-slider-thumb, body.dark section.search .player .timeline .slider::-webkit-slider-thumb {
-  box-shadow: -400px 0 0 400px #7DF9FF;
-}
-body.dark section.playlistDetail .comments article, body.dark section.artistDetail .comments article, body.dark section.musicPlayer .comments article, body.dark section.search .comments article {
-  background-color: white;
-}
-body.dark section.playlistDetail .comments article figure figcaption a, body.dark section.artistDetail .comments article figure figcaption a, body.dark section.musicPlayer .comments article figure figcaption a, body.dark section.search .comments article figure figcaption a {
-  color: #36454F;
-}
-body.dark section.playlistDetail .dropdown button {
-  background-color: transparent;
-  color: white !important;
-}
-body.dark section.genreSongs h2 {
-  color: #7DF9FF;
-}
-body.dark section.login label, body.dark section.login a {
-  color: white !important;
-}
-body.dark footer {
-  background-color: #36454F;
-}
-body.dark footer ul li a, body.dark footer small {
-  color: white;
 }/*# sourceMappingURL=app.css.map */
