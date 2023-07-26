@@ -70,16 +70,21 @@ class AlbumController extends AbstractController
 
         if($user){
 
+            // create a new instance of the Album object
             $album = new Album();
 
+            // create a form to handle the submission
             $form = $this->createForm(AlbumType::class, $album);
 
             $album->setReleaseDate(new \DateTime()); // set the release date to now
-            $album->setUser($user); // set the user in session
+            $album->setUser($user); // set the user to the one stored in session
 
+            // inspect the form request
             $form->handleRequest($request);
 
+            // check if the form is submitted and valid
             if ($form->isSubmitted() && $form->isValid()) {
+                // retrieve the data from the form
                 $album = $form->getData();
 
                 // file upload
@@ -89,18 +94,22 @@ class AlbumController extends AbstractController
                     $album->setCover($imageFileName);
                 }
 
-                $entityManager->persist($album);
-                $entityManager->flush();
+                $entityManager->persist($album); // persist the album to the database
+                $entityManager->flush(); // flush it to the database
 
+                // redirect to the user profile page
                 return $this->redirectToRoute('app_profile');
             }
 
+            // if the form is not submitted or is not valid
+            // then show the form again
             return $this->render('album/newAlbum.html.twig', [
                 'formAddAlbum' => $form,
                 'description' => ''
             ]);
 
         } else {
+            // if the user is not logged in then return to the home page
             return $this-> redirectToRoute('app_home');
         }
  

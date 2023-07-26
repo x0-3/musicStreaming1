@@ -275,12 +275,13 @@ class PlaylistController extends AbstractController
         // if the user is connected then proceed with the form submission
         if ($user) {
 
-
+            // create new instance of Playlist object
             $playlist = new Playlist();
 
-            $playlist->setDateCreated(new \DateTime()); //get current date
-            $playlist->setUser($user); //set the current user
+            $playlist->setDateCreated(new \DateTime()); //set the date to the current date
+            $playlist->setUser($user); //set the user the current user
 
+            // create a form from the type PlaylistType
             $form = $this->createForm(PlaylistType::class, $playlist);
             $form ->handleRequest($request); //analyse whats in the request / gets the data
 
@@ -289,7 +290,6 @@ class PlaylistController extends AbstractController
 
                 $playlist = $form->getData(); // get the data submitted in form and hydrate the object 
 
-                $em->getRepository(Playlist::class);
 
                 // file upload
                 $imageFile = $form->get('image')->getData();
@@ -302,7 +302,7 @@ class PlaylistController extends AbstractController
                 $em->persist($playlist); // prepare
                 $em->flush(); // execute
 
-                // return $this->redirectToRoute('app_myPlaylist');
+                // redirect to the detail page of the playlist that was just created
                 return $this->redirectToRoute('playlist_detail', ['id' => $playlist->getUuid()]);
             }
 

@@ -19,7 +19,7 @@ class PlaylistType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Playlist Image',
 
-                // unmapped means that this field is not associated to any entity property
+                // not associated to the Playlist entity
                 'mapped' => false,
 
                 // make it optional so you don't have to re-upload the PDF file
