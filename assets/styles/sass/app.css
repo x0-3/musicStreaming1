@@ -32,7 +32,7 @@
   background-color: #0f2537;
 }
 * body main {
-  min-height: 74vh;
+  min-height: 122vh;
 }
 * body .card {
   background-color: #36454F !important;
@@ -1087,7 +1087,6 @@
 }
 * body footer {
   padding-top: 50px;
-  z-index: 2;
   position: sticky;
   background-color: #121e29;
 }
