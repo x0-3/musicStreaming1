@@ -215,10 +215,10 @@
                         <div class="w-25 p-2">
 
                             {% if app.user.subUser2|length <= 1 %}
-                                <h3 class="fw-bold">{{app.user.subUser2|length}} subcriber</h3>
+                                <h3 class="fw-bold text-light">{{app.user.subUser2|length}} subcriber</h3>
                             
                             {% else %}
-                                <h3 class="fw-bold">{{app.user.subUser2|length}} subcribers</h3>
+                                <h3 class="fw-bold text-light">{{app.user.subUser2|length}} subcribers</h3>
             
                             {% endif %}
                         </div>
@@ -226,9 +226,9 @@
 
                         <article class="d-flex flex-column w-75">
 
-                            <h2><b>{{app.user.username}}</b>  </h2>
+                            <h2 class="text-light"><b>{{app.user.username}}</b>  </h2>
                             
-                            <p>{{app.user.bio}}</p>
+                            <p class="text-light">{{app.user.bio}}</p>
                         </article>
 
                     </div>
