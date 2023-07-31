@@ -67,7 +67,7 @@
                             <img src="{{asset('uploads/' ~ song.album.cover)}}" alt="song img">
                         </figure>
                     </td>
-                    <td><a href="{{path('app_songPlayer', {'id': song.id})}}">{{song.nameSong}} </a></td>
+                    <td><a href="{{path('app_songPlayer', {'id': song.uuid})}}">{{song.nameSong}} </a></td>
                     <td> <a href="{{path('app_artistDetail', {'id': app.user.username})}}"> {{app.user.username}} </a></td>
                     <td>
                         {% include "like/_like.html.twig" %}
