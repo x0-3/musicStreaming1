@@ -35,7 +35,7 @@ class Comment
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete:'CASCADE')]
     private ?Song $song = null;
 
     public function __construct()
