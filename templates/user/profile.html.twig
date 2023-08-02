@@ -14,7 +14,7 @@
     
                 {% if app.user.poster == null %}
                   
-                    <img src="{{asset('img/avatar-gf5083c0bd_640.png')}}" alt="avatar">
+                    <img src="{{asset('img/default_poster.png')}}" alt="avatar">
                 {% else %}
                 
                     <img src="{{asset('uploads/' ~ app.user.poster)}}" alt="profile picture"> 
@@ -41,7 +41,7 @@
 
     <span class="tacTwitterTimelines">
     </span>
-    <a class="twitter-timeline" href="https://twitter.com/{{app.user.twitterId}}" data-tweet-limit="5" data-dnt="dnt (true | false)" data-width="width" data-height="height" data-theme="theme (dark | light)" data-link-color="hex link-color"></a>
+    <a class="twitter-timeline w-75 m-auto" href="https://twitter.com/{{app.user.twitterId}}" data-tweet-limit="5" data-dnt="dnt (true | false)" data-width="width" data-height="height" data-theme="dark" data-link-color="hex link-color"></a>
     
     <table>
 
