@@ -1387,7 +1387,7 @@ $Montserrat: 'Montserrat', sans-serif;
                     justify-content: space-between;
 
                     a{
-                        color: black;
+                        color: $dark-blue;
                         text-decoration: none;
 
                     }
@@ -1418,7 +1418,7 @@ $Montserrat: 'Montserrat', sans-serif;
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
-            height: 86vh;
+            // height: 86vh;
 
             h1,h2{
                 color: white;
@@ -1441,12 +1441,12 @@ $Montserrat: 'Montserrat', sans-serif;
                 color: white;
 
                 button.btn {
-                    background-color: $dark-blue;
+                    background-color: $dark;
                     color: white;
 
                     &:hover{
                         background-color: $neon-blue;
-                        color: $dark-blue;
+                        color: $dark;
 
                     }
                 }

@@ -1035,7 +1035,7 @@
   justify-content: space-between;
 }
 * body section.login .loginForm .register_reset a {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 * body form {
@@ -1057,7 +1057,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 86vh;
 }
 * body section.register h1, * body section.register h2 {
   color: white;
@@ -1078,12 +1077,12 @@
   color: white;
 }
 * body section.register .registerForm button.btn {
-  background-color: white;
+  background-color: #0f2537;
   color: white;
 }
 * body section.register .registerForm button.btn:hover {
   background-color: #7DF9FF;
-  color: white;
+  color: #0f2537;
 }
 * body footer {
   padding-top: 50px;
