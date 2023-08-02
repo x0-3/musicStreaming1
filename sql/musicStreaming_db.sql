@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS `album` (
   UNIQUE KEY `UNIQ_39986E43D17F50A6` (`uuid`),
   KEY `IDX_39986E43A76ED395` (`user_id`),
   CONSTRAINT `FK_39986E43A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicstream2.album: ~4 rows (approximately)
+-- Dumping data for table musicstream2.album: ~5 rows (approximately)
 INSERT INTO `album` (`id`, `cover`, `name_album`, `release_date`, `user_id`, `uuid`) VALUES
 	(1, 'I-used-to-know-her.jpg', 'I Used to Know HER', '2019-05-02 14:07:22', 2, '0a074143-0694-11ee-af90-80e82c978fe5'),
 	(2, 'H.E.R.png', 'H.E.R', '2017-05-02 14:10:57', 2, '0a0810e9-0694-11ee-af90-80e82c978fe5'),
@@ -52,11 +52,11 @@ CREATE TABLE IF NOT EXISTS `comment` (
   UNIQUE KEY `UNIQ_9474526CD17F50A6` (`uuid`),
   KEY `IDX_9474526CA0BDB2F3` (`song_id`),
   KEY `IDX_9474526CA76ED395` (`user_id`),
-  CONSTRAINT `FK_9474526CA0BDB2F3` FOREIGN KEY (`song_id`) REFERENCES `song` (`id`),
+  CONSTRAINT `FK_9474526CA0BDB2F3` FOREIGN KEY (`song_id`) REFERENCES `song` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_9474526CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=331 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicstream2.comment: ~9 rows (approximately)
+-- Dumping data for table musicstream2.comment: ~13 rows (approximately)
 INSERT INTO `comment` (`id`, `text`, `date_mess`, `song_id`, `user_id`, `uuid`) VALUES
 	(319, 'hello', '2023-05-29 00:27:51', 13, NULL, '0a214fda-0694-11ee-af90-80e82c978fe5'),
 	(323, 'fghjk', '2023-06-01 07:21:52', 13, 30, '0a2161e5-0694-11ee-af90-80e82c978fe5'),
@@ -66,7 +66,10 @@ INSERT INTO `comment` (`id`, `text`, `date_mess`, `song_id`, `user_id`, `uuid`) 
 	(327, 'gfd', '2023-06-01 14:16:39', 5, 30, '0a216b68-0694-11ee-af90-80e82c978fe5'),
 	(328, 'super', '2023-06-02 19:34:13', 6, 30, '0a216d6c-0694-11ee-af90-80e82c978fe5'),
 	(329, 'test', '2023-06-09 07:23:17', 2, 30, '962e1614-b6b3-4f15-a02a-6733dd722c91'),
-	(330, 'test comment', '2023-06-15 09:20:40', 9, 30, '1cdb1daf-d8a6-4d62-875e-69aea5504244');
+	(333, 'hello', '2023-07-29 20:14:58', 7, 2, 'f011626f-ef6e-4ea0-9a08-7d243017d8f0'),
+	(335, 'tesf', '2023-07-31 20:18:45', 11, 30, '689f2514-98e0-446e-bde8-41da05ad32fd'),
+	(337, 'test', '2023-08-02 15:19:57', 5, 30, '52cda280-8760-4ac6-b7c6-a49874b5fee3'),
+	(339, 'hii', '2023-08-02 17:31:55', 6, 2, '933c059a-4c08-4cf0-9b6d-326c127fef31');
 
 -- Dumping structure for table musicstream2.doctrine_migration_versions
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
@@ -86,7 +89,8 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 	('DoctrineMigrations\\Version20230608073243', '2023-06-09 07:05:39', 875),
 	('DoctrineMigrations\\Version20230629200322', '2023-06-30 06:47:05', 34),
 	('DoctrineMigrations\\Version20230629200646', '2023-06-30 06:47:05', 32),
-	('DoctrineMigrations\\Version20230630064753', '2023-06-30 06:47:59', 21);
+	('DoctrineMigrations\\Version20230630064753', '2023-06-30 06:47:59', 21),
+	('DoctrineMigrations\\Version20230802174550', '2023-08-02 17:46:04', 42);
 
 -- Dumping structure for table musicstream2.genre
 CREATE TABLE IF NOT EXISTS `genre` (
@@ -148,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   UNIQUE KEY `UNIQ_D782112DD17F50A6` (`uuid`),
   KEY `IDX_D782112DA76ED395` (`user_id`),
   CONSTRAINT `FK_D782112DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table musicstream2.playlist: ~5 rows (approximately)
 INSERT INTO `playlist` (`id`, `image`, `playlist_name`, `date_created`, `user_id`, `uuid`, `description`) VALUES
@@ -233,9 +237,9 @@ CREATE TABLE IF NOT EXISTS `song` (
   CONSTRAINT `FK_33EDEEA11137ABCF` FOREIGN KEY (`album_id`) REFERENCES `album` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_33EDEEA14296D31F` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`),
   CONSTRAINT `FK_33EDEEA1A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicstream2.song: ~17 rows (approximately)
+-- Dumping data for table musicstream2.song: ~18 rows (approximately)
 INSERT INTO `song` (`id`, `name_song`, `link`, `user_id`, `album_id`, `genre_id`, `uuid`) VALUES
 	(1, 'As I Am', 'H.E.R. - As I Am.mp3', 2, 1, 3, '0a585480-0694-11ee-af90-80e82c978fe5'),
 	(2, 'Carried Away', 'H.E.R. - Carried Away.mp3', 2, 1, 10, '0a586497-0694-11ee-af90-80e82c978fe5'),
@@ -266,15 +270,16 @@ CREATE TABLE IF NOT EXISTS `subscribe` (
   KEY `IDX_68B95F3E441B8B65` (`user2_id`),
   CONSTRAINT `FK_68B95F3E441B8B65` FOREIGN KEY (`user2_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_68B95F3E56AE248B` FOREIGN KEY (`user1_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicstream2.subscribe: ~5 rows (approximately)
+-- Dumping data for table musicstream2.subscribe: ~6 rows (approximately)
 INSERT INTO `subscribe` (`id`, `date_follow`, `user1_id`, `user2_id`) VALUES
 	(127, '2023-05-20 14:20:16', 1, 3),
 	(132, '2023-05-20 14:25:53', 1, 2),
 	(133, '2023-05-21 18:07:16', 3, 2),
-	(139, '2023-06-15 12:15:44', 30, 2),
-	(140, '2023-06-17 20:55:05', 2, 3);
+	(143, '2023-07-27 07:30:57', 30, 3),
+	(144, '2023-07-29 20:10:49', 30, 2),
+	(145, '2023-07-29 20:13:56', 2, 3);
 
 -- Dumping structure for table musicstream2.user
 CREATE TABLE IF NOT EXISTS `user` (
@@ -299,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- Dumping data for table musicstream2.user: ~6 rows (approximately)
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `avatar`, `username`, `is_verified`, `is_banned`, `google_id`, `uuid`, `poster`, `bio`, `twitter_id`) VALUES
-	(1, 'bedoti4679@saeoil.com', '["ROLE_ADMIN"]', '$2y$13$Z2MkJWmewEX5gBzaN3R7VeJ2oAVLhWVbfcFp2UvjgcwNE3nEOZx.S', NULL, 'me', 1, 0, NULL, '0a779431-0694-11ee-af90-80e82c978fe5', NULL, NULL, NULL),
+	(1, 'bedoti4679@saeoil.com', '{"1": "ROLE_USER"}', '$2y$13$Z2MkJWmewEX5gBzaN3R7VeJ2oAVLhWVbfcFp2UvjgcwNE3nEOZx.S', NULL, 'you', 1, 0, NULL, '0a779431-0694-11ee-af90-80e82c978fe5', NULL, NULL, NULL),
 	(2, 'ditipen509@in2reach.com', '["ROLE_ARTIST"]', '$2y$13$JKJXoW24rQdZJ2dPi4O4ReeSiUFlgCG6rz7.E7SpoQ/.y2KXEwJUa', 'her.jpg', 'H.E.R', 1, 0, NULL, '0a783d57-0694-11ee-af90-80e82c978fe5', 'download-648e194e6481c.jpg', 'Global pop superstar Dua Lipa released Future Nostalgia, her #1 UK sophomore album, this year to worldwide acclaim. It is one of the best reviewed albums of 2020 and debuted in the top 5 of the Billboard 200 Album Chart. Upon release, Future Nostalgia was the most streamed album in a day by a British female artist globally in Spotify history and has over 4.5 billion streams to date. Dua is the biggest female artist in the world on Spotify and is currently the third biggest artist overall with nearly 60 million monthly listeners. The album’s certified platinum lead single “Don’t Start Now” is a worldwide hit with one billion streams on Spotify alone, and a #2 spot on the Billboard Hot 100, a career high for the pop star. The track also broke her personal best record of weeks at #1 at US Top 40 radio. Dua followed the success of “Don’t Start Now” by releasing smash UK single “Physical,” and her US Top 40 #1 “Break My Heart.” Most recently, Future Nostalgia was shortlisted for UK’s prestigious Mercury Prize. Future Nostalgia is the follow up to Dua’s eponymous 2017 debut, which is certified platinum and spawned 6 platinum tracks. She made BRIT Award history in 2018 by becoming the first female artist to pick up five nominations, with two wins for British Breakthrough Act and British Female Solo Artist, and received two Grammy awards for Best ', NULL),
 	(3, 'paxefem331@larland.com', '["ROLE_ARTIST"]', '$2y$13$S2b11CeUO1ftho4QRDkEE.AV6YIUVJS/bTJOMO95Q5RkVtHmi3poG', 'th-648e108e1ef73.jpg', 'TW', 1, 0, NULL, '0a78439a-0694-11ee-af90-80e82c978fe5', 'images-648e12646ac97.jpg', 'Lorem Ipsum', NULL),
 	(16, 'bannedUser@test.fr', '[]', '$2y$13$4ntQERaKzuKPOqzswrSxHOpZ82fP7JuLHtQmlZXyE5VI8EBSHRLdG', NULL, 'bannedUser', 1, 0, NULL, '0a784798-0694-11ee-af90-80e82c978fe5', NULL, NULL, NULL),
@@ -317,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `user_song` (
   CONSTRAINT `FK_496CA268A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table musicstream2.user_song: ~18 rows (approximately)
+-- Dumping data for table musicstream2.user_song: ~22 rows (approximately)
 INSERT INTO `user_song` (`user_id`, `song_id`) VALUES
 	(1, 6),
 	(1, 7),
@@ -327,15 +332,19 @@ INSERT INTO `user_song` (`user_id`, `song_id`) VALUES
 	(1, 14),
 	(1, 16),
 	(2, 6),
+	(2, 7),
 	(3, 2),
 	(3, 7),
 	(3, 9),
 	(3, 13),
 	(30, 2),
+	(30, 5),
 	(30, 6),
+	(30, 11),
 	(30, 13),
 	(30, 14),
 	(30, 15),
+	(30, 17),
 	(30, 19);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
