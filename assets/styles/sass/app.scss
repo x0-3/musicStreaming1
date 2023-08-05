@@ -14,7 +14,7 @@ $Montserrat: 'Montserrat', sans-serif;
         width: .45rem;
     }
     ::-webkit-scrollbar-thumb {
-        background-color: rgba(27, 27, 27, .4);
+        background-color: $neon-blue;
         border-radius: 3px;
     }
 
@@ -266,10 +266,20 @@ $Montserrat: 'Montserrat', sans-serif;
                     color: $dark-blue;
                 }
                 figure{
-                    
+                    overflow: hidden;
+
                     img {
                         width: 100%;
                         border-radius: 10px;
+                        transition: 0.5s all ease-in-out;
+                    }
+
+                    &:hover img {
+                        transform: scale(1.1);
+                        -webkit-transform: scale(1.1);
+                        -moz-transform: scale(1.1);
+                        -ms-transform: scale(1.1);
+                        -o-transform: scale(1.1);
                     }
                 }
                 
@@ -465,6 +475,15 @@ $Montserrat: 'Montserrat', sans-serif;
             box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
             border-radius: 37px;
             padding: 11px;
+
+            .parallaxCss{
+                background-image: url("/public/img/parallax.jpg");
+                min-height: 50vh;
+                background-attachment: fixed;
+                background-position: center;
+                background-size: cover;
+                filter: brightness(0.5);
+            }
             
             .hero{
                 height: 85vh;
@@ -546,18 +565,23 @@ $Montserrat: 'Montserrat', sans-serif;
                             figure {
                                 width: 85%;
                                 
+                                overflow: hidden;
                                 img {
                                     width: 100%;
                                     border-radius: 10px;
                                     box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.10);
+                                    transition: 0.5s all ease-in-out;
+                                }
+
+                                &:hover img {
+                                    transform: scale(1.1);
+                                    -webkit-transform: scale(1.1);
+                                    -moz-transform: scale(1.1);
+                                    -ms-transform: scale(1.1);
+                                    -o-transform: scale(1.1);
                                 }
                             }
                         }
-
-                        &:hover{
-                            width: 22%;
-                        }
-                            
                     }
                 }
             }
@@ -628,7 +652,7 @@ $Montserrat: 'Montserrat', sans-serif;
                     }
 
                     &:hover{
-                        width: 90%;
+                        background-color: #706f6f;
                     }
                 }
 
@@ -663,6 +687,10 @@ $Montserrat: 'Montserrat', sans-serif;
                         padding: 11px 30px;
                         border-radius: 10px;
                         margin: 0px 19px 27px;
+
+                        &:hover{
+                            background-color: #4170f4; 
+                        }
                     }
                 }
             }
@@ -759,6 +787,10 @@ $Montserrat: 'Montserrat', sans-serif;
                     color: $neon-blue;
                     font-family: $Montserrat;
 
+                }
+
+                &:hover{
+                    background-color: #152d40;
                 }
             }
         }
@@ -912,6 +944,10 @@ $Montserrat: 'Montserrat', sans-serif;
                             .dropdown{
                                 position: relative;
                             }
+                        }
+
+                        &:hover{
+                            background-color: #152d40;
                         }
                     }
                 }

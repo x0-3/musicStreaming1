@@ -8,7 +8,7 @@
   width: 0.45rem;
 }
 * ::-webkit-scrollbar-thumb {
-  background-color: rgba(27, 27, 27, 0.4);
+  background-color: #7DF9FF;
   border-radius: 3px;
 }
 * h1, * h2, * h3 {
@@ -197,9 +197,20 @@
 * body .mcard a:hover {
   color: white;
 }
+* body .mcard a figure {
+  overflow: hidden;
+}
 * body .mcard a figure img {
   width: 100%;
   border-radius: 10px;
+  transition: 0.5s all ease-in-out;
+}
+* body .mcard a figure:hover img {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
 }
 * body .mcard a h3, * body .mcard a p {
   margin: 12px 0 44px 9px;
@@ -355,6 +366,14 @@
   border-radius: 37px;
   padding: 11px;
 }
+* body section.home .parallaxCss {
+  background-image: url("/public/img/parallax.jpg");
+  min-height: 50vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  filter: brightness(0.5);
+}
 * body section.home .hero {
   height: 85vh;
   overflow: hidden;
@@ -419,14 +438,20 @@
 }
 * body section.home .playlist .playlistCards .playlistCard a figure, * body section.home .playlist .songCards .playlistCard a figure, * body section.home .song .playlistCards .playlistCard a figure, * body section.home .song .songCards .playlistCard a figure {
   width: 85%;
+  overflow: hidden;
 }
 * body section.home .playlist .playlistCards .playlistCard a figure img, * body section.home .playlist .songCards .playlistCard a figure img, * body section.home .song .playlistCards .playlistCard a figure img, * body section.home .song .songCards .playlistCard a figure img {
   width: 100%;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 5px rgba(3, 3, 3, 0.1);
+  transition: 0.5s all ease-in-out;
 }
-* body section.home .playlist .playlistCards .playlistCard:hover, * body section.home .playlist .songCards .playlistCard:hover, * body section.home .song .playlistCards .playlistCard:hover, * body section.home .song .songCards .playlistCard:hover {
-  width: 22%;
+* body section.home .playlist .playlistCards .playlistCard a figure:hover img, * body section.home .playlist .songCards .playlistCard a figure:hover img, * body section.home .song .playlistCards .playlistCard a figure:hover img, * body section.home .song .songCards .playlistCard a figure:hover img {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
 }
 * body section.home .song .side {
   width: 50%;
@@ -476,7 +501,7 @@
   left: 78%;
 }
 * body section.home .song .songCard:hover {
-  width: 90%;
+  background-color: #706f6f;
 }
 * body section.newRelease .album .cards, * body section.newRelease .artist .cards, * body .artistDetail .album .cards, * body .artistDetail .artist .cards {
   display: flex;
@@ -496,6 +521,9 @@
   padding: 11px 30px;
   border-radius: 10px;
   margin: 0px 19px 27px;
+}
+* body section.newRelease .genres .genresList a:hover, * body .artistDetail .genres .genresList a:hover {
+  background-color: #4170f4;
 }
 * body section.playlistList .title .nav {
   display: flex;
@@ -567,6 +595,9 @@
   text-decoration: none;
   color: #7DF9FF;
   font-family: "Montserrat", sans-serif;
+}
+* body section.listArtist .artistCard:hover {
+  background-color: #152d40;
 }
 * body section.playlistDetail img, * body section.playlistDetail table, * body section.playlistDetail .table, * body section.artistDetail img, * body section.artistDetail table, * body section.artistDetail .table, * body section.musicPlayer img, * body section.musicPlayer table, * body section.musicPlayer .table, * body section.search img, * body section.search table, * body section.search .table {
   box-shadow: 0px 2px 10px 5px rgba(3, 3, 3, 0.1);
@@ -679,6 +710,9 @@
 }
 * body section.playlistDetail table tbody tr td .dropdown, * body section.artistDetail table tbody tr td .dropdown, * body section.musicPlayer table tbody tr td .dropdown, * body section.search table tbody tr td .dropdown {
   position: relative;
+}
+* body section.playlistDetail table tbody tr:hover, * body section.artistDetail table tbody tr:hover, * body section.musicPlayer table tbody tr:hover, * body section.search table tbody tr:hover {
+  background-color: #152d40;
 }
 * body section.artistDetail .hero figure {
   width: 100%;
