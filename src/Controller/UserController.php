@@ -37,6 +37,8 @@ class UserController extends AbstractController
 
         $artist = $em->getRepository(User::class)->findOneBy(['username'=> $id]);
 
+        // TODO: add breadcrumbs
+
         $user = $this->getUser();
 
         // page without subscriptions functionality

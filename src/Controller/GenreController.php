@@ -21,6 +21,8 @@ class GenreController extends AbstractController
 
         $genre = $em->getRepository(Genre::class)->findOneBy(['uuid' => $id]);
 
+        // TODO: add breadcrumbs
+        
         $songs = $paginator->paginate(
             $em->getRepository(Song::class)->findBy(['genre' => $genre]),
             $request->query->get('page', 1),

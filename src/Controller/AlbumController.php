@@ -196,6 +196,8 @@ class AlbumController extends AbstractController
 
         $album = $em->getRepository(Album::class)->findOneBy(['uuid' => $id]);
 
+        // TODO: add breadcrumbs
+
         $songs = $album->getSongs();
 
         return $this->render('album/albumDetail.html.twig', [
@@ -231,6 +233,8 @@ class AlbumController extends AbstractController
     {
         $album= $em->getRepository(Album::class)->findOneBy(['id' => $id]);
         $song= $em->getRepository(Song::class)->findOneBy(['id' => $songId]);
+
+        // TODO: add breadcrumbs
 
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
