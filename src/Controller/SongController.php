@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class SongController extends AbstractController
 {
@@ -255,10 +256,16 @@ class SongController extends AbstractController
     // song player for one song
     // with comment form
     #[Route('/song/{id}', name: 'app_songPlayer')]
-    public function songPlayer($id, RequestStack $requestStack, CommentService $commentService, EntityManagerInterface $em): Response
+    public function songPlayer($id, RequestStack $requestStack, CommentService $commentService, EntityManagerInterface $em, Breadcrumbs $breadcrumbs): Response
     {
 
         $song = $em->getRepository(Song::class)->findOneBy(['uuid'=>$id]);
+
+        $breadcrumbs->addRouteItem($song->getNameSong(), "app_songPlayer", [
+            'id' => $song->getUuid(),
+        ]);
+
+        $breadcrumbs->prependRouteItem("Home", "app_home");
 
         // for the comment section 
         $user = $this->getUser();

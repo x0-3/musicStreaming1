@@ -13,13 +13,14 @@ use App\Service\CommentService;
 use App\Repository\SongRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\Collection;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -84,10 +85,22 @@ class PlaylistController extends AbstractController
     // music player page for one playlist
     // with the comment form
     #[Route('/musicPlayer/{id}/song/{songId}', name: 'playlist_player')]
-    public function playlistPlayer($id, EntityManagerInterface $em, $songId, Security $security, RequestStack $requestStack, CommentService $commentService, SessionInterface $session): Response
+    public function playlistPlayer($id, EntityManagerInterface $em, $songId, Security $security, RequestStack $requestStack, CommentService $commentService, SessionInterface $session, Breadcrumbs $breadcrumbs): Response
     {
         $playlist = $em->getRepository(Playlist::class)->findOneBy(['id'=>$id]);
         $song = $em->getRepository(Song::class)->findOneBy(['id'=>$songId]);
+
+        // breadcrumbs
+        $breadcrumbs->addRouteItem($playlist->getPlaylistName(), "playlist_detail", [
+            'id' => $playlist->getUuid(),
+        ]);
+        
+        $breadcrumbs->addRouteItem($song->getNameSong(), "playlist_player", [
+            'id' => $playlist->getUuid(),
+            'songId' => $songId,
+        ]);
+
+        $breadcrumbs->prependRouteItem("Home", "app_home");
 
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
@@ -458,10 +471,17 @@ class PlaylistController extends AbstractController
 
     // detailed page for one playlist
     #[Route('/playlist/{id}', name: 'playlist_detail')]
-    public function detailPlaylist($id, EntityManagerInterface $em): Response
+    public function detailPlaylist($id, EntityManagerInterface $em, Breadcrumbs $breadcrumbs): Response
     {
 
         $playlist = $em->getRepository(Playlist::class)->findOneBy(['uuid' => $id]);
+
+        // breadcrumbs
+        $breadcrumbs->addRouteItem($playlist->getPlaylistName(), "playlist_detail", [
+            'id' => $playlist->getUuid(),
+        ]);
+    
+        $breadcrumbs->prependRouteItem("Home", "app_home");
 
         $songs = $playlist->getSongs();
 
