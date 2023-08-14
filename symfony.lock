@@ -59,6 +59,9 @@
             "./config/packages/knpu_oauth2_client.yaml"
         ]
     },
+    "mhujer/breadcrumbs-bundle": {
+        "version": "1.5.8"
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
