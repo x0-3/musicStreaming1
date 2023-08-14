@@ -10,18 +10,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class GenreController extends AbstractController
 {
 
     // detail page for one genre 
     #[Route('/genre/{id}', name: 'app_genre')]
-    public function index($id, EntityManagerInterface $em, Request $request, PaginatorInterface $paginator): Response
+    public function index($id, EntityManagerInterface $em, Request $request, PaginatorInterface $paginator, Breadcrumbs $breadcrumbs): Response
     {     
 
         $genre = $em->getRepository(Genre::class)->findOneBy(['uuid' => $id]);
 
-        // TODO: add breadcrumbs
+        // breadcrumbs
+        $breadcrumbs->addRouteItem($genre->getGenreName(), "app_genre", [
+            'id' => $genre->getUuid(),
+        ]);
+        
+        $breadcrumbs->prependRouteItem("New Release", "app_newRelease");
         
         $songs = $paginator->paginate(
             $em->getRepository(Song::class)->findBy(['genre' => $genre]),

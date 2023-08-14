@@ -5,7 +5,8 @@
 {% block body %}
 
     <section class="genreSongs">
-
+        {{ wo_render_breadcrumbs() }}
+        
         {% for song in songs %}
     
             <div class="songCard">

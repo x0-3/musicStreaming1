@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class UserController extends AbstractController
 {
@@ -32,12 +33,16 @@ class UserController extends AbstractController
     // page for the detail of another user  
     // with subscription form
     #[Route('/artist/{id}', name: 'app_artistDetail')]
-    public function artistPage($id, EntityManagerInterface $em, Request $request): Response
+    public function artistPage($id, EntityManagerInterface $em, Request $request, Breadcrumbs $breadcrumbs): Response
     {
 
         $artist = $em->getRepository(User::class)->findOneBy(['username'=> $id]);
 
-        // TODO: add breadcrumbs
+        $breadcrumbs->addRouteItem($artist->getUsername(), "app_artistDetail", [
+            'id' => $artist->getUsername(),
+        ]);
+        
+        $breadcrumbs->prependRouteItem("Home", "app_home");
 
         $user = $this->getUser();
 

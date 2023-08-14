@@ -22,6 +22,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class AlbumController extends AbstractController
 {
@@ -191,12 +192,19 @@ class AlbumController extends AbstractController
 
     // detail page of one album
     #[Route('/album/{id}', name: 'app_albumDetail')]
-    public function albumDetail($id, EntityManagerInterface $em): Response
+    public function albumDetail($id, EntityManagerInterface $em, Breadcrumbs $breadcrumbs): Response
     {        
 
         $album = $em->getRepository(Album::class)->findOneBy(['uuid' => $id]);
 
-        // TODO: add breadcrumbs
+
+        // breadcrumbs
+        $breadcrumbs->addRouteItem($album->getNameAlbum(), "app_albumDetail", [
+            'id' => $album->getUuid(),
+        ]);
+        
+        $breadcrumbs->prependRouteItem("Home", "app_home");
+
 
         $songs = $album->getSongs();
 
@@ -229,12 +237,24 @@ class AlbumController extends AbstractController
     // music player page for an album
     // with the comment form
     #[Route('/album/Player/{id}/song/{songId}', name: 'app_albumPlayer')]
-    public function albumMusicPlayer(EntityManagerInterface $em, $id, $songId, RequestStack $requestStack, CommentService $commentService, SessionInterface $session): Response
+    public function albumMusicPlayer(EntityManagerInterface $em, $id, $songId, RequestStack $requestStack, CommentService $commentService, SessionInterface $session, Breadcrumbs $breadcrumbs): Response
     {
         $album= $em->getRepository(Album::class)->findOneBy(['id' => $id]);
         $song= $em->getRepository(Song::class)->findOneBy(['id' => $songId]);
 
-        // TODO: add breadcrumbs
+
+        // breadcrumbs
+        $breadcrumbs->addRouteItem($album->getNameAlbum(), "app_albumDetail", [
+            'id' => $album->getUuid(),
+        ]);
+
+        $breadcrumbs->addRouteItem($song->getNameSong(), "app_albumPlayer", [
+            'id' => $album->getId(),
+            'songId' => $songId,
+        ]);
+        
+        $breadcrumbs->prependRouteItem("Home", "app_home");
+
 
         $isShuffled = $requestStack->getCurrentRequest()->query->getBoolean('isShuffled', false);
 
