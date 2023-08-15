@@ -28,6 +28,14 @@
 * p {
   font-family: "Lato", sans-serif;
 }
+* ol#wo-breadcrumbs {
+  background: none;
+  margin-top: 16px;
+  font-size: large;
+}
+* ol#wo-breadcrumbs a:hover {
+  color: #7DF9FF;
+}
 * body {
   background-color: #0f2537;
 }
@@ -1077,7 +1085,7 @@
 }
 * body form button.fa-solid.fa-magnifying-glass {
   border: none;
-  background-color: white;
+  background-color: #152d40;
   color: white;
   border-radius: 0 10px 10px 0;
   padding: 20px;

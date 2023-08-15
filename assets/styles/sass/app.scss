@@ -41,6 +41,19 @@ $Montserrat: 'Montserrat', sans-serif;
         font-family: 'Lato', sans-serif;
     }
 
+    ol#wo-breadcrumbs {
+        background: none;
+        margin-top: 16px;
+        font-size: large;
+
+        a {
+            &:hover{
+                color: $neon-blue;
+            }
+        }
+    }
+    
+
     body {
 
         background-color: $dark;
@@ -1437,7 +1450,7 @@ $Montserrat: 'Montserrat', sans-serif;
 
             button.fa-solid.fa-magnifying-glass {
                 border: none;
-                background-color: $dark-blue;
+                background-color: #152d40;
                 color: white;
                 border-radius: 0 10px 10px 0;
                 padding: 20px;
@@ -1454,7 +1467,6 @@ $Montserrat: 'Montserrat', sans-serif;
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
-            // height: 86vh;
 
             h1,h2{
                 color: white;
