@@ -59,6 +59,31 @@
 * body .info:hover .tooltiptext {
   visibility: visible;
 }
+* body nav {
+  width: 40%;
+}
+* body nav ul.paginate {
+  display: flex;
+  list-style: none;
+  width: 100%;
+  justify-content: space-evenly;
+  background-color: #7DF9FF;
+  border-radius: 15px;
+  color: #0f2537;
+  padding: 9px;
+}
+* body nav ul.paginate li {
+  margin: 6px;
+}
+* body nav ul.paginate li.page-item.active {
+  width: 25px;
+}
+* body nav ul.paginate li.page-item.active span {
+  background-color: #0f2537;
+  color: white;
+  border-radius: 100%;
+  text-align: center;
+}
 * body header {
   background-color: #121e29;
   display: flex;
@@ -100,6 +125,9 @@
 * body header .mySidepanel nav ul li .menuItem {
   color: white;
   cursor: pointer;
+}
+* body header .mySidepanel nav ul li .active {
+  color: #7DF9FF;
 }
 * body header .mySidepanel nav ul li a {
   text-decoration: none;

@@ -92,6 +92,39 @@ $Montserrat: 'Montserrat', sans-serif;
 
         }
 
+        nav {
+            width: 40%;
+
+            ul.paginate {
+                display: flex;
+                list-style: none;
+                width: 100%;
+                justify-content: space-evenly;
+                background-color: $neon-blue;
+                border-radius: 15px;
+                color: $dark;
+                padding: 9px;
+
+                li{
+                    margin: 6px;
+                }
+
+
+                li.page-item.active {
+                    
+                    width: 25px;
+                    
+
+                    span{
+                        background-color: $dark;
+                        color: white;
+                        border-radius: 100%;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
 
         header {
             background-color: #121e29;
@@ -140,6 +173,11 @@ $Montserrat: 'Montserrat', sans-serif;
                             .menuItem{
                                 color: white;
                                 cursor: pointer;
+
+                            }
+                            
+                            .active{
+                                color: $neon-blue;
                             }
 
                             a {

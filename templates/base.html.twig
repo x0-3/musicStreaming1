@@ -32,13 +32,13 @@
                 <a href="javascript:void(0)" class="closebtn">&times;</a>
                 <nav>
                     <ul>
-                        <li><a class="menuItem" href="{{path('app_home')}}">Home</a></li>
-                        <li><a class="menuItem" href="{{path('app_newRelease')}}">New Release</a></li>
-                        <li><a class="menuItem" href="{{path('app_myPlaylist')}}">My Playlists</a></li>
-                        <li><a class="menuItem" href="{{path('app_like')}}">Liked Songs</a></li>
+                        <li><a {% if app.request.get('_route') == 'app_home' %} class="active"{% endif %} class="menuItem" href="{{path('app_home')}}">Home</a></li>
+                        <li><a {% if app.request.get('_route') == 'app_newRelease' %} class="active"{% endif %} class="menuItem" href="{{path('app_newRelease')}}">New Release</a></li>
+                        <li><a {% if app.request.get('_route') == 'app_myPlaylist' %} class="active"{% endif %} class="menuItem" href="{{path('app_myPlaylist')}}">My Playlists</a></li>
+                        <li><a {% if app.request.get('_route') == 'app_like' %} class="active"{% endif %} class="menuItem" href="{{path('app_like')}}">Liked Songs</a></li>
                         <li>
                             <a href="{{path('search')}}">
-                                <i class="fa-solid fa-magnifying-glass menuItem"></i>
+                                <i {% if app.request.get('_route') == 'search' %} class="fa-solid fa-magnifying-glass menuItem active" {% endif %} class="fa-solid fa-magnifying-glass menuItem"></i>
                             </a>
                         </li>
                     </ul>
