@@ -55,10 +55,7 @@ class PlaylistType extends AbstractType
                     'placeholder' => 'tell us what your playlist is about',
                 ]
             ])
-            // ->add('dateCreated')
-            // ->add('user')
-            // ->add('songs')
-            // ->add('userFavorites')
+
 
             ->add('submit', SubmitType::class)
         ;

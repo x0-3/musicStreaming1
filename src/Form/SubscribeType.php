@@ -13,9 +13,7 @@ class SubscribeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('dateFollow')
-            // ->add('subscribers')
-            // ->add('userSubscribes')
+
             ->add('submit', SubmitType::class)
         ;
     }

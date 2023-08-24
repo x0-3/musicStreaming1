@@ -62,10 +62,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     */
     public function findByRoles($roles): array
     {
-
-        // SELECT u.username, u.poster, u.bio, u.id 
-        // FROM user u
-        // WHERE u.roles LIKE '["ROLE_ARTIST"]'
         
         return $this->createQueryBuilder('u')
             ->andWhere('u.roles LIKE :roles')
@@ -82,10 +78,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     */
     public function findBySearch(SearchBar $searchBar): array
     {
-
-        // SELECT *
-        // FROM user u 
-        // WHERE u.username LIKE '%h%'
         
         return $this->createQueryBuilder('u')
             ->select('u')

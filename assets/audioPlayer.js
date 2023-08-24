@@ -16,9 +16,6 @@ let trackPlaying = true;
 
 let volumeMuted = false;
 
-// let trackId = 0; 
-
-// const tracks = [];
 
 // ************************************************ toggle play ************************************************//
 
@@ -47,70 +44,6 @@ function switchtrack(){
   }
 }
 
-
-// ************************************************ track source ************************************************//
-
-// const trackScr = "uploads/music/" + tracks[trackId];
-
-// function loadTrack(){
-
-//   // set the audio track source
-//   audio.scr = trackScr;
-
-//   progress.style.width = 0;
-//   thumb.style.left = 0;
-
-//   // wait for the song to load
-//   audio.addEventListener('loadedData', () => {
-
-//     // display the duration of the song
-//     setTime(fulltime, audio.duration);
-
-//     // set the max value to the slider
-//     slider.setAttribute("max", audio.duration);
-//   });
-// }
-
-// loadTrack();
-
-// ************************************************ switch prev ************************************************//
-// btnPrev.addEventListener('click', () => {
-
-//   trackId--;
-
-//   // if the track id is negative  
-//   if (trackId < 0) {
-
-//     // go back to the last song
-//     trackId = tracks.length - 1;
-//   }
-
-//   loadTrack();
-
-//   switchtrack();
-
-// });
-
-// ************************************************ switch next ************************************************//
-// btnNext.addEventListener("click", nextTrack);
-
-// function nextTrack(){
-
-//   trackId++;
-
-//   if (trackId > tracks.length - 1) {
-
-//     // set the id to 0
-//     trackId = 0;
-//   }
-    
-//   loadTrack();
-
-//   switchtrack();
-
-// }
-
-// audio.addEventListener('ended', nextTrack);
 
 // ************************************************ music time ************************************************//
 

@@ -95,10 +95,7 @@ class EditUserType extends AbstractType
             
             ->add('submit', SubmitType::class)
             
-            // ->add('password')
-            // ->add('isVerified')
-            // ->add('likes')
-            // ->add('favoritePlaylists')
+
         ;
 
         

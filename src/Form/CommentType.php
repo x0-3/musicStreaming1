@@ -20,9 +20,6 @@ class CommentType extends AbstractType
                     'placeholder'=> 'Write a comment'
                 ],
             ])
-            // ->add('dateMess')
-            // ->add('user')
-            // ->add('song')
             ->add('submit', SubmitType::class)
 
 

@@ -105,10 +105,6 @@ class PlaylistRepository extends ServiceEntityRepository
     */
     public function findBySearch(SearchBar $searchBar): array
     {
-
-        // SELECT *
-        // FROM playlist p 
-        // WHERE p.playlist_name LIKE '%p%'
         
         return $this->createQueryBuilder('p')
             ->select('p')

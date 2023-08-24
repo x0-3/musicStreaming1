@@ -1,5 +1,4 @@
 <?php
-// src/Controller/TwitterController.php
 
 namespace App\Controller;
 

@@ -49,9 +49,7 @@ class SongType extends AbstractType
                 ],
             ])
 
-            // ->add('user')
 
-            // ->add('album')
 
             ->add('genre', EntityType::class,[
                 'class' =>Genre::class,
@@ -61,8 +59,7 @@ class SongType extends AbstractType
 
             ->add('submit',SubmitType::class)
 
-            // ->add('likes')
-            // ->add('playlists')
+
         ;
     }
 

@@ -117,12 +117,6 @@ class SongRepository extends ServiceEntityRepository
     */
     public function findBySearch(SearchBar $searchBar): array
     {
-        // SELECT *
-        // FROM song s 
-        // INNER JOIN album a 
-        // ON s.album_id = a.id
-        // OR s.name_song LIKE '%belong%'
-
 
         return $this->createQueryBuilder('s')
             ->select('s.id, s.uuid, s.nameSong, a.cover, u.username ')

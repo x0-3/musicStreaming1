@@ -50,7 +50,6 @@ class AlbumType extends AbstractType
         
             ->add('submit', SubmitType::class)
 
-            // ->add('releaseDate')
         ;
     }
 

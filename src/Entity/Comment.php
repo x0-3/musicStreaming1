@@ -96,11 +96,6 @@ class Comment
         return $this;
     }
 
-    // public function __toString(): string
-    // {
-    //     return $this->text. " " . $this->dateMess;
-    // }
-
     /**
      * Get the value of uuid
      */ 
